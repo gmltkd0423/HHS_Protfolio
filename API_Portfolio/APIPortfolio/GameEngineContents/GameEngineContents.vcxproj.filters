@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Undertale.h" />
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBackGround.h">
+      <Filter>Level\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Level\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Level\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingLevel.h">
+      <Filter>Level\Ennding</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleLevel.h">
+      <Filter>Level\Battle</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Undertale.cpp" />
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBackGround.cpp">
+      <Filter>Level\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Level\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Level\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingLevel.cpp">
+      <Filter>Level\Ennding</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleLevel.cpp">
+      <Filter>Level\Battle</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Level">
+      <UniqueIdentifier>{6f271dbc-ddf9-4a4e-a126-77c2f6eb0f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{d5424ec1-88d1-47e0-96f8-b0641df815f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Title">
+      <UniqueIdentifier>{08ae12fc-5657-4d12-9287-592cda18409f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\MainMenu">
+      <UniqueIdentifier>{b89aaccb-edd5-4efe-9947-6b909b2f77a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Play">
+      <UniqueIdentifier>{89852ab1-3a69-4400-a3f8-5d6283f82fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Ennding">
+      <UniqueIdentifier>{fd439386-874f-453d-bf97-e1a56fd8c1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Battle">
+      <UniqueIdentifier>{f44764ca-09bc-4e5b-a362-d7ffab63da43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Player">
+      <UniqueIdentifier>{d8004983-2e78-4801-b725-5512f1fd3127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster">
+      <UniqueIdentifier>{0a956dbf-e5b4-4681-88e7-151c50486aed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
