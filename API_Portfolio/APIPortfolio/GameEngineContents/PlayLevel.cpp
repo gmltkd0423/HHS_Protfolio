@@ -1,4 +1,14 @@
 #include "PlayLevel.h"
+#include "Player.h"
+
+enum class ORDER
+{
+	BACKGROUND,
+	PLAYER,
+	MONSTER,
+	UI
+};
+
 
 PlayLevel::PlayLevel()
 {
@@ -15,5 +25,12 @@ void PlayLevel::Loading()
 
 void PlayLevel::Update()
 {
+
+}
+
+
+void PlayLevel::LevelChangeStart()
+{
+	CreateActor<Player>("Player", (int)ORDER::PLAYER);
 
 }

@@ -20,6 +20,9 @@
     <ClInclude Include="BattleLevel.h">
       <Filter>Level\Battle</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actor\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -40,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="BattleLevel.cpp">
       <Filter>Level\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
