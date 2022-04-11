@@ -1,5 +1,5 @@
 #include "GameEngineWindow.h"
-#include "GameEngineDebug.h"
+
 
 // HWND hWnd 어떤 윈도우에 무슨일이 생겼는지 그 윈도우의 핸들
 // UINT message 그 메세지의 중료가 뭔지.
@@ -11,27 +11,33 @@ LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
     switch (message)
     {
     case WM_DESTROY:
-        // 윈도우를 종료하고 모든 
+    {
         GameEngineWindow::GetInst().Off();
-        return DefWindowProc(hWnd, message, wParam, lParam);
+        break;
+    }
     case WM_PAINT:
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
         // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
         EndPaint(hWnd, &ps);
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    default:
         break;
     }
+    case WM_CLOSE:
+    {
+        GameEngineWindow::GetInst().Off();
+        break;
+    }
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
 
-    return DefWindowProc(hWnd, message, wParam, lParam);
+    return 0;
 }
 
 GameEngineWindow* GameEngineWindow::Inst_ = new GameEngineWindow();
 
-GameEngineWindow::GameEngineWindow()
+GameEngineWindow::GameEngineWindow() 
     : hInst_(nullptr)
     , hWnd_(nullptr)
     , WindowOn_(true)
@@ -39,7 +45,7 @@ GameEngineWindow::GameEngineWindow()
 {
 }
 
-GameEngineWindow::~GameEngineWindow()
+GameEngineWindow::~GameEngineWindow() 
 {
     // 내가 만들어준게 아니라면 다 지워줘야 합니다.
     if (nullptr != HDC_)
@@ -55,7 +61,7 @@ GameEngineWindow::~GameEngineWindow()
     }
 }
 
-void GameEngineWindow::Off()
+void GameEngineWindow::Off() 
 {
     WindowOn_ = false;
 }
@@ -87,7 +93,7 @@ void GameEngineWindow::CreateGameWindow(HINSTANCE _hInst, const std::string& _Ti
     }
 
     Title_ = _Title;
-    // 클래스 등록은 1번만 하려고 친 코드
+        // 클래스 등록은 1번만 하려고 친 코드
     hInst_ = _hInst;
     RegClass(_hInst);
 
@@ -103,7 +109,7 @@ void GameEngineWindow::CreateGameWindow(HINSTANCE _hInst, const std::string& _Ti
     }
 }
 
-void GameEngineWindow::ShowGameWindow()
+void GameEngineWindow::ShowGameWindow() 
 {
     if (nullptr == hWnd_)
     {
@@ -139,13 +145,14 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
 
     while (WindowOn_)
     {
-        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+        if (0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
 
-        // 여기서 무슨게임을 돌릴까요?
+            // 윈도우가 일하지 않는 데드 타임.
+            // 여기서 무슨게임을 돌릴까요?
 
         if (nullptr == _LoopFunction)
         {
@@ -153,10 +160,12 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
         }
 
         _LoopFunction();
+
+        
     }
 }
 
-void GameEngineWindow::SetWindowScaleAndPosition(float4 _Pos, float4 _Scale)
+void GameEngineWindow::SetWindowScaleAndPosition(float4 _Pos, float4 _Scale) 
 {
     // 메뉴바 
 

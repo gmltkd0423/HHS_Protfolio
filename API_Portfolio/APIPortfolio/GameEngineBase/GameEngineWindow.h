@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <string>
 #include "GameEngineMath.h"
+#include "GameEngineDebug.h"
 
 // Ό³Έν :
 class GameEngineWindow
@@ -10,7 +11,7 @@ private:
 	static GameEngineWindow* Inst_;
 
 public:
-	inline static GameEngineWindow& GetInst()
+	inline static GameEngineWindow& GetInst() 
 	{
 		return *Inst_;
 	}

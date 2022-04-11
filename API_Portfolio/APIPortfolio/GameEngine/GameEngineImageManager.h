@@ -1,11 +1,10 @@
 #pragma once
-#include "GameEngineImage.h" 
-#include <GameEngineBase/GameEngineMath.h>
+#include "GameEngineImage.h"
+#include "GameEngineFolderImage.h"
 #include <map>
+#include <GameEngineBase/GameEngineMath.h>
 
-// 기본적으로 리소스는 그냥 쓸수도 있지만
-// 관리되는 리소스들은 전부다 이름이 있다고 보고 쓸겁니다.
-
+// 설명 :
 class GameEngineImageManager
 {
 private:
@@ -16,21 +15,16 @@ public:
 	{
 		return Inst_;
 	}
-
+	
 	static void Destroy()
 	{
 		if (nullptr == Inst_)
 		{
 			return;
 		}
-
 		delete Inst_;
 		Inst_ = nullptr;
 	}
-
-	GameEngineImage* Create(const std::string& _Name, float4 _Scale);
-
-	GameEngineImage* Create(const std::string& _Name, HDC _DC);
 
 private:
 	// constrcuter destructer
@@ -43,9 +37,34 @@ private:
 	GameEngineImageManager& operator=(const GameEngineImageManager& _Other) = delete;
 	GameEngineImageManager& operator=(GameEngineImageManager&& _Other) noexcept = delete;
 
-protected:
+
+/// <summary>
+/// 일반이미지
+/// </summary>
+public:
+	GameEngineImage* Find(const std::string& _Name);
+
+	GameEngineImage* Create(const std::string& _Name, const float4& _Scale);
+	GameEngineImage* Create(const std::string& _Name, HDC _DC);
+
+	GameEngineImage* Load(const std::string& _Path);
+	GameEngineImage* Load(const std::string& _Path, const std::string& _Name);
+
 
 private:
-	std::map<std::string, GameEngineImage*> AllRes;
+	std::map < std::string, GameEngineImage* > AllRes;
+
+	/// <summary>
+/// 일반이미지
+/// </summary>
+public:
+	GameEngineFolderImage* FolderImageFind(const std::string& _Name);
+	GameEngineFolderImage* FolderImageLoad(const std::string& _Path);
+	GameEngineFolderImage* FolderImageLoad(const std::string& _Path, const std::string& _Name);
+
+
+private:
+	std::map<std::string, GameEngineFolderImage*> AllFolderRes;
+
 };
 
