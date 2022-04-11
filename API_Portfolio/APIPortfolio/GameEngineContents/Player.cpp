@@ -12,8 +12,8 @@ Player::~Player()
 
 void Player::Start()
 {
-	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale({ 100, 100 });
+	/*SetPosition(GameEngineWindow::GetScale().Half());
+	SetScale({ 100, 100 });*/
 
 
 }
