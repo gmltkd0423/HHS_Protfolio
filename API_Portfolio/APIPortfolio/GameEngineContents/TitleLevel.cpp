@@ -1,6 +1,5 @@
 #include "TitleLevel.h"
 #include "GameEngine/GameEngine.h"
-#include "TitleLogo.h"
 #include "TitleBackGround.h"
 
 TitleLevel::TitleLevel()
@@ -13,10 +12,7 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Loading()
 {
-	// 회사마다 다를수있겠지만
-	// Actor를 만들어야죠?
-
-
+	CreateActor<TitleBackGround>(0, "TitleBackGround");
 
 }
 

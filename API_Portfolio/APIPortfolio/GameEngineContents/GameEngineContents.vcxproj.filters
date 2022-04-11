@@ -5,12 +5,6 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level\Title</Filter>
     </ClInclude>
-    <ClInclude Include="TitleBackGround.h">
-      <Filter>Level\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>Level\Title</Filter>
-    </ClInclude>
     <ClInclude Include="PlayLevel.h">
       <Filter>Level\Play</Filter>
     </ClInclude>
@@ -23,16 +17,13 @@
     <ClInclude Include="Player.h">
       <Filter>Actor\Player</Filter>
     </ClInclude>
+    <ClInclude Include="TitleBackGround.h">
+      <Filter>Actor\Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>Level\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleBackGround.cpp">
-      <Filter>Level\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
       <Filter>Level\Title</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
@@ -46,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBackGround.cpp">
+      <Filter>Actor\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +69,9 @@
     </Filter>
     <Filter Include="Actor\Monster">
       <UniqueIdentifier>{0a956dbf-e5b4-4681-88e7-151c50486aed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Title">
+      <UniqueIdentifier>{ff16c3bd-09c9-4d8a-8ad1-3f3128006c05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

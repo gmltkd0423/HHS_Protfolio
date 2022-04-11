@@ -13,10 +13,11 @@ TitleBackGround::~TitleBackGround()
 void TitleBackGround::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale(GameEngineWindow::GetScale());
+
+	CreateRenderer("Title.bmp");
 }
 
 void TitleBackGround::Render()
 {
-	DebugRectRender();
+	//DebugRectRender();
 }
