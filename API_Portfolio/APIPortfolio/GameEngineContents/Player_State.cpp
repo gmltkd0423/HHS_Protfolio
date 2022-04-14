@@ -9,25 +9,8 @@
 
 void Player::IdleStart()
 {
-	if (true == GameEngineInput::GetInst()->IsFree("MoveRight"))
-	{
-		AniRender_->ChangeAnimation("MoveRightIdle");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsFree("MoveLeft"))
-	{
-		AniRender_->ChangeAnimation("MoveLeftIdle");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsFree("MoveUp"))
-	{
-		AniRender_->ChangeAnimation("MoveUpIdle");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsFree("MoveDown"))
-	{
-		AniRender_->ChangeAnimation("MoveDownIdle");
-	}
+	AnimationName_ = "Idle";
+	AniRender_->ChangeAnimation(DirName_ + AnimationName_);
 }
 
 void Player::IdleUpdate()
@@ -57,24 +40,28 @@ void Player::MoveUpdate()
 	{
 		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * 500;
 		AniRender_->ChangeAnimation("MoveRight");
+		DirName_ = "MoveRight";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
 	{
 		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 500;
 		AniRender_->ChangeAnimation("MoveLeft");
+		DirName_=  "MoveLeft";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
 	{
 		MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 500;
 		AniRender_->ChangeAnimation("MoveUp");
+		DirName_ = "MoveUp";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
 	{
 		MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * 500;
 		AniRender_->ChangeAnimation("MoveDown");
+		DirName_ = "MoveDown";
 	}
 
 	CheckWall(MoveDir_);

@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngine/GameEngineImageManager.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 Undertale::Undertale()
 {
@@ -61,6 +62,23 @@ void Undertale::GameInit()
 		MoveLeft->Cut({ 20,30 });
 		GameEngineImage* MoveRight = GameEngineImageManager::GetInst()->Find("Move_Right.bmp");
 		MoveRight->Cut({ 20,30 });
+	}
+
+	{
+		//»ç¿îµå
+		GameEngineDirectory Dir;
+		Dir.MoveParent("API_Portfolio");
+		Dir.Move("APIPortfolio");
+		Dir.Move("Resources");
+		Dir.Move("Sounds");
+
+		std::vector<GameEngineFile> SoundList = Dir.GetAllFile();
+
+		for (size_t i = 0; i < SoundList.size(); ++i)
+		{
+			GameEngineSound::LoadRes(SoundList[i].GetFullPath());
+		}
+
 	}
 
 	CreateLevel<TitleLevel>("TitleLevel");

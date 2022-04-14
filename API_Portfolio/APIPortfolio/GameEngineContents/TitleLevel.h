@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include<GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
 class TitleLevel : public GameEngineLevel
@@ -20,6 +21,11 @@ protected:
 	void Update() override;
 
 private:
-	void LevelChangeStart();
+	void LevelChangeStart() override;
+	void LevelEnd();
+
+private:
+	GameEngineSoundPlayer Bgm_;
+	float BgmTime_;
 };
 

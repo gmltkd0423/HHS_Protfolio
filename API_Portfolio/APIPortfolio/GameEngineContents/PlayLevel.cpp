@@ -28,12 +28,22 @@ void PlayLevel::Loading()
 
 void PlayLevel::Update()
 {
-
+	BgmTime_ -= GameEngineTime::GetDeltaTime();
+	if (0 >= BgmTime_)
+	{
+		Bgm_.Stop();
+	}
 }
 
 
 void PlayLevel::LevelChangeStart()
 {
-	
+	Bgm_ = GameEngineSound::SoundPlayControl("05_Ruins.flac");
+	BgmTime_ = 30.0f;
 
+}
+
+void PlayLevel::LevelEnd()
+{
+	Bgm_.Stop();
 }

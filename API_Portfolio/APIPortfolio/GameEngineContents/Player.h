@@ -29,6 +29,8 @@ private:
 	GameEngineRenderer* AniRender_;
 	GameEngineImage* MapColImage_;
 	float4 MoveDir_;
+	std::string AnimationName_;
+	std::string DirName_;
 
 	bool IsMoveKey();
 private:
