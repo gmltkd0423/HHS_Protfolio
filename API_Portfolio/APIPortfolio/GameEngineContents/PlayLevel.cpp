@@ -1,14 +1,9 @@
 #include "PlayLevel.h"
 #include "Player.h"
+#include "ContentsEnums.h"
 #include "PlayBackGround.h"
-
-enum class ORDER
-{
-	BACKGROUND,
-	PLAYER,
-	MONSTER,
-	UI
-};
+#include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 
 PlayLevel::PlayLevel()
@@ -21,7 +16,14 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading()
 {
-	CreateActor<PlayBackGround>(0, "Level1");
+	PlayBackGround* Back = CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
+	Back->GetRenderer()->SetImage("Level2.bmp");
+
+	float4 NewPivot = Back->GetRenderer()->GetImage()->GetScale().Half();
+	Back->GetRenderer()->SetPivot(NewPivot);
+
+	Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+	Player_->SetPosition({ 200,200 });
 }
 
 void PlayLevel::Update()

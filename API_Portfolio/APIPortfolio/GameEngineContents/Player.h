@@ -1,13 +1,12 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include<GameEngine/GameEngineImage.h>
 
 // Ό³Έν :
-enum PlayerState
+enum class PlayerState
 {
 	Idle,
-	Attck,
-	Move,
-	Max,
+	Move
 };
 
 class Player : public GameEngineActor
@@ -26,6 +25,13 @@ public:
 protected:
 
 private:
+	PlayerState CurState_;
+	GameEngineRenderer* AniRender_;
+	GameEngineImage* MapColImage_;
+	float4 MoveDir_;
+
+	bool IsMoveKey();
+private:
 	void Start() override;
 	void Update() override;
 	void Render() override;
@@ -33,5 +39,23 @@ private:
 public:
 	void ChangeState(PlayerState _State);
 	void StateUpdate();
+
+
+private:
+	void CameraLock();
+	bool IsKeyPress();
+	bool IsKeyDown();
+	bool IsKeyUp();
+	void CheckWall(float4 _Value);
+
+private:
+
+	//fsm
+	void IdleStart();
+	void IdleUpdate();
+
+	void MoveStart();
+	void MoveUpdate();
+	
 };
 

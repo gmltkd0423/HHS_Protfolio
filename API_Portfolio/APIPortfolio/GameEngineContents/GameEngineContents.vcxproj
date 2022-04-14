@@ -164,6 +164,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContentsEnums.h" />
     <ClInclude Include="EndingLevel.h">
       <SubType>
       </SubType>
@@ -177,6 +178,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PlayLevel2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PlayLevel2BackGround.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -212,6 +221,14 @@
     </ClCompile>
     <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="PlayLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PlayLevel2.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PlayLevel2BackGround.cpp">
       <SubType>
       </SubType>
     </ClCompile>

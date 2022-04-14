@@ -18,5 +18,5 @@ void TitleBackGround::Start()
 
 void TitleBackGround::Render()
 {
-	DebugRectRender();
+	//DebugRectRender();
 }

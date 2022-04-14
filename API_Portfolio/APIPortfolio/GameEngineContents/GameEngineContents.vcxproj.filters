@@ -23,6 +23,15 @@
     <ClInclude Include="PlayBackGround.h">
       <Filter>Level\Play\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsEnums.h">
+      <Filter>Level\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel2.h">
+      <Filter>Level\Play2</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel2BackGround.h">
+      <Filter>Level\Play2\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -49,6 +58,12 @@
     </ClCompile>
     <ClCompile Include="PlayBackGround.cpp">
       <Filter>Level\Play\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel2.cpp">
+      <Filter>Level\Play2</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel2BackGround.cpp">
+      <Filter>Level\Play2\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +99,15 @@
     </Filter>
     <Filter Include="Level\Play\Actor">
       <UniqueIdentifier>{dda464f9-097b-42c8-8170-c0beb4b9b6a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Global">
+      <UniqueIdentifier>{05703c86-16b3-4e80-b9ed-25625597bdfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Play2">
+      <UniqueIdentifier>{f1b94ab9-3525-4598-8f05-016066735b11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Play2\Actor">
+      <UniqueIdentifier>{4ec67bb8-c948-49b1-b5cc-f4f9c6570796}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
