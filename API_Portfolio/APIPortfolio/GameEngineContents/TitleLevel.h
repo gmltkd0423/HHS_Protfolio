@@ -20,6 +20,6 @@ protected:
 	void Update() override;
 
 private:
-
+	void LevelChangeStart();
 };
 

@@ -1,5 +1,6 @@
 #include "PlayLevel.h"
 #include "Player.h"
+#include "PlayBackGround.h"
 
 enum class ORDER
 {
@@ -20,7 +21,7 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading()
 {
-
+	CreateActor<PlayBackGround>(0, "Level1");
 }
 
 void PlayLevel::Update()

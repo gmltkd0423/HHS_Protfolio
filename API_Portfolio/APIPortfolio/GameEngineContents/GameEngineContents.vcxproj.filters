@@ -18,7 +18,10 @@
       <Filter>Actor\Player</Filter>
     </ClInclude>
     <ClInclude Include="TitleBackGround.h">
-      <Filter>Actor\Title</Filter>
+      <Filter>Level\Title\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayBackGround.h">
+      <Filter>Level\Play\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -38,8 +41,14 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>Actor\Player</Filter>
+    </ClCompile>
     <ClCompile Include="TitleBackGround.cpp">
-      <Filter>Actor\Title</Filter>
+      <Filter>Level\Title\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayBackGround.cpp">
+      <Filter>Level\Play\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,8 +79,11 @@
     <Filter Include="Actor\Monster">
       <UniqueIdentifier>{0a956dbf-e5b4-4681-88e7-151c50486aed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Title">
-      <UniqueIdentifier>{ff16c3bd-09c9-4d8a-8ad1-3f3128006c05}</UniqueIdentifier>
+    <Filter Include="Level\Title\Actor">
+      <UniqueIdentifier>{0185e3e3-d091-4a48-bb3f-68183f149d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Play\Actor">
+      <UniqueIdentifier>{dda464f9-097b-42c8-8170-c0beb4b9b6a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

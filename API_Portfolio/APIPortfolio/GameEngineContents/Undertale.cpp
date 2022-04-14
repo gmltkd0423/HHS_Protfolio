@@ -20,12 +20,13 @@ void Undertale::GameInit()
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
 
 	{
+		//맵
 		GameEngineDirectory Dir;
 		Dir.MoveParent("API_Portfolio");
 		Dir.Move("APIPortfolio");
 		Dir.Move("Resources");
 		Dir.Move("Images");
-		Dir.Move("Title");
+		Dir.Move("Maps");
 
 		// 폴더안에 모든 이미지 파일을 찾는다.
 		std::vector<GameEngineFile> AllImageFileList = Dir.GetAllFile("Bmp");
@@ -34,6 +35,10 @@ void Undertale::GameInit()
 		{
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
+	}
+
+	{
+		//플레이어
 	}
 
 	CreateLevel<TitleLevel>("TitleLevel");

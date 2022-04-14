@@ -2,6 +2,14 @@
 #include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
+enum PlayerState
+{
+	Idle,
+	Attck,
+	Move,
+	Max,
+};
+
 class Player : public GameEngineActor
 {
 public:
@@ -19,6 +27,11 @@ protected:
 
 private:
 	void Start() override;
+	void Update() override;
 	void Render() override;
+
+public:
+	void ChangeState(PlayerState _State);
+	void StateUpdate();
 };
 

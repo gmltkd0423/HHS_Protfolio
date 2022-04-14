@@ -12,8 +12,8 @@ TitleBackGround::~TitleBackGround()
 
 void TitleBackGround::Start()
 {
-	SetPosition(GameEngineWindow::GetScale().Half());
-	CreateRenderer("Title.bmp");
+	GameEngineRenderer* Render = CreateRendererToScale("Title.bmp", { 1280,740 });
+	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
 }
 
 void TitleBackGround::Render()
