@@ -1,7 +1,7 @@
 #include"Player.h"
 #include<GameEngine/GameEngineRenderer.h>
 #include<GameEngine/GameEngineImageManager.h>
-#include<GameEngineBase/GameEngineWindow.h>;
+#include<GameEngineBase/GameEngineWindow.h>
 #include<GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>

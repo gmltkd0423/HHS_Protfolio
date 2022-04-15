@@ -24,9 +24,11 @@ Player::~Player()
 
 void Player::Start()
 {
-	SetScale({ 200,200 });
+
+	SetScale({ 60,60 });
 
 	AniRender_ = CreateRenderer();
+	AniRender_->SetScale({ 60,60 });
 
 	AniRender_->CreateAnimation("Move_Down.bmp", "MoveDown", 0, 3, 0.15f, true);
 	AniRender_->CreateAnimation("Move_Down.bmp", "MoveDownIdle", 0, 0, 0.15f, true);
