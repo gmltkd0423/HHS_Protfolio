@@ -29,6 +29,7 @@ void PlayLevel::Loading()
 void PlayLevel::Update()
 {
 	BgmTime_ -= GameEngineTime::GetDeltaTime();
+
 	if (0 >= BgmTime_)
 	{
 		Bgm_.Stop();

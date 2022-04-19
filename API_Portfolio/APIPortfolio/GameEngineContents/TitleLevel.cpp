@@ -4,6 +4,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include "ContentsEnums.h"
 
 TitleLevel::TitleLevel()
 {
@@ -15,7 +16,7 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Loading()
 {
-	CreateActor<TitleBackGround>(0,"TitleBackGround");
+	CreateActor<TitleBackGround>((int)ORDER::BACKGROUND);
 	GameEngineInput::GetInst()->CreateKey("Change_PlayLevel", VK_RETURN);
 
 }
