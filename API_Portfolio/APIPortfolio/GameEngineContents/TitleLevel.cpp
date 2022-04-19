@@ -81,7 +81,6 @@ void TitleLevel::LevelEnd()
 	Bgm_.Stop();
 	TitleImage_[(int)TITLEORDER::TITLE]->Death();
 	Time_ = 0.0f;
-
 }
 
 void TitleLevel::ChangeBackGround()

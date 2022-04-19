@@ -4,6 +4,8 @@
 #include "PlayBackGround.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngine.h>
 
 
 PlayLevel::PlayLevel()
@@ -28,6 +30,12 @@ void PlayLevel::Loading()
 
 void PlayLevel::Update()
 {
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("TitleLevel");
+		LevelEnd();
+	}
+
 	BgmTime_ -= GameEngineTime::GetDeltaTime();
 
 	if (0 >= BgmTime_)
