@@ -32,8 +32,6 @@ public:
 	{
 		return GameEngineUpdateObject::IsDeath() || Actor_->IsDeath();
 	}
-
-
 protected:
 	inline void SetActor(GameEngineActor* _Actor)
 	{

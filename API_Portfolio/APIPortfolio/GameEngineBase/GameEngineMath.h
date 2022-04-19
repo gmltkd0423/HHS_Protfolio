@@ -136,6 +136,7 @@ public:
 		return { x * _Value, y * _Value, z * _Value, 1.0f };
 	}
 
+
 	float4& operator+=(const float4& _Other)
 	{
 		x += _Other.x;

@@ -37,6 +37,21 @@ public:
 		return IsDeath_;
 	}
 
+	void AddAccTime(float _DeltaTime)
+	{
+		AccTime_ += _DeltaTime;
+	}
+
+	float GetAccTime()
+	{
+		return AccTime_;
+	}
+
+	void ResetAccTime()
+	{
+		AccTime_ = 0.0f;
+	}
+
 
 	inline 	void Death()
 	{
@@ -81,6 +96,7 @@ private:
 	int Order_;
 	bool IsReleaseUpdate_;
 	float DeathTime_;
+	float AccTime_;
 
 	bool IsUpdate_;
 	bool IsDeath_;

@@ -1,9 +1,24 @@
 #pragma once
 
-enum class ORDER
+enum class PLAYLEVELORDER
 {
 	BACKGROUND,
 	PLAYER,
 	MONSTER,
 	UI
+};
+
+enum class TITLEORDER
+{
+	TITLE,
+	TITLE9,
+	TITLE8,
+	TITLE7,
+	TITLE6,
+	TITLE5,
+	TITLE4,
+	TITLE3,
+	TITLE2,
+	TITLE1,
+	BACKGROUND
 };

@@ -59,6 +59,7 @@ void Player::Start()
 		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
 	}
 
+	LevelRegist("MainPlayer");
 }
 
 
@@ -202,4 +203,3 @@ void Player::CameraLock()
 	}
 
 }
-

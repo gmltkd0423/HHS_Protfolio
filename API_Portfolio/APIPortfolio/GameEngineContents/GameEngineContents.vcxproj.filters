@@ -32,6 +32,12 @@
     <ClInclude Include="PlayLevel2BackGround.h">
       <Filter>Level\Play2\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="TitleTime.h">
+      <Filter>Level\Title\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleImage.h">
+      <Filter>Level\Title\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -64,6 +70,12 @@
     </ClCompile>
     <ClCompile Include="PlayLevel2BackGround.cpp">
       <Filter>Level\Play2\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleTime.cpp">
+      <Filter>Level\Title\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleImage.cpp">
+      <Filter>Level\Title\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

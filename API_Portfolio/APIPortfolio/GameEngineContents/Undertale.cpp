@@ -7,6 +7,7 @@
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 Undertale::Undertale()
 {
@@ -78,6 +79,12 @@ void Undertale::GameInit()
 		{
 			GameEngineSound::LoadRes(SoundList[i].GetFullPath());
 		}
+
+	}
+
+	{
+		GameEngineInput::GetInst()->CreateKey("ChangeLevel", VK_RETURN);
+
 
 	}
 

@@ -1,5 +1,7 @@
 #include "TitleBackGround.h"
+#include "TitleTime.h"
 #include <GameEngineBase/GameEngineWindow.h>
+
 
 TitleBackGround::TitleBackGround()
 {
@@ -12,8 +14,12 @@ TitleBackGround::~TitleBackGround()
 
 void TitleBackGround::Start()
 {
-	GameEngineRenderer* Render = CreateRendererToScale("Title.bmp", { 1280,740 });
+	CreateRendererToScale("TitleBackGround.bmp", { 1280,740 });
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
+}
+
+void TitleBackGround::Update()
+{
 }
 
 void TitleBackGround::Render()

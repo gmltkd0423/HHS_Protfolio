@@ -55,6 +55,7 @@ public:
 		RenderScale_ = _Scale;
 	}
 
+
 	inline float4 GetScale()
 	{
 		return RenderScale_;

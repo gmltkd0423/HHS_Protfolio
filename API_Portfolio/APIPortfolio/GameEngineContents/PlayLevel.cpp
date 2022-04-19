@@ -16,14 +16,14 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading()
 {
-	PlayBackGround* Back = CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
+	PlayBackGround* Back = CreateActor<PlayBackGround>((int)PLAYLEVELORDER::BACKGROUND);
 	Back->GetRenderer()->SetImage("Level2.bmp");
 
 	float4 NewPivot = Back->GetRenderer()->GetImage()->GetScale().Half();
 	Back->GetRenderer()->SetPivot(NewPivot);
 
-	Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-	Player_->SetPosition({ 200,200 });
+	Player_ = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+	Player_->SetPosition({ 400,300 });
 }
 
 void PlayLevel::Update()

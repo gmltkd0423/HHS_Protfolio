@@ -50,6 +50,7 @@ private:
 	bool IsKeyUp();
 	void CheckWall(float4 _Value);
 
+
 private:
 
 	//fsm

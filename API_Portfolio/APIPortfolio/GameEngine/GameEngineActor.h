@@ -88,6 +88,7 @@ private:
 	GameEngineLevel* Level_;
 	float4 Position_;
 	float4 Scale_;
+	GameEngineRenderer* MyRenderer_;
 
 	// 나를 만들어준 레벨이야.
 	inline void SetLevel(GameEngineLevel* _Level)
@@ -105,6 +106,7 @@ public:
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX),RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = {0,0});
 
 	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, const float4& _Scale, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX) ,RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
+
 
 private:
 	// 이터레이터

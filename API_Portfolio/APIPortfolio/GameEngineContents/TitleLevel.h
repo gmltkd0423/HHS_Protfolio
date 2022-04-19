@@ -1,11 +1,13 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
-#include<GameEngineBase/GameEngineSound.h>
+#include <GameEngineBase/GameEngineSound.h>
+
 
 // Ό³Έν :
 class TitleLevel : public GameEngineLevel
 {
 public:
+	friend class TitleImage;
 	// constrcuter destructer
 	TitleLevel();
 	~TitleLevel();
@@ -23,9 +25,14 @@ protected:
 private:
 	void LevelChangeStart() override;
 	void LevelEnd();
+	void ChangeBackGround();
+	void Init();
 
 private:
 	GameEngineSoundPlayer Bgm_;
+	GameEngineActor* TitleImage_[20];
+	GameEngineRenderer* TitleRenderer_[20];
 	float BgmTime_;
+	float Time_;
 };
 
