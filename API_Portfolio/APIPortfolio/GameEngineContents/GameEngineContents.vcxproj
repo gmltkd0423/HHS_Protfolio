@@ -195,19 +195,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TitleBackGround.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="TitleImage.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TitleTime.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -246,19 +238,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TitleBackGround.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="TitleImage.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TitleTime.cpp">
       <SubType>
       </SubType>
     </ClCompile>

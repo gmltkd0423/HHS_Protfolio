@@ -1,8 +1,6 @@
 #include "TitleLevel.h"
 #include "GameEngine/GameEngine.h"
-#include "TitleBackGround.h"
 #include "TitleImage.h"
-#include "TitleTime.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -48,7 +46,7 @@ void TitleLevel::Init()
 void TitleLevel::Loading()
 {
 	Init();
-	CreateActor<TitleTime>((int)TITLEORDER::BACKGROUND);
+
 	
 }
 
