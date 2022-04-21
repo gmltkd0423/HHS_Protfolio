@@ -84,13 +84,11 @@ void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	Bgm_.Stop();
 	TitleImage_[(int)TITLEORDER::TITLE]->Death();
 	Time_ = 0.0f;
-
 }
 
 void TitleLevel::ChangeBackGround()
 {
 	Time_ += GameEngineTime::GetDeltaTime();
-
 
 	if (2.0f < Time_)
 	{

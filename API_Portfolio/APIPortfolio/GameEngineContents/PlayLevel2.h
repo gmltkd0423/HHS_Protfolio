@@ -23,6 +23,8 @@ protected:
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
+
+
 private:
 	Player* Player_;
 	Flowey* Flowey_;
@@ -38,6 +40,21 @@ private:
 	GameEngineRenderer* FirstLineText_;
 	GameEngineRenderer* SecondLineText_;
 	GameEngineRenderer* ThirdLineText_;
+
+
+	GameEngineActor* WordActor_[10];
+	GameEngineRenderer* WordRenderer_[10];
+
+	GameEngineActor* Word1Actor_;
+	GameEngineActor* Word2Actor_;
+	GameEngineActor* Word3Actor_;
+	GameEngineActor* Word4Actor_;
+	GameEngineRenderer* Word1Renderer_;
+	GameEngineRenderer* Word2Renderer_;
+	GameEngineRenderer* Word3Renderer_;
+	GameEngineRenderer* Word4Renderer_;
+
+
 
 	GameEngineSoundPlayer Bgm_;
 
