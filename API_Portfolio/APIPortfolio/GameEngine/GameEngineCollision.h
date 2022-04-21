@@ -45,6 +45,16 @@ public:
 		return GameEngineRect(GetActor()->GetPosition() + Pivot_ + NextPos_, Scale_);
 	}
 
+	void CameraEffectOff()
+	{
+		IsCameraEffect_ = false;
+	}
+
+	void CameraEffectOn()
+	{
+		IsCameraEffect_ = true;
+	}
+
 
 	// Player   Bullet
 	// 방패     적의 총알을 막는다.
@@ -78,6 +88,7 @@ private:
 	float4 Pivot_;
 	float4 Scale_;
 	float4 NextPos_;
+	bool IsCameraEffect_;
 
 	std::string CollisionName_;
 
