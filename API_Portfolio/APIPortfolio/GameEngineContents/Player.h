@@ -12,6 +12,7 @@ enum class PlayerState
 class Player : public GameEngineActor
 {
 public:
+	static Player* MainPlayer;
 	// constrcuter destructer
 	Player();
 	~Player();
@@ -38,6 +39,8 @@ private:
 	void Update() override;
 	void Render() override;
 
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+
 public:
 	void ChangeState(PlayerState _State);
 	void StateUpdate();
@@ -51,11 +54,18 @@ public:
 		MapColImage_ = _Image;
 	}
 
+	void CollisionImage(const std::string& _Name);
 	GameEngineImage* GetColImage()
 	{
 		return MapColImage_;
 	}
 
+	GameEngineRenderer* GetAniRender()
+	{
+		return AniRender_;
+	}
+
+	
 
 private:
 	void CameraLock();

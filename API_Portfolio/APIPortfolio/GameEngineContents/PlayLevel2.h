@@ -25,6 +25,8 @@ protected:
 private:
 	Player* Player_;
 	Flowey* Flowey_;
+	GameEngineActor* FloweyTalk;
+	GameEngineRenderer* FloweyTalkRenderer;
 
 private:
 	void Init();

@@ -48,8 +48,11 @@ void PlayLevel::Init()
 	GameEngineActor* BackGround = CreateActor<PlayBackGround>((int)PLAYLEVELORDER::BACKGROUND);
 	GameEngineRenderer* Back = BackGround->CreateRenderer("Level1.bmp", (int)PLAYLEVELORDER::BACKGROUND);
 	
-	Player_ = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
-	Player_->SetPosition({ 400,300 });
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+	}
+
 }
 
 
@@ -57,12 +60,14 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	Bgm_ = GameEngineSound::SoundPlayControl("05_Ruins.flac");
 	BgmTime_ = 30.0f;
-
+	Player::MainPlayer->CollisionImage("Level1_ColMap.bmp");
+	Player::MainPlayer->SetPosition({ 400,300 });
 }
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	Player_->SetPosition({ 400,300 });
+	Player::MainPlayer->GetAniRender()->ChangeAnimation("MoveDownIdle");
+	Player::MainPlayer->NextLevelOn();
 	Bgm_.Stop();
 }
 
@@ -70,7 +75,7 @@ void PlayLevel::MoveNextLevel()
 {
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("Level1_ColMap.bmp");
 
-	float4 NextPos = Player_->GetPosition() + Player_->GetMoveDir();
+	float4 NextPos = Player::MainPlayer->GetPosition() + Player::MainPlayer->GetMoveDir();
 	int Color = MapColImage_->GetImagePixel(NextPos);
 
 	if (RGB(255, 22, 0) == Color)

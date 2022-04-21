@@ -1,6 +1,7 @@
 #include "TitleLevel.h"
 #include "GameEngine/GameEngine.h"
 #include "TitleImage.h"
+#include "Player.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -83,6 +84,7 @@ void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	Bgm_.Stop();
 	TitleImage_[(int)TITLEORDER::TITLE]->Death();
 	Time_ = 0.0f;
+
 }
 
 void TitleLevel::ChangeBackGround()

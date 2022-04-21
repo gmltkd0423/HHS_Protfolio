@@ -98,6 +98,7 @@ public:
 		CameraPos_  = _Value;
 	}
 
+
 	template<typename ConvertType>
 	ConvertType* FindActor(const std::string& _Name)
 	{

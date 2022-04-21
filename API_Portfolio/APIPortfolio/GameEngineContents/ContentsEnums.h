@@ -8,6 +8,13 @@ enum class PLAYLEVELORDER
 	UI
 };
 
+enum class UIORDER
+{
+	MESSAGEBOX,
+	IMAGE,
+	TEXT
+};
+
 enum class TITLEORDER
 {
 	TITLE,

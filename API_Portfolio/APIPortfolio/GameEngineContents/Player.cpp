@@ -8,6 +8,8 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngine.h>
 
+Player* Player::MainPlayer = nullptr;
+
 
 Player::Player() :
 	MoveDir_(float4::ZERO)
@@ -78,6 +80,10 @@ void Player::Render()
 	//DebugRectRender();
 }
 
+void Player::CollisionImage(const std::string& _Name)
+{
+	MapColImage_ = GameEngineImageManager::GetInst()->Find(_Name);
+}
 
 void Player::ChangeState(PlayerState _State)
 {
@@ -170,7 +176,7 @@ void Player::CameraLock()
 	float MapSizeY = 720;
 	float CameraRectX = 300;
 	float CameraRectY = 400;
-
+	
 	if (0 > GetLevel()->GetCameraPos().x)	// 카메라 x위치가 0보다 작아지면 카메라 좌표를 0으로 고정시킨다.
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
@@ -196,4 +202,11 @@ void Player::CameraLock()
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 
+}
+
+
+
+void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	MainPlayer = this;
 }
