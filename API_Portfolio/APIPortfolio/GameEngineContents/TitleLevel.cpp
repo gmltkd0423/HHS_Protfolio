@@ -60,6 +60,7 @@ void TitleLevel::Update()
 	if (true == GameEngineInput::GetInst()->IsPress("ChangeLevel"))
 	{
 		GameEngine::GetInst().ChangeLevel("PlayLevel");
+		LevelEnd();
 	}
 
 	BgmTime_ -= GameEngineTime::GetDeltaTime();
@@ -75,7 +76,7 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	BgmTime_ = 30.0f;
 }
 
-void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
+void TitleLevel::LevelEnd()
 {
 	Bgm_.Stop();
 	TitleImage_[(int)TITLEORDER::TITLE]->Death();

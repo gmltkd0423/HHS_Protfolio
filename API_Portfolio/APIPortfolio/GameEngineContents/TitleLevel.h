@@ -23,8 +23,8 @@ protected:
 	void Update() override;
 
 private:
-	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
-	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
+	void LevelEnd();
 	void ChangeBackGround();
 	void Init();
 

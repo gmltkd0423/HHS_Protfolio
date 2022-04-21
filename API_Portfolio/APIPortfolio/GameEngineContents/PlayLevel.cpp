@@ -33,6 +33,7 @@ void PlayLevel::Update()
 	if (true == GameEngineInput::GetInst()->IsPress("ChangeLevel"))
 	{
 		GameEngine::GetInst().ChangeLevel("TitleLevel");
+		LevelEnd();
 	}
 
 	BgmTime_ -= GameEngineTime::GetDeltaTime();
@@ -51,7 +52,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 }
 
-void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
+void PlayLevel::LevelEnd()
 {
 	Bgm_.Stop();
 }
