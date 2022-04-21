@@ -12,7 +12,8 @@ Player* Player::MainPlayer = nullptr;
 
 
 Player::Player() :
-	MoveDir_(float4::ZERO)
+	MoveDir_(float4::ZERO),
+	IsMove_(false)
 {
 }
 
@@ -26,6 +27,7 @@ Player::~Player()
 
 void Player::Start()
 {
+	IsMove_ = true;
 
 	SetScale({ 60,60 });
 
@@ -168,6 +170,13 @@ void Player::CheckWall(float4 _Value)
 	{
 		SetMove(_Value);
 	}
+}
+
+void Player::Stop()
+{
+	IsMove_ = false;
+	MoveDir_ = float4::ZERO;
+	AniRender_->ChangeAnimation("MoveUpIdle");
 }
 
 void Player::CameraLock()

@@ -48,13 +48,13 @@ public:
 		ScaleMode_ = _Mode;
 	}
 
+	// 렌더러 스케일과 이미지 스케일을 같이 맞춰줌, SetImage()에서 호출하여 사용한다.
 
 	inline void SetScale(const float4& _Scale)
 	{
 		ScaleMode_ = RenderScaleMode::User;
 		RenderScale_ = _Scale;
 	}
-
 
 	inline float4 GetScale()
 	{
@@ -116,14 +116,16 @@ public:
 		Pause_ = !Pause_;
 	}
 
-	// 렌더러 스케일과 이미지 스케일을 같이 맞춰줌, SetImage()에서 호출하여 사용한다.
 	void SetImageScale();
 
 	void SetImage(const std::string& _Name);
 
 	void SetIndex(size_t _Index, float4 _Scale = { -1.0f, -1.0f });
 
+	void SetImageAnimationReset(const std::string& _Name);
+
 	void SetOrder(int _Order) override;
+
 
 protected:
 	// EngineImage의 TransCopy 로 이미지를 백버퍼에 그린다.
@@ -132,7 +134,7 @@ protected:
 private:
 	friend class FrameAnimation;
 
-	GameEngineImage* Image_;	
+	GameEngineImage* Image_;
 	RenderPivot PivotType_;		// 센터 bot 등, 이미지 어느곳을 중심으로 출력할것인가
 	RenderScaleMode ScaleMode_;	// ENUM(Image, User), 엔진이 정의해준 기본값으로 쓸것인가, 프로그래머가 정의한 USER값으로 쓸것인가.
 
@@ -148,16 +150,22 @@ private:
 	unsigned int Alpha_;
 
 
+
 	bool IsCameraEffect_;		// 해당 렌더러가 카메라의 영향을 받는가 안받는가, EX) UI 는 카메라의 영향을 안받는다.
 	bool Pause_;
 
 
-	///////////회전
+	/// <summary>
+	/// ////////////////////////////////////////////// 회전용 트랜스 이미지
+	/// </summary>
+
 	float RotZ_;
 	GameEngineImage* RotationFilterImage_;
 
 public:
 	void SetRotationFilter(const std::string& _ImageName);
+
+
 
 	void SetRotationZ(float _RotZ)
 	{
@@ -173,6 +181,8 @@ private:
 	{
 	private:
 		friend GameEngineRenderer;
+		//friend std::map<std::string, FrameAnimation>;
+		//friend std::pair<std::string, FrameAnimation>;
 
 		GameEngineRenderer* Renderer_;
 		GameEngineImage* Image_;
@@ -211,7 +221,7 @@ private:
 
 	public:
 		FrameAnimation()
-			:	Image_(nullptr),
+			: Image_(nullptr),
 			Renderer_(nullptr),
 			FolderImage_(nullptr),
 			TimeKey(0),
@@ -260,6 +270,7 @@ public:
 	{
 		return CurrentAnimation_;
 	}
+
 
 private:
 	std::map<std::string, FrameAnimation> Animations_;

@@ -25,6 +25,7 @@ public:
 	void Move(const std::string& _Name);
 
 	std::vector<GameEngineFile> GetAllFile(const std::string& _Ext = "");
+	std::vector<GameEngineFile> GetAllFolder();
 
 protected:
 	

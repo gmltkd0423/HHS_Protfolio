@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
 #include "Player.h"
 #include "Flowey.h"
 
@@ -26,7 +27,19 @@ private:
 	Player* Player_;
 	Flowey* Flowey_;
 	GameEngineActor* FloweyTalk;
+	GameEngineActor* TextBox;
 	GameEngineRenderer* FloweyTalkRenderer;
+	GameEngineRenderer* TextBoxRenderer;
+
+
+	GameEngineActor* FirstLineActor_;
+	GameEngineActor* SecondLineActor_;
+	GameEngineActor* ThirdLineActor_;
+	GameEngineRenderer* FirstLineText_;
+	GameEngineRenderer* SecondLineText_;
+	GameEngineRenderer* ThirdLineText_;
+
+	GameEngineSoundPlayer Bgm_;
 
 private:
 	void Init();

@@ -33,7 +33,7 @@ private:
 	std::string AnimationName_;
 	std::string DirName_;
 
-	bool IsMoveKey();
+	bool IsMove_;
 private:
 	void Start() override;
 	void Update() override;
@@ -44,6 +44,7 @@ private:
 public:
 	void ChangeState(PlayerState _State);
 	void StateUpdate();
+	void Stop();
 	float4 GetMoveDir()
 	{
 		return MoveDir_;
@@ -65,7 +66,7 @@ public:
 		return AniRender_;
 	}
 
-	
+public:
 
 private:
 	void CameraLock();

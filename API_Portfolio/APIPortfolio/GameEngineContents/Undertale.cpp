@@ -90,6 +90,48 @@ void Undertale::GameInit()
 		Talk_Idle->Cut({ 43,44 });
 	}
 
+	//텍스트 , 말풍선
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParent("API_Portfolio");
+		Dir.Move("APIPortfolio");
+		Dir.Move("Resources");
+		Dir.Move("Images");
+		Dir.Move("Text");
+
+		std::vector<GameEngineFile> AllImageFileList = Dir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
+
+		GameEngineImage* FirstLineText1 = GameEngineImageManager::GetInst()->Find("FirstLineText1.bmp");
+		FirstLineText1->Cut({ 128,128 });
+
+		GameEngineImage* SecondLineText1 = GameEngineImageManager::GetInst()->Find("SecondLineText1.bmp");
+		SecondLineText1->Cut({ 128,128 });
+
+		GameEngineImage* ThirdLineText1 = GameEngineImageManager::GetInst()->Find("ThirdLineText1.bmp");
+		ThirdLineText1->Cut({ 128,128 });
+	}
+
+	//텍스트 폴더 로드
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParent("API_Portfolio");
+		Dir.Move("APIPortfolio");
+		Dir.Move("Resources");
+		Dir.Move("Images");
+		Dir.Move("Text");
+
+		std::vector<GameEngineFile> PlayerImageFolderList = Dir.GetAllFolder();
+		for (size_t i = 0; i < PlayerImageFolderList.size(); ++i)
+		{
+			GameEngineImageManager::GetInst()->FolderImageLoad(PlayerImageFolderList[i].GetFullPath());
+		}
+	}
+
 
 	{
 		//사운드
@@ -115,6 +157,7 @@ void Undertale::GameInit()
 
 
 	}
+
 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<PlayLevel>("PlayLevel");
