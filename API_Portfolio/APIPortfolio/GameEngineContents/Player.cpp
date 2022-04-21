@@ -169,7 +169,7 @@ void Player::CameraLock()
 	float MapSizeX = 1280;
 	float MapSizeY = 720;
 	float CameraRectX = 300;
-	float CameraRectY = 300;
+	float CameraRectY = 400;
 
 	if (0 > GetLevel()->GetCameraPos().x)	// 카메라 x위치가 0보다 작아지면 카메라 좌표를 0으로 고정시킨다.
 	{

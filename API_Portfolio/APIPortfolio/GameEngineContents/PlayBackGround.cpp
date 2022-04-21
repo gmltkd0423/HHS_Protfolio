@@ -12,7 +12,7 @@ PlayBackGround::~PlayBackGround()
 
 void PlayBackGround::Start()
 {
-	Render_ = CreateRenderer();
+	SetPosition({ GameEngineWindow::GetInst().GetScale().Half().x + 350,GameEngineWindow::GetInst().GetScale().Half().y });
 }
 
 void PlayBackGround::Render()

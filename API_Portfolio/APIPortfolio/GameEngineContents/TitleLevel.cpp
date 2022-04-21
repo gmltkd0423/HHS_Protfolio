@@ -60,6 +60,10 @@ void TitleLevel::Update()
 	{
 		GameEngine::GetInst().ChangeLevel("PlayLevel");
 	}
+	else if(true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel2");
+	}
 
 	BgmTime_ -= GameEngineTime::GetDeltaTime();
 	if(0>=BgmTime_)

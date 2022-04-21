@@ -20,13 +20,5 @@ protected:
 
 	void Render() override;
 
-private:
-	GameEngineRenderer* Render_;
-public:
-	GameEngineRenderer* GetRenderer()
-	{
-		return Render_;
-	}
-
 };
 

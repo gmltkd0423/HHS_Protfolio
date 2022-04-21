@@ -3,10 +3,10 @@
   <ItemGroup>
     <ClInclude Include="Undertale.h" />
     <ClInclude Include="TitleLevel.h">
-      <Filter>Level\Title</Filter>
+      <Filter>Level\TitleLevel</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
-      <Filter>Level\Play</Filter>
+      <Filter>Level\PlayLevel</Filter>
     </ClInclude>
     <ClInclude Include="EndingLevel.h">
       <Filter>Level\Ennding</Filter>
@@ -18,28 +18,28 @@
       <Filter>Actor\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayBackGround.h">
-      <Filter>Level\Play\Actor</Filter>
+      <Filter>Level\PlayLevel\Actor</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnums.h">
       <Filter>Level\Global</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel2.h">
-      <Filter>Level\Play2</Filter>
+      <Filter>Level\PlayLevel2</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel2BackGround.h">
-      <Filter>Level\Play2\Actor</Filter>
+      <Filter>Level\PlayLevel2\Actor</Filter>
     </ClInclude>
     <ClInclude Include="TitleImage.h">
-      <Filter>Level\Title\Actor</Filter>
+      <Filter>Level\TitleLevel\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>Level\Title</Filter>
+      <Filter>Level\TitleLevel</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level\Play</Filter>
+      <Filter>Level\PlayLevel</Filter>
     </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
       <Filter>Level\Ennding</Filter>
@@ -54,16 +54,16 @@
       <Filter>Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayBackGround.cpp">
-      <Filter>Level\Play\Actor</Filter>
+      <Filter>Level\PlayLevel\Actor</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel2.cpp">
-      <Filter>Level\Play2</Filter>
+      <Filter>Level\PlayLevel2</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel2BackGround.cpp">
-      <Filter>Level\Play2\Actor</Filter>
+      <Filter>Level\PlayLevel2\Actor</Filter>
     </ClCompile>
     <ClCompile Include="TitleImage.cpp">
-      <Filter>Level\Title\Actor</Filter>
+      <Filter>Level\TitleLevel\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,14 +73,8 @@
     <Filter Include="Actor">
       <UniqueIdentifier>{d5424ec1-88d1-47e0-96f8-b0641df815f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Title">
-      <UniqueIdentifier>{08ae12fc-5657-4d12-9287-592cda18409f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level\MainMenu">
       <UniqueIdentifier>{b89aaccb-edd5-4efe-9947-6b909b2f77a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Play">
-      <UniqueIdentifier>{89852ab1-3a69-4400-a3f8-5d6283f82fa0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level\Ennding">
       <UniqueIdentifier>{fd439386-874f-453d-bf97-e1a56fd8c1a5}</UniqueIdentifier>
@@ -94,19 +88,25 @@
     <Filter Include="Actor\Monster">
       <UniqueIdentifier>{0a956dbf-e5b4-4681-88e7-151c50486aed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Title\Actor">
-      <UniqueIdentifier>{0185e3e3-d091-4a48-bb3f-68183f149d3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Play\Actor">
-      <UniqueIdentifier>{dda464f9-097b-42c8-8170-c0beb4b9b6a0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level\Global">
       <UniqueIdentifier>{05703c86-16b3-4e80-b9ed-25625597bdfb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Play2">
+    <Filter Include="Level\PlayLevel">
+      <UniqueIdentifier>{89852ab1-3a69-4400-a3f8-5d6283f82fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor">
+      <UniqueIdentifier>{dda464f9-097b-42c8-8170-c0beb4b9b6a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\TitleLevel">
+      <UniqueIdentifier>{08ae12fc-5657-4d12-9287-592cda18409f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\TitleLevel\Actor">
+      <UniqueIdentifier>{0185e3e3-d091-4a48-bb3f-68183f149d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel2">
       <UniqueIdentifier>{f1b94ab9-3525-4598-8f05-016066735b11}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Play2\Actor">
+    <Filter Include="Level\PlayLevel2\Actor">
       <UniqueIdentifier>{4ec67bb8-c948-49b1-b5cc-f4f9c6570796}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

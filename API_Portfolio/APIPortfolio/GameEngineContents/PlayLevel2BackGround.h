@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
-class PlayLevel2BackGround
+class PlayLevel2BackGround : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -16,6 +17,9 @@ public:
 
 protected:
 
+	void Start() override;
+
+	void Render() override;
 private:
 
 };

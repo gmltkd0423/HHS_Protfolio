@@ -28,6 +28,10 @@ void PlayLevel::Update()
 	{
 		GameEngine::GetInst().ChangeLevel("TitleLevel");
 	}
+	else if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel2");
+	}
 
 	BgmTime_ -= GameEngineTime::GetDeltaTime();
 
@@ -41,15 +45,13 @@ void PlayLevel::Update()
 
 void PlayLevel::Init()
 {
-	PlayBackGround* Back = CreateActor<PlayBackGround>((int)PLAYLEVELORDER::BACKGROUND);
-	Back->GetRenderer()->SetImage("Level1.bmp");
-
-	float4 NewPivot = Back->GetRenderer()->GetImage()->GetScale().Half();
-	Back->GetRenderer()->SetPivot(NewPivot);
-
+	GameEngineActor* BackGround = CreateActor<PlayBackGround>((int)PLAYLEVELORDER::BACKGROUND);
+	GameEngineRenderer* Back = BackGround->CreateRenderer("Level1.bmp", (int)PLAYLEVELORDER::BACKGROUND);
+	
 	Player_ = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
 	Player_->SetPosition({ 400,300 });
 }
+
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
@@ -73,6 +75,6 @@ void PlayLevel::MoveNextLevel()
 
 	if (RGB(255, 22, 0) == Color)
 	{
-		GameEngine::GetInst().ChangeLevel("TitleLevel");
+		GameEngine::GetInst().ChangeLevel("PlayLevel2");
 	}
 }

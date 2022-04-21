@@ -46,6 +46,16 @@ public:
 		return MoveDir_;
 	}
 
+	void SetColImage(GameEngineImage* _Image)
+	{
+		MapColImage_ = _Image;
+	}
+
+	GameEngineImage* GetColImage()
+	{
+		return MapColImage_;
+	}
+
 
 private:
 	void CameraLock();
