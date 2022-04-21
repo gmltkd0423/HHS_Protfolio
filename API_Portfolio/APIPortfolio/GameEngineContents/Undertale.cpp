@@ -83,7 +83,8 @@ void Undertale::GameInit()
 	}
 
 	{
-		GameEngineInput::GetInst()->CreateKey("ChangeLevel", VK_RETURN);
+		GameEngineInput::GetInst()->CreateKey("ChangePlayLevel", VK_RETURN);
+		GameEngineInput::GetInst()->CreateKey("ChangeTitleLevel", '1');
 
 
 	}

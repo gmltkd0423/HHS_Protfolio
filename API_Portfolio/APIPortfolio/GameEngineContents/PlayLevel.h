@@ -21,10 +21,15 @@ protected:
 	void Loading() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
-	void LevelEnd();
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 private:
 	Player* Player_;
 	GameEngineSoundPlayer Bgm_;
 	float BgmTime_;
+	GameEngineImage* MapColImage_;
+
+private:
+	void Init();
+	void MoveNextLevel();
 };

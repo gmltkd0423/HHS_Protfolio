@@ -162,12 +162,6 @@ void Player::CheckWall(float4 _Value)
 	{
 		SetMove(_Value);
 	}
-
-	if (RGB(255, 22, 0) == Color)
-	{
-		GameEngine::GetInst().ChangeLevel("TitleLevel");
-	}
-
 }
 
 void Player::CameraLock()

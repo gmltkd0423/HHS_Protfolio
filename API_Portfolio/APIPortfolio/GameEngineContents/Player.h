@@ -41,6 +41,10 @@ private:
 public:
 	void ChangeState(PlayerState _State);
 	void StateUpdate();
+	float4 GetMoveDir()
+	{
+		return MoveDir_;
+	}
 
 
 private:
