@@ -114,6 +114,8 @@ void PlayLevel2::Init()
 
 void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	//카메라 수정
+
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x, GameEngineWindow::GetScale().y + 250 });
 }
