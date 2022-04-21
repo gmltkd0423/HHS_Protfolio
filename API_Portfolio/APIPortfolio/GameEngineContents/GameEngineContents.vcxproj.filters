@@ -26,11 +26,14 @@
     <ClInclude Include="PlayLevel2.h">
       <Filter>Level\PlayLevel2</Filter>
     </ClInclude>
-    <ClInclude Include="PlayLevel2BackGround.h">
+    <ClInclude Include="PlayLevel2Actor.h">
       <Filter>Level\PlayLevel2\Actor</Filter>
     </ClInclude>
     <ClInclude Include="TitleImage.h">
       <Filter>Level\TitleLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Flowey.h">
+      <Filter>Actor\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,11 +62,14 @@
     <ClCompile Include="PlayLevel2.cpp">
       <Filter>Level\PlayLevel2</Filter>
     </ClCompile>
-    <ClCompile Include="PlayLevel2BackGround.cpp">
+    <ClCompile Include="PlayLevel2Actor.cpp">
       <Filter>Level\PlayLevel2\Actor</Filter>
     </ClCompile>
     <ClCompile Include="TitleImage.cpp">
       <Filter>Level\TitleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Flowey.cpp">
+      <Filter>Actor\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

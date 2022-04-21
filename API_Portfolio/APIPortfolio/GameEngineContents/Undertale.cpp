@@ -66,6 +66,31 @@ void Undertale::GameInit()
 		MoveRight->Cut({ 20,30 });
 	}
 
+
+	//몬스터 : 플라위
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParent("API_Portfolio");
+		Dir.Move("APIPortfolio");
+		Dir.Move("Resources");
+		Dir.Move("Images");
+		Dir.Move("Flowey");
+
+		std::vector<GameEngineFile> AllImageFileList = Dir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
+
+		GameEngineImage* Idle = GameEngineImageManager::GetInst()->Find("Flowey_Idle.bmp");
+		Idle->Cut({ 21,21 });
+
+		GameEngineImage* Talk_Idle = GameEngineImageManager::GetInst()->Find("Flowey_Talk_Idle.bmp");
+		Talk_Idle->Cut({ 43,44 });
+	}
+
+
 	{
 		//사운드
 		GameEngineDirectory Dir;

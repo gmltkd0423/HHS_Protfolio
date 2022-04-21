@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 #include "Player.h"
+#include "Flowey.h"
 
 // Ό³Έν :
 class PlayLevel2 :public GameEngineLevel
@@ -23,8 +24,11 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 private:
 	Player* Player_;
+	Flowey* Flowey_;
 
 private:
 	void Init();
+	void CheckPlayerPosition();
+	bool CheckPos;
 };
 
