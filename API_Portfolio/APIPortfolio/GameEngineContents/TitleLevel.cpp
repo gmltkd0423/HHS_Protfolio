@@ -70,7 +70,7 @@ void TitleLevel::Update()
 	}
 }
 
-void TitleLevel::LevelChangeStart()
+void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	Bgm_ = GameEngineSound::SoundPlayControl("01_Once_Upon_a_Time.flac");
 	BgmTime_ = 30.0f;

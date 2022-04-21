@@ -45,7 +45,7 @@ void PlayLevel::Update()
 }
 
 
-void PlayLevel::LevelChangeStart()
+void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	Bgm_ = GameEngineSound::SoundPlayControl("05_Ruins.flac");
 	BgmTime_ = 30.0f;
