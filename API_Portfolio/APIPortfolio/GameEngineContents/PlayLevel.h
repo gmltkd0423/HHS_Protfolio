@@ -21,7 +21,7 @@ protected:
 	void Loading() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
-	void LevelEnd();
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 private:
 	Player* Player_;
