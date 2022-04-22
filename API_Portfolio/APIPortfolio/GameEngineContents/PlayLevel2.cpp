@@ -31,6 +31,8 @@ void PlayLevel2::Update()
 		TalkEvent_ = true;
 	}
 
+	if(true == Player::MainPlayer->Is)
+
 	CheckPlayerPosition();
 
 	Player::MainPlayer->GetLevel()->GetCameraPos();

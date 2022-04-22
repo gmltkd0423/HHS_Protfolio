@@ -63,6 +63,8 @@ public:
 		return MoveDir_;
 	}
 
+	void PressAnyMoveKey();
+
 	void SetColImage(GameEngineImage* _Image)
 	{
 		MapColImage_ = _Image;
