@@ -43,6 +43,7 @@ void PlayLevel::Update()
 	MoveNextLevel();
 }
 
+
 void PlayLevel::Init()
 {
 	GameEngineActor* BackGround = CreateActor<PlayBackGround>((int)PLAYLEVELORDER::BACKGROUND);

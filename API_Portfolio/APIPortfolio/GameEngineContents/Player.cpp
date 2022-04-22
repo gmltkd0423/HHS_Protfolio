@@ -13,7 +13,13 @@ Player* Player::MainPlayer = nullptr;
 
 Player::Player() :
 	MoveDir_(float4::ZERO),
-	IsMove_(false)
+	IsMove_(false),
+	MapSizeX(0),
+	MapSizeY(0),
+	CamRectX(0),
+	CamRectY(0),
+	CamPos_(true)
+
 {
 }
 
@@ -72,8 +78,11 @@ void Player::Update()
 {
 	StateUpdate();
 
-	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetScale().Half());
-	CameraLock();
+	if (CamPos_ == true)
+	{
+		GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetScale().Half());
+		CameraLock();
+	}
 }
 
 
@@ -196,33 +205,52 @@ void Player::Stop()
 
 void Player::CameraLock()
 {
-	float MapSizeX = 1280;
-	float MapSizeY = 720;
-	float CameraRectX = 300;
-	float CameraRectY = 400;
-	
+	if (strcmp(GetLevel()->GetNameConstPtr(), "PlayLevel") == 0)
+	{
+		MapSizeX = 2000;
+		MapSizeY = 720;
+		CamRectX = 1280;
+		CamRectY = 300;
+	}
+	else if (strcmp(GetLevel()->GetNameConstPtr(), "PlayLevel2") == 0)
+	{
+		MapSizeX = 1280;
+		MapSizeY = 720;
+		CamRectX = 1280;
+		CamRectY = 200;
+	}
+
+	//float MapSizeX = 1280;
+	//float MapSizeY = 720;
+	//float CameraRectX = 300;
+	//float CameraRectY = 400;
+	float4 CurCameraPos = GetLevel()->GetCameraPos();
+
 	if (0 > GetLevel()->GetCameraPos().x)	// 카메라 x위치가 0보다 작아지면 카메라 좌표를 0으로 고정시킨다.
 	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
 		CurCameraPos.x = 0;
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 	if (0 > GetLevel()->GetCameraPos().y)		// 카메라 y위치가 0보다 작아지면
 	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
 		CurCameraPos.y = 0;
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
-	if (MapSizeX < GetLevel()->GetCameraPos().x + CameraRectX)		// 카메라 x위치가 맵 크기보다 커지면
+
+	//if (GameEngineWindow::GetScale().Half().y - (MapSizeY / 2) > GetLevel()->GetCameraPos().y)		// 카메라 y위치가 맵보다 작아지면
+	//{
+	//	CurCameraPos.y = GameEngineWindow::GetScale().Half().y - (MapSizeY / 2) + CamRectY;
+	//	GetLevel()->SetCameraPos(CurCameraPos);
+	//}
+
+	if (MapSizeX < GetLevel()->GetCameraPos().x + CamRectX)		// 카메라 x위치가 맵 크기보다 커지면
 	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = MapSizeX - CameraRectX;
+		CurCameraPos.x = MapSizeX - CamRectX;
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
-	if (MapSizeY < GetLevel()->GetCameraPos().y + CameraRectY)		// 카메라 y위치가 맵 크기보다 커지면
+	if (MapSizeY < GetLevel()->GetCameraPos().y + CamRectY)		// 카메라 y위치가 맵 크기보다 커지면
 	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = MapSizeY - CameraRectY;
+		CurCameraPos.y = MapSizeY - CamRectY;
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 

@@ -34,6 +34,11 @@ private:
 	std::string DirName_;
 
 	bool IsMove_;
+	bool CamPos_;
+	float MapSizeX;
+	float MapSizeY;
+	float CamRectX;
+	float CamRectY;
 private:
 	void Start() override;
 	void Update() override;
@@ -61,6 +66,16 @@ public:
 	void SetColImage(GameEngineImage* _Image)
 	{
 		MapColImage_ = _Image;
+	}
+
+	void CamPosOff()
+	{
+		CamPos_ = false;
+	}
+
+	void CamPosOn()
+	{
+		CamPos_ = true;
 	}
 
 	void CollisionImage(const std::string& _Name);

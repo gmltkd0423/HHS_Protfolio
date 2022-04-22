@@ -33,13 +33,19 @@ void PlayLevel2::Update()
 
 	CheckPlayerPosition();
 
-
+	Player::MainPlayer->GetLevel()->GetCameraPos();
 }
 
 void PlayLevel2::Init()
 {
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+	}
+
 	GameEngineActor* BackGround = CreateActor<PlayLevel2Actor>((int)PLAYLEVELORDER::BACKGROUND);
 	GameEngineRenderer* Back = BackGround->CreateRenderer("Level2.bmp", (int)PLAYLEVELORDER::BACKGROUND);
+	//BackGround->SetPosition({ GameEngineWindow::GetInst().GetScale().x,GameEngineWindow::GetScale().y + 200 });
 
 	{
 		//플라위 대화 이미지
@@ -124,9 +130,12 @@ void PlayLevel2::Init()
 void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	//카메라 수정
-
+	//Player::MainPlayer->GetPosition().x, Player::MainPlayer->GetPosition().y - 200
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x, GameEngineWindow::GetScale().y + 250 });
+	Player::MainPlayer->GetLevel()->SetCameraPos({ GameEngineWindow::GetScale().Half().x - 640, GameEngineWindow::GetScale().y  });
+	Player::MainPlayer->CamPosOff();
+
 }
 
 void PlayLevel2::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -137,6 +146,7 @@ void PlayLevel2::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 void PlayLevel2::CheckPlayerPosition()
 {
+
 	if (Player::MainPlayer->GetPosition().y <= GameEngineWindow::GetInst().GetScale().Half().y + 460 && CheckPos_ == false)
 	{
 		FloweyTalkEvent();
