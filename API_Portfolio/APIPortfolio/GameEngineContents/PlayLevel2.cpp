@@ -29,9 +29,8 @@ void PlayLevel2::Update()
 	if (true == Player::MainPlayer->IsActionKeyDown())
 	{
 		TalkEvent_ = true;
+		Player::MainPlayer->CamPosOn();
 	}
-
-	if(true == Player::MainPlayer->Is)
 
 	CheckPlayerPosition();
 
@@ -40,14 +39,12 @@ void PlayLevel2::Update()
 
 void PlayLevel2::Init()
 {
-	if (nullptr == Player::MainPlayer)
-	{
-		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
-	}
-
 	GameEngineActor* BackGround = CreateActor<PlayLevel2Actor>((int)PLAYLEVELORDER::BACKGROUND);
 	GameEngineRenderer* Back = BackGround->CreateRenderer("Level2.bmp", (int)PLAYLEVELORDER::BACKGROUND);
-	//BackGround->SetPosition({ GameEngineWindow::GetInst().GetScale().x,GameEngineWindow::GetScale().y + 200 });
+	float4 Half = Back->GetImage()->GetScale().Half();
+	Back->SetPivot(Half);
+
+	// BackGround->SetPosition({ GameEngineWindow::GetInst().GetScale().x,GameEngineWindow::GetScale().y + 200 });
 
 	{
 		//플라위 대화 이미지
@@ -131,11 +128,18 @@ void PlayLevel2::Init()
 
 void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+	}
+
+
 	//카메라 수정
 	//Player::MainPlayer->GetPosition().x, Player::MainPlayer->GetPosition().y - 200
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
-	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x, GameEngineWindow::GetScale().y + 250 });
-	Player::MainPlayer->GetLevel()->SetCameraPos({ GameEngineWindow::GetScale().Half().x - 640, GameEngineWindow::GetScale().y  });
+	Player::MainPlayer->SetPosition({ 0, 0 });
+	Player::MainPlayer->GetLevel()->SetCameraPos({ 0, 0});
 	Player::MainPlayer->CamPosOff();
 
 }

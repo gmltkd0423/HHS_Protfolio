@@ -141,6 +141,19 @@ bool Player::IsActionKeyDown()
 	return true;
 }
 
+bool Player::IsPressAnyMoveKey()
+{
+	if (false == GameEngineInput::GetInst()->IsPress("MoveLeft") &&
+		false == GameEngineInput::GetInst()->IsPress("MoveUp") &&
+		false == GameEngineInput::GetInst()->IsPress("MoveDown") &&
+		false == GameEngineInput::GetInst()->IsPress("MoveRight")
+		)
+	{
+		return false;
+	}
+	return true;
+}
+
 bool Player::IsKeyDown()
 {
 	if (false == GameEngineInput::GetInst()->IsDown("MoveLeft") &&
@@ -205,19 +218,20 @@ void Player::Stop()
 
 void Player::CameraLock()
 {
+
 	if (strcmp(GetLevel()->GetNameConstPtr(), "PlayLevel") == 0)
 	{
 		MapSizeX = 2000;
 		MapSizeY = 720;
 		CamRectX = 1280;
-		CamRectY = 300;
+		CamRectY = 720;
 	}
 	else if (strcmp(GetLevel()->GetNameConstPtr(), "PlayLevel2") == 0)
 	{
 		MapSizeX = 1280;
-		MapSizeY = 720;
+		MapSizeY = 1500;
 		CamRectX = 1280;
-		CamRectY = 200;
+		CamRectY = 720;
 	}
 
 	//float MapSizeX = 1280;
@@ -226,12 +240,12 @@ void Player::CameraLock()
 	//float CameraRectY = 400;
 	float4 CurCameraPos = GetLevel()->GetCameraPos();
 
-	if (0 > GetLevel()->GetCameraPos().x)	// 카메라 x위치가 0보다 작아지면 카메라 좌표를 0으로 고정시킨다.
+	if (0 > GetLevel()->GetCameraPos().x)	
 	{
 		CurCameraPos.x = 0;
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
-	if (0 > GetLevel()->GetCameraPos().y)		// 카메라 y위치가 0보다 작아지면
+	if (0 > GetLevel()->GetCameraPos().y)		
 	{
 		CurCameraPos.y = 0;
 		GetLevel()->SetCameraPos(CurCameraPos);

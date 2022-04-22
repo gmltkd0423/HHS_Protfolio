@@ -48,17 +48,20 @@ void PlayLevel::Init()
 {
 	GameEngineActor* BackGround = CreateActor<PlayBackGround>((int)PLAYLEVELORDER::BACKGROUND);
 	GameEngineRenderer* Back = BackGround->CreateRenderer("Level1.bmp", (int)PLAYLEVELORDER::BACKGROUND);
+	float4 Half = Back->GetImage()->GetScale().Half();
+	Back->SetPivot(Half);
 	
-	if (nullptr == Player::MainPlayer)
-	{
-		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
-	}
 
 }
 
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+	}
+
 	Bgm_ = GameEngineSound::SoundPlayControl("05_Ruins.flac");
 	BgmTime_ = 30.0f;
 	Player::MainPlayer->CollisionImage("Level1_ColMap.bmp");
