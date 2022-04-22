@@ -48,10 +48,11 @@ void Player::Start()
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("MoveLeft", 'A');
-		GameEngineInput::GetInst()->CreateKey("MoveRight", 'D');
-		GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
-		GameEngineInput::GetInst()->CreateKey("MoveDown", 'S');
+		GameEngineInput::GetInst()->CreateKey("MoveLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("MoveRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("MoveUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("MoveDown", VK_DOWN);
+		GameEngineInput::GetInst()->CreateKey("Action", 'Z');
 	}
 
 	CurState_ = PlayerState::Idle;
@@ -122,12 +123,21 @@ void Player::StateUpdate()
 	}
 }
 
+bool Player::IsActionKeyDown()
+{
+	if (false == GameEngineInput::GetInst()->IsDown("Action"))
+	{
+		return false;
+	}
+	return true;
+}
+
 bool Player::IsKeyDown()
 {
 	if (false == GameEngineInput::GetInst()->IsDown("MoveLeft") &&
 		false == GameEngineInput::GetInst()->IsDown("MoveUp") &&
 		false == GameEngineInput::GetInst()->IsDown("MoveDown") &&
-		false == GameEngineInput::GetInst()->IsDown("MoveRight")
+		false == GameEngineInput::GetInst()->IsDown("MoveRight") 
 		)
 	{
 		return false;
@@ -140,7 +150,7 @@ bool Player::IsKeyPress()
 	if (false == GameEngineInput::GetInst()->IsPress("MoveLeft") &&
 		false == GameEngineInput::GetInst()->IsPress("MoveUp") &&
 		false == GameEngineInput::GetInst()->IsPress("MoveDown") &&
-		false == GameEngineInput::GetInst()->IsPress("MoveRight")
+		false == GameEngineInput::GetInst()->IsPress("MoveRight") 
 		)
 	{
 		return false;
@@ -153,7 +163,7 @@ bool Player::IsKeyUp()
 	if (false == GameEngineInput::GetInst()->IsUp("MoveLeft") &&
 		false == GameEngineInput::GetInst()->IsUp("MoveUP") &&
 		false == GameEngineInput::GetInst()->IsUp("MoveDown") &&
-		false == GameEngineInput::GetInst()->IsUp("MoveRight")
+		false == GameEngineInput::GetInst()->IsUp("MoveRight") 
 		)
 	{
 		return false;
@@ -170,6 +180,11 @@ void Player::CheckWall(float4 _Value)
 	{
 		SetMove(_Value);
 	}
+}
+
+void Player::Play()
+{
+	IsMove_ = true;
 }
 
 void Player::Stop()

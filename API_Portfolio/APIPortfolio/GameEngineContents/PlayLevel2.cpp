@@ -7,9 +7,11 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 PlayLevel2::PlayLevel2() :
-	CheckPos(false)
+	CheckPos_(false),
+	TalkEvent_(false)
 {
 }
 
@@ -24,7 +26,14 @@ void PlayLevel2::Loading()
 
 void PlayLevel2::Update()
 {
+	if (true == Player::MainPlayer->IsActionKeyDown())
+	{
+		TalkEvent_ = true;
+	}
+
 	CheckPlayerPosition();
+
+
 }
 
 void PlayLevel2::Init()
@@ -128,21 +137,32 @@ void PlayLevel2::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 void PlayLevel2::CheckPlayerPosition()
 {
-	if (Player::MainPlayer->GetPosition().y <= GameEngineWindow::GetInst().GetScale().Half().y + 460 && CheckPos == false)
+	if (Player::MainPlayer->GetPosition().y <= GameEngineWindow::GetInst().GetScale().Half().y + 460 && CheckPos_ == false)
 	{
-		Player::MainPlayer->Stop();
-		CheckPos = true;
-		FloweyTalk->On();
+		FloweyTalkEvent();
 
-		WordRenderer_[0]->On();
-		WordRenderer_[1]->On();
-		WordRenderer_[2]->On();
-		WordRenderer_[3]->On();
-
-
-		TextBox->On();
-		FirstLineText_->On();
-		FirstLineText_->PauseOff();
-		Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
 	}
+
+	if (TalkEvent_ == true)
+	{
+		Player::MainPlayer->Play();
+	}
+}
+
+void PlayLevel2::FloweyTalkEvent()
+{
+	Player::MainPlayer->Stop();
+	CheckPos_ = true;
+	FloweyTalk->On();
+
+	WordRenderer_[0]->On();
+	WordRenderer_[1]->On();
+	WordRenderer_[2]->On();
+	WordRenderer_[3]->On();
+
+
+	TextBox->On();
+	FirstLineText_->On();
+	FirstLineText_->PauseOff();
+	Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
 }

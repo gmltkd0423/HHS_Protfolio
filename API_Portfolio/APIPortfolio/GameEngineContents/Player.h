@@ -44,7 +44,15 @@ private:
 public:
 	void ChangeState(PlayerState _State);
 	void StateUpdate();
+	void Play();
 	void Stop();
+	bool IsActionKeyDown();
+
+	bool GetIsMove()
+	{
+		return IsMove_;
+	}
+
 	float4 GetMoveDir()
 	{
 		return MoveDir_;

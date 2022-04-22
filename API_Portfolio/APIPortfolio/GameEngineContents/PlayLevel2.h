@@ -26,6 +26,8 @@ protected:
 
 
 private:
+	bool TalkEvent_;
+	bool CheckPos_;
 	Player* Player_;
 	Flowey* Flowey_;
 	GameEngineActor* FloweyTalk;
@@ -61,6 +63,7 @@ private:
 private:
 	void Init();
 	void CheckPlayerPosition();
-	bool CheckPos;
+
+	void FloweyTalkEvent();
 };
 
