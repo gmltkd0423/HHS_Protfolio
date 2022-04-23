@@ -22,7 +22,7 @@ void TitleFont::Start()
 	std::vector<GameEngineFile> AllImageFileList = Dir.GetAllFile("ttf");
 
 
-	TextFont.Load(AllImageFileList[1].GetFullPath());
+	TextFont.Load("enbrodwy.ttf");
 }
 
 void TitleFont::Update()
@@ -32,6 +32,7 @@ void TitleFont::Update()
 void TitleFont::Render()
 {
 	TextFont.Draw("´Ù¶÷Áã Çå ÃÂ¹ÙÄû Å¸°íÆÄ", { 100.0f,100.0f }, 100, 50);
+	TextFont.Draw("abcdefghijklmnopqrstuwxyz", { 100.0f,200.0f }, 100, 50);
 
 }
 

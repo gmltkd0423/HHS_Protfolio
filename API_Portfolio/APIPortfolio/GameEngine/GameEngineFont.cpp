@@ -23,6 +23,7 @@ bool GameEngineFont::Load(const std::string& _Path)
 		MsgBoxAssert("사용할 수 없는 폰트입니다.");
 	}
 
+
 	GameEnginePath FilePath(_Path);
 
 	FontName = FilePath.GetFileName();
@@ -44,8 +45,11 @@ void GameEngineFont::Draw(const std::string& _Text, float4 _Postion, float _Size
 	std::wstring WText;
 	GameEngineString::AnsiToUnicode(_Text, WText);
 
-	//배경색지우는함수 수정필요
-	//SetBkColor(GameEngine::BackBufferDC(), TRANSPARENT);
+	//폰트색 변경함수
+	SetTextColor(GameEngine::BackBufferDC(), RGB(255, 255, 255));
+
+	//폰트 배경색 지우는함수
+	SetBkMode(GameEngine::BackBufferDC(), 1);
 
 	oldFont = (HFONT)SelectObject(GameEngine::BackBufferDC(), hFont);
 	TextOutW(GameEngine::BackBufferDC(), _Postion.ix(), _Postion.iy(), WText.c_str(), static_cast<int>(WText.size()));
