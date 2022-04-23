@@ -24,21 +24,7 @@ void PlayLevel::Loading()
 
 void PlayLevel::Update()
 {
-	if (Player::MainPlayer->IsPressAnyMoveKey() == true)
-	{
-		Player::MainPlayer->CamPosOn();
-	}
-
-
-	if (true == GameEngineInput::GetInst()->IsPress("ChangeTitleLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("TitleLevel");
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
-	{
-		GameEngine::GetInst().ChangeLevel("PlayLevel2");
-	}
-
+	CheckChangeLevelKey();
 	BgmTime_ -= GameEngineTime::GetDeltaTime();
 
 	if (0 >= BgmTime_)
@@ -72,8 +58,6 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	BgmTime_ = 30.0f;
 	Player::MainPlayer->CollisionImage("Level1_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  500 });
-	//Player::MainPlayer->GetLevel()->SetCameraPos({ 0,  250 });
-	//Player::MainPlayer->CamPosOff();
 
 }
 
@@ -95,4 +79,20 @@ void PlayLevel::MoveNextLevel()
 	{
 		GameEngine::GetInst().ChangeLevel("PlayLevel2");
 	}
+}
+
+void PlayLevel::CheckChangeLevelKey()
+{
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeTitleLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("TitleLevel");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel2");
+	}
+
+
 }

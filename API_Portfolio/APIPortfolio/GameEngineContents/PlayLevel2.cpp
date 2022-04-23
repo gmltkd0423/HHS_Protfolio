@@ -28,13 +28,8 @@ void PlayLevel2::Loading()
 
 void PlayLevel2::Update()
 {
-	if (true == Player::MainPlayer->IsActionKeyDown())
-	{
-		TalkEvent_ = true;
-		Player::MainPlayer->CamPosOn();
-
-		GameEngine::GetInst().ChangeLevel("BattleLevel");
-	}
+	
+	CheckChangeLevelKey();
 
 	CheckPlayerPosition();
 
@@ -114,6 +109,27 @@ void PlayLevel2::CheckPlayerPosition()
 	if (TalkEvent_ == true)
 	{
 		Player::MainPlayer->Play();
+	}
+}
+
+void PlayLevel2::CheckChangeLevelKey()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeTitleLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("TitleLevel");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel");
+	}
+
+	if (true == Player::MainPlayer->IsActionKeyDown())
+	{
+		TalkEvent_ = true;
+		Player::MainPlayer->CamPosOn();
+
+		GameEngine::GetInst().ChangeLevel("BattleLevel");
 	}
 }
 

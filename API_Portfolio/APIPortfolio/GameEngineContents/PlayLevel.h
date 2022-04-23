@@ -32,4 +32,5 @@ private:
 private:
 	void Init();
 	void MoveNextLevel();
+	void CheckChangeLevelKey();
 };

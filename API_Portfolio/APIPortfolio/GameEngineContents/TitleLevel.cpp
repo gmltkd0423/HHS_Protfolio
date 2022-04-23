@@ -28,9 +28,9 @@ void TitleLevel::Init()
 	{
 		TitleImage_[i] = CreateActor<TitleImage>();
 	}
-	float4 Half = { 640 , 360 };
 
 	TitleRenderer_[(int)TITLEORDER::TITLE] = TitleImage_[(int)TITLEORDER::TITLE]->CreateRendererToScale("Title.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE);
+	float4 Half = TitleRenderer_[(int)TITLEORDER::TITLE]->GetImage()->GetScale().Half();
 	TitleRenderer_[(int)TITLEORDER::TITLE]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE1] = TitleImage_[(int)TITLEORDER::TITLE1]->CreateRendererToScale("Title1.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE1);
 	TitleRenderer_[(int)TITLEORDER::TITLE1]->SetPivot(Half);
@@ -93,9 +93,16 @@ void TitleLevel::Update()
 
 void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	if (nullptr != Player::MainPlayer)
+	{
+		Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
+		Player::MainPlayer->CamPosOff();
+	}
+
+	//초기화함수
 	Init();
-	SetCameraPos({ 0,0 });
 	Bgm_ = GameEngineSound::SoundPlayControl("01_Once_Upon_a_Time.flac");
+
 }
 
 void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -110,6 +117,10 @@ void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	}
 	Text_->Death();
 
+	if (nullptr != Player::MainPlayer)
+	{
+		Player::MainPlayer->CamPosOn();
+	}
 }
 
 void TitleLevel::ChangeBackGround()

@@ -5,7 +5,10 @@ enum class BATTLELEVELORDER
 	BACKGROUND
 };
 
-
+enum class BATTLESTATE
+{
+	FLOWEY
+};
 enum class PLAYLEVELORDER
 {
 	BACKGROUND,

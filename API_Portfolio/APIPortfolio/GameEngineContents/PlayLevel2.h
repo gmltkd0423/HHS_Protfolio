@@ -44,6 +44,7 @@ private:
 private:
 	void Init();
 	void CheckPlayerPosition();
+	void CheckChangeLevelKey();
 
 	void FloweyTalkEvent();
 	void MoveNextLevel();
