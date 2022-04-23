@@ -24,8 +24,10 @@ void TitleLevel::Init()
 	{
 		TitleImage_[i] = CreateActor<TitleImage>();
 	}
+	float4 Half = { 640 , 360 };
 
 	TitleRenderer_[(int)TITLEORDER::TITLE] = TitleImage_[(int)TITLEORDER::TITLE]->CreateRendererToScale("Title.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE);
+	//TitleRenderer_[(int)TITLEORDER::TITLE]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE1] = TitleImage_[(int)TITLEORDER::TITLE1]->CreateRendererToScale("Title1.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE1);
 	TitleRenderer_[(int)TITLEORDER::TITLE2] = TitleImage_[(int)TITLEORDER::TITLE2]->CreateRendererToScale("Title2.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE2);
 	TitleRenderer_[(int)TITLEORDER::TITLE3] = TitleImage_[(int)TITLEORDER::TITLE3]->CreateRendererToScale("Title3.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE3);
