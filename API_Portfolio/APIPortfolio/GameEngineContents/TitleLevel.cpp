@@ -27,21 +27,30 @@ void TitleLevel::Init()
 	float4 Half = { 640 , 360 };
 
 	TitleRenderer_[(int)TITLEORDER::TITLE] = TitleImage_[(int)TITLEORDER::TITLE]->CreateRendererToScale("Title.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE);
-	//TitleRenderer_[(int)TITLEORDER::TITLE]->SetPivot(Half);
+	TitleRenderer_[(int)TITLEORDER::TITLE]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE1] = TitleImage_[(int)TITLEORDER::TITLE1]->CreateRendererToScale("Title1.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE1);
+	TitleRenderer_[(int)TITLEORDER::TITLE1]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE2] = TitleImage_[(int)TITLEORDER::TITLE2]->CreateRendererToScale("Title2.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE2);
+	TitleRenderer_[(int)TITLEORDER::TITLE2]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE3] = TitleImage_[(int)TITLEORDER::TITLE3]->CreateRendererToScale("Title3.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE3);
+	TitleRenderer_[(int)TITLEORDER::TITLE3]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE4] = TitleImage_[(int)TITLEORDER::TITLE4]->CreateRendererToScale("Title4.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE4);
+	TitleRenderer_[(int)TITLEORDER::TITLE4]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE5] = TitleImage_[(int)TITLEORDER::TITLE5]->CreateRendererToScale("Title5.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE5);
+	TitleRenderer_[(int)TITLEORDER::TITLE5]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE6] = TitleImage_[(int)TITLEORDER::TITLE6]->CreateRendererToScale("Title6.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE6);
+	TitleRenderer_[(int)TITLEORDER::TITLE6]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE7] = TitleImage_[(int)TITLEORDER::TITLE7]->CreateRendererToScale("Title7.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE7);
+	TitleRenderer_[(int)TITLEORDER::TITLE7]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE8] = TitleImage_[(int)TITLEORDER::TITLE8]->CreateRendererToScale("Title8.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE8);
+	TitleRenderer_[(int)TITLEORDER::TITLE8]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE9] = TitleImage_[(int)TITLEORDER::TITLE9]->CreateRendererToScale("Title9.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE9);
+	TitleRenderer_[(int)TITLEORDER::TITLE9]->SetPivot({640, 50});
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND] = TitleImage_[(int)TITLEORDER::BACKGROUND]->CreateRendererToScale("TitleBackGround.bmp", { 1280, 720 }, (int)TITLEORDER::BACKGROUND);
+	TitleRenderer_[(int)TITLEORDER::BACKGROUND]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND]->SetTransColor(RGB(255, 255, 255));
 	
 
-	TitleImage_[(int)TITLEORDER::TITLE9]->SetPosition({ TitleImage_[(int)TITLEORDER::TITLE9]->GetPosition().x,TitleImage_[(int)TITLEORDER::TITLE9]->GetPosition().y - 300 });
 	
 }
 
@@ -141,7 +150,7 @@ void TitleLevel::ChangeBackGround()
 
 	if (18.0f < Time_)
 	{
-		if (TitleImage_[(int)TITLEORDER::TITLE9]->GetPosition().y - 50 <= GameEngineWindow::GetInst().GetScale().Half().y)
+		if (TitleImage_[(int)TITLEORDER::TITLE9]->GetPosition().y <= 390)
 		{
 			TitleImage_[(int)TITLEORDER::TITLE9]->SetMove(float4::DOWN * 100.0f * GameEngineTime::GetDeltaTime());
 		}
