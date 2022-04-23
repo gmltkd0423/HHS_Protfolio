@@ -3,6 +3,7 @@
 #include "EndingLevel.h"
 #include "TitleLevel.h"
 #include "PlayLevel2.h"
+#include "BattleLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
@@ -149,6 +150,7 @@ void Undertale::GameInit()
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<PlayLevel>("PlayLevel");
 	CreateLevel<PlayLevel2>("PlayLevel2");
+	CreateLevel
 	CreateLevel<EndingLevel>("EndingLevel");
 	ChangeLevel("TitleLevel");
 }

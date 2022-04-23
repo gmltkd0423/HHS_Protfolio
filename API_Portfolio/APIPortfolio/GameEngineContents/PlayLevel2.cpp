@@ -32,6 +32,8 @@ void PlayLevel2::Update()
 	{
 		TalkEvent_ = true;
 		Player::MainPlayer->CamPosOn();
+
+		GameEngine::GetInst().ChangeLevel("BattleLevel");
 	}
 
 	CheckPlayerPosition();

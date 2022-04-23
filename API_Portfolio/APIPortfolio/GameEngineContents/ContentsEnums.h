@@ -18,6 +18,7 @@ enum class UIORDER
 enum class TITLEORDER
 {
 	TITLE,
+	TITLE10,
 	TITLE9,
 	TITLE8,
 	TITLE7,
