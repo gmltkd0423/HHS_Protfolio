@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngine/GameEngineFont.h>
 
 
 // Ό³Έν :

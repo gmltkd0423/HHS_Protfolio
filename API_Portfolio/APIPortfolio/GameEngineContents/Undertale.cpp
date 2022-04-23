@@ -9,6 +9,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngineFont.h>
 
 Undertale::Undertale()
 {
@@ -90,6 +91,8 @@ void Undertale::GameInit()
 		Talk_Idle->Cut({ 43,44 });
 	}
 
+
+
 	//텍스트 , 말풍선
 	{
 		GameEngineDirectory Dir;
@@ -114,22 +117,6 @@ void Undertale::GameInit()
 
 		GameEngineImage* ThirdLineText1 = GameEngineImageManager::GetInst()->Find("ThirdLineText1.bmp");
 		ThirdLineText1->Cut({ 128,128 });
-	}
-
-	//텍스트 폴더 로드
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParent("API_Portfolio");
-		Dir.Move("APIPortfolio");
-		Dir.Move("Resources");
-		Dir.Move("Images");
-		Dir.Move("Text");
-
-		std::vector<GameEngineFile> PlayerImageFolderList = Dir.GetAllFolder();
-		for (size_t i = 0; i < PlayerImageFolderList.size(); ++i)
-		{
-			GameEngineImageManager::GetInst()->FolderImageLoad(PlayerImageFolderList[i].GetFullPath());
-		}
 	}
 
 

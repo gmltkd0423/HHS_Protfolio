@@ -2,6 +2,7 @@
 #include "GameEngine/GameEngine.h"
 #include "TitleImage.h"
 #include "Player.h"
+#include "TitleFont.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -20,6 +21,9 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Init()
 {
+
+	GameEngineActor* Text = CreateActor<TitleFont>((int)TITLEORDER::TEXT);
+
 	for (int i = 0; i < 15; ++i)
 	{
 		TitleImage_[i] = CreateActor<TitleImage>();

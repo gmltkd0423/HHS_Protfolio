@@ -35,6 +35,12 @@
     <ClInclude Include="Flowey.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="TitleFont.h">
+      <Filter>Level\TitleLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -70,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="Flowey.cpp">
       <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleFont.cpp">
+      <Filter>Level\TitleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
