@@ -36,3 +36,7 @@ void BattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 }
 
+void BattleLevel::CheckBattleState()
+{
+}
+
