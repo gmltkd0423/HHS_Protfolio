@@ -24,6 +24,12 @@ void PlayLevel::Loading()
 
 void PlayLevel::Update()
 {
+	if (Player::MainPlayer->IsPressAnyMoveKey() == true)
+	{
+		Player::MainPlayer->CamPosOn();
+	}
+
+
 	if (true == GameEngineInput::GetInst()->IsPress("ChangeTitleLevel"))
 	{
 		GameEngine::GetInst().ChangeLevel("TitleLevel");
@@ -65,7 +71,10 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Bgm_ = GameEngineSound::SoundPlayControl("05_Ruins.flac");
 	BgmTime_ = 30.0f;
 	Player::MainPlayer->CollisionImage("Level1_ColMap.bmp");
-	Player::MainPlayer->SetPosition({ 400,300 });
+	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  500 });
+	//Player::MainPlayer->GetLevel()->SetCameraPos({ 0,  250 });
+	//Player::MainPlayer->CamPosOff();
+
 }
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -82,7 +91,7 @@ void PlayLevel::MoveNextLevel()
 	float4 NextPos = Player::MainPlayer->GetPosition() + Player::MainPlayer->GetMoveDir();
 	int Color = MapColImage_->GetImagePixel(NextPos);
 
-	if (RGB(255, 22, 0) == Color)
+	if (RGB(255, 0, 0) == Color)
 	{
 		GameEngine::GetInst().ChangeLevel("PlayLevel2");
 	}

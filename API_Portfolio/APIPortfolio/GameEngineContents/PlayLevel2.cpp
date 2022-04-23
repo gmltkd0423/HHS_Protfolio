@@ -8,6 +8,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngineImageManager.h>
+#include <GameEngine/GameEngine.h>
 
 PlayLevel2::PlayLevel2() :
 	CheckPos_(false),
@@ -34,7 +36,7 @@ void PlayLevel2::Update()
 
 	CheckPlayerPosition();
 
-	Player::MainPlayer->GetLevel()->GetCameraPos();
+	MoveNextLevel();
 }
 
 void PlayLevel2::Init()
@@ -46,7 +48,6 @@ void PlayLevel2::Init()
 
 	Flowey_ = CreateActor<Flowey>((int)PLAYLEVELORDER::MONSTER);
 
-	// BackGround->SetPosition({ GameEngineWindow::GetInst().GetScale().x,GameEngineWindow::GetScale().y + 200 });
 
 	{
 		//플라위 대화 이미지
@@ -67,62 +68,11 @@ void PlayLevel2::Init()
 		TextBox->SetPosition({ GameEngineWindow::GetScale().Half().x , GameEngineWindow::GetScale().y + 180 });
 		TextBox->Off();
 
-		
-
-
-		//FirstLineActor_ = CreateActor<PlayLevel2Actor>((int)UIORDER::TEXT);
-		//
-		//FirstLineText_ = FirstLineActor_->CreateRenderer((int)UIORDER::TEXT);
-		//FirstLineActor_->SetPosition({ GameEngineWindow::GetScale().Half().x - 100, GameEngineWindow::GetScale().y - 300 });
-		//FirstLineText_->CreateAnimation("FirstLineText1.bmp","Flowey_Text1" ,0, 3, 0.4f, false);
-		//FirstLineText_->ChangeAnimation("Flowey_Text1");
-		//FirstLineText_->SetTransColor(RGB(255, 0, 0));
-		////폴더이미지
-		////FirstLineActor_->SetPosition({ GameEngineWindow::GetScale().Half().x + 100, GameEngineWindow::GetScale().y - 250 });
-		////FirstLineText_->CreateFolderAnimation("FloweyText", "Flowey_Text", 0, 3 ,0.3f, false);
-		////FirstLineText_->ChangeAnimation("Flowey_Text");
-		////FirstLineText_->SetTransColor(RGB(1, 1, 1));
-		//FirstLineText_->SetScale({ 130,130 });
-		//FirstLineText_->PauseOn();
-		//FirstLineText_->Off();
 
 	}
 
+	
 
-	// 글자
-	{
-		/*for (int i = 0; i < 4; ++i)
-		{
-			WordActor_[i] = CreateActor<PlayLevel2Actor>((int)UIORDER::TEXT);
-			WordRenderer_[i] = WordActor_[i]->CreateRenderer((int)UIORDER::TEXT);
-		}
-
-
-		WordRenderer_[0]->SetImage("Text1.bmp");
-		WordRenderer_[0]->SetPivot({ -100,150 });
-		WordRenderer_[0]->SetTransColor(RGB(255, 0, 0));
-		WordRenderer_[0]->Off();
-		WordRenderer_[1]->SetImage("Text2.bmp");
-		WordRenderer_[1]->SetPivot({ -50,150 });
-		WordRenderer_[1]->SetTransColor(RGB(255, 0, 0));
-		WordRenderer_[1]->Off();
-		WordRenderer_[2]->SetImage("Text3.bmp");
-		WordRenderer_[2]->SetPivot({ 0,150 });
-		WordRenderer_[2]->SetTransColor(RGB(255, 0, 0));
-		WordRenderer_[2]->Off();
-		WordRenderer_[3]->SetImage("Text4.bmp");
-		WordRenderer_[3]->SetPivot({ 50,150 });
-		WordRenderer_[3]->SetTransColor(RGB(255, 0, 0));
-		WordRenderer_[3]->Off();
-*/
-
-
-
-
-
-	}
-
-	//Player_ = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
 
 }
 
@@ -138,11 +88,9 @@ void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Flowey_->SetPosition({ GameEngineWindow::GetScale().Half().x , GameEngineWindow::GetScale().y + 320 });
 
 	//카메라 수정
-	//Player::MainPlayer->GetPosition().x, Player::MainPlayer->GetPosition().y - 200
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1400});
-	Player::MainPlayer->GetLevel()->SetCameraPos({ 0,  780});
-	Player::MainPlayer->CamPosOff();
+	//Player::MainPlayer->CamPosOff();
 
 }
 
@@ -173,14 +121,20 @@ void PlayLevel2::FloweyTalkEvent()
 	CheckPos_ = true;
 	FloweyTalk->On();
 
-	//WordRenderer_[0]->On();
-	//WordRenderer_[1]->On();
-	//WordRenderer_[2]->On();
-	//WordRenderer_[3]->On();
-
-
 	TextBox->On();
-	//FirstLineText_->On();
-	//FirstLineText_->PauseOff();
+
 	Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
+}
+
+void PlayLevel2::MoveNextLevel()
+{
+	MapColImage_ = GameEngineImageManager::GetInst()->Find("Level2_ColMap.bmp");
+
+	float4 NextPos = Player::MainPlayer->GetPosition() + Player::MainPlayer->GetMoveDir();
+	int Color = MapColImage_->GetImagePixel(NextPos);
+
+	if (RGB(255, 0, 0) == Color)
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel");
+	}
 }

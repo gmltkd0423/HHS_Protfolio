@@ -37,29 +37,7 @@ private:
 	GameEngineActor* TextBox;
 	GameEngineRenderer* FloweyTalkRenderer;
 	GameEngineRenderer* TextBoxRenderer;
-
-
-	GameEngineActor* FirstLineActor_;
-	GameEngineActor* SecondLineActor_;
-	GameEngineActor* ThirdLineActor_;
-	GameEngineRenderer* FirstLineText_;
-	GameEngineRenderer* SecondLineText_;
-	GameEngineRenderer* ThirdLineText_;
-
-
-	GameEngineActor* WordActor_[10];
-	GameEngineRenderer* WordRenderer_[10];
-
-	GameEngineActor* Word1Actor_;
-	GameEngineActor* Word2Actor_;
-	GameEngineActor* Word3Actor_;
-	GameEngineActor* Word4Actor_;
-	GameEngineRenderer* Word1Renderer_;
-	GameEngineRenderer* Word2Renderer_;
-	GameEngineRenderer* Word3Renderer_;
-	GameEngineRenderer* Word4Renderer_;
-
-
+	GameEngineImage* MapColImage_;
 
 	GameEngineSoundPlayer Bgm_;
 
@@ -68,5 +46,6 @@ private:
 	void CheckPlayerPosition();
 
 	void FloweyTalkEvent();
+	void MoveNextLevel();
 };
 

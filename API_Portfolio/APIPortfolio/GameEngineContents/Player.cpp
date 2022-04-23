@@ -221,8 +221,8 @@ void Player::CameraLock()
 
 	if (strcmp(GetLevel()->GetNameConstPtr(), "PlayLevel") == 0)
 	{
-		MapSizeX = 2000;
-		MapSizeY = 720;
+		MapSizeX = 2300;
+		MapSizeY = 1000;
 		CamRectX = 1280;
 		CamRectY = 720;
 	}
