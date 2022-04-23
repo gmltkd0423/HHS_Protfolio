@@ -1,5 +1,11 @@
 #pragma once
 
+enum class BATTLELEVELORDER
+{
+	BACKGROUND
+};
+
+
 enum class PLAYLEVELORDER
 {
 	BACKGROUND,

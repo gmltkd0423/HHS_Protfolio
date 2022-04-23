@@ -12,7 +12,7 @@
       <Filter>Level\Ennding</Filter>
     </ClInclude>
     <ClInclude Include="BattleLevel.h">
-      <Filter>Level\Battle</Filter>
+      <Filter>Level\BattleLevel</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor\Player</Filter>
@@ -41,6 +41,12 @@
     <ClInclude Include="Font.h">
       <Filter>Actor</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerHeart.h">
+      <Filter>Actor\PlayerHeart</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleLevelActor.h">
+      <Filter>Level\BattleLevel\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -54,7 +60,7 @@
       <Filter>Level\Ennding</Filter>
     </ClCompile>
     <ClCompile Include="BattleLevel.cpp">
-      <Filter>Level\Battle</Filter>
+      <Filter>Level\BattleLevel</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Player</Filter>
@@ -83,6 +89,12 @@
     <ClCompile Include="Font.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerHeart.cpp">
+      <Filter>Actor\PlayerHeart</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleLevelActor.cpp">
+      <Filter>Level\BattleLevel\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -96,9 +108,6 @@
     </Filter>
     <Filter Include="Level\Ennding">
       <UniqueIdentifier>{fd439386-874f-453d-bf97-e1a56fd8c1a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Battle">
-      <UniqueIdentifier>{f44764ca-09bc-4e5b-a362-d7ffab63da43}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Player">
       <UniqueIdentifier>{d8004983-2e78-4801-b725-5512f1fd3127}</UniqueIdentifier>
@@ -126,6 +135,15 @@
     </Filter>
     <Filter Include="Level\PlayLevel2\Actor">
       <UniqueIdentifier>{4ec67bb8-c948-49b1-b5cc-f4f9c6570796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\BattleLevel">
+      <UniqueIdentifier>{f44764ca-09bc-4e5b-a362-d7ffab63da43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\PlayerHeart">
+      <UniqueIdentifier>{7374d321-f448-450a-a5f9-8a0bdc7aa432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\BattleLevel\Actor">
+      <UniqueIdentifier>{c0b5ff8b-00d4-44ad-af18-8738652297e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

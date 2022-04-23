@@ -142,6 +142,7 @@ void Undertale::GameInit()
 		GameEngineInput::GetInst()->CreateKey("ChangePlayLevel", VK_RETURN);
 		GameEngineInput::GetInst()->CreateKey("ChangeTitleLevel", '1');
 		GameEngineInput::GetInst()->CreateKey("ChangePlayLevel2", '2');
+		GameEngineInput::GetInst()->CreateKey("ChangeBattleLevel", '3');
 
 
 	}
@@ -150,7 +151,7 @@ void Undertale::GameInit()
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<PlayLevel>("PlayLevel");
 	CreateLevel<PlayLevel2>("PlayLevel2");
-	CreateLevel
+	CreateLevel<BattleLevel>("BattleLevel");
 	CreateLevel<EndingLevel>("EndingLevel");
 	ChangeLevel("TitleLevel");
 }
