@@ -38,11 +38,7 @@ void PlayLevel::Update()
 
 void PlayLevel::Init()
 {
-	GameEngineActor* BackGround = CreateActor<PlayBackGround>((int)PLAYLEVELORDER::BACKGROUND);
-	GameEngineRenderer* Back = BackGround->CreateRenderer("Level1.bmp", (int)PLAYLEVELORDER::BACKGROUND);
-	float4 Half = Back->GetImage()->GetScale().Half();
-	Back->SetPivot(Half);
-	
+	CreateActor<PlayBackGround>();
 
 }
 

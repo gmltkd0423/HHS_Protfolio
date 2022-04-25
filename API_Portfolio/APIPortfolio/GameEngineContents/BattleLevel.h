@@ -1,6 +1,12 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
+enum class BATTLELEVELSTATE
+{
+	FLOWEY,
+	NONE
+};
+
 // Ό³Έν :
 class BattleLevel : public GameEngineLevel
 {
@@ -22,7 +28,11 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 private:
-	void CheckBattleState();
+	void BattleStateUpdate(BATTLELEVELSTATE _State);
 
+	void Battle_Flowey();
+	void UISetting();
+private:
+	BATTLELEVELSTATE CurState_;
 };
 

@@ -2,13 +2,13 @@
 
 enum class BATTLELEVELORDER
 {
-	BACKGROUND
+	BACKGROUND,
+	BOX,
+	ACTOR,
+	BULLET
 };
 
-enum class BATTLESTATE
-{
-	FLOWEY
-};
+
 enum class PLAYLEVELORDER
 {
 	BACKGROUND,

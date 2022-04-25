@@ -129,7 +129,7 @@ void PlayLevel2::CheckChangeLevelKey()
 		TalkEvent_ = true;
 		Player::MainPlayer->CamPosOn();
 
-		GameEngine::GetInst().ChangeLevel("BattleLevel");
+		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
 	}
 }
 

@@ -23,20 +23,57 @@ void BattleLevel::Loading()
 
 void BattleLevel::Update()
 {
-	CheckBattleState();
+	BattleStateUpdate(CurState_);
 }
 
 void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
 	Player::MainPlayer->CamPosOff();
+
+	
+
+	CurState_ = BATTLELEVELSTATE::FLOWEY;
+
 }
 
 void BattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+
 }
 
-void BattleLevel::CheckBattleState()
+void BattleLevel::BattleStateUpdate(BATTLELEVELSTATE _State)
 {
+
+
+
+
+	switch (_State)
+	{
+	case BATTLELEVELSTATE::FLOWEY:
+		Battle_Flowey();
+		break;
+	case BATTLELEVELSTATE::NONE:
+		return;
+	}
+
+	CurState_ = BATTLELEVELSTATE::NONE;
+	
 }
+
+void BattleLevel::Battle_Flowey()
+{
+
+
+
+
+}
+
+void BattleLevel::UISetting()
+{
+
+
+}
+
+
 

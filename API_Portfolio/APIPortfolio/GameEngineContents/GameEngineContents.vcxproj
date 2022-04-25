@@ -184,7 +184,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Font.h">
+    <ClInclude Include="FloweyBattleLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FloweyBullet.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -193,10 +197,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="PlayerHeart.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -246,7 +246,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
+    <ClCompile Include="FloweyBattleLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FloweyBullet.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -255,10 +259,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="PlayerHeart.cpp">
       <SubType>
       </SubType>
     </ClCompile>

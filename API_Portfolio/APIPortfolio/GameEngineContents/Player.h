@@ -28,6 +28,7 @@ protected:
 private:
 	PlayerState CurState_;
 	GameEngineRenderer* AniRender_;
+	GameEngineRenderer* Heart;
 	GameEngineImage* MapColImage_;
 	float4 MoveDir_;
 	std::string AnimationName_;

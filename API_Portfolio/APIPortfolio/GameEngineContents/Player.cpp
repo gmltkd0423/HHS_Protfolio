@@ -37,6 +37,8 @@ void Player::Start()
 
 	SetScale({ 60,60 });
 
+	
+
 	AniRender_ = CreateRenderer();
 	AniRender_->SetScale({ 70,90 });
 
@@ -99,6 +101,10 @@ void Player::CollisionImage(const std::string& _Name)
 
 void Player::ChangeState(PlayerState _State)
 {
+	
+
+
+
 	if (_State != CurState_)
 	{
 		switch (_State)

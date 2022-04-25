@@ -22,6 +22,7 @@ protected:
 	void Start() override;
 	void Update() override;
 private:
-
+	GameEngineActor* TitleImage_[20];
+	GameEngineRenderer* TitleRenderer_[20];
 };
 

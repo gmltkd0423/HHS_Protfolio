@@ -11,9 +11,6 @@
     <ClInclude Include="EndingLevel.h">
       <Filter>Level\Ennding</Filter>
     </ClInclude>
-    <ClInclude Include="BattleLevel.h">
-      <Filter>Level\BattleLevel</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor\Player</Filter>
     </ClInclude>
@@ -32,20 +29,23 @@
     <ClInclude Include="TitleImage.h">
       <Filter>Level\TitleLevel\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Flowey.h">
-      <Filter>Actor\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="TitleFont.h">
       <Filter>Level\TitleLevel\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHeart.h">
-      <Filter>Actor\PlayerHeart</Filter>
-    </ClInclude>
     <ClInclude Include="BattleLevelActor.h">
       <Filter>Level\BattleLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="FloweyBattleLevel.h">
+      <Filter>Level\BattleLevel\FloweyBattleLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Flowey.h">
+      <Filter>Actor\Monster\Flowey</Filter>
+    </ClInclude>
+    <ClInclude Include="FloweyBullet.h">
+      <Filter>Actor\Monster\Flowey</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleLevel.h">
+      <Filter>Level\BattleLevel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +58,6 @@
     </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
       <Filter>Level\Ennding</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleLevel.cpp">
-      <Filter>Level\BattleLevel</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Player</Filter>
@@ -80,20 +77,23 @@
     <ClCompile Include="TitleImage.cpp">
       <Filter>Level\TitleLevel\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Flowey.cpp">
-      <Filter>Actor\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="TitleFont.cpp">
       <Filter>Level\TitleLevel\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHeart.cpp">
-      <Filter>Actor\PlayerHeart</Filter>
-    </ClCompile>
     <ClCompile Include="BattleLevelActor.cpp">
       <Filter>Level\BattleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="FloweyBattleLevel.cpp">
+      <Filter>Level\BattleLevel\FloweyBattleLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Flowey.cpp">
+      <Filter>Actor\Monster\Flowey</Filter>
+    </ClCompile>
+    <ClCompile Include="FloweyBullet.cpp">
+      <Filter>Actor\Monster\Flowey</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleLevel.cpp">
+      <Filter>Level\BattleLevel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,11 +139,14 @@
     <Filter Include="Level\BattleLevel">
       <UniqueIdentifier>{f44764ca-09bc-4e5b-a362-d7ffab63da43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\PlayerHeart">
-      <UniqueIdentifier>{7374d321-f448-450a-a5f9-8a0bdc7aa432}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level\BattleLevel\Actor">
       <UniqueIdentifier>{c0b5ff8b-00d4-44ad-af18-8738652297e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster\Flowey">
+      <UniqueIdentifier>{f55550bd-2c01-4bf8-af29-ccd13004bebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\BattleLevel\FloweyBattleLevel">
+      <UniqueIdentifier>{8af7c7a4-d62b-4875-b8b9-82211c269c90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
