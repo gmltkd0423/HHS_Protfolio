@@ -91,6 +91,9 @@ void Undertale::GameInit()
 
 		GameEngineImage* Talk_Idle = GameEngineImageManager::GetInst()->Find("Flowey_Talk_Idle.bmp");
 		Talk_Idle->Cut({ 43,44 });
+
+		GameEngineImage* Bullet = GameEngineImageManager::GetInst()->Find("Flowey_Bullet.bmp");
+		Bullet->Cut({ 15,14 });
 	}
 
 

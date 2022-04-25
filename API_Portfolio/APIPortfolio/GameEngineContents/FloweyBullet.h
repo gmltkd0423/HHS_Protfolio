@@ -1,5 +1,6 @@
 #pragma once
 #include<GameEngine/GameEngineActor.h>
+#include<GameEngine/GameEngineRenderer.h>
 
 // Ό³Έν :
 class FloweyBullet	:public GameEngineActor
@@ -20,6 +21,7 @@ protected:
 	void Update() override;
 	void Render() override;
 private:
-
+	GameEngineRenderer* AniRender_;
+	float4 Pos_;
 };
 

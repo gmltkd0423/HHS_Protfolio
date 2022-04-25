@@ -2,6 +2,7 @@
 #include "BattleLevelActor.h"
 #include "ContentsEnums.h"
 #include "Player.h"
+#include "FloweyBullet.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineImage.h>
@@ -10,7 +11,9 @@
 #include <GameEngineBase/GameEngineInput.h>
 
 FloweyBattleLevel::FloweyBattleLevel() :
-	Check_(false)
+	Check_(false),
+	PlayerPos_(float4::ZERO),
+	CheckBullet_(false)
 {
 }
 
@@ -56,6 +59,19 @@ void FloweyBattleLevel::Loading()
 		Speech_BubbleRenderer->Off();
 	}
 
+	{
+
+
+
+		PosVec_.push_back({ 480 , 160 });
+		PosVec_.push_back({ 560 , 120 });
+		PosVec_.push_back({ 640 , 80 });
+		PosVec_.push_back({ 720 , 120 });
+		PosVec_.push_back({ 800 , 160 });
+
+
+
+	}
 
 }
 
@@ -72,11 +88,44 @@ void FloweyBattleLevel::Update()
 		}
 	}
 
+
+
 	if (true == Player::MainPlayer->IsActionKeyDown())
 	{
-		Player::MainPlayer->BlinkOn();
+		//Player::MainPlayer->BlinkOn();
+
+		CreateBullet();
+
+
+		PlayerPos_ = Player::MainPlayer->GetPosition();
+
+		for (int i = 0; i < BulletVec_.size(); ++i)
+		{
+			BulletVec_[i]->On();
+		}
+
+		for (int i = 0; i < BulletVec_.size(); ++i)
+		{
+			float4 BulletMoveDir_ = (PlayerPos_ - BulletVec_[i]->GetPosition()) * GameEngineTime::GetDeltaTime() * 0.2f;
+
+			BulletDirVec_.push_back(BulletMoveDir_);
+		}
+		CheckBullet_ = true;
 	}
 
+	if (true == CheckBullet_)
+	{
+		for (int i = 0; i < BulletVec_.size(); ++i)
+		{
+			//BulletMoveDir_ = (PlayerPos_ - BulletVec_[i]->GetPosition()) * GameEngineTime::GetDeltaTime() * 0.1f;
+			BulletVec_[i]->SetMove(BulletDirVec_[i]);
+		}
+
+		
+	}
+
+
+	CheckDeath();
 }
 
 void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -99,4 +148,26 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void FloweyBattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+}
+
+void FloweyBattleLevel::CreateBullet()
+{
+	for (int i = 0; i < 5; ++i)
+	{
+		GameEngineActor* Bullet = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+		BulletVec_.push_back(Bullet);
+		BulletVec_[i]->Off();
+		BulletVec_[i]->SetPosition(PosVec_[i]);
+	}
+}
+
+void FloweyBattleLevel::CheckDeath()
+{
+	for (int i = 0; i < BulletVec_.size(); ++i)
+	{
+		if (720.0f <= BulletVec_[i]->GetPosition().y)
+		{
+			BulletVec_[i]->Death();
+		}
+	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include "FloweyBullet.h"
 
 
 // Ό³Έν :
@@ -24,12 +25,23 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 private:
 	bool Check_;
-
+	bool CheckBullet_;
 
 private:
 	GameEngineActor* FloweyTalk;
 	GameEngineRenderer* FloweyTalkRenderer;
 	GameEngineActor* Speech_Bubble;
 	GameEngineRenderer* Speech_BubbleRenderer;
+	float4 PlayerPos_;
+	std::vector<float4> BulletDirVec_;
+
+	std::vector<float4> PosVec_;
+	std::vector<GameEngineActor*> BulletVec_;
+
+
+
+private:
+	void CreateBullet();
+	void CheckDeath();
 };
 
