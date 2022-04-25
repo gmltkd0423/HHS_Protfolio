@@ -34,6 +34,7 @@ private:
 	std::string AnimationName_;
 	std::string DirName_;
 
+	float Speed_;
 	bool IsMove_;
 	bool CamPos_;
 	float MapSizeX;
@@ -65,6 +66,15 @@ public:
 		return MoveDir_;
 	}
 
+	void SetSpeed(float _Speed)
+	{
+		Speed_ = _Speed;
+	}
+
+	float GetSpeed()
+	{
+		return Speed_;
+	}
 	bool IsPressAnyMoveKey();
 
 	void SetColImage(GameEngineImage* _Image)

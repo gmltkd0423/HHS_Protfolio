@@ -95,14 +95,14 @@ void Undertale::GameInit()
 
 
 
-	//텍스트 , 말풍선
+	// UI
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParent("API_Portfolio");
 		Dir.Move("APIPortfolio");
 		Dir.Move("Resources");
 		Dir.Move("Images");
-		Dir.Move("Text");
+		Dir.Move("UI");
 
 		std::vector<GameEngineFile> AllImageFileList = Dir.GetAllFile("Bmp");
 
@@ -110,16 +110,8 @@ void Undertale::GameInit()
 		{
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
-
-		GameEngineImage* FirstLineText1 = GameEngineImageManager::GetInst()->Find("FirstLineText1.bmp");
-		FirstLineText1->Cut({ 128,128 });
-
-		GameEngineImage* SecondLineText1 = GameEngineImageManager::GetInst()->Find("SecondLineText1.bmp");
-		SecondLineText1->Cut({ 128,128 });
-
-		GameEngineImage* ThirdLineText1 = GameEngineImageManager::GetInst()->Find("ThirdLineText1.bmp");
-		ThirdLineText1->Cut({ 128,128 });
 	}
+
 
 
 	{

@@ -23,6 +23,13 @@ protected:
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 private:
+	bool Check_;
 
+
+private:
+	GameEngineActor* FloweyTalk;
+	GameEngineRenderer* FloweyTalkRenderer;
+	GameEngineActor* Speech_Bubble;
+	GameEngineRenderer* Speech_BubbleRenderer;
 };
 

@@ -39,28 +39,28 @@ void Player::MoveUpdate()
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveRight") && true == IsMove_)
 	{
-		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * 500;
+		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_;
 		AniRender_->ChangeAnimation("MoveRight");
 		DirName_ = "MoveRight";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft") && true == IsMove_)
 	{
-		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 500;
+		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_;
 		AniRender_->ChangeAnimation("MoveLeft");
 		DirName_=  "MoveLeft";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveUp") && true == IsMove_)
 	{
-		MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 500;
+		MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * Speed_;
 		AniRender_->ChangeAnimation("MoveUp");
 		DirName_ = "MoveUp";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveDown") && true == IsMove_)
 	{
-		MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * 500;
+		MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_;
 		AniRender_->ChangeAnimation("MoveDown");
 		DirName_ = "MoveDown";
 	}

@@ -19,7 +19,8 @@ Player::Player() :
 	MapSizeY(0),
 	CamRectX(0),
 	CamRectY(0),
-	CamPos_(true)
+	CamPos_(true),
+	Speed_(500.0f)
 
 {
 }
