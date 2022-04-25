@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineImage.h>
+#include <GameEngineBase/GameEngineWindow.h>
 
 FloweyBattleLevel::FloweyBattleLevel() 
 {
@@ -20,6 +21,9 @@ void FloweyBattleLevel::Loading()
 	GameEngineRenderer* Back = BackGround->CreateRenderer("BattleLevelBackGround.bmp", (int)BATTLELEVELORDER::BACKGROUND);
 	float4 Half = Back->GetImage()->GetScale().Half();
 	Back->SetPivot(Half);
+
+	GameEngineActor* Box = CreateActor<BattleLevelActor>();
+	GameEngineRenderer* BoxRenderer = Box->CreateRendererToScale("TextBox.bmp", { 150,150 }, (int)BATTLELEVELORDER::BOX);
 
 
 }
@@ -37,8 +41,11 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 
 	Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
+	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,420 });
 	Player::MainPlayer->CamPosOff();
 	//Player::MainPlayer->
+
+
 
 }
 
