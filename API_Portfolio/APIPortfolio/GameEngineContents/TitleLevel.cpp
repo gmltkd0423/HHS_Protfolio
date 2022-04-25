@@ -3,6 +3,7 @@
 #include "TitleImage.h"
 #include "Player.h"
 #include "TitleFont.h"
+#include "FadeInOut.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -10,7 +11,8 @@
 #include "ContentsEnums.h"
 
 TitleLevel::TitleLevel():
-	Time_(0.0f)
+	Time_(0.0f),
+	Count_(0)
 {
 }
 
@@ -56,6 +58,7 @@ void TitleLevel::Init()
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND]->SetTransColor(RGB(255, 255, 255));
 	
+	FadeEffect_ = CreateActor<FadeInOut>((int)TITLEORDER::BACKGROUND);
 
 	
 }
@@ -70,8 +73,7 @@ void TitleLevel::Update()
 {
 
 	ChangeBackGround();
-	
-
+	FadeInOutBackGround();
 	
 	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
 	{
@@ -103,6 +105,7 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Init();
 	Bgm_ = GameEngineSound::SoundPlayControl("01_Once_Upon_a_Time.flac");
 
+
 }
 
 void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -127,70 +130,89 @@ void TitleLevel::ChangeBackGround()
 {
 	Time_ += GameEngineTime::GetDeltaTime();
 
-	if (4.0f < Time_)
+	if (6.0f < Time_ && 0 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE1]->Death();
+		++Count_;
 	}
 
 
-	if (8.0f < Time_)
+	if (10.0f < Time_ && 1 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE2]->Death();
+		++Count_;
 	}
 
 
-	if (12.0f < Time_)
+	if (12.0f < Time_ && 2 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE3]->Death();
+		++Count_;
 	}
 
 
-	if (16.0f < Time_)
+	if (16.0f < Time_ && 3 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE4]->Death();
+		++Count_;
 	}
 
 
-	if (20.0f < Time_)
+	if (20.0f < Time_ && 4 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE5]->Death();
+		++Count_;
 	}
 
 
-	if (24.0f < Time_)
+	if (24.0f < Time_ && 5 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE6]->Death();
+		++Count_;
 	}
 
 
-	if (28.0f < Time_)
+	if (28.0f < Time_ && 6 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE7]->Death();
+		++Count_;
 	}
 
 
-	if (32.0f < Time_)
+	if (32.0f < Time_ && 7 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE8]->Death();
+		++Count_;
 	}
 
 
-	if (36.0f < Time_)
+	if (36.0f < Time_ && 8 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE9]->Death();
+		++Count_;
 	}
 
-	if (40.0f < Time_)
+	if (40.0f < Time_ && 9 == Count_)
 	{
 		if (TitleImage_[(int)TITLEORDER::TITLE10]->GetPosition().y <= 650)
 		{
 			TitleImage_[(int)TITLEORDER::TITLE10]->SetMove(float4::DOWN * 100.0f * GameEngineTime::GetDeltaTime());
 		}
+		++Count_;
 	}
 
-	if (50.0f < Time_)
+	if (50.0f < Time_ && 10 == Count_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE10]->Death();
 		TitleImage_[(int)TITLEORDER::BACKGROUND]->Death();
+		++Count_;
+	}
+}
+
+void TitleLevel::FadeInOutBackGround()
+{
+	if (4.0f < Time_ && 0 == Count_)
+	{
+		FadeEffect_->FadeIn();
 	}
 }

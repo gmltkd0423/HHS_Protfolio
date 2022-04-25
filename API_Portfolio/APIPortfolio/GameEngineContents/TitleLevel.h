@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngine/GameEngineFont.h>
+#include "FadeInOut.h"
 
 
 // Ό³Έν :
@@ -27,14 +28,18 @@ private:
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _NextLevle) override;
 	void ChangeBackGround();
+	void FadeInOutBackGround();
 	void Init();
 
+
 private:
+	FadeInOut* FadeEffect_;
 	GameEngineSoundPlayer Bgm_;
 	GameEngineActor* TitleImage_[20];
 	GameEngineRenderer* TitleRenderer_[20];
 	GameEngineActor* Text_;
 	float BgmTime_;
 	float Time_;
+	int Count_;
 };
 

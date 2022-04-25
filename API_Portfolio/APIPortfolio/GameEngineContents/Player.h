@@ -35,12 +35,15 @@ private:
 	std::string DirName_;
 
 	float Speed_;
+	bool IsBlink_;
 	bool IsMove_;
 	bool CamPos_;
 	float MapSizeX;
 	float MapSizeY;
 	float CamRectX;
 	float CamRectY;
+	float BlinkTime_;
+	bool IsAlphaOn_;
 private:
 	void Start() override;
 	void Update() override;
@@ -54,6 +57,19 @@ public:
 	void StateUpdate();
 	void Play();
 	void Stop();
+
+
+
+	void BlinkOn()
+	{
+		IsBlink_ = true;
+	}
+
+	void BlinkOff()
+	{
+		IsBlink_ = false;
+	}
+	
 	bool IsActionKeyDown();
 
 	bool GetIsMove()
@@ -111,6 +127,7 @@ private:
 	bool IsKeyDown();
 	bool IsKeyUp();
 	void CheckWall(float4 _Value);
+	void Blink();
 
 
 private:

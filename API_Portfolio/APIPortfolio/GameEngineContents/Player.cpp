@@ -20,7 +20,10 @@ Player::Player() :
 	CamRectX(0),
 	CamRectY(0),
 	CamPos_(true),
-	Speed_(500.0f)
+	Speed_(500.0f),
+	IsBlink_(false),
+	BlinkTime_(1.0f),
+	IsAlphaOn_(true)
 
 {
 }
@@ -99,6 +102,8 @@ void Player::Update()
 	}
 
 	CheckLevel();
+
+	Blink();
 }
 
 
@@ -222,6 +227,12 @@ void Player::CheckWall(float4 _Value)
 	{
 		SetMove(_Value);
 	}
+}
+
+void Player::Blink()
+{
+	
+
 }
 
 void Player::CheckLevel()

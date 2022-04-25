@@ -7,6 +7,7 @@
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 FloweyBattleLevel::FloweyBattleLevel() :
 	Check_(false)
@@ -69,6 +70,11 @@ void FloweyBattleLevel::Update()
 			FloweyTalk->On();
 			Speech_BubbleRenderer->On();
 		}
+	}
+
+	if (true == Player::MainPlayer->IsActionKeyDown())
+	{
+		Player::MainPlayer->BlinkOn();
 	}
 
 }

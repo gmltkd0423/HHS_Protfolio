@@ -28,7 +28,6 @@ void PlayLevel2::Loading()
 
 void PlayLevel2::Update()
 {
-	Player::MainPlayer->GetPosition();
 	CheckChangeLevelKey();
 
 	CheckPlayerPosition();

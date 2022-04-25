@@ -47,6 +47,9 @@
     <ClInclude Include="BattleLevel.h">
       <Filter>Level\BattleLevel</Filter>
     </ClInclude>
+    <ClInclude Include="FadeInOut.h">
+      <Filter>Level\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -94,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="BattleLevel.cpp">
       <Filter>Level\BattleLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeInOut.cpp">
+      <Filter>Level\Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
