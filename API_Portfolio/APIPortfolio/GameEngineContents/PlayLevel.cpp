@@ -45,6 +45,10 @@ void PlayLevel::Init()
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+
+
+
+
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);

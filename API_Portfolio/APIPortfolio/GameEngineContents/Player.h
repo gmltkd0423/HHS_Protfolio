@@ -28,7 +28,7 @@ protected:
 private:
 	PlayerState CurState_;
 	GameEngineRenderer* AniRender_;
-	GameEngineRenderer* Heart;
+	GameEngineRenderer* Heart_;
 	GameEngineImage* MapColImage_;
 	float4 MoveDir_;
 	std::string AnimationName_;
@@ -49,6 +49,7 @@ private:
 
 public:
 	void ChangeState(PlayerState _State);
+	void CheckLevel();
 	void StateUpdate();
 	void Play();
 	void Stop();

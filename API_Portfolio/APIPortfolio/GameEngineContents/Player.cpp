@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "ContentsEnums.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -35,23 +36,33 @@ void Player::Start()
 {
 	IsMove_ = true;
 
-	SetScale({ 60,60 });
+	//SetScale({ 60,60 });
 
-	
+	{
+		Heart_ = CreateRendererToScale("Heart.bmp", { 20,20 }, (int)BATTLELEVELORDER::ACTOR);
+		Heart_->SetTransColor(RGB(255, 102, 255));
+	}
 
-	AniRender_ = CreateRenderer();
-	AniRender_->SetScale({ 70,90 });
 
-	AniRender_->CreateAnimation("Move_Down.bmp", "MoveDown", 0, 3, 0.15f, true);
-	AniRender_->CreateAnimation("Move_Down.bmp", "MoveDownIdle", 0, 0, 0.15f, true);
-	AniRender_->CreateAnimation("Move_Up.bmp", "MoveUp", 0, 3, 0.15f, true);
-	AniRender_->CreateAnimation("Move_Up.bmp", "MoveUpIdle", 0, 0, 0.15f, true);
-	AniRender_->CreateAnimation("Move_Right.bmp", "MoveRight", 0, 1, 0.15f, true);
-	AniRender_->CreateAnimation("Move_Right.bmp", "MoveRightIdle", 0, 0, 0.15f, true);
-	AniRender_->CreateAnimation("Move_Left.bmp", "MoveLeft", 0, 1, 0.15f, true);
-	AniRender_->CreateAnimation("Move_Left.bmp", "MoveLeftIdle", 0, 0, 0.15f, true);
-	AniRender_->ChangeAnimation("MoveDownIdle");
-	AniRender_->SetTransColor(RGB(255, 255, 255));
+
+	//애니메이션
+	{
+		AniRender_ = CreateRenderer();
+		AniRender_->SetScale({ 70,90 });
+
+		AniRender_->CreateAnimation("Move_Down.bmp", "MoveDown", 0, 3, 0.15f, true);
+		AniRender_->CreateAnimation("Move_Down.bmp", "MoveDownIdle", 0, 0, 0.15f, true);
+		AniRender_->CreateAnimation("Move_Up.bmp", "MoveUp", 0, 3, 0.15f, true);
+		AniRender_->CreateAnimation("Move_Up.bmp", "MoveUpIdle", 0, 0, 0.15f, true);
+		AniRender_->CreateAnimation("Move_Right.bmp", "MoveRight", 0, 1, 0.15f, true);
+		AniRender_->CreateAnimation("Move_Right.bmp", "MoveRightIdle", 0, 0, 0.15f, true);
+		AniRender_->CreateAnimation("Move_Left.bmp", "MoveLeft", 0, 1, 0.15f, true);
+		AniRender_->CreateAnimation("Move_Left.bmp", "MoveLeftIdle", 0, 0, 0.15f, true);
+		AniRender_->ChangeAnimation("MoveDownIdle");
+		AniRender_->SetTransColor(RGB(255, 255, 255));
+
+	}
+
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
@@ -85,6 +96,8 @@ void Player::Update()
 		GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetScale().Half());
 		CameraLock();
 	}
+
+	CheckLevel();
 }
 
 
@@ -209,6 +222,21 @@ void Player::CheckWall(float4 _Value)
 		SetMove(_Value);
 	}
 }
+
+void Player::CheckLevel()
+{
+	if (strcmp(GetLevel()->GetNameConstPtr(), "BattleLevel") == 0 || strcmp(GetLevel()->GetNameConstPtr(), "FloweyBattleLevel") == 0)
+	{
+		AniRender_->Off();
+		Heart_->On();
+	}
+	else
+	{
+		AniRender_->On();
+		Heart_->Off();
+	}
+}
+
 
 void Player::Play()
 {
