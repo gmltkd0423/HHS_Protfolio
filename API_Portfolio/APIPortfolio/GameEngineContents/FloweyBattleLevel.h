@@ -38,6 +38,7 @@ private:
 	std::vector<float4> PosVec_;
 	std::vector<GameEngineActor*> BulletVec_;
 
+	int IsDeathCheck;
 
 
 private:

@@ -13,7 +13,8 @@
 FloweyBattleLevel::FloweyBattleLevel() :
 	Check_(false),
 	PlayerPos_(float4::ZERO),
-	CheckBullet_(false)
+	CheckBullet_(false),
+	IsDeathCheck(0)
 {
 }
 
@@ -165,9 +166,17 @@ void FloweyBattleLevel::CheckDeath()
 {
 	for (int i = 0; i < BulletVec_.size(); ++i)
 	{
-		if (720.0f <= BulletVec_[i]->GetPosition().y)
+		if (720.0f <= BulletVec_[i]->GetPosition().y && true == BulletVec_[i]->IsUpdate())
 		{
-			BulletVec_[i]->Death();
+
+			BulletVec_[i]->Off();
+			IsDeathCheck++;
+		
+			if (IsDeathCheck == BulletVec_.size())
+			{
+				BulletVec_.clear();
+			}
 		}
 	}
+
 }
