@@ -29,7 +29,8 @@ private:
 	bool TalkEvent_;
 	bool CheckPos_;
 	float Time_;
-
+	bool PlayBgm_;
+	int Count_ = 0;
 
 	Player* Player_;
 	Flowey* Flowey_;

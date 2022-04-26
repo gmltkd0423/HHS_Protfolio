@@ -15,7 +15,8 @@
 PlayLevel2::PlayLevel2() :
 	CheckPos_(false),
 	TalkEvent_(false),
-	Time_(0)
+	Time_(0),
+	PlayBgm_(false)
 {
 }
 
@@ -153,7 +154,11 @@ void PlayLevel2::FloweyTalkEvent()
 
 	TextBox->On();
 
-	Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
+	if (0==Count_)
+	{
+		Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
+		Count_++;
+	}
 }
 
 
