@@ -23,5 +23,9 @@ protected:
 private:
 	GameEngineRenderer* AniRender_;
 	float4 Pos_;
+	float4 MoveDir_;
+	float Speed_;
+
+	bool IsCheckPos_;
 };
 

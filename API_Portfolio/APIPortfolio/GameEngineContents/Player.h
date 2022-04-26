@@ -9,6 +9,14 @@ enum class PlayerState
 	Move
 };
 
+static enum class PlayerLevelState
+{
+	PlayLevel,
+	PlayLevel2,
+	BattleLevel,
+};
+
+
 class Player : public GameEngineActor
 {
 public:

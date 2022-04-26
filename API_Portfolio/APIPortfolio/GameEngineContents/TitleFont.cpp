@@ -44,11 +44,6 @@ void TitleFont::Update()
 
 void TitleFont::Render()
 {
-	//폰트변경 테스트용 텍스트
-	/*TestFont.Draw("다람쥐 헌 쳇바퀴 타고파", { 100.0f,100.0f }, 100, 50);
-	TestFont.Draw("abcdefghijklmnopqrstuwxyz", { 100.0f,200.0f }, 100, 50);
-	TestFont2.Draw("다람쥐 헌 쳇바퀴 타고파", { 100.0f,300.0f }, 100, 50);
-	TestFont2.Draw("abcdefghijklmnopqrstuwxyz", { 100.0f,400.0f }, 100, 50);*/
 
 	TitleText();
 

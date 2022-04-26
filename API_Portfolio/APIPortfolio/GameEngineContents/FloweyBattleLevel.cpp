@@ -64,12 +64,13 @@ void FloweyBattleLevel::Loading()
 
 
 
-		PosVec_.push_back({ 480 , 160 });
-		PosVec_.push_back({ 560 , 120 });
-		PosVec_.push_back({ 640 , 80 });
-		PosVec_.push_back({ 720 , 120 });
-		PosVec_.push_back({ 800 , 160 });
+		//PosVec_.push_back({ 480 , 160 });
+		//PosVec_.push_back({ 560 , 120 });
+		//PosVec_.push_back({ 640 , 80 });
+		//PosVec_.push_back({ 720 , 120 });
+		//PosVec_.push_back({ 800 , 160 });
 
+		CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
 
 
 	}
@@ -91,37 +92,37 @@ void FloweyBattleLevel::Update()
 
 
 
-	if (true == Player::MainPlayer->IsActionKeyDown())
-	{
-		//Player::MainPlayer->BlinkOn();
+	//if (true == Player::MainPlayer->IsActionKeyDown())
+	//{
+	//	//Player::MainPlayer->BlinkOn();
 
-		CreateBullet();
-
-
-		PlayerPos_ = Player::MainPlayer->GetPosition();
+	//	CreateBullet();
 
 
-		for (int i = 0; i < BulletVec_.size(); ++i)
-		{
-			float4 BulletMoveDir_ = (PlayerPos_ - BulletVec_[i]->GetPosition()) * GameEngineTime::GetDeltaTime() * 0.2f;
-
-			BulletDirVec_.push_back(BulletMoveDir_);
-		}
-		CheckBullet_ = true;
-	}
-
-	if (true == CheckBullet_)
-	{
-		for (int i = 0; i < BulletVec_.size(); ++i)
-		{
-			BulletVec_[i]->SetMove(BulletDirVec_[i]);
-		}
-
-		
-	}
+	//	PlayerPos_ = Player::MainPlayer->GetPosition();
 
 
-	CheckDeath();
+	//	for (int i = 0; i < BulletVec_.size(); ++i)
+	//	{
+	//		float4 BulletMoveDir_ = (PlayerPos_ - BulletVec_[i]->GetPosition()) * GameEngineTime::GetDeltaTime() * 0.2f;
+
+	//		BulletDirVec_.push_back(BulletMoveDir_);
+	//	}
+	//	CheckBullet_ = true;
+	//}
+
+	//if (true == CheckBullet_)
+	//{
+	//	for (int i = 0; i < BulletVec_.size(); ++i)
+	//	{
+	//		BulletVec_[i]->SetMove(BulletDirVec_[i]);
+	//	}
+
+	//	
+	//}
+
+
+	//CheckDeath();
 }
 
 void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -131,7 +132,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
 	}
 
-
+	GameEngineInput::GetInst()->Reset();
 	Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,420 });
 	Player::MainPlayer->SetSpeed(200.0f);
@@ -148,33 +149,33 @@ void FloweyBattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 void FloweyBattleLevel::CreateBullet()
 {
-	for (int i = 0; i < 5; ++i)
-	{
-		GameEngineActor* Bullet = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
-		BulletVec_.push_back(Bullet);
-		//BulletVec_[i]->Off();
-		BulletVec_[i]->SetPosition(PosVec_[i]);
-	}
+	//for (int i = 0; i < 5; ++i)
+	//{
+	//	GameEngineActor* Bullet = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+	//	BulletVec_.push_back(Bullet);
+	//	//BulletVec_[i]->Off();
+	//	BulletVec_[i]->SetPosition(PosVec_[i]);
+	//}
 }
 
 void FloweyBattleLevel::CheckDeath()
 {
-	for (int i = 0; i < BulletVec_.size(); ++i)
-	{
-		if (600.0f <= BulletVec_[i]->GetPosition().y)
-		{
+	//for (int i = 0; i < BulletVec_.size(); ++i)
+	//{
+	//	if (600.0f <= BulletVec_[i]->GetPosition().y)
+	//	{
 
-			BulletVec_[i]->Off();
-			if (false == BulletVec_[i]->IsUpdate())
-			{
-				++IsDeathCheck;
-			}
-		
-		/*	if (IsDeathCheck == BulletVec_.size())
-			{
-				BulletVec_.clear();
-			}*/
-		}
-	}
+	//		BulletVec_[i]->Off();
+	//		if (false == BulletVec_[i]->IsUpdate())
+	//		{
+	//			++IsDeathCheck;
+	//		}
+	//	
+	//	/*	if (IsDeathCheck == BulletVec_.size())
+	//		{
+	//			BulletVec_.clear();
+	//		}*/
+	//	}
+	//}
 
 }

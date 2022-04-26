@@ -99,11 +99,20 @@ void PlayLevel2::LevelChangeEnd(GameEngineLevel* _NextLevel)
 void PlayLevel2::CheckPlayerPosition()
 {
 
-	if (Player::MainPlayer->GetPosition().y <= 1200 && CheckPos_ == false)
+	if (Player::MainPlayer->GetPosition().y <= 1200 )
 	{
 		FloweyTalkEvent();
 
+		if (true == Player::MainPlayer->IsActionKeyDown())
+		{
+			TalkEvent_ = true;
+			Player::MainPlayer->CamPosOn();
+			
+			GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
+		}
 	}
+
+	
 
 	if (TalkEvent_ == true)
 	{
@@ -123,19 +132,11 @@ void PlayLevel2::CheckChangeLevelKey()
 		GameEngine::GetInst().ChangeLevel("PlayLevel");
 	}
 
-	if (true == Player::MainPlayer->IsActionKeyDown())
-	{
-		TalkEvent_ = true;
-		Player::MainPlayer->CamPosOn();
-
-		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
-	}
 }
 
 void PlayLevel2::FloweyTalkEvent()
 {
 	Player::MainPlayer->Stop();
-	CheckPos_ = true;
 	FloweyTalk->On();
 
 	TextBox->On();
