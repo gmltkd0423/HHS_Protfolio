@@ -40,7 +40,7 @@ protected:
 
 private:
 	PlayerState CurState_;
-	GameEngineRenderer* AniRender_;
+	GameEngineRenderer* Frisk_;
 	GameEngineRenderer* Heart_;
 	GameEngineImage* MapColImage_;
 	float4 MoveDir_;
@@ -83,6 +83,9 @@ public:
 		BlinkTimer_ = _BlinkTimer;
 	}
 	
+	void IsHeart();
+	void IsFrisk();
+
 	bool IsActionKeyDown();
 
 	bool GetIsMove()
@@ -127,9 +130,9 @@ public:
 		return MapColImage_;
 	}
 
-	GameEngineRenderer* GetAniRender()
+	GameEngineRenderer* GetFrisk()
 	{
-		return AniRender_;
+		return Frisk_;
 	}
 
 public:

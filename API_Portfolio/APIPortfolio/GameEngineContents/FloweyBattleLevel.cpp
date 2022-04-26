@@ -15,7 +15,8 @@ FloweyBattleLevel::FloweyBattleLevel() :
 	Check_(false),
 	PlayerPos_(float4::ZERO),
 	CheckBullet_(false),
-	IsDeathCheck(0)
+	IsDeathCheck(0),
+	Count_(0)
 {
 }
 
@@ -62,16 +63,9 @@ void FloweyBattleLevel::Loading()
 	}
 
 	{
+		
 
-
-
-		//PosVec_.push_back({ 480 , 160 });
-		//PosVec_.push_back({ 560 , 120 });
-		//PosVec_.push_back({ 640 , 80 });
-		//PosVec_.push_back({ 720 , 120 });
-		//PosVec_.push_back({ 800 , 160 });
-
-		CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+		//CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
 
 
 	}
@@ -91,28 +85,30 @@ void FloweyBattleLevel::Update()
 		}
 	}
 
+	//총알생성
+	if (true == Player::MainPlayer->IsActionKeyDown() && 0 == Count_)
+	{
+		CreateBullet();
 
+		for (int i = 0; i < 5; ++i)
+		{
+			Bullet_[i]->On();
+		}
 
+		++Count_;
+	}
+	else if (true == Player::MainPlayer->IsActionKeyDown() && 1 == Count_)
+	{
+		Count_ = 0;
 
+		//총알 캐릭터를 중심으로 원으로 생성
+		CreateBulletCircle();
+	}
 
-	//CheckDeath();
+	CheckDeath();
 
 	CheckChageLevelKey();
 
-	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("PlayLevel");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
-	{
-		GameEngine::GetInst().ChangeLevel("PlayLevel2");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
-	}
 
 }
 
@@ -121,6 +117,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+		Player::MainPlayer->IsHeart();
 	}
 
 	Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
@@ -139,35 +136,61 @@ void FloweyBattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 void FloweyBattleLevel::CreateBullet()
 {
-	//for (int i = 0; i < 5; ++i)
-	//{
-	//	GameEngineActor* Bullet = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
-	//	BulletVec_.push_back(Bullet);
-	//	//BulletVec_[i]->Off();
-	//	BulletVec_[i]->SetPosition(PosVec_[i]);
-	//}
+	BulletPos_[0] = { 480, 160 };
+	BulletPos_[1] = { 560, 120 };
+	BulletPos_[2] = { 640, 80 };
+	BulletPos_[3] = { 720, 120 };
+	BulletPos_[4] = { 800, 160 };
+
+	if (0 != Bullet_.size())
+	{
+		return;
+	}
+
+	for (int i = 0; i < 5;++i)
+	{
+		GameEngineActor* Bullets = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+
+		Bullet_.push_back(Bullets);
+		Bullet_[i]->SetPosition(BulletPos_[i]);
+		Bullet_[i]->Off();
+	}
 }
+
+
+void FloweyBattleLevel::CreateBulletCircle()
+{
+
+
+}
+
+
 
 void FloweyBattleLevel::CheckDeath()
 {
-	//for (int i = 0; i < BulletVec_.size(); ++i)
-	//{
-	//	if (600.0f <= BulletVec_[i]->GetPosition().y)
-	//	{
+	if (0 == Bullet_.size())
+	{
+		return;
+	}
 
-	//		BulletVec_[i]->Off();
-	//		if (false == BulletVec_[i]->IsUpdate())
-	//		{
-	//			++IsDeathCheck;
-	//		}
-	//	
-	//	/*	if (IsDeathCheck == BulletVec_.size())
-	//		{
-	//			BulletVec_.clear();
-	//		}*/
-	//	}
-	//}
+	for (int i = 0; i < 5; ++i)
+	{
+		if (500.0f <= Bullet_.back()->GetPosition().y)
+		{
+			CheckBullet_ = true;
+		}
+	}
 
+	if (true == CheckBullet_)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			Bullet_[i]->Death();
+		}
+
+		Bullet_.clear();
+		CheckBullet_ = false;
+	}
 }
 
 void FloweyBattleLevel::CheckChageLevelKey()
@@ -182,8 +205,8 @@ void FloweyBattleLevel::CheckChageLevelKey()
 		GameEngine::GetInst().ChangeLevel("PlayLevel2");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeTitleLevel"))
 	{
-		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
+		GameEngine::GetInst().ChangeLevel("TitleLevel");
 	}
 }

@@ -63,7 +63,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	Player::MainPlayer->GetAniRender()->ChangeAnimation("MoveDownIdle");
+	Player::MainPlayer->GetFrisk()->ChangeAnimation("MoveDownIdle");
 	Player::MainPlayer->NextLevelOn();
 	Bgm_.Stop();
 }

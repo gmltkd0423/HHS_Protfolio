@@ -25,7 +25,26 @@ private:
 	float4 Pos_;
 	float4 MoveDir_;
 	float Speed_;
-
+	int KeyCount_;
+	int SpeedCount_;
 	bool IsCheckPos_;
+
+
+
+public:
+	GameEngineRenderer* GetRenderer()
+	{
+		return AniRender_;
+	}
+
+	void SetSpeedCount(int _SpeedCount)
+	{
+		SpeedCount_ = _SpeedCount;
+	}
+
+	int GetSpeedCount()
+	{
+		return SpeedCount_;
+	}
 };
 

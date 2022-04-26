@@ -26,6 +26,8 @@ protected:
 private:
 	bool Check_;
 	bool CheckBullet_;
+	float Time_;
+	int Count_;
 
 private:
 	GameEngineActor* FloweyTalk;
@@ -34,6 +36,8 @@ private:
 	GameEngineRenderer* Speech_BubbleRenderer;
 	float4 PlayerPos_;
 
+	std::vector<GameEngineActor*> Bullet_;
+	float4 BulletPos_[5];
 
 
 	int IsDeathCheck;
@@ -41,6 +45,7 @@ private:
 
 private:
 	void CreateBullet();
+	void CreateBulletCircle();
 	void CheckDeath();
 	void CheckChageLevelKey();
 };

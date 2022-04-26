@@ -54,19 +54,19 @@ void Player::Start()
 
 	//애니메이션
 	{
-		AniRender_ = CreateRenderer((int)PlayerOrder::Frisk);
-		AniRender_->SetScale({ 70,90 });
+		Frisk_ = CreateRenderer((int)PlayerOrder::Frisk);
+		Frisk_->SetScale({ 70,90 });
 
-		AniRender_->CreateAnimation("Move_Down.bmp", "MoveDown", 0, 3, 0.15f, true);
-		AniRender_->CreateAnimation("Move_Down.bmp", "MoveDownIdle", 0, 0, 0.15f, true);
-		AniRender_->CreateAnimation("Move_Up.bmp", "MoveUp", 0, 3, 0.15f, true);
-		AniRender_->CreateAnimation("Move_Up.bmp", "MoveUpIdle", 0, 0, 0.15f, true);
-		AniRender_->CreateAnimation("Move_Right.bmp", "MoveRight", 0, 1, 0.15f, true);
-		AniRender_->CreateAnimation("Move_Right.bmp", "MoveRightIdle", 0, 0, 0.15f, true);
-		AniRender_->CreateAnimation("Move_Left.bmp", "MoveLeft", 0, 1, 0.15f, true);
-		AniRender_->CreateAnimation("Move_Left.bmp", "MoveLeftIdle", 0, 0, 0.15f, true);
-		AniRender_->ChangeAnimation("MoveDownIdle");
-		AniRender_->SetTransColor(RGB(255, 255, 255));
+		Frisk_->CreateAnimation("Move_Down.bmp", "MoveDown", 0, 3, 0.15f, true);
+		Frisk_->CreateAnimation("Move_Down.bmp", "MoveDownIdle", 0, 0, 0.15f, true);
+		Frisk_->CreateAnimation("Move_Up.bmp", "MoveUp", 0, 3, 0.15f, true);
+		Frisk_->CreateAnimation("Move_Up.bmp", "MoveUpIdle", 0, 0, 0.15f, true);
+		Frisk_->CreateAnimation("Move_Right.bmp", "MoveRight", 0, 1, 0.15f, true);
+		Frisk_->CreateAnimation("Move_Right.bmp", "MoveRightIdle", 0, 0, 0.15f, true);
+		Frisk_->CreateAnimation("Move_Left.bmp", "MoveLeft", 0, 1, 0.15f, true);
+		Frisk_->CreateAnimation("Move_Left.bmp", "MoveLeftIdle", 0, 0, 0.15f, true);
+		Frisk_->ChangeAnimation("MoveDownIdle");
+		Frisk_->SetTransColor(RGB(255, 255, 255));
 
 	}
 
@@ -157,6 +157,18 @@ void Player::StateUpdate()
 	default:
 		break;
 	}
+}
+
+void Player::IsHeart()
+{
+	Heart_->On();
+	Frisk_->Off();
+}
+
+void Player::IsFrisk()
+{
+	Heart_->Off();
+	Frisk_->On();
 }
 
 bool Player::IsActionKeyDown()
@@ -274,7 +286,7 @@ void Player::ChangeToHeart()
 
 		if (1.0f <= Time_)
 		{
-			AniRender_->Off();
+			Frisk_->Off();
 			IsChange_ = false;
 		}
 	}
@@ -292,7 +304,7 @@ void Player::Stop()
 {
 	IsMove_ = false;
 	MoveDir_ = float4::ZERO;
-	AniRender_->ChangeAnimation("MoveUpIdle");
+	Frisk_->ChangeAnimation("MoveUpIdle");
 }
 
 void Player::CameraLock()
