@@ -44,7 +44,20 @@ void TitleFont::Update()
 
 void TitleFont::Render()
 {
+	/*static float Time = 0.1f;
+	static std::wstring Text = L"차례대로 출력\n되게 해보겠습니다.";
+	static int Count = 0;
 
+	Time -= GameEngineTime::GetDeltaTime();
+	if (0 >= Time)
+	{
+		Count++;
+		Time = 0.5f;
+	}
+
+	std::wstring RealText = Text.substr(0, Count);
+
+	TextFont.Draw(RealText, { 100.0f, 100.0f }, RGB(255, 0, 0), 100, 50);*/
 	TitleText();
 
 

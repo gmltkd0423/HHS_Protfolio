@@ -48,6 +48,7 @@ void GameEngineFont::Draw(const std::string& _Text, float4 _Postion, int TextCol
 	//폰트색 변경함수
 	SetTextColor(GameEngine::BackBufferDC(), TextColor);
 	SetBkMode(GameEngine::BackBufferDC(), 1);
+
 	oldFont = (HFONT)SelectObject(GameEngine::BackBufferDC(), hFont);
 
 	RECT NewRect = { _Postion.ix(), _Postion.iy(), 1280, 720 };
