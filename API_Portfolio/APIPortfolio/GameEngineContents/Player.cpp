@@ -22,8 +22,10 @@ Player::Player() :
 	CamPos_(true),
 	Speed_(500.0f),
 	IsBlink_(false),
-	BlinkTime_(1.0f),
-	IsAlphaOn_(true)
+	BlinkTime_(0),
+	BlinkTimer_(0),
+	Time_(0),
+	IsChange_(false)
 
 {
 }
@@ -43,15 +45,16 @@ void Player::Start()
 	//SetScale({ 60,60 });
 
 	{
-		Heart_ = CreateRendererToScale("Heart.bmp", { 20,20 }, (int)BATTLELEVELORDER::ACTOR);
+		Heart_ = CreateRendererToScale("Heart.bmp", { 20,20 },(int)PlayerOrder::Heart);
 		Heart_->SetTransColor(RGB(255, 102, 255));
+		Heart_->Off();
 	}
 
 
 
 	//¾Ö´Ï¸ÞÀÌ¼Ç
 	{
-		AniRender_ = CreateRenderer();
+		AniRender_ = CreateRenderer((int)PlayerOrder::Frisk);
 		AniRender_->SetScale({ 70,90 });
 
 		AniRender_->CreateAnimation("Move_Down.bmp", "MoveDown", 0, 3, 0.15f, true);
@@ -101,9 +104,8 @@ void Player::Update()
 		CameraLock();
 	}
 
-	CheckLevel();
-
 	Blink();
+	ChangeToHeart();
 }
 
 
@@ -165,6 +167,7 @@ bool Player::IsActionKeyDown()
 	}
 	return true;
 }
+
 
 bool Player::IsPressAnyMoveKey()
 {
@@ -231,22 +234,51 @@ void Player::CheckWall(float4 _Value)
 
 void Player::Blink()
 {
-	
+	if (BlinkTimer_ > 0.0f)
+	{
+		IsBlink_ = true;
+		//±ôºýÀÌ´Â ÀüÃ¼½Ã°£
+		BlinkTimer_ -= GameEngineTime::GetDeltaTime();
+		//±ôºýÀÌ´Â È½¼ö
+		BlinkTime_ += GameEngineTime::GetDeltaTime();
+		if (BlinkTime_>=0.2f)
+		{
+			BlinkTime_ = 0.0f;
+			Heart_->SetAlpha(255);
+		}
+		else if(BlinkTime_>=0.1f)
+		{
+			Heart_->SetAlpha(0);
+		}
 
+		if (BlinkTimer_ <= 0.0f)
+		{
+			BlinkTimer_ = 0.0f;
+			BlinkTime_ = 0.0f;
+			Heart_->SetAlpha(255);
+			IsBlink_ = false;
+		}
+	}
 }
 
-void Player::CheckLevel()
+void Player::ChangeToHeart()
 {
-	if (strcmp(GetLevel()->GetNameConstPtr(), "BattleLevel") == 0 || strcmp(GetLevel()->GetNameConstPtr(), "FloweyBattleLevel") == 0)
+	if (true == IsChange_)
 	{
-		AniRender_->Off();
-		Heart_->On();
+		if (false == Heart_->IsUpdate())
+		{
+			Heart_->On();
+			SetBlinkTimer(1.0f);
+		}
+		Time_ += GameEngineTime::GetDeltaTime();
+
+		if (1.0f <= Time_)
+		{
+			AniRender_->Off();
+			IsChange_ = false;
+		}
 	}
-	else
-	{
-		AniRender_->On();
-		Heart_->Off();
-	}
+
 }
 
 
@@ -254,6 +286,7 @@ void Player::Play()
 {
 	IsMove_ = true;
 }
+
 
 void Player::Stop()
 {

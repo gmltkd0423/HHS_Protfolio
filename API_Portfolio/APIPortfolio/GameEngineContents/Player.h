@@ -9,12 +9,17 @@ enum class PlayerState
 	Move
 };
 
-static enum class PlayerLevelState
+enum class PlayerOrder
 {
-	PlayLevel,
-	PlayLevel2,
-	BattleLevel,
+	Frisk,
+	Heart
 };
+//static enum class PlayerLevelState
+//{
+//	PlayLevel,
+//	PlayLevel2,
+//	BattleLevel,
+//};
 
 
 class Player : public GameEngineActor
@@ -42,16 +47,18 @@ private:
 	std::string AnimationName_;
 	std::string DirName_;
 
+	float Time_;
 	float Speed_;
 	bool IsBlink_;
 	bool IsMove_;
 	bool CamPos_;
+	bool IsChange_;
 	float MapSizeX;
 	float MapSizeY;
 	float CamRectX;
 	float CamRectY;
 	float BlinkTime_;
-	bool IsAlphaOn_;
+	float BlinkTimer_;
 private:
 	void Start() override;
 	void Update() override;
@@ -61,21 +68,19 @@ private:
 
 public:
 	void ChangeState(PlayerState _State);
-	void CheckLevel();
+	void ChangeToHeart();
 	void StateUpdate();
 	void Play();
 	void Stop();
-
-
-
-	void BlinkOn()
+	
+	void SetIsChange()
 	{
-		IsBlink_ = true;
+		IsChange_ = true;
 	}
 
-	void BlinkOff()
+	void SetBlinkTimer(float _BlinkTimer)
 	{
-		IsBlink_ = false;
+		BlinkTimer_ = _BlinkTimer;
 	}
 	
 	bool IsActionKeyDown();

@@ -33,10 +33,8 @@ private:
 	GameEngineActor* Speech_Bubble;
 	GameEngineRenderer* Speech_BubbleRenderer;
 	float4 PlayerPos_;
-	std::vector<float4> BulletDirVec_;
 
-	std::vector<float4> PosVec_;
-	std::vector<GameEngineActor*> BulletVec_;
+
 
 	int IsDeathCheck;
 
@@ -44,5 +42,6 @@ private:
 private:
 	void CreateBullet();
 	void CheckDeath();
+	void CheckChageLevelKey();
 };
 

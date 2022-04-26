@@ -10,10 +10,12 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngine.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 PlayLevel2::PlayLevel2() :
 	CheckPos_(false),
-	TalkEvent_(false)
+	TalkEvent_(false),
+	Time_(0)
 {
 }
 
@@ -28,17 +30,17 @@ void PlayLevel2::Loading()
 
 void PlayLevel2::Update()
 {
-	CheckChangeLevelKey();
 
 	CheckPlayerPosition();
 
 	MoveNextLevel();
+	CheckChangeLevelKey();
 }
 
 void PlayLevel2::Init()
 {
-	GameEngineActor* BackGround = CreateActor<PlayLevel2Actor>((int)PLAYLEVELORDER::BACKGROUND);
-	GameEngineRenderer* Back = BackGround->CreateRenderer("Level2.bmp", (int)PLAYLEVELORDER::BACKGROUND);
+	BackGround = CreateActor<PlayLevel2Actor>((int)PLAYLEVELORDER::BACKGROUND);
+	Back = BackGround->CreateRenderer("Level2.bmp", (int)PLAYLEVELORDER::BACKGROUND);
 	float4 Half = Back->GetImage()->GetScale().Half();
 	Back->SetPivot(Half);
 
@@ -86,7 +88,6 @@ void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//카메라 수정
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1400});
-	//Player::MainPlayer->CamPosOff();
 
 }
 
@@ -103,11 +104,21 @@ void PlayLevel2::CheckPlayerPosition()
 	{
 		FloweyTalkEvent();
 
+
+		//z키 입력시
 		if (true == Player::MainPlayer->IsActionKeyDown())
 		{
 			TalkEvent_ = true;
 			Player::MainPlayer->CamPosOn();
-			
+			Player::MainPlayer->SetIsChange();
+			Back->Off();
+			FloweyTalk->Off();
+			TextBox->Off();
+
+		}
+
+		if (1.0f <= Time_)
+		{
 			GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
 		}
 	}
@@ -116,6 +127,7 @@ void PlayLevel2::CheckPlayerPosition()
 
 	if (TalkEvent_ == true)
 	{
+		Time_ += GameEngineTime::GetDeltaTime();
 		Player::MainPlayer->Play();
 	}
 }
@@ -143,6 +155,7 @@ void PlayLevel2::FloweyTalkEvent()
 
 	Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
 }
+
 
 void PlayLevel2::MoveNextLevel()
 {

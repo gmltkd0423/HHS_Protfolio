@@ -3,6 +3,7 @@
 #include "ContentsEnums.h"
 #include "Player.h"
 #include "FloweyBullet.h"
+#include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineImage.h>
@@ -92,37 +93,27 @@ void FloweyBattleLevel::Update()
 
 
 
-	//if (true == Player::MainPlayer->IsActionKeyDown())
-	//{
-	//	//Player::MainPlayer->BlinkOn();
-
-	//	CreateBullet();
-
-
-	//	PlayerPos_ = Player::MainPlayer->GetPosition();
-
-
-	//	for (int i = 0; i < BulletVec_.size(); ++i)
-	//	{
-	//		float4 BulletMoveDir_ = (PlayerPos_ - BulletVec_[i]->GetPosition()) * GameEngineTime::GetDeltaTime() * 0.2f;
-
-	//		BulletDirVec_.push_back(BulletMoveDir_);
-	//	}
-	//	CheckBullet_ = true;
-	//}
-
-	//if (true == CheckBullet_)
-	//{
-	//	for (int i = 0; i < BulletVec_.size(); ++i)
-	//	{
-	//		BulletVec_[i]->SetMove(BulletDirVec_[i]);
-	//	}
-
-	//	
-	//}
 
 
 	//CheckDeath();
+
+	CheckChageLevelKey();
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel2");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
+	}
+
 }
 
 void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -132,7 +123,6 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
 	}
 
-	GameEngineInput::GetInst()->Reset();
 	Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,420 });
 	Player::MainPlayer->SetSpeed(200.0f);
@@ -178,4 +168,22 @@ void FloweyBattleLevel::CheckDeath()
 	//	}
 	//}
 
+}
+
+void FloweyBattleLevel::CheckChageLevelKey()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel2");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
+	}
 }

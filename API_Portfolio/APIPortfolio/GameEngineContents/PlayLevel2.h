@@ -28,13 +28,15 @@ protected:
 private:
 	bool TalkEvent_;
 	bool CheckPos_;
-
+	float Time_;
 
 
 	Player* Player_;
 	Flowey* Flowey_;
 	GameEngineActor* FloweyTalk;
 	GameEngineActor* TextBox;
+	GameEngineActor* BackGround;
+	GameEngineRenderer* Back;
 	GameEngineRenderer* FloweyTalkRenderer;
 	GameEngineRenderer* TextBoxRenderer;
 	GameEngineImage* MapColImage_;

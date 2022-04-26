@@ -85,9 +85,9 @@ void TitleLevel::Update()
 		GameEngine::GetInst().ChangeLevel("PlayLevel2");
 	}
 	
-	if (true == GameEngineInput::GetInst()->IsPress("ChangeBattleLevel"))
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
 	{
-		GameEngine::GetInst().ChangeLevel("BattleLevel");
+		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
 	}
 
 

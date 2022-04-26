@@ -138,7 +138,7 @@ void Undertale::GameInit()
 		GameEngineInput::GetInst()->CreateKey("ChangePlayLevel", VK_RETURN);
 		GameEngineInput::GetInst()->CreateKey("ChangeTitleLevel", '1');
 		GameEngineInput::GetInst()->CreateKey("ChangePlayLevel2", '2');
-		GameEngineInput::GetInst()->CreateKey("ChangeBattleLevel", '3');
+		GameEngineInput::GetInst()->CreateKey("ChangeFloweyBattleLevel", '3');
 
 
 	}
