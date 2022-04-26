@@ -13,3 +13,4 @@ int __stdcall WinMain(_In_ HINSTANCE hInstance,
    GameEngine::Start<Undertale>();
 
 }
+

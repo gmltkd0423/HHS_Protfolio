@@ -100,10 +100,6 @@ void FloweyBattleLevel::Update()
 
 		PlayerPos_ = Player::MainPlayer->GetPosition();
 
-		for (int i = 0; i < BulletVec_.size(); ++i)
-		{
-			BulletVec_[i]->On();
-		}
 
 		for (int i = 0; i < BulletVec_.size(); ++i)
 		{
@@ -118,7 +114,6 @@ void FloweyBattleLevel::Update()
 	{
 		for (int i = 0; i < BulletVec_.size(); ++i)
 		{
-			//BulletMoveDir_ = (PlayerPos_ - BulletVec_[i]->GetPosition()) * GameEngineTime::GetDeltaTime() * 0.1f;
 			BulletVec_[i]->SetMove(BulletDirVec_[i]);
 		}
 
@@ -157,7 +152,7 @@ void FloweyBattleLevel::CreateBullet()
 	{
 		GameEngineActor* Bullet = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
 		BulletVec_.push_back(Bullet);
-		BulletVec_[i]->Off();
+		//BulletVec_[i]->Off();
 		BulletVec_[i]->SetPosition(PosVec_[i]);
 	}
 }
@@ -166,16 +161,19 @@ void FloweyBattleLevel::CheckDeath()
 {
 	for (int i = 0; i < BulletVec_.size(); ++i)
 	{
-		if (720.0f <= BulletVec_[i]->GetPosition().y && true == BulletVec_[i]->IsUpdate())
+		if (500.0f <= BulletVec_[i]->GetPosition().y)
 		{
 
 			BulletVec_[i]->Off();
-			IsDeathCheck++;
+			if (false == BulletVec_[i]->IsUpdate())
+			{
+				++IsDeathCheck;
+			}
 		
-			if (IsDeathCheck == BulletVec_.size())
+		/*	if (IsDeathCheck == BulletVec_.size())
 			{
 				BulletVec_.clear();
-			}
+			}*/
 		}
 	}
 
