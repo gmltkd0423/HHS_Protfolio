@@ -15,7 +15,7 @@ public:
 	}
 
 	// 마지막에 지우더라도 내가 의도한 순서에서 지우고 싶기 때문에
-	// pointer로 삭제하는 겁니다.
+	// pointer로 삭제
 	static void Destroy()
 	{
 		if (nullptr != Inst_)

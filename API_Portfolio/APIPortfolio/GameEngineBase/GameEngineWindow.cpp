@@ -3,7 +3,7 @@
 
 
 // HWND hWnd 어떤 윈도우에 무슨일이 생겼는지 그 윈도우의 핸들
-// UINT message 그 메세지의 중료가 뭔지.
+// UINT message 그 메세지의 종류가 뭔지.
 // WPARAM wParam
 // LPARAM lParam
 
@@ -20,7 +20,6 @@ LRESULT CALLBACK GameEngineWindow::MessageProcess(HWND hWnd, UINT message, WPARA
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
         EndPaint(hWnd, &ps);
         break;
     }
@@ -53,7 +52,7 @@ GameEngineWindow::GameEngineWindow()
 
 GameEngineWindow::~GameEngineWindow() 
 {
-    // 내가 만들어준게 아니라면 다 지워줘야 합니다.
+    // 내가 만들어준게 아니라면 다 지워줘야 한다
     if (nullptr != HDC_)
     {
         ReleaseDC(hWnd_, HDC_);
@@ -106,7 +105,7 @@ void GameEngineWindow::CreateGameWindow(HINSTANCE _hInst, const std::string& _Ti
     hWnd_ = CreateWindowExA(0L, "GameEngineWindowClass", Title_.c_str(), WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, _hInst, nullptr);
 
-    // 화면에 무언가를 그리기 위한 핸들입니다.
+    // 화면에 무언가를 그리기 위한 핸들
     HDC_ = GetDC(hWnd_);
 
     if (!hWnd_)
@@ -157,8 +156,7 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
             DispatchMessage(&msg);
         }
 
-            // 윈도우가 일하지 않는 데드 타임.
-            // 여기서 무슨게임을 돌릴까요?
+        // 윈도우가 일하지 않는 데드 타임.
 
         if (nullptr == _LoopFunction)
         {
