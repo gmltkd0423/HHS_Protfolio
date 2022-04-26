@@ -78,7 +78,7 @@ bool GameEngineCollision::CollisionCheck(
 	{
 		if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
 		{
-			return false;
+			continue;
 		}
 
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
@@ -128,7 +128,7 @@ bool GameEngineCollision::NextPosCollisionCheck(
 	{
 		if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
 		{
-			return false;
+			continue;
 		}
 
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
@@ -205,7 +205,7 @@ bool GameEngineCollision::CollisionResult(
 	{
 		if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
 		{
-			return false;
+			continue;
 		}
 
 

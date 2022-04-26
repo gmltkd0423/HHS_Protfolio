@@ -161,7 +161,7 @@ void FloweyBattleLevel::CheckDeath()
 {
 	for (int i = 0; i < BulletVec_.size(); ++i)
 	{
-		if (500.0f <= BulletVec_[i]->GetPosition().y)
+		if (600.0f <= BulletVec_[i]->GetPosition().y)
 		{
 
 			BulletVec_[i]->Off();
