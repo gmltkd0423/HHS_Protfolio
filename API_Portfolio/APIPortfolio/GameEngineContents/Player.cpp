@@ -8,6 +8,7 @@
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngine.h>
+#include <GameEngine/GameEngineCollision.h>
 
 Player* Player::MainPlayer = nullptr;
 
@@ -25,7 +26,8 @@ Player::Player() :
 	BlinkTime_(0),
 	BlinkTimer_(0),
 	Time_(0),
-	IsChange_(false)
+	IsChange_(false),
+	Hp_(20)
 
 {
 }
@@ -40,10 +42,13 @@ Player::~Player()
 
 void Player::Start()
 {
+	//움직일수있는 상황에대한 bool값 true면 움직일수있음
+	//false면 움직일수없음
 	IsMove_ = true;
 
 	//SetScale({ 60,60 });
 
+	//heart 랜더러
 	{
 		Heart_ = CreateRendererToScale("Heart.bmp", { 20,20 },(int)PlayerOrder::Heart);
 		Heart_->SetTransColor(RGB(255, 102, 255));
@@ -52,7 +57,7 @@ void Player::Start()
 
 
 
-	//애니메이션
+	//frisk 애니메이션
 	{
 		Frisk_ = CreateRenderer((int)PlayerOrder::Frisk);
 		Frisk_->SetScale({ 70,90 });
@@ -71,7 +76,7 @@ void Player::Start()
 	}
 
 
-
+	//키생성
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
 		GameEngineInput::GetInst()->CreateKey("MoveLeft", VK_LEFT);
@@ -83,12 +88,7 @@ void Player::Start()
 
 	CurState_ = PlayerState::Idle;
 
-	MapColImage_ = GameEngineImageManager::GetInst()->Find("Level1_ColMap.bmp");
 
-	if (nullptr == MapColImage_)
-	{
-		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
-	}
 
 	LevelRegist("MainPlayer");
 }
@@ -118,6 +118,11 @@ void Player::Render()
 void Player::CollisionImage(const std::string& _Name)
 {
 	MapColImage_ = GameEngineImageManager::GetInst()->Find(_Name);
+
+	if (nullptr == MapColImage_)
+	{
+		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
+	}
 }
 
 void Player::ChangeState(PlayerState _State)

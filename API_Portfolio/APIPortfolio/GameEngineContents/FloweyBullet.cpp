@@ -27,6 +27,8 @@ void FloweyBullet::Start()
 	AniRender_->ChangeAnimation("Bullet");
 	AniRender_->SetTransColor(RGB(241, 95, 241));
 	AniRender_->Off();
+	
+
 }
 
 void FloweyBullet::Update()
@@ -44,7 +46,7 @@ void FloweyBullet::Update()
 			MoveDir_ = Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
 			IsCheckPos_ = true;
 			KeyCount_ = 1;
-			++SpeedCount_;
+			SpeedCount_= 1;
 		}
 	}
 
@@ -57,6 +59,11 @@ void FloweyBullet::Update()
 }
 
 void FloweyBullet::Render()
+{
+
+}
+
+void FloweyBullet::CheckDeath()
 {
 
 }

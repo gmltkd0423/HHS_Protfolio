@@ -59,6 +59,9 @@ private:
 	float CamRectY;
 	float BlinkTime_;
 	float BlinkTimer_;
+	int Hp_;
+
+
 private:
 	void Start() override;
 	void Update() override;
@@ -154,6 +157,7 @@ private:
 
 	void MoveStart();
 	void MoveUpdate();
+	void GetDamaged();
 	
 };
 

@@ -46,5 +46,8 @@ public:
 	{
 		return SpeedCount_;
 	}
+
+private:
+	void CheckDeath();
 };
 

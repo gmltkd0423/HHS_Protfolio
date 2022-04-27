@@ -70,3 +70,7 @@ void Player::MoveUpdate()
 	return;
 }
 
+void Player::GetDamaged()
+{
+}
+
