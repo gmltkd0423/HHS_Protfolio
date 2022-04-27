@@ -79,6 +79,7 @@ void FloweyBattleLevel::Loading()
 void FloweyBattleLevel::Update()
 {
 
+	//하트위치 이동
 	if (Player::MainPlayer->GetPosition().y < 460.0f && false == Check_)
 	{
 		Player::MainPlayer->SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * 70);

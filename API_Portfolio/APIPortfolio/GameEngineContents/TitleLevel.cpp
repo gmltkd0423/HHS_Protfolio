@@ -24,6 +24,7 @@ TitleLevel::~TitleLevel()
 void TitleLevel::Init()
 {
 
+	Text_ = CreateActor<TitleFont>((int)TITLEORDER::TEXT);
 
 	for (int i = 0; i < 15; ++i)
 	{
@@ -41,18 +42,20 @@ void TitleLevel::Init()
 	TitleRenderer_[(int)TITLEORDER::TITLE3]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::TITLE4] = TitleImage_[(int)TITLEORDER::TITLE4]->CreateRendererToScale("Title4.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE4);
 	TitleRenderer_[(int)TITLEORDER::TITLE4]->SetPivot(Half);
-	TitleRenderer_[(int)TITLEORDER::TITLE5] = TitleImage_[(int)TITLEORDER::TITLE5]->CreateRendererToScale("Title5.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE5);
+	TitleRenderer_[(int)TITLEORDER::TITLE5] = TitleImage_[(int)TITLEORDER::TITLE5]->CreateRendererToScale("TitleBlack.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE5);
 	TitleRenderer_[(int)TITLEORDER::TITLE5]->SetPivot(Half);
-	TitleRenderer_[(int)TITLEORDER::TITLE6] = TitleImage_[(int)TITLEORDER::TITLE6]->CreateRendererToScale("Title6.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE6);
+	TitleRenderer_[(int)TITLEORDER::TITLE6] = TitleImage_[(int)TITLEORDER::TITLE6]->CreateRendererToScale("Title5.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE6);
 	TitleRenderer_[(int)TITLEORDER::TITLE6]->SetPivot(Half);
-	TitleRenderer_[(int)TITLEORDER::TITLE7] = TitleImage_[(int)TITLEORDER::TITLE7]->CreateRendererToScale("Title7.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE7);
+	TitleRenderer_[(int)TITLEORDER::TITLE7] = TitleImage_[(int)TITLEORDER::TITLE7]->CreateRendererToScale("Title6.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE7);
 	TitleRenderer_[(int)TITLEORDER::TITLE7]->SetPivot(Half);
-	TitleRenderer_[(int)TITLEORDER::TITLE8] = TitleImage_[(int)TITLEORDER::TITLE8]->CreateRendererToScale("Title8.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE8);
+	TitleRenderer_[(int)TITLEORDER::TITLE8] = TitleImage_[(int)TITLEORDER::TITLE8]->CreateRendererToScale("Title7.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE8);
 	TitleRenderer_[(int)TITLEORDER::TITLE8]->SetPivot(Half);
-	TitleRenderer_[(int)TITLEORDER::TITLE9] = TitleImage_[(int)TITLEORDER::TITLE9]->CreateRendererToScale("Title9.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE8);
+	TitleRenderer_[(int)TITLEORDER::TITLE9] = TitleImage_[(int)TITLEORDER::TITLE9]->CreateRendererToScale("Title8.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE9);
 	TitleRenderer_[(int)TITLEORDER::TITLE9]->SetPivot(Half);
-	TitleRenderer_[(int)TITLEORDER::TITLE10] = TitleImage_[(int)TITLEORDER::TITLE10]->CreateRendererToScale("Title10.bmp", { 1280, 1000 }, (int)TITLEORDER::TITLE9);
-	TitleRenderer_[(int)TITLEORDER::TITLE10]->SetPivot({640, -90});
+	TitleRenderer_[(int)TITLEORDER::TITLE10] = TitleImage_[(int)TITLEORDER::TITLE10]->CreateRendererToScale("Title9.bmp", { 1280, 720 }, (int)TITLEORDER::TITLE10);
+	TitleRenderer_[(int)TITLEORDER::TITLE10]->SetPivot(Half);
+	TitleRenderer_[(int)TITLEORDER::TITLE11] = TitleImage_[(int)TITLEORDER::TITLE11]->CreateRendererToScale("Title10.bmp", { 1280, 1000 }, (int)TITLEORDER::TITLE11);
+	TitleRenderer_[(int)TITLEORDER::TITLE11]->SetPivot({640, -90});
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND] = TitleImage_[(int)TITLEORDER::BACKGROUND]->CreateRendererToScale("TitleBackGround.bmp", { 1280, 720 }, (int)TITLEORDER::BACKGROUND);
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND]->SetTransColor(RGB(255, 255, 255));
@@ -65,7 +68,7 @@ void TitleLevel::Init()
 
 void TitleLevel::Loading()
 {
-	Text_ = CreateActor<TitleFont>((int)TITLEORDER::TEXT);
+
 }
 
 void TitleLevel::Update()
@@ -90,6 +93,7 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//초기화함수
 	Init();
 	Bgm_ = GameEngineSound::SoundPlayControl("01_Once_Upon_a_Time.flac");
+
 
 
 }
@@ -144,73 +148,79 @@ void TitleLevel::ChangeBackGround()
 	}
 
 
-	if (10.0f < Time_)
+	if (12.0f < Time_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE2]->Death();
 
 	}
 
 
-	if (12.0f < Time_)
+	if (18.0f < Time_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE3]->Death();
 
 	}
 
 
-	if (16.0f < Time_)
+	if (24.0f < Time_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE4]->Death();
 
 	}
 
 
-	if (20.0f < Time_)
+	if (30.0f < Time_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE5]->Death();
 
 	}
 
 
-	if (24.0f < Time_ )
+	if (36.0f < Time_ )
 	{
 		TitleImage_[(int)TITLEORDER::TITLE6]->Death();
 
 	}
 
 
-	if (28.0f < Time_ )
+	if (42.0f < Time_ )
 	{
 		TitleImage_[(int)TITLEORDER::TITLE7]->Death();
 
 	}
 
 
-	if (32.0f < Time_ )
+	if (48.0f < Time_ )
 	{
 		TitleImage_[(int)TITLEORDER::TITLE8]->Death();
 
 	}
 
 
-	if (36.0f < Time_ )
+	if (54.0f < Time_ )
 	{
 		TitleImage_[(int)TITLEORDER::TITLE9]->Death();
 
 	}
 
-	if (40.0f < Time_ )
+	if (60.0f < Time_)
 	{
-		if (TitleImage_[(int)TITLEORDER::TITLE10]->GetPosition().y <= 650)
+		TitleImage_[(int)TITLEORDER::TITLE10]->Death();
+
+	}
+
+	if (66.0f < Time_ )
+	{
+		if (TitleImage_[(int)TITLEORDER::TITLE11]->GetPosition().y <= 650)
 		{
-			TitleImage_[(int)TITLEORDER::TITLE10]->SetMove(float4::DOWN * 100.0f * GameEngineTime::GetDeltaTime());
+			TitleImage_[(int)TITLEORDER::TITLE11]->SetMove(float4::DOWN * 100.0f * GameEngineTime::GetDeltaTime());
 		}
 
 	}
 
-	if (50.0f < Time_ )
+	if (76.0f < Time_ )
 	{
-		TitleImage_[(int)TITLEORDER::TITLE10]->Death();
+		TitleImage_[(int)TITLEORDER::TITLE11]->Death();
 		TitleImage_[(int)TITLEORDER::BACKGROUND]->Death();
 
 	}

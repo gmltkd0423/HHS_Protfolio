@@ -50,6 +50,9 @@
     <ClInclude Include="FadeInOut.h">
       <Filter>Level\Global</Filter>
     </ClInclude>
+    <ClInclude Include="PlayLevel2Font.h">
+      <Filter>Level\PlayLevel2\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -100,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="FadeInOut.cpp">
       <Filter>Level\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel2Font.cpp">
+      <Filter>Level\PlayLevel2\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

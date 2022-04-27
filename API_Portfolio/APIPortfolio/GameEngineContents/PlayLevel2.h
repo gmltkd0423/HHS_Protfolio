@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include "PlayLevel2Font.h"
 #include "Player.h"
 #include "Flowey.h"
 
@@ -37,6 +38,7 @@ private:
 	GameEngineActor* FloweyTalk;
 	GameEngineActor* TextBox;
 	GameEngineActor* BackGround;
+	PlayLevel2Font* TextFont_;
 	GameEngineRenderer* Back;
 	GameEngineRenderer* FloweyTalkRenderer;
 	GameEngineRenderer* TextBoxRenderer;
@@ -51,5 +53,6 @@ private:
 
 	void FloweyTalkEvent();
 	void MoveNextLevel();
+	void DeathAllActor();
 };
 

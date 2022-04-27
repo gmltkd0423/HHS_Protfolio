@@ -2,6 +2,7 @@
 #include "PlayLevel2Actor.h"
 #include "Player.h"
 #include "Flowey.h"
+#include "PlayLevel2Font.h"
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -16,7 +17,8 @@ PlayLevel2::PlayLevel2() :
 	CheckPos_(false),
 	TalkEvent_(false),
 	Time_(0),
-	PlayBgm_(false)
+	PlayBgm_(false),
+	Count_(0)
 {
 }
 
@@ -26,13 +28,18 @@ PlayLevel2::~PlayLevel2()
 
 void PlayLevel2::Loading()
 {
-	Init();
+
 }
 
 void PlayLevel2::Update()
 {
 
 	CheckPlayerPosition();
+
+	if (true == CheckPos_)
+	{
+		FloweyTalkEvent();
+	}
 
 	MoveNextLevel();
 	CheckChangeLevelKey();
@@ -50,8 +57,8 @@ void PlayLevel2::Init()
 
 	{
 		//플라위 대화 이미지
-		FloweyTalk = CreateActor<PlayLevel2Actor>((int)UIORDER::IMAGE);
-		FloweyTalkRenderer = FloweyTalk->CreateRenderer((int)UIORDER::IMAGE);
+		FloweyTalk = CreateActor<PlayLevel2Actor>((int)PLAYLEVELORDER::UIIMAGE);
+		FloweyTalkRenderer = FloweyTalk->CreateRenderer((int)PLAYLEVELORDER::UIIMAGE);
 		FloweyTalk->SetPosition({ GameEngineWindow::GetScale().Half().x - 250 , GameEngineWindow::GetScale().y + 180 });
 		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Talk_Idle", 0, 1, 0.4f, true);
 		FloweyTalkRenderer->ChangeAnimation("Talk_Idle");
@@ -62,14 +69,18 @@ void PlayLevel2::Init()
 
 	{
 		//대화 텍스트박스이미지
-		TextBox = CreateActor<PlayLevel2Actor>((int)UIORDER::MESSAGEBOX);
-		TextBoxRenderer = TextBox->CreateRendererToScale("TextBox.bmp", { 750 ,200 }, (int)UIORDER::MESSAGEBOX);
+		TextBox = CreateActor<PlayLevel2Actor>((int)PLAYLEVELORDER::UI);
+		TextBoxRenderer = TextBox->CreateRendererToScale("TextBox.bmp", { 750 ,200 }, (int)PLAYLEVELORDER::UI);
 		TextBox->SetPosition({ GameEngineWindow::GetScale().Half().x , GameEngineWindow::GetScale().y + 180 });
 		TextBox->Off();
 
 
 	}
 
+	{
+		//폰트액터
+		TextFont_ = CreateActor<PlayLevel2Font>((int)UIORDER::TEXT);
+	}
 	
 
 
@@ -77,6 +88,9 @@ void PlayLevel2::Init()
 
 void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	//레벨 액터 재배치
+	Init();
+
 
 	if (nullptr == Player::MainPlayer)
 	{
@@ -86,28 +100,78 @@ void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//flowey 위치
 	Flowey_->SetPosition({ GameEngineWindow::GetScale().Half().x , GameEngineWindow::GetScale().y + 320 });
 
-	//카메라 수정
+
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1400});
 
+	CheckPos_ = false;
+	TalkEvent_ = false;
+	PlayBgm_ = false;
+	Time_ = 0;
+	Count_ = 0;
 }
 
 void PlayLevel2::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+	DeathAllActor();
 	Player::MainPlayer->NextLevelOn();
+	Player::MainPlayer->Play();
 }
 
 
 void PlayLevel2::CheckPlayerPosition()
 {
-
 	if (Player::MainPlayer->GetPosition().y <= 1200 )
 	{
-		FloweyTalkEvent();
+		CheckPos_ = true;
+	}
+}
 
 
+void PlayLevel2::CheckChangeLevelKey()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeTitleLevel"))
+	{
+		if (true == PlayBgm_)
+		{
+			Bgm_.Stop();
+		}
+
+		GameEngine::GetInst().ChangeLevel("TitleLevel");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
+	{
+		if (true == PlayBgm_)
+		{
+			Bgm_.Stop();
+		}
+
+		GameEngine::GetInst().ChangeLevel("PlayLevel");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
+	{
+		if (true == PlayBgm_)
+		{
+			Bgm_.Stop();
+		}
+
+		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
+	}
+}
+
+
+void PlayLevel2::FloweyTalkEvent()
+{
+	Player::MainPlayer->Stop();
+	FloweyTalk->On();
+	TextBox->On();
+
+	//레벨전환 키입력
+	{
 		//z키 입력시
-		if (true == Player::MainPlayer->IsActionKeyDown())
+		if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetTalkEnd())
 		{
 			TalkEvent_ = true;
 			Player::MainPlayer->CamPosOn();
@@ -115,7 +179,17 @@ void PlayLevel2::CheckPlayerPosition()
 			Back->Off();
 			FloweyTalk->Off();
 			TextBox->Off();
+			TextFont_->SetCount(0);
+			TextFont_->SetIsTalkEndFalse();
+		}
 
+	}
+
+	//잠시 딜레이를 준뒤에 레벨이동
+	{
+		if (TalkEvent_ == true)
+		{
+			Time_ += GameEngineTime::GetDeltaTime();
 		}
 
 		if (1.0f <= Time_)
@@ -124,49 +198,31 @@ void PlayLevel2::CheckPlayerPosition()
 		}
 	}
 
+	//텍스트출력 키입력
+	{
+
+		if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetIsAllTextOut())
+		{
+			Count_++;  // 2
+			TextFont_->IsAllTextOutFalse();
+			TextFont_->SetTextCount(0);
+		}
+
+
+		if (0 == Count_)
+		{
+			Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
+			PlayBgm_ = true;
+			Count_++;  //1
+		}
+		else if (0 < Count_)
+		{
+			//PlayLevel2Font에 Count값을 전달하여 Texts()에서 다음 텍스트 출력
+			TextFont_->SetCount(Count_);
+		}
+
+	}
 	
-
-	if (TalkEvent_ == true)
-	{
-		Time_ += GameEngineTime::GetDeltaTime();
-		Player::MainPlayer->Play();
-	}
-}
-
-void PlayLevel2::CheckChangeLevelKey()
-{
-	if (true == GameEngineInput::GetInst()->IsPress("ChangeTitleLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("TitleLevel");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("PlayLevel");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
-	}
-}
-
-void PlayLevel2::FloweyTalkEvent()
-{
-	Player::MainPlayer->Stop();
-	FloweyTalk->On();
-
-	TextBox->On();
-
-	if (0==Count_)
-	{
-		Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
-		Count_++;
-	}
-	else if (1 == Count_)
-	{
-
-	}
 }
 
 
@@ -181,4 +237,12 @@ void PlayLevel2::MoveNextLevel()
 	{
 		GameEngine::GetInst().ChangeLevel("PlayLevel");
 	}
+}
+
+
+void PlayLevel2::DeathAllActor()
+{
+	TextFont_->Death();
+	FloweyTalk->Death();
+	TextBox->Death();
 }

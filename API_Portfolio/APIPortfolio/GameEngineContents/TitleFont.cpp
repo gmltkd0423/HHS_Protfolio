@@ -7,8 +7,8 @@
 
 
 TitleFont::TitleFont() :
-	Time_(0.3f),
-	Timer_(0.0f),
+	Time_(0.1f),
+	Timer_(0),
 	Count_(0),
 	TextCount_(0)
 
@@ -22,32 +22,27 @@ TitleFont::~TitleFont()
 void TitleFont::Start()
 {
 	Count_ = 0;
-
-	//GameEngineDirectory Dir;
-	//Dir.MoveParent("API_Portfolio");
-	//Dir.Move("APIPortfolio");
-	//Dir.Move("Resources");
-	//Dir.Move("Fonts");
-
-	//std::vector<GameEngineFile> AllFontFileList = Dir.GetAllFile("ttf");
-
-	//TextFont_.Load(AllFontFileList[1].GetFullPath());
-
-	//폰트변경 테스트용 텍스트
-	/*TestFont.Load("enbrodwy.ttf");
-	TestFont2.Load("arial.ttf");*/
+	TextCount_ = 0;
+	Timer_ = 0;
 }
 
 void TitleFont::Update()
 {
-	Time_ += GameEngineTime::GetDeltaTime();
+
 }
 
 void TitleFont::Render()
 {
+	Timer_ += GameEngineTime::GetDeltaTime();
 
-	Text_ = L"차례대로 출력\n되게 해보겠습니다.";
+	if (6.0f <= Timer_)
+	{
+		Timer_ = 0;
+		Count_++;
+		TextCount_ = 0;
+	}
 
+	Texts();
 
 	Time_ -= GameEngineTime::GetDeltaTime();
 
@@ -58,29 +53,49 @@ void TitleFont::Render()
 	}
 
 	RealText_ = Text_.substr(0, TextCount_);
-
-	TextFont_.Draw(RealText_, { 300.0f, 300.0f }, RGB(255, 0, 0), 200, 200);
-
-	//static float Time = 0.1f;
-	//static std::wstring Text = L"차례대로 출력\n되게 해보겠습니다.";
-	//static int Count = 0;
-
-	//Time -= GameEngineTime::GetDeltaTime();
-	//if (0 >= Time)
-	//{
-	//	Count++;
-	//	Time = 0.5f;
-	//}
-
-	//std::wstring RealText = Text.substr(0, Count);
-
-	//TextFont_.Draw(RealText, { 100.0f, 100.0f }, RGB(255, 0, 0), 100, 50);
+	if (5 == Count_)
+	{
+		TextFont_.Draw(RealText_, { 550.0f, 470.0f }, RGB(255, 255, 255), 80, 70);
+	}
+	else
+	{
+		TextFont_.Draw(RealText_, { 230.0f, 470.0f }, RGB(255, 255, 255), 80, 70);
+	}
 
 }
 
-
-void TitleFont::TitleText()
+void TitleFont::Texts()
 {
-
-
+	if (0 == Count_)
+	{
+		Text_ = L"오래  전,  인간과  괴물,\n두  종족이  지구를  통치했다.";
+	}
+	else if (1 == Count_)
+	{
+		Text_ = L"어느 날,  두  종족간에\n전쟁이  발발했다.";
+	}
+	else if (2 == Count_)
+	{
+		Text_ = L"길고  긴  싸움  끝에,\n인간이  승리했다.";
+	}
+	else if (3 == Count_)
+	{
+		Text_ = L"그들은  마법  주문을\n이용하여  괴물들을\n땅  속에  봉인했다.";
+	}
+	else if (4 == Count_)
+	{
+		Text_ = L"많은  시간이  흐른  뒤...";
+	}
+	else if (5 == Count_)
+	{
+		Text_ = L"에봇  산,\n201X년";
+	}
+	else if (6 == Count_)
+	{
+		Text_ = L"전설에  따르면\n산에  오른  이는  절대\n돌아오지  못한다고  한다.";
+	}
+	else
+	{
+		Text_ = L"";
+	}
 }

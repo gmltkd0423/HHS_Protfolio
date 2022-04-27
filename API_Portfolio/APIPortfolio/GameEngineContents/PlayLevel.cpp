@@ -55,12 +55,13 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	BgmTime_ = 30.0f;
 	Player::MainPlayer->CollisionImage("Level1_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  500 });
+	Player::MainPlayer->GetFrisk()->ChangeAnimation("MoveDownIdle");
 
 }
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	Player::MainPlayer->GetFrisk()->ChangeAnimation("MoveDownIdle");
+
 	Player::MainPlayer->NextLevelOn();
 	Bgm_.Stop();
 }

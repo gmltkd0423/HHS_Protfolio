@@ -33,7 +33,6 @@ private:
 	int Count_;
 
 
-	void TitleText();
-
+	void Texts();
 };
 
