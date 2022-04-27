@@ -68,7 +68,7 @@ void PlayLevel2Font::Texts()
 {
 	if (1 == Count_)
 	{
-		Text_ = L"*  반가워!\n*  내  이름은  플라위.\n*   노란  꽃  플라위야!!";
+		Text_ = L"*  반가워!\n*  내  이름은  플라위.\n*  노란  꽃  플라위야!!";
 	}
 	else if (2 == Count_)
 	{
@@ -76,19 +76,19 @@ void PlayLevel2Font::Texts()
 	}
 	else if (3 == Count_)
 	{
-		Text_ = L"*  너  이  지하세계는\n    처음인가  보구나,\n    그렇지?";
+		Text_ = L"*  너  이  지하세계는\n   처음인가  보구나,\n   그렇지?";
 	}
 	else if (4 == Count_)
 	{
-		Text_ = L"*  이런,  정말\n    정신없겠네.";
+		Text_ = L"*  이런,  정말\n   정신없겠네.";
 	}
 	else if (5 == Count_)
 	{
-		Text_ = L"*  이곳이  어떤  곳인지\n    누군가  알려줘야겠는데!";
+		Text_ = L"*  이곳이  어떤  곳인지\n   누군가  알려줘야겠는데!";
 	}
 	else if (6 == Count_)
 	{
-		Text_ = L"*  작고  힘없는  나라도\n    알려줘야겠네.";
+		Text_ = L"*  작고  힘없는  나라도\n   알려줘야겠네.";
 	}
 	else if (7 == Count_)
 	{

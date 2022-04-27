@@ -328,10 +328,6 @@ void Player::CameraLock()
 		CamRectY = 720;
 	}
 
-	//float MapSizeX = 1280;
-	//float MapSizeY = 720;
-	//float CameraRectX = 300;
-	//float CameraRectY = 400;
 	float4 CurCameraPos = GetLevel()->GetCameraPos();
 
 	if (0 > GetLevel()->GetCameraPos().x)	
@@ -345,11 +341,6 @@ void Player::CameraLock()
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 
-	//if (GameEngineWindow::GetScale().Half().y - (MapSizeY / 2) > GetLevel()->GetCameraPos().y)		// 카메라 y위치가 맵보다 작아지면
-	//{
-	//	CurCameraPos.y = GameEngineWindow::GetScale().Half().y - (MapSizeY / 2) + CamRectY;
-	//	GetLevel()->SetCameraPos(CurCameraPos);
-	//}
 
 	if (MapSizeX < GetLevel()->GetCameraPos().x + CamRectX)		// 카메라 x위치가 맵 크기보다 커지면
 	{

@@ -3,6 +3,7 @@
 #include "ContentsEnums.h"
 #include "Player.h"
 #include "FloweyBullet.h"
+#include "FloweyBattleLevelFont.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
@@ -49,8 +50,9 @@ void FloweyBattleLevel::Loading()
 		//플라위 대화 이미지
 		FloweyTalk = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::ACTOR);
 		FloweyTalkRenderer = FloweyTalk->CreateRenderer((int)BATTLELEVELORDER::ACTOR , RenderPivot::CENTER,{640 , 230});
-		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Talk_Idle", 0, 1, 0.4f, true);
-		FloweyTalkRenderer->ChangeAnimation("Talk_Idle");
+		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Idle", 0, 0, 0.4f, true);
+		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Talk", 0, 1, 0.4f, true);
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
 		FloweyTalkRenderer->SetTransColor(RGB(241, 95, 241));
 		FloweyTalkRenderer->SetScale({ 120,120 });
 		FloweyTalk->Off();
@@ -89,6 +91,7 @@ void FloweyBattleLevel::Update()
 			FloweyTalk->On();
 			Speech_BubbleRenderer->On();
 			Player::MainPlayer->Play();
+			Count_++;
 		}
 	}
 
@@ -117,8 +120,10 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->CamPosOff();
 	Player::MainPlayer->Stop();
 	
+	TextFont_ = CreateActor<FloweyBattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
-	ChangeState(PatternState::Pattern1);
+
+	ChangeState(PatternState::Talk);
 	//Player::MainPlayer->
 
 
@@ -128,6 +133,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 void FloweyBattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	Player::MainPlayer->NextLevelOn();
+	Count_ = 0;
 }
 
 void FloweyBattleLevel::CreateBullet()
@@ -150,13 +156,6 @@ void FloweyBattleLevel::CreateBullet()
 		Bullet_.push_back(Bullets);
 		Bullet_[i]->SetPosition(BulletPos_[i]);
 	}
-}
-
-
-void FloweyBattleLevel::CreateBulletCircle()
-{
-
-
 }
 
 
@@ -257,13 +256,27 @@ void FloweyBattleLevel::TalkStart()
 
 void FloweyBattleLevel::TalkUpdate()
 {
-	if (true == Check_)
+	if (1 == Count_)
 	{
-		if (true == Player::MainPlayer->IsActionKeyDown() && 0 == Count_)
-		{
-			ChangeState(PatternState::Pattern1);
-		}
+		TextFont_->SetCount(Count_);
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Talk");
 	}
+
+	if (true == TextFont_->GetIsAllTextOut())
+	{
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
+	}
+
+	if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetIsAllTextOut())
+	{
+		Count_++;  // 1
+		TextFont_->IsAllTextOutFalse();
+		TextFont_->SetTextCount(0);
+
+		TextFont_->SetCount(Count_);
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Talk");
+	}
+	
 }
 
 void FloweyBattleLevel::Pattern1Start()

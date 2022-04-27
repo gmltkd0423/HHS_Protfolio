@@ -61,7 +61,6 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-
 	Player::MainPlayer->NextLevelOn();
 	Bgm_.Stop();
 }

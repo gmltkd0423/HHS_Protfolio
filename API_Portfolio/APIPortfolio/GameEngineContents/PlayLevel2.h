@@ -53,6 +53,6 @@ private:
 
 	void FloweyTalkEvent();
 	void MoveNextLevel();
-	void DeathAllActor();
+	void ResetAll();
 };
 

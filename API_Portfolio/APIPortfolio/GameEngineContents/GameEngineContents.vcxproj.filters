@@ -53,6 +53,9 @@
     <ClInclude Include="PlayLevel2Font.h">
       <Filter>Level\PlayLevel2\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="FloweyBattleLevelFont.h">
+      <Filter>Level\BattleLevel\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="PlayLevel2Font.cpp">
       <Filter>Level\PlayLevel2\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="FloweyBattleLevelFont.cpp">
+      <Filter>Level\BattleLevel\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -192,6 +192,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="FloweyBattleLevelFont.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="FloweyBullet.h">
       <SubType>
       </SubType>
@@ -259,6 +263,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="FloweyBattleLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FloweyBattleLevelFont.cpp">
       <SubType>
       </SubType>
     </ClCompile>

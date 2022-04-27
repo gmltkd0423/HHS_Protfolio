@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include "FloweyBullet.h"
+#include "FloweyBattleLevelFont.h"
 
 
 enum class PatternState
@@ -43,6 +44,8 @@ private:
 	GameEngineRenderer* FloweyTalkRenderer;
 	GameEngineActor* Speech_Bubble;
 	GameEngineRenderer* Speech_BubbleRenderer;
+
+	FloweyBattleLevelFont* TextFont_;
 	float4 PlayerPos_;
 
 	std::vector<GameEngineActor*> Bullet_;
@@ -55,7 +58,6 @@ private:
 
 private:
 	void CreateBullet();
-	void CreateBulletCircle();
 	void CheckDeath();
 	void CheckChangeLevelKey();
 
