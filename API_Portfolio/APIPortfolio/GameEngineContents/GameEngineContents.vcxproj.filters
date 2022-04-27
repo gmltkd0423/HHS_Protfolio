@@ -154,5 +154,8 @@
     <Filter Include="Level\BattleLevel\FloweyBattleLevel">
       <UniqueIdentifier>{8af7c7a4-d62b-4875-b8b9-82211c269c90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Font">
+      <UniqueIdentifier>{34495c58-4535-4858-8286-fc636137155c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -44,7 +44,8 @@ GameEngineActor::~GameEngineActor()
 	}
 }
 
-//void GameEngineActor::DebugRectRender()
+//void GameEngineActor::DebugRect
+// 
 //{
 //	// 선생님은 기본적으로 중앙을 기준으로하는걸 좋아합니다.
 //

@@ -21,21 +21,15 @@ protected:
 	void Update() override;
 	void Render() override;
 private:
-	GameEngineFont TestFont;
-	GameEngineFont TestFont2;
 
 	GameEngineFont TextFont_;
 
 	float Time_;
+	float Timer_;
+	std::wstring Text_;
+	std::wstring RealText_;
 
-	float FontSizeX_;   //폰트x사이즈
-	float FontSizeY_;   //폰트y사이즈
-
-	float4 TextPos_;
-
-
-	bool Title1TextOn;
-
+	int TextCount_;
 	int Count_;
 
 

@@ -150,7 +150,7 @@ void Undertale::GameInit()
 	CreateLevel<BattleLevel>("BattleLevel");
 	CreateLevel<EndingLevel>("EndingLevel");
 	CreateLevel<FloweyBattleLevel>("FloweyBattleLevel");
-	ChangeLevel("FloweyBattleLevel");
+	ChangeLevel("TitleLevel");
 }
 
 void Undertale::GameLoop()

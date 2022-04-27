@@ -163,6 +163,10 @@ void PlayLevel2::FloweyTalkEvent()
 		Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
 		Count_++;
 	}
+	else if (1 == Count_)
+	{
+
+	}
 }
 
 

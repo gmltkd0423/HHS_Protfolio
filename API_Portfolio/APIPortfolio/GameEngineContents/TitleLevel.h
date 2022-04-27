@@ -38,8 +38,9 @@ private:
 	GameEngineSoundPlayer Bgm_;
 	GameEngineActor* TitleImage_[20];
 	GameEngineRenderer* TitleRenderer_[20];
+
 	GameEngineActor* Text_;
-	float BgmTime_;
+
 	float Time_;
 	int Count_;
 };
