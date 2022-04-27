@@ -26,19 +26,13 @@ void FloweyBullet::Start()
 	AniRender_->CreateAnimation("Flowey_Bullet.bmp","Bullet", 0, 1, 0.1f, true);
 	AniRender_->ChangeAnimation("Bullet");
 	AniRender_->SetTransColor(RGB(241, 95, 241));
-	AniRender_->Off();
 	
 
 }
 
 void FloweyBullet::Update()
 {
-	if (true == Player::MainPlayer->IsActionKeyDown() && 0 == KeyCount_)
-	{
-		AniRender_->On();
-		KeyCount_++;
-	}
-	else if (true == Player::MainPlayer->IsActionKeyDown() && 1 == KeyCount_)   //z 키를 누르면
+	if (true == Player::MainPlayer->IsActionKeyDown())   //z 키를 누르면
 	{
 		if (0 == SpeedCount_)
 		{
@@ -56,6 +50,8 @@ void FloweyBullet::Update()
 
 		SetMove(MoveDir_);
 	}
+
+	CheckDeath();
 }
 
 void FloweyBullet::Render()
@@ -65,5 +61,17 @@ void FloweyBullet::Render()
 
 void FloweyBullet::CheckDeath()
 {
+	/*if (false == IsCheckPos_)
+	{
+		return;
+	}*/
 
+	if (700.0f <= GetPosition().y ||
+		100.0f >= GetPosition().y ||
+		50.0f >= GetPosition().x ||
+		1200.0f <= GetPosition().x
+		)
+	{
+		Death();
+	}
 }

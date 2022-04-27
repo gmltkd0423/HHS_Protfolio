@@ -19,7 +19,8 @@ FloweyBattleLevel::FloweyBattleLevel() :
 	PlayerPos_(float4::ZERO),
 	CheckBullet_(false),
 	IsDeathCheck(0),
-	Count_(0)
+	Count_(0),
+	CurState_(PatternState::Talk)
 {
 }
 
@@ -114,7 +115,9 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetSpeed(200.0f);
 	Player::MainPlayer->CamPosOff();
 	Player::MainPlayer->Stop();
-	CurState_ = PatternState::Talk;
+	
+
+	ChangeState(PatternState::Pattern1);
 	//Player::MainPlayer->
 
 
@@ -189,23 +192,22 @@ void FloweyBattleLevel::CheckDeath()
 
 void FloweyBattleLevel::ChangeState(PatternState _State)
 {
-	if (_State != CurState_)
+
+	switch (_State)
 	{
-		switch (_State)
-		{
-		case PatternState::Talk:
-			TalkStart();
-			break;
-		case PatternState::Pattern1:
-			Pattern1Start();
-			break;
-		case PatternState::Pattern2:
-			Pattern2Start();
-			break;
-		default:
-			break;
-		}
+	case PatternState::Talk:
+		TalkStart();
+		break;
+	case PatternState::Pattern1:
+		Pattern1Start();
+		break;
+	case PatternState::Pattern2:
+		Pattern2Start();
+		break;
+	default:
+		break;
 	}
+	
 
 	CurState_ = _State;
 }
@@ -254,8 +256,6 @@ void FloweyBattleLevel::TalkStart()
 
 void FloweyBattleLevel::TalkUpdate()
 {
-
-
 	if (true == Check_)
 	{
 		if (true == Player::MainPlayer->IsActionKeyDown() && 0 == Count_)
@@ -267,32 +267,88 @@ void FloweyBattleLevel::TalkUpdate()
 
 void FloweyBattleLevel::Pattern1Start()
 {
-	if (Count_ == 2)
+	if (Count_ == 3)
 	{
 		return;
 	}
 
-	CreateBullet();
+	if(true == Player::MainPlayer->IsActionKeyDown())
+	{
+	
+		FloweyBullet* NewBullet1 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+		NewBullet1->SetPosition({ 480,160 });
 
+		FloweyBullet* NewBullet2 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+		NewBullet2->SetPosition({ 560,120 });
+
+		FloweyBullet* NewBullet3 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+		NewBullet3->SetPosition({ 640,80 });
+
+		FloweyBullet* NewBullet4 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+		NewBullet4->SetPosition({ 720,120 });
+
+		FloweyBullet* NewBullet5 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+		NewBullet5->SetPosition({ 800,160 });
+
+		Count_++;
+		//CreateBullet();
+	}
 	
 }
 
 void FloweyBattleLevel::Pattern1Update()
 {
-	CheckDeath();
+	//CheckDeath();
 
-	if (Count_ == 3)
+	if (Count_ <  3)
+	{
+		ChangeState(PatternState::Pattern1);
+	}
+	else
 	{
 		ChangeState(PatternState::Pattern2);
 	}
 
+
 }
+
+static float Angle = 0;
+static float Time = 0;
+//static float Timer = 1.0f;
 
 void FloweyBattleLevel::Pattern2Start()
 {
-	CreateBulletCircle();
+	Angle = 0.0f;
+	Time = 0.05f;
+
+	//float4 Dir = float4::DegreeToDirectionFloat4(Angle);
+	//Dir *= 100.0f;
+	//loweyBullet* NewBullet = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+	//NewBullet->SetPosition(Player::MainPlayer->GetPosition() + Dir);
+
 }
 
 void FloweyBattleLevel::Pattern2Update()
 {
+	if (360.0f <= Angle)
+	{
+		return;
+	}
+
+	Time -= GameEngineTime::GetDeltaTime();
+
+	if (0.0f < Time)
+	{
+		return;
+	}
+
+
+	Angle += 3.0f;
+
+	float4 Dir = float4::DegreeToDirectionFloat4(Angle);
+	Dir *= 200.0f;
+	FloweyBullet* NewBullet = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
+	NewBullet->SetPosition(Player::MainPlayer->GetPosition() + Dir);
+	Time = 0.05f;
+
 }
