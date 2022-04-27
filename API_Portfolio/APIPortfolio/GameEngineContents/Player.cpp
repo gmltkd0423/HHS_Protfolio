@@ -127,9 +127,6 @@ void Player::CollisionImage(const std::string& _Name)
 
 void Player::ChangeState(PlayerState _State)
 {
-	
-
-
 
 	if (_State != CurState_)
 	{

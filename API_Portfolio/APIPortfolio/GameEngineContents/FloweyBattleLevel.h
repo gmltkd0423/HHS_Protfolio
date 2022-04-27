@@ -4,6 +4,15 @@
 #include "FloweyBullet.h"
 
 
+enum class PatternState
+{
+	Talk,
+	Pattern1,
+	Pattern2,
+	Pattern3,
+	Pattern4
+};
+
 // Ό³Έν :
 class FloweyBattleLevel	:public GameEngineLevel
 {
@@ -41,12 +50,27 @@ private:
 
 
 	int IsDeathCheck;
+	PatternState CurState_;
 
 
 private:
 	void CreateBullet();
 	void CreateBulletCircle();
 	void CheckDeath();
-	void CheckChageLevelKey();
+	void CheckChangeLevelKey();
+
+	void ChangeState(PatternState _State);
+	void StateUpdate();
+
+
+
+	void TalkStart();
+	void TalkUpdate();
+	
+	void Pattern1Start();
+	void Pattern1Update();
+
+	void Pattern2Start();
+	void Pattern2Update();
 };
 

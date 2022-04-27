@@ -93,6 +93,10 @@ void PlayLevel::CheckChangeLevelKey()
 	{
 		GameEngine::GetInst().ChangeLevel("PlayLevel2");
 	}
-
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
+	{
+		Player::MainPlayer->SetIsChange();
+		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
+	}
 
 }

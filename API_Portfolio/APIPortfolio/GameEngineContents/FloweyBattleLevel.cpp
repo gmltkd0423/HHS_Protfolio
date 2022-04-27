@@ -11,6 +11,9 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineInput.h>
 
+
+
+
 FloweyBattleLevel::FloweyBattleLevel() :
 	Check_(false),
 	PlayerPos_(float4::ZERO),
@@ -74,6 +77,7 @@ void FloweyBattleLevel::Loading()
 
 void FloweyBattleLevel::Update()
 {
+
 	if (Player::MainPlayer->GetPosition().y < 460.0f && false == Check_)
 	{
 		Player::MainPlayer->SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * 70);
@@ -82,32 +86,16 @@ void FloweyBattleLevel::Update()
 			Check_ = true;
 			FloweyTalk->On();
 			Speech_BubbleRenderer->On();
+			Player::MainPlayer->Play();
 		}
 	}
 
-	//총알생성
-	if (true == Player::MainPlayer->IsActionKeyDown() && 0 == Count_)
-	{
-		CreateBullet();
+	StateUpdate();
 
-		for (int i = 0; i < 5; ++i)
-		{
-			Bullet_[i]->On();
-		}
 
-		++Count_;
-	}
-	else if (true == Player::MainPlayer->IsActionKeyDown() && 1 == Count_)
-	{
-		Count_ = 0;
+	
 
-		//총알 캐릭터를 중심으로 원으로 생성
-		CreateBulletCircle();
-	}
-
-	CheckDeath();
-
-	CheckChageLevelKey();
+	CheckChangeLevelKey();
 
 
 }
@@ -120,10 +108,13 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player::MainPlayer->IsHeart();
 	}
 
+	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
 	Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,420 });
 	Player::MainPlayer->SetSpeed(200.0f);
 	Player::MainPlayer->CamPosOff();
+	Player::MainPlayer->Stop();
+	CurState_ = PatternState::Talk;
 	//Player::MainPlayer->
 
 
@@ -153,7 +144,6 @@ void FloweyBattleLevel::CreateBullet()
 
 		Bullet_.push_back(Bullets);
 		Bullet_[i]->SetPosition(BulletPos_[i]);
-		Bullet_[i]->Off();
 	}
 }
 
@@ -190,10 +180,55 @@ void FloweyBattleLevel::CheckDeath()
 
 		Bullet_.clear();
 		CheckBullet_ = false;
+
+		Pattern1Start();
+		Count_++;
 	}
 }
 
-void FloweyBattleLevel::CheckChageLevelKey()
+void FloweyBattleLevel::ChangeState(PatternState _State)
+{
+	if (_State != CurState_)
+	{
+		switch (_State)
+		{
+		case PatternState::Talk:
+			TalkStart();
+			break;
+		case PatternState::Pattern1:
+			Pattern1Start();
+			break;
+		case PatternState::Pattern2:
+			Pattern2Start();
+			break;
+		default:
+			break;
+		}
+	}
+
+	CurState_ = _State;
+}
+
+void FloweyBattleLevel::StateUpdate()
+{
+	switch (CurState_)
+	{
+	case PatternState::Talk:
+		TalkUpdate();
+		break;
+	case PatternState::Pattern1:
+		Pattern1Update();
+		break;
+	case PatternState::Pattern2:
+		Pattern2Update();
+		break;
+	default:
+		break;
+	}
+}
+
+
+void FloweyBattleLevel::CheckChangeLevelKey()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
 	{
@@ -209,4 +244,54 @@ void FloweyBattleLevel::CheckChageLevelKey()
 	{
 		GameEngine::GetInst().ChangeLevel("TitleLevel");
 	}
+}
+
+void FloweyBattleLevel::TalkStart()
+{
+
+}
+
+void FloweyBattleLevel::TalkUpdate()
+{
+
+
+	if (true == Check_)
+	{
+		if (true == Player::MainPlayer->IsActionKeyDown() && 0 == Count_)
+		{
+			ChangeState(PatternState::Pattern1);
+		}
+	}
+}
+
+void FloweyBattleLevel::Pattern1Start()
+{
+	if (Count_ == 2)
+	{
+		return;
+	}
+
+	CreateBullet();
+
+	
+}
+
+void FloweyBattleLevel::Pattern1Update()
+{
+	CheckDeath();
+
+	if (Count_ == 3)
+	{
+		ChangeState(PatternState::Pattern2);
+	}
+
+}
+
+void FloweyBattleLevel::Pattern2Start()
+{
+	CreateBulletCircle();
+}
+
+void FloweyBattleLevel::Pattern2Update()
+{
 }

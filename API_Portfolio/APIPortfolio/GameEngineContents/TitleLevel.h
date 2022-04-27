@@ -30,6 +30,7 @@ private:
 	void ChangeBackGround();
 	void FadeInOutBackGround();
 	void Init();
+	void CheckChangeLevelKey();
 
 
 private:

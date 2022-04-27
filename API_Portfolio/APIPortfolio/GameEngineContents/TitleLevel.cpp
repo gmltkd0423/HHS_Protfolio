@@ -75,21 +75,7 @@ void TitleLevel::Update()
 	ChangeBackGround();
 	FadeInOutBackGround();
 	
-	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("PlayLevel");
-	}
-	
-	if(true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
-	{
-		GameEngine::GetInst().ChangeLevel("PlayLevel2");
-	}
-	
-	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
-	}
-
+	CheckChangeLevelKey();
 
 }
 
@@ -125,6 +111,26 @@ void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Player::MainPlayer->CamPosOn();
 	}
 }
+
+void TitleLevel::CheckChangeLevelKey()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangePlayLevel2"))
+	{
+		GameEngine::GetInst().ChangeLevel("PlayLevel2");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeFloweyBattleLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
+	}
+
+}
+
 
 void TitleLevel::ChangeBackGround()
 {
