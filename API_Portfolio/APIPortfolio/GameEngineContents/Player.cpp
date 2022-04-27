@@ -296,6 +296,7 @@ void Player::ChangeToHeart()
 }
 
 
+
 void Player::Play()
 {
 	IsMove_ = true;

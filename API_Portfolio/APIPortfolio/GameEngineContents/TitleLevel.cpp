@@ -87,6 +87,7 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player::MainPlayer->CamPosOff();
 	}
 
+
 	//초기화함수
 	Init();
 	Bgm_ = GameEngineSound::SoundPlayControl("01_Once_Upon_a_Time.flac");
@@ -109,6 +110,7 @@ void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	if (nullptr != Player::MainPlayer)
 	{
 		Player::MainPlayer->CamPosOn();
+		Player::MainPlayer->NextLevelOn();
 	}
 }
 

@@ -123,6 +123,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void FloweyBattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+	Player::MainPlayer->NextLevelOn();
 }
 
 void FloweyBattleLevel::CreateBullet()

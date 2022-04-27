@@ -138,6 +138,16 @@ public:
 		return Frisk_;
 	}
 
+	void Reset()
+	{
+		IsChange_ = false;
+		CamPos_ = true;
+		IsMove_ = true;
+		IsBlink_ = false;
+		IsFrisk();
+	}
+
+
 public:
 
 private:
@@ -158,6 +168,5 @@ private:
 	void MoveStart();
 	void MoveUpdate();
 	void GetDamaged();
-	
 };
 
