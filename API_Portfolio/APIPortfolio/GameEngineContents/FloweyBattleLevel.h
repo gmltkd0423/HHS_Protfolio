@@ -42,13 +42,17 @@ private:
 private:
 	GameEngineActor* FloweyTalk;
 	GameEngineRenderer* FloweyTalkRenderer;
+
+	GameEngineActor* WinkStar;
+	GameEngineRenderer* WinkStarRenderer;
+
 	GameEngineActor* Speech_Bubble;
 	GameEngineRenderer* Speech_BubbleRenderer;
 
 	FloweyBattleLevelFont* TextFont_;
 	float4 PlayerPos_;
 
-	std::vector<GameEngineActor*> Bullet_;
+
 	float4 BulletPos_[5];
 
 
@@ -57,8 +61,7 @@ private:
 
 
 private:
-	void CreateBullet();
-	void CheckDeath();
+
 	void CheckChangeLevelKey();
 
 	void ChangeState(PatternState _State);

@@ -8,7 +8,7 @@
 FloweyBullet::FloweyBullet() :
 	Pos_(float4::ZERO),
 	MoveDir_(float4::ZERO),
-	Speed_(0.2f),
+	Speed_(0.0005f),
 	IsCheckPos_(false),
 	KeyCount_(0),
 	SpeedCount_(0)
@@ -23,7 +23,7 @@ void FloweyBullet::Start()
 {
 	AniRender_ = CreateRenderer();
 
-	AniRender_->CreateAnimation("Flowey_Bullet.bmp","Bullet", 0, 1, 0.1f, true);
+	AniRender_->CreateAnimation("Flowey_Bullet.bmp","Bullet", 0, 1, 0.07f, true);
 	AniRender_->ChangeAnimation("Bullet");
 	AniRender_->SetTransColor(RGB(241, 95, 241));
 	
@@ -36,6 +36,7 @@ void FloweyBullet::Update()
 	{
 		if (0 == SpeedCount_)
 		{
+			//한번만 추적
 			Pos_ = Player::MainPlayer->GetPosition() - GetPosition();
 			MoveDir_ = Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
 			IsCheckPos_ = true;
@@ -44,10 +45,14 @@ void FloweyBullet::Update()
 		}
 	}
 
+	//플레이어 위치 추적
+	//Pos_ = Player::MainPlayer->GetPosition() - GetPosition();
+	//MoveDir_ = Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
 
 	if (true == IsCheckPos_)
 	{
-
+		
+		MoveDir_ += Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
 		SetMove(MoveDir_);
 	}
 
