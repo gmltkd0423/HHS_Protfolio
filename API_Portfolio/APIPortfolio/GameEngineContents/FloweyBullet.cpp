@@ -74,7 +74,7 @@ void FloweyBullet::Update()
 		SetMove(MoveDir_);
 	}
 
-
+	 
 
 	if (true == IsCheckPos_)
 	{
