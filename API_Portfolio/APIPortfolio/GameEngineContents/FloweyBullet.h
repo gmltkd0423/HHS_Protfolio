@@ -28,6 +28,10 @@ private:
 	int KeyCount_;
 	int SpeedCount_;
 	bool IsCheckPos_;
+	int Count_;
+
+	float4 BulletPos_[5];
+	float4 Count10Dir_[5];
 
 
 
@@ -45,6 +49,11 @@ public:
 	int GetSpeedCount()
 	{
 		return SpeedCount_;
+	}
+
+	inline void SetCount(int _Count)
+	{
+		Count_ = _Count;
 	}
 
 private:

@@ -91,7 +91,7 @@ void FloweyBattleLevel::Update()
 {
 
 	//하트위치 이동
-	if (Player::MainPlayer->GetPosition().y < 460.0f && false == Check_)
+ 	if (Player::MainPlayer->GetPosition().y < 460.0f && false == Check_)
 	{
 		Player::MainPlayer->SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * 70);
 		if (Player::MainPlayer->GetPosition().y >= 460.0f)
@@ -100,7 +100,6 @@ void FloweyBattleLevel::Update()
 			FloweyTalk->On();
 			Speech_BubbleRenderer->On();
 			Player::MainPlayer->Play();
-			Count_++;
 		}
 	}
 
@@ -131,7 +130,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	TextFont_ = CreateActor<FloweyBattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
 
-	ChangeState(PatternState::Talk);
+	ChangeState(PatternState::Pattern1);
 	//Player::MainPlayer->
 
 
@@ -212,7 +211,7 @@ void FloweyBattleLevel::TalkStart()
 
 void FloweyBattleLevel::TalkUpdate()
 {
-	if (1 == Count_)
+	if (0 == Count_)
 	{
 		TextFont_->SetCount(Count_);
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Talk");
@@ -226,7 +225,7 @@ void FloweyBattleLevel::TalkUpdate()
 		}
 	}
 
-	if (6 == Count_)
+	if (5 == Count_)
 	{
 
 		Speech_Bubble->Off();
@@ -263,82 +262,129 @@ void FloweyBattleLevel::TalkUpdate()
 
 void FloweyBattleLevel::Pattern1Start()
 {
-
+	//pattern1은 Count_가 10부터 시작
+	Count_ = 10;
+	FloweyTalkRenderer->ChangeAnimation("Flowey_Side");
 	Speech_Bubble->On();
+	TextFont_->SetTextCount(0);
+	TextFont_->IsAllTextOutFalse();
 
-	if(true == Player::MainPlayer->IsActionKeyDown())
-	{
-		
-		//if()
-	
-		FloweyBullet* NewBullet1 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
-		NewBullet1->SetPosition({ 480,160 });
-
-		FloweyBullet* NewBullet2 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
-		NewBullet2->SetPosition({ 560,120 });
-
-		FloweyBullet* NewBullet3 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
-		NewBullet3->SetPosition({ 640,80 });
-
-		FloweyBullet* NewBullet4 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
-		NewBullet4->SetPosition({ 720,120 });
-
-		FloweyBullet* NewBullet5 = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
-		NewBullet5->SetPosition({ 800,160 });
-
-		Count_++;
-		//CreateBullet();
-	}
+	BulletPos_[0] = { 490, 180 };
+	BulletPos_[1] = { 560, 120 };
+	BulletPos_[2] = { 640, 90 };
+	BulletPos_[3] = { 710, 110 };
+	BulletPos_[4] = { 790, 130 };
 	
 }
 
 void FloweyBattleLevel::Pattern1Update()
 {
-
-	if (1 == Count_)
+	if (10 == Count_ && false == CheckBullet_)
 	{
 		TextFont_->SetCount(Count_);
-		FloweyTalkRenderer->ChangeAnimation("Flowey_Talk");
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Side");
+
+		for (int i = 0; i < 5; ++i)
+		{
+			Bullets_[i] = CreateActor<FloweyBullet>();
+			Bullets_[i]-> SetPosition(FloweyTalkRenderer->GetPivot());
+		}
+		CheckBullet_ = true;
 	}
 
-	if (true == TextFont_->GetIsAllTextOut())
+	//시작하면 총알 위치로 보내기
+	if (true == CheckBullet_)
 	{
-		if (5 > Count_)
+		for (int i = 0; i < 5; ++i)
 		{
-			FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
+			Dir[i] = (BulletPos_[i] - Bullets_[i]->GetPosition());
+			Dir[i].Normal2D();
+
+			Bullets_[i]->SetMove(Dir[i] * GameEngineTime::GetDeltaTime() * 100.0f);
 		}
 	}
 
-	if (6 == Count_)
-	{
-		Count_ = 0;
-		Speech_Bubble->Off();
-		FloweyTalkRenderer->ChangeAnimation("Flowey_Wink");
 
-		ChangeState(PatternState::Pattern1);
+	if (true == TextFont_->GetIsAllTextOut())
+	{
+		if (10 == Count_)
+		{
+			FloweyTalkRenderer->ChangeAnimation("Flowey_Side_Idle");
+			
+		}
+		else if(11 == Count_)
+		{
+			FloweyTalkRenderer->ChangeAnimation("Flowey_Side_Idle2");
+		}
+		else
+		{
+			FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
+		}
+
+		//Count_ == 13일땐 첫번재 총알 발사
+		if (13 == Count_)
+		{
+
+			CheckBullet_ = false;
+			for (int i = 0; i < 5; ++i)
+			{
+				Bullets_[i]->SetCount(Count_);
+			}
+
+
+			Time_ += GameEngineTime::GetDeltaTime();
+			if (1.0f < Time_)
+			{
+				Speech_Bubble->Off();
+				Time_ = 0;
+			}
+		}
+
+
 	}
 
+	//z키를눌러 텍스트출력
 	if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetIsAllTextOut())
 	{
 		Count_++;  // 1
 		TextFont_->IsAllTextOutFalse();
 		TextFont_->SetTextCount(0);
-
 		TextFont_->SetCount(Count_);
-		FloweyTalkRenderer->ChangeAnimation("Flowey_Talk");
+		
+
+		if (11 == Count_)
+		{
+			FloweyTalkRenderer->ChangeAnimation("Flowey_Side");
+		}
+		else
+		{
+			FloweyTalkRenderer->ChangeAnimation("Flowey_Talk");
+		}
 	}
+
+
+	if (11 == Count_)
+	{
+		Time_ += GameEngineTime::GetDeltaTime();
+		if (0.8 < Time_)
+		{
+			FloweyTalkRenderer->ChangeAnimation("Flowey_Side2");
+			Time_ = 0;
+		}
+	}
+
 
 
 	//CheckDeath();
 
-	if (Count_ <  3)
-	{
-		ChangeState(PatternState::Pattern1);
-	}
-	else
-	{
-		ChangeState(PatternState::Pattern2);
-	}
+	//if (Count_ <  3)
+	//{
+	//	ChangeState(PatternState::Pattern1);
+	//}
+	//else
+	//{
+	//	ChangeState(PatternState::Pattern2);
+	//}
 
 
 }

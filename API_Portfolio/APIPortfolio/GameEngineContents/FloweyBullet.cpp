@@ -11,7 +11,8 @@ FloweyBullet::FloweyBullet() :
 	Speed_(0.0005f),
 	IsCheckPos_(false),
 	KeyCount_(0),
-	SpeedCount_(0)
+	SpeedCount_(0),
+	Count_(0)
 {
 }
 
@@ -21,28 +22,27 @@ FloweyBullet::~FloweyBullet()
 
 void FloweyBullet::Start()
 {
-	AniRender_ = CreateRenderer();
+	AniRender_ = CreateRenderer(1);
 
 	AniRender_->CreateAnimation("Flowey_Bullet.bmp","Bullet", 0, 1, 0.07f, true);
 	AniRender_->ChangeAnimation("Bullet");
 	AniRender_->SetTransColor(RGB(241, 95, 241));
 	
 
+
 }
 
 void FloweyBullet::Update()
 {
-	if (true == Player::MainPlayer->IsActionKeyDown())   //z 키를 누르면
+	if (13 == Count_ && false == IsCheckPos_)
 	{
-		if (0 == SpeedCount_)
-		{
-			//한번만 추적
-			Pos_ = Player::MainPlayer->GetPosition() - GetPosition();
-			MoveDir_ = Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
-			IsCheckPos_ = true;
-			KeyCount_ = 1;
-			SpeedCount_= 1;
-		}
+		SetOrder(5);
+		AniRender_->SetOrder(5);
+		//한번만 추적
+		Speed_ = 0.0005f;
+		Pos_ = Player::MainPlayer->GetPosition() - GetPosition();
+
+		IsCheckPos_ = true;
 	}
 
 	//플레이어 위치 추적
@@ -51,10 +51,12 @@ void FloweyBullet::Update()
 
 	if (true == IsCheckPos_)
 	{
-		
 		MoveDir_ += Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
 		SetMove(MoveDir_);
 	}
+	
+
+
 
 	CheckDeath();
 }
@@ -71,10 +73,10 @@ void FloweyBullet::CheckDeath()
 		return;
 	}*/
 
-	if (700.0f <= GetPosition().y ||
-		100.0f >= GetPosition().y ||
-		50.0f >= GetPosition().x ||
-		1200.0f <= GetPosition().x
+	if (720.0f <= GetPosition().y ||
+		0.0f >= GetPosition().y ||
+		00.0f >= GetPosition().x ||
+		1280.0f <= GetPosition().x
 		)
 	{
 		Death();

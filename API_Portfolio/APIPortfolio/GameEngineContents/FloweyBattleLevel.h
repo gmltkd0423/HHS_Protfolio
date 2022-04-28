@@ -54,8 +54,9 @@ private:
 
 
 	float4 BulletPos_[5];
+	FloweyBullet* Bullets_[5];
 
-
+	float4 Dir[5];
 	int IsDeathCheck;
 	PatternState CurState_;
 

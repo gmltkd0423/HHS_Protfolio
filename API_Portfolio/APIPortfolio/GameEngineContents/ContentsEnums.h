@@ -2,6 +2,7 @@
 
 enum class BATTLELEVELORDER
 {
+	NONE,
 	BACKGROUND,
 	BOX,
 	ACTOR,
