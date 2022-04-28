@@ -4,7 +4,7 @@
 #include "GameEngineRenderer.h"
 #include <GameEngineBase/GameEngineDebug.h>
 
-bool GameEngineLevel::IsDebug = true;
+bool GameEngineLevel::IsDebug = false;
 
 GameEngineLevel::GameEngineLevel()
 	: CameraPos_(float4::ZERO)
@@ -168,6 +168,10 @@ void GameEngineLevel::ActorLevelChangeEnd(GameEngineLevel* _NextLevel)
 	}
 }
 
+bool SortY(GameEngineRenderer* _Left, GameEngineRenderer* _Right)
+{
+	return _Left->GetSortingPivot().y < _Right->GetSortingPivot().y;
+}
 
 void GameEngineLevel::ActorRender()
 {
@@ -182,6 +186,13 @@ void GameEngineLevel::ActorRender()
 		for (; GroupStart != GroupEnd; ++GroupStart)
 		{
 			std::list<GameEngineRenderer*>& Group = GroupStart->second;
+
+			// 그 그룹간에만 소팅이 됩니다
+			if (IsYSort_.end() != IsYSort_.find(GroupStart->first))
+			{
+				Group.sort(SortY);
+			}
+
 			StartRenderer = Group.begin();
 			EndRenderer = Group.end();
 			for (; StartRenderer != EndRenderer; ++StartRenderer)
@@ -227,8 +238,13 @@ void GameEngineLevel::ActorRender()
 	}
 }
 
-void GameEngineLevel::CollisionDebugRender() 
+void GameEngineLevel::CollisionDebugRender()
 {
+	if (false == IsDebug)
+	{
+		return;
+	}
+
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupStart = AllCollision_.begin();
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupEnd = AllCollision_.end();
 
@@ -355,7 +371,7 @@ void GameEngineLevel::AddRenderer(GameEngineRenderer* _Renderer)
 	AllRenderer_[_Renderer->GetOrder()].push_back(_Renderer);
 }
 
-void GameEngineLevel::ChangeUpdateOrder(GameEngineActor* _Actor, int _NewOreder) 
+void GameEngineLevel::ChangeUpdateOrder(GameEngineActor* _Actor, int _NewOreder)
 {
 	if (_Actor->GetOrder() == _NewOreder)
 	{
@@ -379,7 +395,7 @@ void GameEngineLevel::ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewO
 }
 
 void GameEngineLevel::AddCollision(const std::string& _GroupName
-	, GameEngineCollision* _Collision) 
+	, GameEngineCollision* _Collision)
 {
 	_Collision->CollisionName_ = _GroupName;
 	// 찾아서 없으면 만드는 것까지.
