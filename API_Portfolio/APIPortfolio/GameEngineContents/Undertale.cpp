@@ -98,6 +98,18 @@ void Undertale::GameInit()
 		GameEngineImage* Wink = GameEngineImageManager::GetInst()->Find("Flowey_Talk_Wink.bmp");
 		Wink->Cut({ 43,44 });
 
+		GameEngineImage* Sassy = GameEngineImageManager::GetInst()->Find("Flowey_Talk_Sassy.bmp");
+		Sassy->Cut({ 43,44 });
+
+		GameEngineImage* Mad = GameEngineImageManager::GetInst()->Find("Flowey_Talk_Mad.bmp");
+		Mad->Cut({ 43,44 });
+
+		GameEngineImage* Evil = GameEngineImageManager::GetInst()->Find("Flowey_Talk_Evil.bmp");
+		Evil->Cut({ 43,44 });
+
+		GameEngineImage* Laugh = GameEngineImageManager::GetInst()->Find("Flowey_Laugh.bmp");
+		Laugh->Cut({ 43,44 });
+
 		GameEngineImage* WinkStar = GameEngineImageManager::GetInst()->Find("WinkStar.bmp");
 		WinkStar->Cut({ 58,55 });
 
@@ -160,7 +172,7 @@ void Undertale::GameInit()
 	CreateLevel<BattleLevel>("BattleLevel");
 	CreateLevel<EndingLevel>("EndingLevel");
 	CreateLevel<FloweyBattleLevel>("FloweyBattleLevel");
-	ChangeLevel("FloweyBattleLevel");
+	ChangeLevel("TitleLevel");
 
 }
 

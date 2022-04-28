@@ -38,6 +38,8 @@ private:
 	bool CheckBullet_;
 	float Time_;
 	int Count_;
+	int FloweyStateCount_;
+	float Angle;
 
 private:
 	GameEngineActor* FloweyTalk;
@@ -55,6 +57,7 @@ private:
 
 	float4 BulletPos_[5];
 	FloweyBullet* Bullets_[5];
+	FloweyBullet* NewBullet;
 
 	float4 Dir[5];
 	int IsDeathCheck;
@@ -68,7 +71,7 @@ private:
 	void ChangeState(PatternState _State);
 	void StateUpdate();
 
-
+	void CreateBulletCircle();
 
 	void TalkStart();
 	void TalkUpdate();

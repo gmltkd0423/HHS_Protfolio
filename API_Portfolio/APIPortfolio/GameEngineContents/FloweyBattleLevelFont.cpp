@@ -46,8 +46,14 @@ void FloweyBattleLevelFont::Render()
 
 	RealText_ = Text_.substr(0, TextCount_);
 
-	TextFont_.Draw(RealText_, {760.0f, 170.0f }, RGB(0, 0, 0), 35, 35);
-
+	if (24 == Count_)
+	{
+		TextFont_.Draw(RealText_, { 780.0f, 180.0f }, RGB(0, 0, 0), 120, 120);
+	}
+	else
+	{
+		TextFont_.Draw(RealText_, { 760.0f, 170.0f }, RGB(0, 0, 0), 35, 35);
+	}
 
 	//대화가 모두 출력되면
 	if (Text_.size() == RealText_.size())
@@ -93,6 +99,34 @@ void FloweyBattleLevelFont::Texts()
 	else if (13 == Count_)
 	{
 		Text_ = L"움직여!\n친절을 최대한\n많이 받는거야!";
+	}
+	else if (14 == Count_)
+	{
+		Text_ = L"이봐 친구,\n놓쳐버렸잖아.";
+	}
+	else if (15 == Count_)
+	{
+		Text_ = L"다시 해보자고,\n알았지?";
+	}
+	else if (18 == Count_)
+	{
+		Text_ = L"장난치는거야?\n너 무뇌아니?\n달려. 가라고. 저.\n총알로!!!";
+	}
+	else if (19 == Count_)
+	{
+		Text_ = L"장난치는거야?\n너 무뇌아니?\n달려. 가라고. 저.\n친절로!!!";
+	}
+	else if (22 == Count_)
+	{
+		Text_ = L"눈치채고 있었던\n거지,\n응?";
+	}
+	else if (23 == Count_)
+	{
+		Text_ = L"그저 날 괴롭히고\n싶었을 뿐이었어.";
+	}
+	else if (24 == Count_)
+	{
+		Text_ = L"죽 어.";
 	}
 	else
 	{
