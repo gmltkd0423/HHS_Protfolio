@@ -87,6 +87,7 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
 		Player::MainPlayer->CamPosOff();
+		Player::MainPlayer->Off();
 	}
 
 
@@ -114,6 +115,7 @@ void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	{
 		Player::MainPlayer->CamPosOn();
 		Player::MainPlayer->NextLevelOn();
+		Player::MainPlayer->On();
 	}
 }
 

@@ -62,7 +62,7 @@ void PlayLevel2::Init()
 		FloweyTalkRenderer = FloweyTalk->CreateRenderer((int)PLAYLEVELORDER::UIIMAGE);
 		FloweyTalk->SetPosition({ GameEngineWindow::GetScale().Half().x - 250 , GameEngineWindow::GetScale().y + 180 });
 		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Idle", 0, 0, 0.4f, true);
-		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Talk", 0, 1, 0.4f, true);
+		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Talk", 0, 1, 0.2f, true);
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
 		FloweyTalkRenderer->SetTransColor(RGB(241, 95, 241));
 		FloweyTalkRenderer->SetScale({ 120,120 });
@@ -103,7 +103,6 @@ void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Flowey_->SetPosition({ GameEngineWindow::GetScale().Half().x , GameEngineWindow::GetScale().y + 320 });
 
 	
-
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1400});
 

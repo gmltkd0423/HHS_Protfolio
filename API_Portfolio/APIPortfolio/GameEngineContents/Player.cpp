@@ -56,6 +56,8 @@ void Player::Start()
 	}
 
 
+	
+
 
 	//frisk 애니메이션
 	{
@@ -106,6 +108,8 @@ void Player::Update()
 
 	Blink();
 	ChangeToHeart();
+
+
 }
 
 

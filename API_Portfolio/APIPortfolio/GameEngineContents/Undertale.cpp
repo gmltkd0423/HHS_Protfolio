@@ -86,6 +86,13 @@ void Undertale::GameInit()
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
 
+		std::vector<GameEngineFile> AllImageFolderList = Dir.GetAllFolder();
+
+		for (size_t i = 0; i < AllImageFolderList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->FolderImageLoad(AllImageFolderList[i].GetFullPath());
+		}
+
 		GameEngineImage* Idle = GameEngineImageManager::GetInst()->Find("Flowey_Idle.bmp");
 		Idle->Cut({ 21,21 });
 
@@ -94,6 +101,9 @@ void Undertale::GameInit()
 
 		GameEngineImage* Bullet = GameEngineImageManager::GetInst()->Find("Flowey_Bullet.bmp");
 		Bullet->Cut({ 15,14 });
+
+		GameEngineImage* Wink = GameEngineImageManager::GetInst()->Find("Flowey_Wink.bmp");
+		Wink->Cut({ 200,170 });
 	}
 
 
@@ -150,7 +160,7 @@ void Undertale::GameInit()
 	CreateLevel<BattleLevel>("BattleLevel");
 	CreateLevel<EndingLevel>("EndingLevel");
 	CreateLevel<FloweyBattleLevel>("FloweyBattleLevel");
-	ChangeLevel("TitleLevel");
+	ChangeLevel("FloweyBattleLevel");
 
 }
 

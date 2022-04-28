@@ -14,7 +14,6 @@
 
 
 
-
 FloweyBattleLevel::FloweyBattleLevel() :
 	Check_(false),
 	PlayerPos_(float4::ZERO),
@@ -51,7 +50,7 @@ void FloweyBattleLevel::Loading()
 		FloweyTalk = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::ACTOR);
 		FloweyTalkRenderer = FloweyTalk->CreateRenderer((int)BATTLELEVELORDER::ACTOR , RenderPivot::CENTER,{640 , 230});
 		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Idle", 0, 0, 0.4f, true);
-		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Talk", 0, 1, 0.4f, true);
+		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Talk", 0, 1, 0.2f, true);
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
 		FloweyTalkRenderer->SetTransColor(RGB(241, 95, 241));
 		FloweyTalkRenderer->SetScale({ 120,120 });
@@ -68,13 +67,6 @@ void FloweyBattleLevel::Loading()
 		Speech_BubbleRenderer->Off();
 	}
 
-	{
-		
-
-		//CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
-
-
-	}
 
 }
 
@@ -95,10 +87,9 @@ void FloweyBattleLevel::Update()
 		}
 	}
 
+
 	StateUpdate();
 
-
-	
 
 	CheckChangeLevelKey();
 
@@ -259,12 +250,21 @@ void FloweyBattleLevel::TalkUpdate()
 	if (1 == Count_)
 	{
 		TextFont_->SetCount(Count_);
-		FloweyTalkRenderer->ChangeAnimation("Flowey_Talk");
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Wink");
 	}
 
 	if (true == TextFont_->GetIsAllTextOut())
 	{
-		FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
+		if (5 > Count_)
+		{
+			FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
+		}
+		else
+		{
+			Speech_Bubble->Off();
+			FloweyTalkRenderer->ChangeAnimation("Flowey_Wink");
+			ChangeState(PatternState::Pattern1);
+		}
 	}
 
 	if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetIsAllTextOut())

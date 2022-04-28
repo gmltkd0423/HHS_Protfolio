@@ -11,7 +11,7 @@ enum class PlayerState
 
 enum class PlayerOrder
 {
-	Frisk,
+	Frisk = 1000 , 
 	Heart
 };
 //static enum class PlayerLevelState
