@@ -29,10 +29,10 @@ static float Value = 0;
 static float time = 0.0f;
 void FadeInOut::Update()
 {
-	time += GameEngineTime::GetDeltaTime();
+	//time += GameEngineTime::GetDeltaTime();
 
-	Value = GameEngineMath::Lerp(255, 0, time);
-	Back->SetAlpha(Value);
+	//Value = GameEngineMath::Lerp(255, 0, time);
+	//Back->SetAlpha(Value);
 
 
 
