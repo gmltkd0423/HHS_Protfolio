@@ -60,7 +60,7 @@ void TitleLevel::Init()
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND]->SetPivot(Half);
 	TitleRenderer_[(int)TITLEORDER::BACKGROUND]->SetTransColor(RGB(255, 255, 255));
 	
-	//FadeEffect_ = CreateActor<FadeInOut>((int)TITLEORDER::BACKGROUND);
+	FadeEffect_ = CreateActor<FadeInOut>((int)TITLEORDER::BACKGROUND);
 
 	
 }

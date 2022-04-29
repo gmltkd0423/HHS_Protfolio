@@ -1,5 +1,6 @@
 #include "FadeInOut.h"
 #include "ContentsEnums.h"
+#include <GameEngineBase/GameEngineMath.h>
 #include "GameEngine/GameEngineRenderer.h"
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -21,13 +22,21 @@ void FadeInOut::Start()
 	Back = CreateRenderer("TitleBlack.bmp");
 	float4 Half = Back->GetImage()->GetScale().Half();
 	Back->SetPivot(Half);
-	Back->SetAlpha(0);
+	Back->SetAlpha(255);
 }
 
-
+static float Value = 0;
+static float time = 0.0f;
 void FadeInOut::Update()
 {
-	if (true == IsFadeIn_)
+	time += GameEngineTime::GetDeltaTime();
+
+	Value = GameEngineMath::Lerp(255, 0, time);
+	Back->SetAlpha(Value);
+
+
+
+	/*if (true == IsFadeIn_)
 	{
 		Value_ += static_cast<int>(GameEngineTime::GetDeltaTime() * FadeSpeed_);
 		Back->SetAlpha(Value_);
@@ -47,8 +56,9 @@ void FadeInOut::Update()
 		{
 			IsFadeOut_ = false;
 		}
-	}
+	}*/
 }
+
 
 void FadeInOut::Render()
 {
