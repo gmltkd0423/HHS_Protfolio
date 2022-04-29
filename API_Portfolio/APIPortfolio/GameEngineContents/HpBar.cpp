@@ -18,6 +18,7 @@ void HpBar::Start()
 {
 	HpBarRed_ = CreateRenderer("Hp_Bar_Red.bmp", (int)BATTLELEVELORDER::ACTOR);
 	HpBarYellow_ = CreateRenderer("Hp_Bar_Yellow.bmp", (int)BATTLELEVELORDER::ACTOR);
+	FullHpBar_ = HpBarYellow_->GetScale().x;
 }
 
 void HpBar::Update()
@@ -26,8 +27,13 @@ void HpBar::Update()
 	PlayerHp_ = Player::MainPlayer->GetHp();
 
 	int HpBarYellow_x = HpBarYellow_->GetImageScale().x * PlayerHp_ / PlayerMaxHp_;
+	float HpBarXPivot = (FullHpBar_ - HpBarYellow_x) / 2;
+	HpBarYellow_->SetScale({ static_cast<float>(HpBarYellow_x),HpBarYellow_->GetImageScale().y });
 
-	HpBarYellow_->SetScale({ HpBarYellow_x,HpBarYellow_->GetImageScale().y });
+	if (HpBarYellow_->GetScale().x < PlayerMaxHp_)
+	{
+		HpBarYellow_->SetPivot({ -HpBarXPivot ,0 });
+	}
 }
 
 void HpBar::Render()

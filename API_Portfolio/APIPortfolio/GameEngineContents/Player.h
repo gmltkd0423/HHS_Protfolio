@@ -170,6 +170,7 @@ private:
 	bool IsKeyUp();
 	void CheckWall(float4 _Value);
 	void Blink();
+	void GetDamaged();
 
 
 private:
@@ -180,6 +181,5 @@ private:
 
 	void MoveStart();
 	void MoveUpdate();
-	void GetDamaged();
 };
 

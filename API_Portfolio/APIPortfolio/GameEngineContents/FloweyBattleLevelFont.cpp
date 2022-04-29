@@ -136,6 +136,18 @@ void FloweyBattleLevelFont::Texts()
 	{
 		Text_ = L"죽 어.";
 	}
+	else if (30 == Count_)
+	{
+		Text_ =  L"멍청하긴.";
+	}
+	else if (31 == Count_)
+	{
+		Text_ = L"이 세상에선, 죽이지\n않으면 죽는거야.";
+	}
+	else if (32 == Count_)
+	{
+		Text_ = L"누가 이런 기회를\n내다 버리겠어!?";
+	}
 	else
 	{
 		Text_ = L"";
@@ -411,6 +423,36 @@ void FloweyBattleLevelFont::TextSounds()
 				TextSound_.SoundPlayOneShot("snd_floweytalk2.wav");
 				TextTime_ = 0.1f;
 			
+		}
+	}
+	else if (30 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+
+			TextSound_.SoundPlayOneShot("snd_floweytalk2.wav");
+			TextTime_ = 0.1f;
+
+		}
+	}
+	else if (31 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+
+			TextSound_.SoundPlayOneShot("snd_floweytalk2.wav");
+			TextTime_ = 0.1f;
+
+		}
+	}
+	else if (32 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+
+			TextSound_.SoundPlayOneShot("snd_floweytalk2.wav");
+			TextTime_ = 0.1f;
+
 		}
 	}
 	else

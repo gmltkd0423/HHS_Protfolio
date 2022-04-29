@@ -3,6 +3,7 @@
 #include "ContentsEnums.h"
 #include "Player.h"
 #include "FloweyBullet.h"
+#include "HpBar.h"
 #include "FloweyBattleLevelFont.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -77,6 +78,7 @@ void FloweyBattleLevel::Loading()
 
 		//표정4
 		FloweyTalkRenderer->CreateAnimation("Flowey_Laugh.bmp", "Flowey_Laugh_Idle", 0, 0, 0, false);
+		FloweyTalkRenderer->CreateAnimation("Flowey_Laugh.bmp", "Flowey_Laugh_Talk", 0, 1, 0.1f, true);
 		FloweyTalkRenderer->CreateAnimation("Flowey_Laugh.bmp", "Flowey_Laugh", 0, 1, 0.05f, true);
 
 		//side표정 1
@@ -118,7 +120,8 @@ void FloweyBattleLevel::Loading()
 
 	{
 		//플레이어 hp바
-
+		HpBar_ = CreateActor<HpBar>((int)BATTLELEVELORDER::ACTOR);
+		HpBar_->SetPosition({ 630, 620 });
 
 	}
 
@@ -201,6 +204,9 @@ void FloweyBattleLevel::ChangeState(PatternState _State)
 	case PatternState::Pattern2:
 		Pattern2Start();
 		break;
+	case PatternState::Pattern3:
+		Pattern3Start();
+		break;
 	default:
 		break;
 	}
@@ -221,6 +227,9 @@ void FloweyBattleLevel::StateUpdate()
 		break;
 	case PatternState::Pattern2:
 		Pattern2Update();
+		break;
+	case PatternState::Pattern3:
+		Pattern3Update();
 		break;
 	default:
 		break;
@@ -322,6 +331,17 @@ void FloweyBattleLevel::Pattern1Start()
 
 void FloweyBattleLevel::Pattern1Update()
 {
+	////플레이어가 맞았는지 검사
+	if (9 == Player::MainPlayer->GetHp())
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			Bullets_[i]->Off();
+		}
+
+		ChangeState(PatternState::Pattern3);
+		return;
+	}
 
 	//처음시작했을때 한번만 호출되는애들
 	{
@@ -413,6 +433,8 @@ void FloweyBattleLevel::Pattern1Update()
 				Speech_Bubble->Off();
 				Time_ = 0;
 			}
+
+
 
 			for (int i = 0; i < 5; ++i)
 			{
@@ -691,6 +713,7 @@ void FloweyBattleLevel::CreateBulletCircle()
 
 
 
+
 void FloweyBattleLevel::Pattern2Update()
 {
 	//Count == 23
@@ -729,4 +752,50 @@ void FloweyBattleLevel::Pattern2Update()
 		FloweySound.SoundPlayOneShot("snd_floweylaugh.wav");
 	}
 
+}
+
+
+void FloweyBattleLevel::Pattern3Start()
+{
+	Angle = 0.0f;
+	Time_ = 0.03f;
+	Count_ = 30;
+	FloweyStateCount_ = 3;
+	Speech_Bubble->On();
+	FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh_Idle");
+	TextFont_->IsAllTextOutFalse();
+
+}
+
+
+void FloweyBattleLevel::Pattern3Update()
+{
+	if (true == TextFont_->GetIsAllTextOut())
+	{
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh_Idle");
+	}
+
+	if (30 == Count_ && 3 == FloweyStateCount_)
+	{
+		Speech_Bubble->On();
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh_Talk");
+		TextFont_->SetCount(Count_);
+		TextFont_->SetTextCount(0);
+		FloweyStateCount_++;
+	}
+
+
+	if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetIsAllTextOut())
+	{
+		Count_++;  // 1
+		TextFont_->SetCount(Count_);
+		TextFont_->SetTextCount(0);
+		TextFont_->IsAllTextOutFalse();
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh_Talk");
+
+		if (33 == Count_)
+		{
+			ChangeState(PatternState::Pattern2);
+		}
+	}
 }

@@ -28,7 +28,8 @@ Player::Player() :
 	BlinkTimer_(0),
 	Time_(0),
 	IsChange_(false),
-	Hp_(20)
+	Hp_(20),
+	MaxHp_(20)
 
 {
 }
@@ -97,10 +98,7 @@ void Player::Start()
 
 void Player::Update()
 {
-	if (true == PlayerCollision_->CollisionCheck("Bullet"))
-	{
-		Hp_ -= 19;
-	}
+	GetDamaged();
 
 	StateUpdate();
 
@@ -368,4 +366,15 @@ void Player::CameraLock()
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainPlayer = this;
+}
+
+
+void Player::GetDamaged()
+{
+	std::vector<GameEngineCollision*> ColList;
+
+	if (true == PlayerCollision_->CollisionResult("Bullet", ColList,CollisionType::Rect, CollisionType::Rect))
+	{
+		Hp_ -= 11;
+	}
 }

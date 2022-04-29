@@ -3,7 +3,7 @@
 
 
 // Ό³Έν :
-class HpBar	:GameEngineActor
+class HpBar	: public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -26,6 +26,7 @@ private:
 
 	int PlayerHp_;
 	int PlayerMaxHp_;
+	float FullHpBar_;
 
 };
 

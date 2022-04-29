@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include "FloweyBullet.h"
 #include "FloweyBattleLevelFont.h"
+#include "HpBar.h"
 #include <GameEngineBase/GameEngineSound.h>
 
 
@@ -10,8 +11,8 @@ enum class PatternState
 {
 	Talk,
 	Pattern1,
-	Pattern2,
-	Pattern3,
+	Pattern2,  //총알에 안맞으면
+	Pattern3,  //총알에 맞으면
 	Pattern4
 };
 
@@ -49,11 +50,6 @@ private:
 	GameEngineActor* Undyne;
 	GameEngineRenderer* UndyneRenderer;
 
-	GameEngineActor* HpBa;
-	GameEngineRenderer* UndyneRenderer;
-
-	GameEngineActor* Undyne;
-	GameEngineRenderer* UndyneRenderer;
 
 	GameEngineActor* WinkStar;
 	GameEngineRenderer* WinkStarRenderer;
@@ -69,6 +65,7 @@ private:
 	float4 BulletPos_[5];
 	FloweyBullet* Bullets_[5];
 	FloweyBullet* NewBullet;
+	HpBar* HpBar_;
 
 	float4 Dir[5];
 	int IsDeathCheck;
@@ -83,6 +80,7 @@ private:
 	void StateUpdate();
 
 	void CreateBulletCircle();
+	void CreateBulletCircle2();
 
 	void TalkStart();
 	void TalkUpdate();
@@ -92,5 +90,8 @@ private:
 
 	void Pattern2Start();
 	void Pattern2Update();
+
+	void Pattern3Start();
+	void Pattern3Update();
 };
 
