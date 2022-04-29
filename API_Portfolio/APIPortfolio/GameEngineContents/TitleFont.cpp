@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 
 
@@ -10,7 +11,8 @@ TitleFont::TitleFont() :
 	Time_(0.1f),
 	Timer_(0),
 	Count_(0),
-	TextCount_(0)
+	TextCount_(0),
+	SoundTime_(0.15f)
 
 {
 }
@@ -51,8 +53,20 @@ void TitleFont::Render()
 		TextCount_++;
 		Time_ = 0.1f;
 	}
+	SoundTime_ -= GameEngineTime::GetDeltaTime();
 
+	if (0 >= SoundTime_)
+	{
+		SoundTime_ = 0.15f;
+		if (Text_.size() != RealText_.size())
+		{
+			TextSound_.SoundPlayOneShot("SND_TXT2.wav");
+		}
+	}
 	RealText_ = Text_.substr(0, TextCount_);
+
+
+
 	if (5 == Count_)
 	{
 		TextFont_.Draw(RealText_, { 550.0f, 470.0f }, RGB(255, 255, 255), 80, 70);

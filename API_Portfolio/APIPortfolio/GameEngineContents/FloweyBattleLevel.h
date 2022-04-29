@@ -46,6 +46,15 @@ private:
 	GameEngineActor* FloweyTalk;
 	GameEngineRenderer* FloweyTalkRenderer;
 
+	GameEngineActor* Undyne;
+	GameEngineRenderer* UndyneRenderer;
+
+	GameEngineActor* HpBa;
+	GameEngineRenderer* UndyneRenderer;
+
+	GameEngineActor* Undyne;
+	GameEngineRenderer* UndyneRenderer;
+
 	GameEngineActor* WinkStar;
 	GameEngineRenderer* WinkStarRenderer;
 

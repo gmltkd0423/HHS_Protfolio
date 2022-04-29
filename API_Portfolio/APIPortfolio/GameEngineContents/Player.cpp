@@ -9,6 +9,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <GameEngine/GameEngineCollision.h>
 
 Player* Player::MainPlayer = nullptr;
 
@@ -56,9 +57,7 @@ void Player::Start()
 	}
 
 
-	
-
-
+	PlayerCollision_ = CreateCollision("Player" , {20, 20});
 	//frisk 애니메이션
 	{
 		Frisk_ = CreateRenderer((int)PlayerOrder::Frisk);
@@ -98,6 +97,11 @@ void Player::Start()
 
 void Player::Update()
 {
+	if (true == PlayerCollision_->CollisionCheck("Bullet"))
+	{
+		Hp_ -= 19;
+	}
+
 	StateUpdate();
 
 	if (CamPos_ == true)

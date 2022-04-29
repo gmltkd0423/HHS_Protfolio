@@ -47,6 +47,8 @@ void FloweyBattleLevel::Loading()
 
 
 	{
+
+
 		WinkStar = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::ACTOR);
 		WinkStarRenderer = WinkStar->CreateRenderer((int)BATTLELEVELORDER::ACTOR, RenderPivot::CENTER, { 730 , 170 });
 		WinkStarRenderer->CreateAnimation("WinkStar.bmp","WinkStar" , 0, 6, 0.1f, false);
@@ -92,6 +94,17 @@ void FloweyBattleLevel::Loading()
 		FloweyTalk->Off();
 	}
 
+
+	{
+	/*	Undyne = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::ACTOR);
+		UndyneRenderer = Undyne->CreateRenderer((int)BATTLELEVELORDER::ACTOR, RenderPivot::CENTER, { 640,180 });
+		UndyneRenderer->CreateAnimation("Undyne_Idle.bmp", "Idle", 0, 67, 0.05f, true);
+		UndyneRenderer->ChangeAnimation("Idle");
+		UndyneRenderer->SetScale({ 350,350 });*/
+
+	}
+
+
 	{
 		//말풍선
 		Speech_Bubble = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::BOX);
@@ -100,6 +113,13 @@ void FloweyBattleLevel::Loading()
 		Speech_BubbleRenderer->SetScale({ 387, 160 });
 		Speech_BubbleRenderer->SetTransColor(RGB(255, 102, 255));
 		Speech_BubbleRenderer->Off();
+	}
+
+
+	{
+		//플레이어 hp바
+
+
 	}
 
 
@@ -127,6 +147,10 @@ void FloweyBattleLevel::Update()
 
 	CheckChangeLevelKey();
 
+	if (true == GameEngineInput::GetInst()->IsPress("ChangeDebug"))
+	{
+		GameEngineLevel::IsDebugModeSwitch();
+	}
 
 }
 
@@ -148,7 +172,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	TextFont_ = CreateActor<FloweyBattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
 
-	ChangeState(PatternState::Talk);
+	ChangeState(PatternState::Pattern1);
 	//Player::MainPlayer->
 
 

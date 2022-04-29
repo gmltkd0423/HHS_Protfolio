@@ -42,6 +42,7 @@ private:
 	PlayerState CurState_;
 	GameEngineRenderer* Frisk_;
 	GameEngineRenderer* Heart_;
+	GameEngineCollision* PlayerCollision_;
 	GameEngineImage* MapColImage_;
 	float4 MoveDir_;
 	std::string AnimationName_;
@@ -60,6 +61,7 @@ private:
 	float BlinkTime_;
 	float BlinkTimer_;
 	int Hp_;
+	int MaxHp_;
 
 
 private:
@@ -105,6 +107,17 @@ public:
 	{
 		Speed_ = _Speed;
 	}
+
+	int GetMaxHp()
+	{
+		return MaxHp_;
+	}
+
+	int GetHp()
+	{
+		return Hp_;
+	}
+
 
 	float GetSpeed()
 	{

@@ -56,6 +56,9 @@
     <ClInclude Include="FloweyBattleLevelFont.h">
       <Filter>Level\BattleLevel\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="HpBar.h">
+      <Filter>Actor\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -112,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="FloweyBattleLevelFont.cpp">
       <Filter>Level\BattleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="HpBar.cpp">
+      <Filter>Actor\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

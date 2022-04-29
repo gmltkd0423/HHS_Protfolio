@@ -72,6 +72,8 @@ void Undertale::GameInit()
 
 	//몬스터 : 플라위
 	{
+
+
 		GameEngineDirectory Dir;
 		Dir.MoveParent("API_Portfolio");
 		Dir.Move("APIPortfolio");
@@ -116,7 +118,34 @@ void Undertale::GameInit()
 		GameEngineImage* Bullet = GameEngineImageManager::GetInst()->Find("Flowey_Bullet.bmp");
 		Bullet->Cut({ 15,14 });
 
+
 	}
+
+
+	{
+
+
+		GameEngineDirectory Dir;
+		Dir.MoveParent("API_Portfolio");
+		Dir.Move("APIPortfolio");
+		Dir.Move("Resources");
+		Dir.Move("Images");
+		Dir.Move("Undyne");
+		
+
+		std::vector<GameEngineFile> AllImageFileList = Dir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
+
+
+		GameEngineImage* Idle = GameEngineImageManager::GetInst()->Find("Undyne_Idle.bmp");
+		Idle->Cut({ 477,364 });
+
+	}
+
 
 
 
@@ -161,6 +190,7 @@ void Undertale::GameInit()
 		GameEngineInput::GetInst()->CreateKey("ChangeTitleLevel", '1');
 		GameEngineInput::GetInst()->CreateKey("ChangePlayLevel2", '2');
 		GameEngineInput::GetInst()->CreateKey("ChangeFloweyBattleLevel", '3');
+		GameEngineInput::GetInst()->CreateKey("ChangeDebug", '0');
 
 
 	}

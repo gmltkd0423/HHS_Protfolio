@@ -221,8 +221,12 @@ void TitleLevel::ChangeBackGround()
 
 	}
 
-	if (78.0f < Time_ )
+	if (78.0f <= Time_ && 20 == Count_)
 	{
+		Count_++;
+		Bgm_.Stop();
+		GameEngineSound sound;
+		sound.SoundPlayOneShot("mus_intronoise.ogg");
 		TitleImage_[(int)TITLEORDER::TITLE11]->Death();
 		TitleImage_[(int)TITLEORDER::BACKGROUND]->Death();
 

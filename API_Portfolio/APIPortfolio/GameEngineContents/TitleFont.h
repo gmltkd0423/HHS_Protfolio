@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineFont.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
 class TitleFont	:public GameEngineActor
@@ -23,9 +24,11 @@ protected:
 private:
 
 	GameEngineFont TextFont_;
+	GameEngineSound TextSound_;
 
 	float Time_;
 	float Timer_;
+	float SoundTime_;
 	std::wstring Text_;
 	std::wstring RealText_;
 

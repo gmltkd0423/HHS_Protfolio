@@ -30,7 +30,7 @@ void FloweyBullet::Start()
 	AniRender_->ChangeAnimation("Bullet");
 	AniRender_->SetTransColor(RGB(241, 95, 241));
 	
-	BulletCol_ = CreateCollision("Bullet_Col", { 15,14 });
+	BulletCol_ = CreateCollision("Bullet", { 15,14 });
 
 } 
 
