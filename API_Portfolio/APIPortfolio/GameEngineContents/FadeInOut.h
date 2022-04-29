@@ -25,7 +25,7 @@ private:
 	bool IsFadeOut_;
 
 	float FadeSpeed_;
-	int Value_;
+	float Value_;
 
 	GameEngineRenderer* Back;
 public:

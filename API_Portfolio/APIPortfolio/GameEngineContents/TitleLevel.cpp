@@ -75,7 +75,8 @@ void TitleLevel::Update()
 {
 
 	ChangeBackGround();
-	//FadeInOutBackGround();
+	
+	FadeInOutBackGround();
 	
 	CheckChangeLevelKey();
 
@@ -146,7 +147,7 @@ void TitleLevel::ChangeBackGround()
 	if (6.0f < Time_)
 	{
 		TitleImage_[(int)TITLEORDER::TITLE1]->Death();
-
+		
 	}
 
 
@@ -220,7 +221,7 @@ void TitleLevel::ChangeBackGround()
 
 	}
 
-	if (76.0f < Time_ )
+	if (78.0f < Time_ )
 	{
 		TitleImage_[(int)TITLEORDER::TITLE11]->Death();
 		TitleImage_[(int)TITLEORDER::BACKGROUND]->Death();
@@ -230,8 +231,106 @@ void TitleLevel::ChangeBackGround()
 
 void TitleLevel::FadeInOutBackGround()
 {
-	if (4.0f < Time_ && 0 == Count_)
+	if (5.0f < Time_ && 0 == Count_)
 	{
 		FadeEffect_->FadeIn();
+		Count_++;
 	}
+	else if (6.0f < Time_ && 1 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (11.0f < Time_ && 2 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (12.0f < Time_ && 3 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (17.0f < Time_ && 4 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (18.0f < Time_ && 5 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (23.0f < Time_ && 6 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (24.0f < Time_ && 7 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (29.0f < Time_ && 8 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (30.0f < Time_ && 9 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (35.0f < Time_ && 10 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (36.0f < Time_ && 11 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (41.0f < Time_ && 12 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (42.0f < Time_ && 13 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (47.0f < Time_ && 14 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (48.0f < Time_ && 15 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (53.0f < Time_ && 16 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (54.0f < Time_ && 17 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+	else if (59.0f < Time_ && 18 == Count_)
+	{
+		FadeEffect_->FadeIn();
+		Count_++;
+	}
+	else if (60.0f < Time_ && 19 == Count_)
+	{
+		FadeEffect_->FadeOut();
+		Count_++;
+	}
+
+
 }
