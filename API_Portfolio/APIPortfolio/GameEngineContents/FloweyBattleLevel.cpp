@@ -554,9 +554,6 @@ void FloweyBattleLevel::Pattern1Update()
 
 
 
-
-
-
 ///////////////////////////////////////////////////////////////////
 	//z키를눌러 텍스트출력
 	if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetIsAllTextOut())
@@ -705,7 +702,7 @@ void FloweyBattleLevel::Pattern2Update()
 	{
 		Count_++;  // 1
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh");
+		FloweySound.SoundPlayOneShot("snd_floweylaugh.wav");
 	}
-
 
 }

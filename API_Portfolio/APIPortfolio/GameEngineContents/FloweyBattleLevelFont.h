@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineFont.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 
 // Ό³Έν :
@@ -23,8 +24,9 @@ protected:
 	void Render() override;
 private:
 	GameEngineFont TextFont_;
+	GameEngineSound TextSound_;
 
-	float Time_;
+	float TextTime_;
 	float Timer_;
 	int TextCount_;
 	int Count_;
@@ -34,7 +36,7 @@ private:
 	std::wstring RealText_;
 
 	void Texts();
-
+	void TextSounds();
 
 public:
 	inline void SetCount(int _Count)

@@ -6,7 +6,8 @@ PlayLevel2Font::PlayLevel2Font() :
 	Count_(0),
 	TextCount_(0),
 	IsAllTextOut(false),
-	IsTalkEnd_(false)
+	IsTalkEnd_(false),
+	TextTime_(0.2f)
 {
 }
 
@@ -52,6 +53,12 @@ void PlayLevel2Font::Render()
 		Time_ = 0.1f;
 	}
 
+
+	if (Text_.size() != RealText_.size())
+	{
+		TextSounds();
+	}
+
 	RealText_ = Text_.substr(0, TextCount_);
 
 	TextFont_.Draw(RealText_, { 470.0f, 30.0f }, RGB(255, 255, 255), 55, 45);
@@ -61,6 +68,7 @@ void PlayLevel2Font::Render()
 	if (Text_.size() == RealText_.size())
 	{
 		IsAllTextOut = true;
+		Timer_ = 0;
 	}
 }
 
@@ -99,4 +107,92 @@ void PlayLevel2Font::Texts()
 		Text_ = L"";
 	}
 
+}
+
+void PlayLevel2Font::TextSounds()
+{
+	TextTime_ -= GameEngineTime::GetDeltaTime();
+	Timer_ += GameEngineTime::GetDeltaTime();
+
+	if (1 == Count_)
+	{
+
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.7f || Timer_ >= 1.4f )
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (2 == Count_)
+	{
+
+		if (0 >= TextTime_)
+		{
+			TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+			TextTime_ = 0.1f;
+		}
+	}
+	else if (3 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 2.6f || Timer_ >= 3.1f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (4 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.6f || Timer_ >= 1.0f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (5 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 1.2f || Timer_ >= 1.7f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (6 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 1.2f || Timer_ >= 1.7f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	
+	}
+	else if (7 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else
+	{
+	
+	}
 }

@@ -1,7 +1,7 @@
 #include "FloweyBattleLevelFont.h"
 
 FloweyBattleLevelFont::FloweyBattleLevelFont() :
-	Time_(0.1f),
+	TextTime_(0.1f),
 	Timer_(0),
 	Count_(0),
 	IsAllTextOut(false),
@@ -36,15 +36,22 @@ void FloweyBattleLevelFont::Render()
 		return;
 	}
 
-	Time_ -= GameEngineTime::GetDeltaTime();
+	TextTime_ -= GameEngineTime::GetDeltaTime();
 
-	if (0 >= Time_)
+	if (0 >= TextTime_)
 	{
 		TextCount_++;
-		Time_ = 0.1f;
+		TextTime_ = 0.1f;
 	}
 
 	RealText_ = Text_.substr(0, TextCount_);
+
+
+	if (Text_.size() != RealText_.size())
+	{
+		TextSounds();
+	}
+
 
 	if (24 == Count_)
 	{
@@ -59,6 +66,7 @@ void FloweyBattleLevelFont::Render()
 	if (Text_.size() == RealText_.size())
 	{
 		IsAllTextOut = true;
+		Timer_ = 0;
 	}
 }
 
@@ -131,5 +139,282 @@ void FloweyBattleLevelFont::Texts()
 	else
 	{
 		Text_ = L"";
+	}
+}
+
+void FloweyBattleLevelFont::TextSounds()
+{
+	TextTime_ -= GameEngineTime::GetDeltaTime();
+	Timer_ += GameEngineTime::GetDeltaTime();
+
+	if (0 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.7f || Timer_ >= 1.4f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (1 == Count_)
+	{
+
+		if (0 >= TextTime_)
+		{
+			TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+			TextTime_ = 0.1f;
+		}
+	}
+	else if (2 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 2.6f || Timer_ >= 3.1f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (3 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.6f || Timer_ >= 1.0f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (4 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 1.2f || Timer_ >= 1.7f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (5 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 1.2f || Timer_ >= 1.7f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+
+	}
+	else if (6 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (7 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (8 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (9 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (10 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+
+			TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+			TextTime_ = 0.1f;
+
+		}
+	}
+	else if (11 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (12 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (13 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (14 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+
+			TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+			TextTime_ = 0.1f;
+
+		}
+	}
+	else if (15 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+			TextTime_ = 0.1f;
+		}
+	}
+	else if (16 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (17 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.5f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (18 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.7f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (19 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.7f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (20 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.7f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (21 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+			if (Timer_ <= 0.7f || Timer_ >= 1.3f)
+			{
+				TextSound_.SoundPlayOneShot("snd_floweytalk1.wav");
+				TextTime_ = 0.1f;
+			}
+		}
+	}
+	else if (22 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+
+				TextSound_.SoundPlayOneShot("snd_floweytalk2.wav");
+				TextTime_ = 0.1f;
+			
+		}
+	}
+	else if (23 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+
+				TextSound_.SoundPlayOneShot("snd_floweytalk2.wav");
+				TextTime_ = 0.1f;
+			
+		}
+	}
+	else if (24 == Count_)
+	{
+		if (0 >= TextTime_)
+		{
+
+				TextSound_.SoundPlayOneShot("snd_floweytalk2.wav");
+				TextTime_ = 0.1f;
+			
+		}
+	}
+	else
+	{
+
 	}
 }

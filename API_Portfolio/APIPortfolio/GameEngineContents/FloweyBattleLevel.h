@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include "FloweyBullet.h"
 #include "FloweyBattleLevelFont.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 
 enum class PatternState
@@ -54,6 +55,7 @@ private:
 	FloweyBattleLevelFont* TextFont_;
 	float4 PlayerPos_;
 
+	GameEngineSound FloweySound;
 
 	float4 BulletPos_[5];
 	FloweyBullet* Bullets_[5];
