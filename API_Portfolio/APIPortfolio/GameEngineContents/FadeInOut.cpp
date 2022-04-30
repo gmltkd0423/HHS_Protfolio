@@ -53,7 +53,8 @@ void FadeInOut::Update()
 	else if (true == IsFadeOut_)
 	{
 		Value_ -= GameEngineTime::GetDeltaTime() * FadeSpeed_;
-		Back->SetAlpha(static_cast<int>(Value_));
+		Back->SetAlpha(static_cast<int>(Value_)); 
+
 
 		if (0 >= Value_)
 		{

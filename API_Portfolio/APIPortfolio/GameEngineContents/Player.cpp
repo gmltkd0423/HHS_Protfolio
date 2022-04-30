@@ -315,7 +315,7 @@ void Player::Stop()
 	MoveDir_ = float4::ZERO;
 	Frisk_->ChangeAnimation("MoveUpIdle");
 }
-
+ 
 
 void Player::CameraLock()
 {
