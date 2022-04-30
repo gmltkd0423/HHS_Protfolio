@@ -32,7 +32,7 @@ void Fire::Update()
 
 	if (BlinkTimer_ <= 0.0f)
 	{
-		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 150.0f;
+		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 200.0f;
 		SetMove(MoveDir_);
 	}
 

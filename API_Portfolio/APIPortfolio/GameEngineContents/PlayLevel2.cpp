@@ -263,4 +263,5 @@ void PlayLevel2::ResetAll()
 	TextFont_->Death();
 	FloweyTalk->Death();
 	TextBox->Death();
+	Flowey_->Death();
 }

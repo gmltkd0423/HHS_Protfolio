@@ -7,6 +7,7 @@
 
 GameEngineActor::GameEngineActor()
 	: Level_(nullptr)
+	, IsResetIgnore(false)
 {
 	// delete this;
 }
@@ -44,26 +45,25 @@ GameEngineActor::~GameEngineActor()
 	}
 }
 
-//void GameEngineActor::DebugRect
-// 
-//{
-//	// 선생님은 기본적으로 중앙을 기준으로하는걸 좋아합니다.
-//
-//	GameEngineRect DebugRect(Position_, Scale_);
-//
-//
-//	Rectangle(
-//		GameEngine::BackBufferDC(),
-//		DebugRect.CenterLeft(),
-//		DebugRect.CenterTop(),
-//		DebugRect.CenterRight(),
-//		DebugRect.CenterBot()
-//	);
-//}
+void GameEngineActor::DebugRectRender()
+{
+	// 선생님은 기본적으로 중앙을 기준으로하는걸 좋아합니다.
+
+	GameEngineRect DebugRect(Position_, Scale_);
+
+
+	Rectangle(
+		GameEngine::BackBufferDC(),
+		DebugRect.CenterLeft(),
+		DebugRect.CenterTop(),
+		DebugRect.CenterRight(),
+		DebugRect.CenterBot()
+	);
+}
 
 GameEngineRenderer* GameEngineActor::CreateRenderer(
 	int _Order, /*= static_cast<int>(EngineMax::RENDERORDERMAX)*/
-	RenderPivot _PivotType /*= RenderPivot::CENTER*/, 
+	RenderPivot _PivotType /*= RenderPivot::CENTER*/,
 	const float4& _PivotPos /*= { 0,0 }*/)
 {
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
@@ -127,7 +127,8 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(
 	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
 	{
 		NewRenderer->GameEngineUpdateObject::SetOrder(_Order);
-	} else
+	}
+	else
 	{
 		NewRenderer->GameEngineUpdateObject::SetOrder(GetOrder());
 	}
@@ -142,8 +143,6 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(
 	return NewRenderer;
 }
 
-
-
 GameEngineCollision* GameEngineActor::CreateCollision(const std::string& _GroupName, float4 _Scale, float4 _Pivot /*= { 0, 0 }*/)
 {
 	GameEngineCollision* NewCollision = new GameEngineCollision();
@@ -156,7 +155,7 @@ GameEngineCollision* GameEngineActor::CreateCollision(const std::string& _GroupN
 	return NewCollision;
 }
 
-void GameEngineActor::Release() 
+void GameEngineActor::Release()
 {
 	{
 		std::list<GameEngineRenderer*>::iterator StartIter = RenderList_.begin();

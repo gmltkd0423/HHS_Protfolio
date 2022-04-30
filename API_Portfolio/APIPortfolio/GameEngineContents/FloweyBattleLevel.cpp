@@ -733,7 +733,7 @@ void FloweyBattleLevel::CreateBulletCircle()
 	Angle += 3.0f;
 
 	float4 Dir = float4::DegreeToDirectionFloat4(Angle);
-	Dir *= 150.0f;
+	Dir *= 120.0f;
 	NewBullet = CreateActor<FloweyBullet>((int)BATTLELEVELORDER::BULLET);
 	NewBullet->SetPosition(Player::MainPlayer->GetPosition() + Dir);
 	NewBullet->SetRendererOrder((int)BATTLELEVELORDER::BULLET);

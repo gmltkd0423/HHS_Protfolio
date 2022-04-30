@@ -62,6 +62,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+	//Reset();
 	Player::MainPlayer->NextLevelOn();
 	SoundPlayer::Bgm_.Stop();
 }
