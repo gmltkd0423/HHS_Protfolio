@@ -18,16 +18,19 @@ void Fire::Start()
 {
 	FireRenderer = CreateRenderer((int)BATTLELEVELORDER::BULLET);
 	FireRenderer->CreateAnimation("Fire.bmp", "Fire", 0, 3, 0.1f, true);
+	FireRenderer->ChangeAnimation("Fire");
+	FireRenderer->SetTransColor(RGB(255, 102, 255));
 	FireRenderer->SetAlpha(0);
+	FireRenderer->SetScale({ 50,80 });
 }
 
 void Fire::Update()
 {
 	Blink();
 
-	if (BlinkTimer_ > 0.0f)
+	if (BlinkTimer_ <= 0.0f)
 	{
-		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 0.5f;
+		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 150.0f;
 		SetMove(MoveDir_);
 	}
 

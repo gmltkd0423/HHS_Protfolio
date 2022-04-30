@@ -106,6 +106,14 @@ void FloweyBattleLevel::Loading()
 
 	}
 
+	{
+		Fire_ = CreateActor<Fire>((int)BATTLELEVELORDER::BULLET);
+		Fire_->SetPosition({ 1000,190 });
+		Fire_->Off();
+
+
+	}
+
 
 	{
 		//¸»Ç³¼±
@@ -175,7 +183,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	TextFont_ = CreateActor<FloweyBattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
 
-	ChangeState(PatternState::Pattern1);
+	ChangeState(PatternState::Talk);
 	//Player::MainPlayer->
 
 
@@ -832,9 +840,15 @@ void FloweyBattleLevel::Pattern4Start()
 {
 
 	FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh_Idle");
-
+	Time_ = 0;
 }
 
 void FloweyBattleLevel::Pattern4Update()
 {
+	Time_ += GameEngineTime::GetDeltaTime();
+	if (1.0f < Time_)
+	{
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Mad_Idle");
+		Fire_->On();
+	}
 }
