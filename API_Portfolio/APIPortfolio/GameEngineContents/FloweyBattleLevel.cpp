@@ -207,6 +207,9 @@ void FloweyBattleLevel::ChangeState(PatternState _State)
 	case PatternState::Pattern3:
 		Pattern3Start();
 		break;
+	case PatternState::Pattern4:
+		Pattern4Start();
+		break;
 	default:
 		break;
 	}
