@@ -316,6 +316,7 @@ void Player::Stop()
 	Frisk_->ChangeAnimation("MoveUpIdle");
 }
 
+
 void Player::CameraLock()
 {
 

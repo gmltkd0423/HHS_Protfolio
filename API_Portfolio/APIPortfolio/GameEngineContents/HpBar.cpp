@@ -6,7 +6,9 @@
 
 HpBar::HpBar() :
 	PlayerMaxHp_(0),
-	PlayerHp_(0)
+	PlayerHp_(0),
+	HpBarRed_(nullptr),
+	HpBarYellow_(nullptr)
 {
 }
 
@@ -22,12 +24,12 @@ void HpBar::Start()
 
 void HpBar::Update()
 {
-	PlayerMaxHp_ = Player::MainPlayer->GetMaxHp();
-	PlayerHp_ = Player::MainPlayer->GetHp();
+	PlayerMaxHp_ = static_cast<int>(Player::MainPlayer->GetMaxHp());
+	PlayerHp_ = static_cast<int>(Player::MainPlayer->GetHp());
 
-	int HpBarYellow_x = HpBarYellow_->GetImageScale().x * PlayerHp_ / PlayerMaxHp_;
+	float HpBarYellow_x = HpBarYellow_->GetImageScale().x * PlayerHp_ / PlayerMaxHp_;
 
-	HpBarYellow_->SetScale({ static_cast<float>(HpBarYellow_x),HpBarYellow_->GetImageScale().y });
+	HpBarYellow_->SetScale({HpBarYellow_x ,HpBarYellow_->GetImageScale().y });
 
 }
 

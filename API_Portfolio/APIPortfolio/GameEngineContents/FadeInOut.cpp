@@ -9,7 +9,8 @@ FadeInOut::FadeInOut() :
 	FadeSpeed_(400.0f),
 	IsFadeIn_(false),
 	IsFadeOut_(false),
-	Value_(0)
+	Value_(0),
+	Back(nullptr)
 {
 }
 
@@ -39,13 +40,14 @@ void FadeInOut::Update()
 	if (true == IsFadeIn_)
 	{
 		Value_ += GameEngineTime::GetDeltaTime() * FadeSpeed_;
+
 		Back->SetAlpha(static_cast<int>(Value_));
 
 		if (255 <= Value_)
 		{
 			IsFadeIn_ = false;
 			Value_ = 255;
-			Back->SetAlpha(Value_);
+			Back->SetAlpha(static_cast<int>(Value_));
 		}
 	}
 	else if (true == IsFadeOut_)
@@ -57,7 +59,7 @@ void FadeInOut::Update()
 		{
 			IsFadeOut_ = false;
 			Value_ = 0;
-			Back->SetAlpha(Value_);
+			Back->SetAlpha(static_cast<int>(Value_));
 		}
 	}
 }
