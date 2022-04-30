@@ -4,6 +4,7 @@
 #include "Flowey.h"
 #include "PlayLevel2Font.h"
 #include "ContentsEnums.h"
+#include "SoundPlayer.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -133,7 +134,7 @@ void PlayLevel2::CheckChangeLevelKey()
 	{
 		if (true == PlayBgm_)
 		{
-			Bgm_.Stop();
+			SoundPlayer::Bgm_.Stop();
 		}
 
 		GameEngine::GetInst().ChangeLevel("TitleLevel");
@@ -143,7 +144,7 @@ void PlayLevel2::CheckChangeLevelKey()
 	{
 		if (true == PlayBgm_)
 		{
-			Bgm_.Stop();
+			SoundPlayer::Bgm_.Stop();
 		}
 
 		GameEngine::GetInst().ChangeLevel("PlayLevel");
@@ -153,7 +154,7 @@ void PlayLevel2::CheckChangeLevelKey()
 	{
 		if (true == PlayBgm_)
 		{
-			Bgm_.Stop();
+			SoundPlayer::Bgm_.Stop();
 		}
 
 		GameEngine::GetInst().ChangeLevel("FloweyBattleLevel");
@@ -214,7 +215,7 @@ void PlayLevel2::FloweyTalkEvent()
 
 		if (0 == Count_)
 		{
-			Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
+			SoundPlayer::Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
 			PlayBgm_ = true;
 			Count_++;  //1
 		}

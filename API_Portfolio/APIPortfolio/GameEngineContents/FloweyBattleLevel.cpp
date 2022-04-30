@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "FloweyBullet.h"
 #include "HpBar.h"
+#include "SoundPlayer.h"
 #include "FloweyBattleLevelFont.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -24,7 +25,8 @@ FloweyBattleLevel::FloweyBattleLevel() :
 	IsDeathCheck(0),
 	Count_(0),
 	CurState_(PatternState::Talk),
-	FloweyStateCount_(0)
+	FloweyStateCount_(0),
+	FloweyDeath(false)
 {
 }
 
@@ -45,7 +47,7 @@ void FloweyBattleLevel::Loading()
 	//네모 이미지
 	{
 		GameEngineActor* Box = CreateActor<BattleLevelActor>();
-		GameEngineRenderer* BoxRenderer = Box->CreateRendererToScale("TextBox_Square.bmp", { 250,250 }, (int)BATTLELEVELORDER::BOX, RenderPivot::CENTER, { 640 , 465 });
+		GameEngineRenderer* BoxRenderer = Box->CreateRendererToScale("TextBox_Square.bmp", { 200,200 }, (int)BATTLELEVELORDER::BOX, RenderPivot::CENTER, { 640 , 465 });
 	}
 
 
@@ -103,11 +105,13 @@ void FloweyBattleLevel::Loading()
 
 
 	{
-	/*	Undyne = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::ACTOR);
-		UndyneRenderer = Undyne->CreateRenderer((int)BATTLELEVELORDER::ACTOR, RenderPivot::CENTER, { 640,180 });
+		Undyne = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::BACKGROUND);
+		Undyne->SetPosition({ 1500,180 });
+		UndyneRenderer = Undyne->CreateRenderer((int)BATTLELEVELORDER::BACKGROUND, RenderPivot::CENTER);
 		UndyneRenderer->CreateAnimation("Undyne_Idle.bmp", "Idle", 0, 67, 0.05f, true);
-		UndyneRenderer->ChangeAnimation("Idle");
-		UndyneRenderer->SetScale({ 350,350 });*/
+		UndyneRenderer->CreateAnimation("Undyne_Idle.bmp", "Idle_Stop", 0, 0, 0, false);
+		UndyneRenderer->ChangeAnimation("Idle_Stop");
+		UndyneRenderer->SetScale({ 350,350 });
 
 	}
 
@@ -194,7 +198,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	TextFont_ = CreateActor<FloweyBattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
 
-	ChangeState(PatternState::Pattern4);
+	ChangeState(PatternState::Talk);
 	//Player::MainPlayer->
 
 
@@ -319,7 +323,7 @@ void FloweyBattleLevel::TalkUpdate()
 			//pattern1은 Count_가 10부터 시작
 			Count_ = 10;
 			WinkStar->Off();
-			ChangeState(PatternState::Pattern2);
+			ChangeState(PatternState::Pattern1);
 			
 		}
 		
@@ -363,7 +367,7 @@ void FloweyBattleLevel::Pattern1Update()
 		{
 			Bullets_[i]->Off();
 		}
-
+		SoundPlayer::Bgm_.Stop();
 		ChangeState(PatternState::Pattern3);
 		return;
 	}
@@ -378,7 +382,7 @@ void FloweyBattleLevel::Pattern1Update()
 			for (int i = 0; i < 5; ++i)
 			{
 				Bullets_[i] = CreateActor<FloweyBullet>();
-				Bullets_[i]->SetPosition(FloweyTalkRenderer->GetPivot());
+				Bullets_[i]->SetPosition(FloweyTalk->GetPosition());
 			}
 			CheckBullet_ = true;
 		}
@@ -607,6 +611,7 @@ void FloweyBattleLevel::Pattern1Update()
 
 		if (1.5f < Time_)
 		{
+			SoundPlayer::Bgm_.Stop();
 			FloweyTalkRenderer->ChangeAnimation("Flowey_Evil");
 			if (2.2f < Time_)
 			{
@@ -873,17 +878,31 @@ void FloweyBattleLevel::Pattern4Update()
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Hurt");
 		Angle += 3.0f;
 
-		float4 MoveDir_ = float4::LEFT *  GameEngineTime::GetDeltaTime() * 300.0f;
-		float4 MoveDir2_ = float4::UP * GameEngineTime::GetDeltaTime() * 200.0f;
-		FloweyTalk->SetMove(MoveDir_);
+		MoveDir_ += float4::LEFT *  GameEngineTime::GetDeltaTime() * 100.0f;
+		MoveDir2_ = float4::UP * GameEngineTime::GetDeltaTime() * 200.0f;
+
+		FloweyTalk->SetMove(MoveDir_ * GameEngineTime::GetDeltaTime()*10);
 		FloweyTalk->SetMove(MoveDir2_);
 
 
-		if (-50.0f <= FloweyTalk->GetPosition().x ||
+		if (-50.0f >= FloweyTalk->GetPosition().x ||
 			800.0f <= FloweyTalk->GetPosition().y)
 		{
 			FloweyTalk->Off();
+			FloweyDeath = true;
 		}
+
+
+		if (true == FloweyDeath)
+		{
+			if (690.0f <= Undyne->GetPosition().x)
+			{
+				MoveDir3_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 250.0f;
+
+				Undyne->SetMove(MoveDir3_);
+			}
+		}
+
 	}
 
 }
@@ -892,7 +911,7 @@ void FloweyBattleLevel::Pattern4Update()
 
 void FloweyBattleLevel::ResetAll()
 {
-	Check_ = false;
+	/*Check_ = false;
 	CheckBullet_=false;
 	PhaseEnd=false;
 	Time_=0;
@@ -923,17 +942,17 @@ void FloweyBattleLevel::ResetAll()
 	{
 		BulletPos_[i]={};
 		Bullets_[i]->Death();
+		Dir[i] = {};
 	}
 
 	NewBullet->Death();
 	HpBar_->Death();
 
-	Dir[5] = {};
 	IsDeathCheck=false;
 	CurState_ = PatternState::Talk;
 
 	if (0 != BulletList_.size())
 	{
 		BulletList_.clear();
-	}
+	}*/
 }

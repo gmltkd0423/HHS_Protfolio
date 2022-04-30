@@ -25,7 +25,6 @@ protected:
 
 private:
 	Player* Player_;
-	GameEngineSoundPlayer Bgm_;
 	float BgmTime_;
 	GameEngineImage* MapColImage_;
 

@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "TitleFont.h"
 #include "FadeInOut.h"
+#include "SoundPlayer.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -94,7 +95,7 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	//초기화함수
 	Init();
-	Bgm_ = GameEngineSound::SoundPlayControl("01_Once_Upon_a_Time.flac");
+	SoundPlayer::Bgm_ = GameEngineSound::SoundPlayControl("01_Once_Upon_a_Time.flac");
 
 
 
@@ -102,7 +103,7 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	Bgm_.Stop();
+	SoundPlayer::Bgm_.Stop();
 	TitleImage_[(int)TITLEORDER::TITLE]->Death();
 	Time_ = 0.0f;
 
@@ -224,7 +225,7 @@ void TitleLevel::ChangeBackGround()
 	if (78.0f <= Time_ && 20 == Count_)
 	{
 		Count_++;
-		Bgm_.Stop();
+		SoundPlayer::Bgm_.Stop();
 		GameEngineSound sound;
 		sound.SoundPlayOneShot("mus_intronoise.ogg");
 		TitleImage_[(int)TITLEORDER::TITLE11]->Death();

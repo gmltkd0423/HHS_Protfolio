@@ -45,6 +45,11 @@ private:
 	int Count_;
 	int FloweyStateCount_;
 	float Angle;
+	bool FloweyDeath;
+
+	float4 MoveDir_;
+	float4 MoveDir2_;
+	float4 MoveDir3_;
 
 private:
 	GameEngineActor* FloweyTalk;

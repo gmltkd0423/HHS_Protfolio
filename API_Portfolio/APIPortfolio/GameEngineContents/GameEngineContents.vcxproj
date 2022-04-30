@@ -229,6 +229,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="TitleFont.h">
       <SubType>
       </SubType>
@@ -310,6 +311,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="TitleFont.cpp">
       <SubType>
       </SubType>

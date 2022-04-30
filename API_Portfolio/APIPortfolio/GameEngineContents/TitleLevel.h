@@ -35,7 +35,6 @@ private:
 
 private:
 	FadeInOut* FadeEffect_;
-	GameEngineSoundPlayer Bgm_;
 	GameEngineActor* TitleImage_[20];
 	GameEngineRenderer* TitleRenderer_[20];
 	GameEngineActor* Text_;

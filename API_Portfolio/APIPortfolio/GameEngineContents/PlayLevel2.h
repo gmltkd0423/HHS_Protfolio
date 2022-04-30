@@ -44,7 +44,6 @@ private:
 	GameEngineRenderer* TextBoxRenderer;
 	GameEngineImage* MapColImage_;
 
-	GameEngineSoundPlayer Bgm_;
 
 private:
 	void Init();

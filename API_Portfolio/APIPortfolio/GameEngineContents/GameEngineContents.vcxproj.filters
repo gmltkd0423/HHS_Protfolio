@@ -44,9 +44,6 @@
     <ClInclude Include="BattleLevel.h">
       <Filter>Level\BattleLevel</Filter>
     </ClInclude>
-    <ClInclude Include="FadeInOut.h">
-      <Filter>Level\Global</Filter>
-    </ClInclude>
     <ClInclude Include="PlayLevel2Font.h">
       <Filter>Level\PlayLevel2\Actor</Filter>
     </ClInclude>
@@ -62,8 +59,14 @@
     <ClInclude Include="Fire.h">
       <Filter>Actor\Projectiles</Filter>
     </ClInclude>
+    <ClInclude Include="FadeInOut.h">
+      <Filter>Level\Global\FadeInOut</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>Level\Global\SoundPlayer</Filter>
+    </ClInclude>
     <ClInclude Include="Trigger.h">
-      <Filter>Level\Global</Filter>
+      <Filter>Level\Global\Trigger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +113,6 @@
     <ClCompile Include="BattleLevel.cpp">
       <Filter>Level\BattleLevel</Filter>
     </ClCompile>
-    <ClCompile Include="FadeInOut.cpp">
-      <Filter>Level\Global</Filter>
-    </ClCompile>
     <ClCompile Include="PlayLevel2Font.cpp">
       <Filter>Level\PlayLevel2\Actor</Filter>
     </ClCompile>
@@ -128,8 +128,14 @@
     <ClCompile Include="Fire.cpp">
       <Filter>Actor\Projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="FadeInOut.cpp">
+      <Filter>Level\Global\FadeInOut</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>Level\Global\SoundPlayer</Filter>
+    </ClCompile>
     <ClCompile Include="Trigger.cpp">
-      <Filter>Level\Global</Filter>
+      <Filter>Level\Global\Trigger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +192,15 @@
     </Filter>
     <Filter Include="Actor\Projectiles">
       <UniqueIdentifier>{1ce98387-29e0-47bc-a464-10278a34e367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Global\FadeInOut">
+      <UniqueIdentifier>{7bba1247-7eef-4424-b091-87665305520a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Global\SoundPlayer">
+      <UniqueIdentifier>{09bc0577-7ed4-4dbf-8445-be2ea56aadea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Global\Trigger">
+      <UniqueIdentifier>{7fa410ba-3834-4d8b-8fc1-4602b388373c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "ContentsEnums.h"
 #include "PlayBackGround.h"
+#include "SoundPlayer.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -29,7 +30,7 @@ void PlayLevel::Update()
 
 	if (0 >= BgmTime_)
 	{
-		Bgm_.Stop();
+		SoundPlayer::Bgm_.Stop();
 	}
 
 	MoveNextLevel();
@@ -51,7 +52,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
 	}
 
-	Bgm_ = GameEngineSound::SoundPlayControl("05_Ruins.flac");
+	SoundPlayer::Bgm_ = GameEngineSound::SoundPlayControl("05_Ruins.flac");
 	BgmTime_ = 30.0f;
 	Player::MainPlayer->CollisionImage("Level1_ColMap.bmp");
 	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  500 });
@@ -62,7 +63,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	Player::MainPlayer->NextLevelOn();
-	Bgm_.Stop();
+	SoundPlayer::Bgm_.Stop();
 }
 
 void PlayLevel::MoveNextLevel()
