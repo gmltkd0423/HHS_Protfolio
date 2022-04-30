@@ -29,6 +29,7 @@ protected:
 private:
 	bool TalkEvent_;
 	bool CheckPos_;
+	bool NextLevel;
 	float Time_;
 	bool PlayBgm_;
 	int Count_ = 0;

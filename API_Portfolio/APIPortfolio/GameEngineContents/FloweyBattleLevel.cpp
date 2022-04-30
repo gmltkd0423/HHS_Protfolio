@@ -15,6 +15,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngine.h>
 
 
 
@@ -207,6 +208,9 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void FloweyBattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+	Player::MainPlayer->SetSpeed(500.0f);
+	Player::MainPlayer->IsFrisk();
+	Player::MainPlayer->CamPosOn();
 	Player::MainPlayer->NextLevelOn();
 	Count_ = 0;
 }
@@ -872,7 +876,7 @@ void FloweyBattleLevel::Pattern4Update()
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Mad_Idle");
 		Fire_->On();
 	}
-
+	
 	if (true == Trigger_->GetFireDeath())
 	{
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Hurt");
@@ -900,6 +904,10 @@ void FloweyBattleLevel::Pattern4Update()
 				MoveDir3_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 250.0f;
 
 				Undyne->SetMove(MoveDir3_);
+			}
+			else
+			{
+				GameEngine::GetInst().ChangeLevel("PlayLevel2");
 			}
 		}
 

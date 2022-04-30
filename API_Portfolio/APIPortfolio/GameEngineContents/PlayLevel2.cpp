@@ -19,7 +19,8 @@ PlayLevel2::PlayLevel2() :
 	TalkEvent_(false),
 	Time_(0),
 	PlayBgm_(false),
-	Count_(0)
+	Count_(0),
+	NextLevel(false)
 {
 }
 
@@ -37,7 +38,7 @@ void PlayLevel2::Update()
 
 	CheckPlayerPosition();
 
-	if (true == CheckPos_)
+	if (true == CheckPos_ && false == NextLevel)
 	{
 		FloweyTalkEvent();
 	}
@@ -91,22 +92,29 @@ void PlayLevel2::Init()
 
 void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	//레벨 액터 재배치
-	Init();
-
-
-	if (nullptr == Player::MainPlayer)
+	if (0 == strcmp("FloweyBattleLevel", _PrevLevel->GetNameConstPtr()))
 	{
-		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+		NextLevel = true;
+		Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1200 });
+		Back->On();
 	}
+	else
+	{
+		//레벨 액터 재배치
+		Init();
 
-	//flowey 위치
-	Flowey_->SetPosition({ GameEngineWindow::GetScale().Half().x , GameEngineWindow::GetScale().y + 320 });
+		if (nullptr == Player::MainPlayer)
+		{
+			Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+		}
 
-	
-	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
-	Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1400});
+		//flowey 위치
+		Flowey_->SetPosition({ GameEngineWindow::GetScale().Half().x , GameEngineWindow::GetScale().y + 320 });
 
+
+		Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
+		Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1400 });
+	}
 }
 
 void PlayLevel2::LevelChangeEnd(GameEngineLevel* _NextLevel)
