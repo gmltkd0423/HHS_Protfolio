@@ -112,6 +112,9 @@ void Undertale::GameInit()
 		GameEngineImage* Laugh = GameEngineImageManager::GetInst()->Find("Flowey_Laugh.bmp");
 		Laugh->Cut({ 43,44 });
 
+		GameEngineImage* Hurt = GameEngineImageManager::GetInst()->Find("Flowey_Hurt.bmp");
+		Hurt->Cut({ 43,44 });
+
 		GameEngineImage* WinkStar = GameEngineImageManager::GetInst()->Find("WinkStar.bmp");
 		WinkStar->Cut({ 58,55 });
 

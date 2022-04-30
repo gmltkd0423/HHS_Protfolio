@@ -60,7 +60,8 @@ void FloweyBattleLevel::Loading()
 
 		//플라위 대화 이미지
 		FloweyTalk = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::ACTOR);
-		FloweyTalkRenderer = FloweyTalk->CreateRenderer((int)BATTLELEVELORDER::ACTOR , RenderPivot::CENTER,{640 , 230});
+		FloweyTalk->SetPosition({ 640 , 230 });
+		FloweyTalkRenderer = FloweyTalk->CreateRenderer((int)BATTLELEVELORDER::ACTOR , RenderPivot::CENTER);
 		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Idle", 0, 0, 0.4f, true);
 		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Idle.bmp", "Flowey_Talk", 0, 1, 0.2f, true);
 
@@ -91,6 +92,8 @@ void FloweyBattleLevel::Loading()
 		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Side.bmp", "Flowey_Side_Idle2", 2, 2, 0, true);
 		FloweyTalkRenderer->CreateAnimation("Flowey_Talk_Side.bmp", "Flowey_Side2", 2, 3, 0.2f, true);
 
+		//hurt 표정
+		FloweyTalkRenderer->CreateAnimation("Flowey_Hurt.bmp", "Flowey_Hurt", 0, 0, 0, false);
 
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Idle");
 		FloweyTalkRenderer->SetTransColor(RGB(241, 95, 241));
@@ -316,7 +319,7 @@ void FloweyBattleLevel::TalkUpdate()
 			//pattern1은 Count_가 10부터 시작
 			Count_ = 10;
 			WinkStar->Off();
-			ChangeState(PatternState::Pattern1);
+			ChangeState(PatternState::Pattern2);
 			
 		}
 		
@@ -853,6 +856,7 @@ void FloweyBattleLevel::Pattern4Start()
 
 	FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh_Idle");
 	Time_ = 0;
+	Angle = 0;
 }
 
 void FloweyBattleLevel::Pattern4Update()
@@ -866,7 +870,70 @@ void FloweyBattleLevel::Pattern4Update()
 
 	if (true == Trigger_->GetFireDeath())
 	{
-		FloweyTalkRenderer->ChangeAnimation
+		FloweyTalkRenderer->ChangeAnimation("Flowey_Hurt");
+		Angle += 3.0f;
+
+		float4 MoveDir_ = float4::LEFT *  GameEngineTime::GetDeltaTime() * 300.0f;
+		float4 MoveDir2_ = float4::UP * GameEngineTime::GetDeltaTime() * 200.0f;
+		FloweyTalk->SetMove(MoveDir_);
+		FloweyTalk->SetMove(MoveDir2_);
+
+
+		if (-50.0f <= FloweyTalk->GetPosition().x ||
+			800.0f <= FloweyTalk->GetPosition().y)
+		{
+			FloweyTalk->Off();
+		}
 	}
 
+}
+
+
+
+void FloweyBattleLevel::ResetAll()
+{
+	Check_ = false;
+	CheckBullet_=false;
+	PhaseEnd=false;
+	Time_=0;
+	Count_=0;
+	FloweyStateCount_ = 0;
+	Angle=0.0f;
+
+	FloweyTalk->Death();;
+	FloweyTalkRenderer->Death();
+
+	Undyne->Death();
+	UndyneRenderer->Death();
+
+	Fire_->Death();
+	Trigger_->Death();
+
+
+	WinkStar->Death();
+	WinkStarRenderer->Death();
+
+	Speech_Bubble->Death();
+	Speech_BubbleRenderer->Death();
+
+	TextFont_->Death();
+	PlayerPos_={};
+	
+	for (size_t i = 0; i < 5; i++)
+	{
+		BulletPos_[i]={};
+		Bullets_[i]->Death();
+	}
+
+	NewBullet->Death();
+	HpBar_->Death();
+
+	Dir[5] = {};
+	IsDeathCheck=false;
+	CurState_ = PatternState::Talk;
+
+	if (0 != BulletList_.size())
+	{
+		BulletList_.clear();
+	}
 }

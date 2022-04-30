@@ -103,5 +103,7 @@ private:
 
 	void Pattern4Start();
 	void Pattern4Update();
+
+	void ResetAll();
 };
 
