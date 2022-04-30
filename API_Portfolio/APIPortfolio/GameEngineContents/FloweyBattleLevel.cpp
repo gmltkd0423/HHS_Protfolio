@@ -231,6 +231,9 @@ void FloweyBattleLevel::StateUpdate()
 	case PatternState::Pattern3:
 		Pattern3Update();
 		break;
+	case PatternState::Pattern4:
+		Pattern4Update();
+		break;
 	default:
 		break;
 	}
@@ -717,14 +720,6 @@ void FloweyBattleLevel::Pattern2Update()
 	CreateBulletCircle();
 	//Count == 24
 
-	if (24 == Count_)
-	{
-		for (size_t i = 0; i < BulletList_.size(); i++)
-		{
-			int a = 0;
-		}
-	}
-
 
 	if (true == TextFont_->GetIsAllTextOut())
 	{
@@ -764,10 +759,26 @@ void FloweyBattleLevel::Pattern2Update()
 		{
 			FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh");
 			FloweySound.SoundPlayOneShot("snd_floweylaugh.wav");
+
+			//총알이 생성되는동안 z키를눌러도 총알이 안움직이게 해준다.
+			for (size_t i = 0; i < BulletList_.size(); i++)
+			{
+				BulletList_[i]->SetPhaseStart();
+			}
 		}
 	}
 
 
+
+	//patter4로 넘어가기
+	for (size_t i = 0; i < BulletList_.size(); i++)
+	{
+		if (true == BulletList_[i]->GetPhaseEnd())
+		{
+			BulletList_.clear();
+			ChangeState(PatternState::Pattern4);
+		}
+	}
 
 
 }
@@ -816,4 +827,12 @@ void FloweyBattleLevel::Pattern3Update()
 			ChangeState(PatternState::Pattern2);
 		}
 	}
+}
+
+void FloweyBattleLevel::Pattern4Start()
+{
+}
+
+void FloweyBattleLevel::Pattern4Update()
+{
 }

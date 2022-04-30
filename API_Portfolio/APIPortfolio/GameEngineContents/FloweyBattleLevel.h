@@ -72,7 +72,7 @@ private:
 	int IsDeathCheck;
 	PatternState CurState_;
 
-	std::vector<GameEngineActor*> BulletList_;
+	std::vector<FloweyBullet*> BulletList_;
 
 private:
 
@@ -94,5 +94,9 @@ private:
 
 	void Pattern3Start();
 	void Pattern3Update();
+
+
+	void Pattern4Start();
+	void Pattern4Update();
 };
 

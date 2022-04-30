@@ -89,7 +89,7 @@ void FloweyBullet::CircleBullet()
 		IsCircleBullet = true;
 	}
 
-	if (true == IsCircleBullet )
+	if (true == IsCircleBullet && true == PhaseStart_)
 	{
 		if (true == Player::MainPlayer->IsActionKeyDown())
 		{
