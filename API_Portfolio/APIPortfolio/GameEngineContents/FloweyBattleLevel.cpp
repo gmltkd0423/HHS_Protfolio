@@ -12,6 +12,8 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngineCollision.h>
+#include <GameEngine/GameEngineActor.h>
 
 
 
@@ -106,14 +108,20 @@ void FloweyBattleLevel::Loading()
 
 	}
 
+	//Fire Projectile 
 	{
 		Fire_ = CreateActor<Fire>((int)BATTLELEVELORDER::BULLET);
-		Fire_->SetPosition({ 1000,190 });
+		Fire_->SetPosition({ 1000,220 });
 		Fire_->Off();
 
 
 	}
 
+	{
+
+		Trigger_ = CreateActor<Trigger>();
+		Trigger_->SetPosition({ 640,230 });
+	}
 
 	{
 		//¸»Ç³¼±
@@ -183,7 +191,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	TextFont_ = CreateActor<FloweyBattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
 
-	ChangeState(PatternState::Talk);
+	ChangeState(PatternState::Pattern4);
 	//Player::MainPlayer->
 
 
@@ -855,4 +863,10 @@ void FloweyBattleLevel::Pattern4Update()
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Mad_Idle");
 		Fire_->On();
 	}
+
+	if (true == Trigger_->GetFireDeath())
+	{
+		FloweyTalkRenderer->ChangeAnimation
+	}
+
 }

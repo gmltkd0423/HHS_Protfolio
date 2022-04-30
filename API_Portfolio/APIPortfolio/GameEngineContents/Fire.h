@@ -29,6 +29,7 @@ private:
 	float4 MoveDir_;
 
 
+	GameEngineCollision* FireCol_;
 	GameEngineRenderer* FireRenderer;
 
 

@@ -241,6 +241,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Trigger.h" />
     <ClInclude Include="Undertale.h">
       <SubType>
       </SubType>
@@ -321,6 +322,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Undertale.cpp">
       <SubType>
       </SubType>

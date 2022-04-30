@@ -5,6 +5,7 @@
 #include "FloweyBattleLevelFont.h"
 #include "HpBar.h"
 #include "Fire.h"
+#include "Trigger.h"
 #include <GameEngineBase/GameEngineSound.h>
 
 
@@ -53,6 +54,8 @@ private:
 	GameEngineRenderer* UndyneRenderer;
 	
 	Fire* Fire_;
+	Trigger* Trigger_;
+
 
 	GameEngineActor* WinkStar;
 	GameEngineRenderer* WinkStarRenderer;

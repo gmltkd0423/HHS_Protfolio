@@ -62,6 +62,9 @@
     <ClInclude Include="Fire.h">
       <Filter>Actor\Projectiles</Filter>
     </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Level\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="Fire.cpp">
       <Filter>Actor\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>Level\Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

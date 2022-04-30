@@ -22,6 +22,8 @@ void Fire::Start()
 	FireRenderer->SetTransColor(RGB(255, 102, 255));
 	FireRenderer->SetAlpha(0);
 	FireRenderer->SetScale({ 50,80 });
+
+	FireCol_ = CreateCollision("Fire", { 50,80 });
 }
 
 void Fire::Update()
