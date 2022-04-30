@@ -148,6 +148,25 @@ void Undertale::GameInit()
 
 
 
+	GameEngineDirectory Dir;
+	Dir.MoveParent("API_Portfolio");
+	Dir.Move("APIPortfolio");
+	Dir.Move("Resources");
+	Dir.Move("Images");
+	Dir.Move("Bullets");
+
+
+	std::vector<GameEngineFile> AllImageFileList = Dir.GetAllFile("Bmp");
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+
+
+	GameEngineImage* Fire = GameEngineImageManager::GetInst()->Find("Fire.bmp");
+	Fire->Cut({ 20,30 });
+
 
 	// UI
 	{

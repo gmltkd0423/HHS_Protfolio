@@ -735,10 +735,6 @@ void FloweyBattleLevel::Pattern2Update()
 			Speech_Bubble->Off();
 		}
 
-		if (true == NewBullet->GetPhaseEnd())
-		{
-			FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh_Idle");
-		}
 
 	}
 
@@ -834,6 +830,9 @@ void FloweyBattleLevel::Pattern3Update()
 
 void FloweyBattleLevel::Pattern4Start()
 {
+
+	FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh_Idle");
+
 }
 
 void FloweyBattleLevel::Pattern4Update()

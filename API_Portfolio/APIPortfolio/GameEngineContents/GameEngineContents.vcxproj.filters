@@ -41,9 +41,6 @@
     <ClInclude Include="Flowey.h">
       <Filter>Actor\Monster\Flowey</Filter>
     </ClInclude>
-    <ClInclude Include="FloweyBullet.h">
-      <Filter>Actor\Monster\Flowey</Filter>
-    </ClInclude>
     <ClInclude Include="BattleLevel.h">
       <Filter>Level\BattleLevel</Filter>
     </ClInclude>
@@ -58,6 +55,12 @@
     </ClInclude>
     <ClInclude Include="HpBar.h">
       <Filter>Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="FloweyBullet.h">
+      <Filter>Actor\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Actor\Projectiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +104,6 @@
     <ClCompile Include="Flowey.cpp">
       <Filter>Actor\Monster\Flowey</Filter>
     </ClCompile>
-    <ClCompile Include="FloweyBullet.cpp">
-      <Filter>Actor\Monster\Flowey</Filter>
-    </ClCompile>
     <ClCompile Include="BattleLevel.cpp">
       <Filter>Level\BattleLevel</Filter>
     </ClCompile>
@@ -118,6 +118,12 @@
     </ClCompile>
     <ClCompile Include="HpBar.cpp">
       <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="FloweyBullet.cpp">
+      <Filter>Actor\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Actor\Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,8 +178,8 @@
     <Filter Include="Level\BattleLevel\FloweyBattleLevel">
       <UniqueIdentifier>{8af7c7a4-d62b-4875-b8b9-82211c269c90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Font">
-      <UniqueIdentifier>{34495c58-4535-4858-8286-fc636137155c}</UniqueIdentifier>
+    <Filter Include="Actor\Projectiles">
+      <UniqueIdentifier>{1ce98387-29e0-47bc-a464-10278a34e367}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
