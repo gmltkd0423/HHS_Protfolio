@@ -33,6 +33,9 @@ private:
 	int Count_;
 	bool DeathCheck_;
 	bool IsCircleBullet;
+	float len;
+	bool PhaseStart_;
+	bool PhaseEnd_;
 
 
 	float4 BulletPos_[5];
@@ -61,6 +64,16 @@ public:
 		return DeathCheck_;
 	}
 
+	void SetPhaseStart()
+	{
+		PhaseStart_ = true;
+	}
+
+	bool GetPhaseEnd()
+	{
+		return PhaseEnd_;
+	}
+
 	void SetSpeedCount(int _SpeedCount)
 	{
 		SpeedCount_ = _SpeedCount;
@@ -77,6 +90,8 @@ public:
 	}
 
 private:
+	void NormalBullet();
+	void CircleBullet();
 	void CheckDeath();
 };
 

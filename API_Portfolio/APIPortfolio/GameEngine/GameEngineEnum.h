@@ -4,6 +4,7 @@ enum class RenderPivot
 {
 	CENTER,
 	BOT,
+	LEFT
 };
 
 enum class RenderScaleMode

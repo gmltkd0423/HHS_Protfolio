@@ -375,6 +375,6 @@ void Player::GetDamaged()
 
 	if (true == PlayerCollision_->CollisionResult("Bullet", ColList,CollisionType::Rect, CollisionType::Rect))
 	{
-		Hp_ -= 11;
+		Hp_ -= 8;
 	}
 }

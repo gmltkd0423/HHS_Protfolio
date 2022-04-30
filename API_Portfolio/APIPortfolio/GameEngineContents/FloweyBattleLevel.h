@@ -38,6 +38,7 @@ protected:
 private:
 	bool Check_;
 	bool CheckBullet_;
+	bool PhaseEnd;
 	float Time_;
 	int Count_;
 	int FloweyStateCount_;
@@ -71,6 +72,7 @@ private:
 	int IsDeathCheck;
 	PatternState CurState_;
 
+	std::vector<GameEngineActor*> BulletList_;
 
 private:
 
@@ -80,7 +82,6 @@ private:
 	void StateUpdate();
 
 	void CreateBulletCircle();
-	void CreateBulletCircle2();
 
 	void TalkStart();
 	void TalkUpdate();

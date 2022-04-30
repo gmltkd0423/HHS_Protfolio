@@ -14,7 +14,9 @@ FloweyBullet::FloweyBullet() :
 	SpeedCount_(0),
 	Count_(0),
 	DeathCheck_(false),
-	IsCircleBullet(false)
+	IsCircleBullet(false),
+	PhaseStart_(false),
+	PhaseEnd_(false)
 {
 }
 
@@ -36,6 +38,23 @@ void FloweyBullet::Start()
 
 void FloweyBullet::Update()
 {
+
+	NormalBullet();
+	CircleBullet();
+
+
+
+	CheckDeath();
+}
+
+void FloweyBullet::Render()
+{
+
+}
+
+void FloweyBullet::NormalBullet()
+{
+	//세번쏠때
 	if (13 == Count_ && false == IsCheckPos_ ||
 		16 == Count_ && false == IsCheckPos_ ||
 		19 == Count_ && false == IsCheckPos_)
@@ -50,9 +69,19 @@ void FloweyBullet::Update()
 		IsCheckPos_ = true;
 	}
 
-	if (23 == Count_ && false == IsCheckPos_ )
+	if (true == IsCheckPos_)
 	{
-		//한번만 추적
+		MoveDir_ += Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
+		SetMove(MoveDir_);
+	}
+
+}
+
+void FloweyBullet::CircleBullet()
+{
+	if (23 == Count_ && false == IsCheckPos_)
+	{
+			//한번만 추적
 		Speed_ = 0.1f;
 		Pos_ = Player::MainPlayer->GetPosition() - GetPosition();
 		MoveDir_ = Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
@@ -60,8 +89,8 @@ void FloweyBullet::Update()
 		IsCircleBullet = true;
 	}
 
-	if(true == IsCircleBullet)
-	{ 
+	if (true == IsCircleBullet )
+	{
 		if (true == Player::MainPlayer->IsActionKeyDown())
 		{
 			Count_++;
@@ -72,25 +101,15 @@ void FloweyBullet::Update()
 	{
 		MoveDir_ = Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
 		SetMove(MoveDir_);
+
+		float4 NewPos_= Player::MainPlayer->GetPosition() - GetPosition();
+		len = NewPos_.Len2D();
+		if (60 >= len)
+		{
+			Off();
+			PhaseEnd_ = true;
+		}
 	}
-
-	 
-
-	if (true == IsCheckPos_)
-	{
-		MoveDir_ += Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
-		SetMove(MoveDir_);
-	}
-	
-
-
-
-	CheckDeath();
-}
-
-void FloweyBullet::Render()
-{
-
 }
 
 void FloweyBullet::CheckDeath()

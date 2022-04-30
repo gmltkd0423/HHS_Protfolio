@@ -26,7 +26,6 @@ private:
 
 	int PlayerHp_;
 	int PlayerMaxHp_;
-	float FullHpBar_;
 
 };
 
