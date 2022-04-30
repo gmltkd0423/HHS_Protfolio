@@ -37,7 +37,7 @@ private:
 	bool PhaseStart_;
 	bool PhaseEnd_;
 
-
+	float4 PlayerPos_;
 	float4 BulletPos_[5];
 	float4 Count10Dir_[5];
 

@@ -87,6 +87,7 @@ void FloweyBullet::CircleBullet()
 		MoveDir_ = Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
 		Count_++;
 		IsCircleBullet = true;
+		PlayerPos_ = Player::MainPlayer->GetPosition();
 	}
 
 	if (true == IsCircleBullet && true == PhaseStart_)
@@ -102,7 +103,7 @@ void FloweyBullet::CircleBullet()
 		MoveDir_ = Pos_ * GameEngineTime::GetDeltaTime() * Speed_;
 		SetMove(MoveDir_);
 
-		float4 NewPos_= Player::MainPlayer->GetPosition() - GetPosition();
+		float4 NewPos_= PlayerPos_ - GetPosition();
 		len = NewPos_.Len2D();
 		if (60 >= len)
 		{

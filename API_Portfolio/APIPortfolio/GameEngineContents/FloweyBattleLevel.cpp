@@ -759,14 +759,18 @@ void FloweyBattleLevel::Pattern2Update()
 	}
 
 
-	if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetIsAllTextOut())
+	if (true == Player::MainPlayer->IsActionKeyDown() &&
+		true == TextFont_->GetIsAllTextOut() &&
+		24 <= Count_
+		)
 	{
 		Count_++;  // 1
 		if (25 == Count_)
 		{
 			FloweyTalkRenderer->ChangeAnimation("Flowey_Laugh");
 			FloweySound.SoundPlayOneShot("snd_floweylaugh.wav");
-
+			TextFont_->SetTextCount(0);
+			TextFont_->SetCount(Count_);
 			//총알이 생성되는동안 z키를눌러도 총알이 안움직이게 해준다.
 			for (size_t i = 0; i < BulletList_.size(); i++)
 			{
