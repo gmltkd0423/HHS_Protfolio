@@ -9,7 +9,7 @@ Undyne::Undyne() :
 	IsHurt(false),
 	IsIdle(false),
 	IsShake(false),
-	Time_(0.0f),
+	Time_(0.2f),
 	Timer_(1.0f)
 {
 }
@@ -62,21 +62,22 @@ void Undyne::Shake()
 		if (0.0f <= Timer_)
 		{
 			Timer_ -= GameEngineTime::GetDeltaTime();
-			Time_ += GameEngineTime::GetDeltaTime();
-			if (0.2f <= Time_)
+			Time_ -= GameEngineTime::GetDeltaTime();
+			if (0.1f <= Time_)
 			{
-				Time_ = 0.0f;
+			
 				GameEngineRandom Ran;
-				float Randomfloat = Ran.RandomInt(1.0f, 5.0f);
+				float Randomfloat = Ran.RandomInt(1.0f, 2.0f);
 				//float x  = sin(Randomfloat * 10.0f)* powf(0.5f, Randomfloat);
-				SetPosition( {GetPosition().x + 3,GetPosition().y});
+				SetPosition( {GetPosition().x + Randomfloat,GetPosition().y});
 			}
-			else if (0.1f <= Time_)
+			else if (0.0f >= Time_)
 			{
+				Time_ = 0.2f;
 				GameEngineRandom Ran;
-				float Randomfloat = Ran.RandomInt(1.0f, 5.0f);
+				float Randomfloat = Ran.RandomInt(1.0f, 2.0f);
 				//float x = sin(Randomfloat * 10.0f) * powf(0.5f, Randomfloat);
-				SetPosition({ GetPosition().x - 3,GetPosition().y });
+				SetPosition({ GetPosition().x - Randomfloat,GetPosition().y });
 			}
 
 			if (0.0f >= Timer_)
