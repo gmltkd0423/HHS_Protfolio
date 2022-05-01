@@ -32,12 +32,6 @@
     <ClInclude Include="TitleFont.h">
       <Filter>Level\TitleLevel\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="BattleLevelActor.h">
-      <Filter>Level\BattleLevel\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="FloweyBattleLevel.h">
-      <Filter>Level\BattleLevel\FloweyBattleLevel</Filter>
-    </ClInclude>
     <ClInclude Include="Flowey.h">
       <Filter>Actor\Monster\Flowey</Filter>
     </ClInclude>
@@ -46,9 +40,6 @@
     </ClInclude>
     <ClInclude Include="PlayLevel2Font.h">
       <Filter>Level\PlayLevel2\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="FloweyBattleLevelFont.h">
-      <Filter>Level\BattleLevel\Actor</Filter>
     </ClInclude>
     <ClInclude Include="HpBar.h">
       <Filter>Actor\Player</Filter>
@@ -67,6 +58,27 @@
     </ClInclude>
     <ClInclude Include="Trigger.h">
       <Filter>Level\Global\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="FloweyBattleLevel.h">
+      <Filter>Level\FloweyBattleLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleLevelActor.h">
+      <Filter>Level\FloweyBattleLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="FloweyBattleLevelFont.h">
+      <Filter>Level\FloweyBattleLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleLevelFont.h">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Undyne.h">
+      <Filter>Actor\Monster\Undyne</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,12 +113,6 @@
     <ClCompile Include="TitleFont.cpp">
       <Filter>Level\TitleLevel\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="BattleLevelActor.cpp">
-      <Filter>Level\BattleLevel\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="FloweyBattleLevel.cpp">
-      <Filter>Level\BattleLevel\FloweyBattleLevel</Filter>
-    </ClCompile>
     <ClCompile Include="Flowey.cpp">
       <Filter>Actor\Monster\Flowey</Filter>
     </ClCompile>
@@ -115,9 +121,6 @@
     </ClCompile>
     <ClCompile Include="PlayLevel2Font.cpp">
       <Filter>Level\PlayLevel2\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="FloweyBattleLevelFont.cpp">
-      <Filter>Level\BattleLevel\Actor</Filter>
     </ClCompile>
     <ClCompile Include="HpBar.cpp">
       <Filter>Actor\Player</Filter>
@@ -136,6 +139,27 @@
     </ClCompile>
     <ClCompile Include="Trigger.cpp">
       <Filter>Level\Global\Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="FloweyBattleLevel.cpp">
+      <Filter>Level\FloweyBattleLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleLevelActor.cpp">
+      <Filter>Level\FloweyBattleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="FloweyBattleLevelFont.cpp">
+      <Filter>Level\FloweyBattleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleLevelFont.cpp">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Undyne.cpp">
+      <Filter>Actor\Monster\Undyne</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,9 +211,6 @@
     <Filter Include="Actor\Monster\Flowey">
       <UniqueIdentifier>{f55550bd-2c01-4bf8-af29-ccd13004bebd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\BattleLevel\FloweyBattleLevel">
-      <UniqueIdentifier>{8af7c7a4-d62b-4875-b8b9-82211c269c90}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Projectiles">
       <UniqueIdentifier>{1ce98387-29e0-47bc-a464-10278a34e367}</UniqueIdentifier>
     </Filter>
@@ -201,6 +222,21 @@
     </Filter>
     <Filter Include="Level\Global\Trigger">
       <UniqueIdentifier>{7fa410ba-3834-4d8b-8fc1-4602b388373c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\FloweyBattleLevel">
+      <UniqueIdentifier>{c23ae589-6835-4873-8324-63cd9a014e55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\FloweyBattleLevel\Actor">
+      <UniqueIdentifier>{9e4cd7b5-5aa9-4b7e-bcc2-1491ab9d2018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\BattleLevel\Actor\UI">
+      <UniqueIdentifier>{dab19f86-d600-47c1-a82c-12f2897f9c95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\BattleLevel\Actor\Projectiles">
+      <UniqueIdentifier>{e9644594-8727-40f4-837e-ef8677e4a88f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster\Undyne">
+      <UniqueIdentifier>{bd6d3563-919a-444f-8dc0-ea2e7b819c3e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

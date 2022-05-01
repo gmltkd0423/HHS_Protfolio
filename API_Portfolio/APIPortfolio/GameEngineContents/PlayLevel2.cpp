@@ -96,6 +96,14 @@ void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		NextLevel = true;
 		Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1200 });
+		Player::MainPlayer->Play();
+		if (nullptr == Back)
+		{
+			BackGround = CreateActor<PlayLevel2Actor>((int)PLAYLEVELORDER::BACKGROUND);
+			Back = BackGround->CreateRenderer("Level2.bmp", (int)PLAYLEVELORDER::BACKGROUND);
+			float4 Half = Back->GetImage()->GetScale().Half();
+			Back->SetPivot(Half);
+		}
 		Back->On();
 	}
 	else
@@ -248,7 +256,7 @@ void PlayLevel2::MoveNextLevel()
 
 	if (RGB(255, 0, 0) == Color)
 	{
-		GameEngine::GetInst().ChangeLevel("PlayLevel");
+		GameEngine::GetInst().ChangeLevel("BattleLevel");
 	}
 }
 
@@ -260,6 +268,13 @@ void PlayLevel2::ResetAll()
 	PlayBgm_ = false;
 	Time_ = 0;
 	Count_ = 0;
+	if (nullptr == TextFont_ ||
+		nullptr == FloweyTalk ||
+		nullptr == TextBox ||
+		nullptr == Flowey_)
+	{
+		return;
+	}
 	TextFont_->Death();
 	FloweyTalk->Death();
 	TextBox->Death();
