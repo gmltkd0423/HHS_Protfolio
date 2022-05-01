@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Undyne.h"
 #include "AttackBar.h"
+#include "SoundPlayer.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -13,7 +14,8 @@ BattleLevel::BattleLevel() :
 	FightButtonDir_({}),
 	ActionButtonDir_({}),
 	MercyButtonDir_({}),
-	ItemButtonDir_({})
+	ItemButtonDir_({}),
+	Timer_(0.2f)
 {
 }
 
@@ -40,11 +42,6 @@ void BattleLevel::Loading()
 	AttackBar_ = CreateActor<AttackBar>((int)BATTLELEVELORDER::BOX);
 	AttackBar_->SetPosition({ 640,430 });
 	AttackBar_->Off();
-
-	Judge_Bar = CreateActor<Bar>((int)BATTLELEVELORDER::ACTOR);
-	Judge_Bar->SetPosition({ 100,430 });
-	Judge_Bar->Off();
-
 	//Å°»ý¼º
 	{
 		if (false == GameEngineInput::GetInst()->IsKey("UI_Left"))
@@ -87,6 +84,8 @@ void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->CamPosOff();
 	Player::MainPlayer->SetPosition({ 191.0f, 650.0f });
 	Player::MainPlayer->Stop();
+
+	SoundPlayer::Bgm_ = GameEngineSound::SoundPlayControl("mus_x_undyne.ogg");
 }
 
 void BattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -145,6 +144,34 @@ void BattleLevel::MenuStateUpdate()
 
 void BattleLevel::UISetting()
 {
+}
+
+void BattleLevel::CreateBar()
+{
+	if (3 <= Count_)
+	{
+		return;
+	}
+
+	Timer_ -= GameEngineTime::GetDeltaTime();
+
+	if (0 >= Timer_)
+	{
+		Judge_Bar = CreateActor<Bar>((int)BATTLELEVELORDER::ACTOR);
+		Judge_Bar->SetPosition({ 100,430 });
+		BarList[Count_] = Judge_Bar;
+		Count_++;
+		if (Count_ == 1)
+		{
+			Timer_ = 0.2f;
+		}
+		else
+		{
+			Timer_ = 0.5f;
+		}
+	}
+
+
 }
 
 void BattleLevel::UIKeyMove()
@@ -260,13 +287,16 @@ void BattleLevel::MenuSelectUpdate()
 
 void BattleLevel::FightMenuStart()
 {
+	Count_ = 0;
 	AttackBar_->On();
-	Judge_Bar->On();
 }
 
 void BattleLevel::FightMenuUpdate()
 {
-	int a = 0;
+	CreateBar();
+
+
+
 }
 
 void BattleLevel::ActionMenuStart()

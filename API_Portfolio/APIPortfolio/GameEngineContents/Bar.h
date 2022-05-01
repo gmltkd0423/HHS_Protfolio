@@ -7,6 +7,9 @@
 class Bar :public GameEngineActor
 {
 public:
+	static int BarCount_;
+	static int KeyDownCount_;
+	static int Damage_;
 	// constrcuter destructer
 	Bar();
 	~Bar();
@@ -24,10 +27,9 @@ protected:
 private:
 	GameEngineRenderer* BarRenderer;
 	GameEngineImage* AttackBar_ColMap;
-	static int Damage_;
 	float4 MoveDir_;
 	void CheckJudgMent();
-
+	int MyBarCount_;
 	bool IsKeyDown;
 
 	float Timer_;

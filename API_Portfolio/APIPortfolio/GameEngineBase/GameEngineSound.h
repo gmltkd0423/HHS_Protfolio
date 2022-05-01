@@ -57,11 +57,17 @@ class GameEngineSoundPlayer
 public:
 	void Stop();
 
+	FMOD::Channel* getControlHandle_()
+	{
+		return ControlHandle_;
+	}
+
 	GameEngineSoundPlayer(const GameEngineSoundPlayer& _Other);
 
 private:
 	GameEngineSound* Sound_;
 	FMOD::Channel* ControlHandle_;
+
 
 
 	GameEngineSoundPlayer(GameEngineSound* Sound, FMOD::Channel* ControlHandle);

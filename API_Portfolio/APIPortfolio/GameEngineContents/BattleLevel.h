@@ -52,13 +52,15 @@ private:
 	Box* TextBox;
 	AttackBar* AttackBar_;
 	Bar* Judge_Bar;
+	Bar* BarList[3];
+
 
 	float4 FightButtonDir_;
 	float4 ActionButtonDir_;
 	float4 MercyButtonDir_;
 	float4 ItemButtonDir_;
 
-
+	float Timer_;
 
 
 private:
@@ -67,7 +69,9 @@ private:
 	void CheckEscape();
 
 	void UISetting();
+	void CreateBar();
 
+	int Count_;
 
 //state
 private:

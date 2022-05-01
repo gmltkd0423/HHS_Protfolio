@@ -201,7 +201,10 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	ChangeState(PatternState::Talk);
 	//Player::MainPlayer->
 
-
+	if (nullptr == SoundPlayer::Bgm_.getControlHandle_())
+	{
+		SoundPlayer::Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
+	}
 
 }
 
@@ -212,6 +215,11 @@ void FloweyBattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	Player::MainPlayer->CamPosOn();
 	Player::MainPlayer->NextLevelOn();
 	Count_ = 0;
+
+	if (nullptr != SoundPlayer::Bgm_.getControlHandle_())
+	{
+		SoundPlayer::Bgm_.Stop();
+	}
 }
 
 
