@@ -2,6 +2,8 @@
 #include <GameEngine/GameEngineLevel.h>
 #include "UIButton.h"
 #include "Undyne.h"
+#include "Box.h"
+#include "AttackBar.h"
 
 enum class MENUSTATE
 {
@@ -46,6 +48,8 @@ private:
 	MENUSTATE PrevMenuState_;
 	UIButton* Button_;
 	Undyne* Undyne_;
+	Box* TextBox;
+	AttackBar* AttackBar_;
 
 	float4 FightButtonDir_;
 	float4 ActionButtonDir_;

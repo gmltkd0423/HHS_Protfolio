@@ -21,5 +21,5 @@ protected:
 	void Update() override;
 	void Render() override;
 private:
-
+	GameEngineRenderer* TextBox;
 };

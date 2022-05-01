@@ -167,6 +167,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackBar.h" />
     <ClInclude Include="BattleLevel.h">
       <SubType>
       </SubType>
@@ -253,6 +254,7 @@
     <ClInclude Include="Undyne.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AttackBar.cpp" />
     <ClCompile Include="BattleLevel.cpp">
       <SubType>
       </SubType>

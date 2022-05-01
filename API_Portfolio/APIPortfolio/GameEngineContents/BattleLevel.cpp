@@ -2,7 +2,8 @@
 #include "ContentsEnums.h"
 #include "BattleLevelActor.h"
 #include "Player.h"
-#include "Undyne.h";
+#include "Undyne.h"
+#include "AttackBar.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -28,12 +29,17 @@ void BattleLevel::Loading()
 	Back->SetPivot(Half);
 
 	Undyne_ = CreateActor<Undyne>((int)BATTLELEVELORDER::BACKGROUND);
-	Undyne_->SetPosition({ 690,175 });
+	Undyne_->SetPosition({ 690,155 });
 
 	Button_ = CreateActor<UIButton>((int)BATTLELEVELORDER::BOX);
 	Button_->SetPosition({ 250,650 });
 
+	TextBox = CreateActor<Box>((int)BATTLELEVELORDER::BOX);
+	TextBox->SetPosition({ 640,430 });
 
+	AttackBar_ = CreateActor<AttackBar>((int)BATTLELEVELORDER::BOX);
+	AttackBar_->SetPosition({ 640,430 });
+	AttackBar_->Off();
 
 	//키생성
 	{
@@ -170,26 +176,24 @@ void BattleLevel::SelectButton()
 	//Fight버튼을 눌럿다면
 	if (true == Button_->GetbFightButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		CurMenuState_ = MENUSTATE::FIGHTMENU;
+		ChangeMenuState(MENUSTATE::FIGHTMENU);
 		FightButtonDir_ = Player::MainPlayer->GetPosition();
 	}
 	else if (true == Button_->GetbActionButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		CurMenuState_ = MENUSTATE::ACTIONMENU;
+		ChangeMenuState(MENUSTATE::ACTIONMENU);
 		ActionButtonDir_ = Player::MainPlayer->GetPosition();
 	}
 	else if (true == Button_->GetbMercyButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		CurMenuState_ = MENUSTATE::MERCYMENU;
+		ChangeMenuState(MENUSTATE::MERCYMENU);
 		MercyButtonDir_ = Player::MainPlayer->GetPosition();
 	}
 	else if (true == Button_->GetbItemButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		CurMenuState_ = MENUSTATE::ITEMMENU;
+		ChangeMenuState(MENUSTATE::ITEMMENU);
 		ItemButtonDir_ = Player::MainPlayer->GetPosition();
 	}
-
-	ChangeMenuState(CurMenuState_);
 
 }
 
@@ -202,8 +206,16 @@ void BattleLevel::CheckEscape()
 	{
 		if (true == GameEngineInput::GetInst()->IsDown("UI_Esc"))
 		{
+			if (MENUSTATE::FIGHTMENU == CurMenuState_)
+			{
+				AttackBar_->Off();
+			}
+
+
 			PrevMenuState_ = CurMenuState_;
 			ChangeMenuState(MENUSTATE::SELECTMENU);
+
+			
 		}
 	}
 
@@ -243,7 +255,7 @@ void BattleLevel::MenuSelectUpdate()
 
 void BattleLevel::FightMenuStart()
 {
-	int a = 0;
+	AttackBar_->On();
 }
 
 void BattleLevel::FightMenuUpdate()
