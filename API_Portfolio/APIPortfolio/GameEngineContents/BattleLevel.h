@@ -3,10 +3,22 @@
 #include "UIButton.h"
 #include "Undyne.h"
 
-enum class BATTLELEVELSTATE
+enum class MENUSTATE
 {
-	FLOWEY,
-	NONE
+	SELECTMENU,
+	FIGHTMENU,
+	MERCYMENU,
+	ACTIONMENU,
+	ITEMMENU,
+};
+
+
+enum class FIGHTSTATE
+{
+	Pattern1,
+	Pattern2,
+	Pattern3,
+	Pattern4,
 };
 
 // Ό³Έν :
@@ -30,18 +42,33 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 private:
-	void BattleStateUpdate(BATTLELEVELSTATE _State);
-
-	void Battle_Flowey();
-	void UISetting();
-private:
-	BATTLELEVELSTATE CurState_;
+	MENUSTATE CurMenuState_;
 	UIButton* Button_;
 	Undyne* Undyne_;
 
 
 
+
 private:
-	void CheckPlayerKey();
+	void UIKeyMove();
+	void SelectButton();
+
+	void UISetting();
+
+
+//state
+private:
+	void ChangeMenuState(MENUSTATE _State);
+	void MenuStateUpdate();
+
+
+	void MenuSelectStart();
+	void MenuSelectUpdate();
+
+	void FightMenuStart();
+	void FightMenuUpdate();
+
+	void ActionMenuStart();
+	void ActionMenuUpdate();
 };
 

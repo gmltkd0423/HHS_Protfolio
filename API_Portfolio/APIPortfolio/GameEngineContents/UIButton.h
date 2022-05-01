@@ -36,6 +36,34 @@ private:
 	float4 ButtonSize;
 
 
+	bool bFightButton;
+	bool bActionButton;
+	bool bMercyButton;
+	bool bItemButton;
+
+
 private:
 	void CheckCollision();
+
+public:
+
+	bool GetbFightButton()
+	{
+		return bFightButton;
+	}
+
+	bool GetbActionButton()
+	{
+		return bActionButton;
+	}
+
+	bool GetbMercyButton()
+	{
+		return bMercyButton;
+	}
+
+	bool GetbItemButton()
+	{
+		return bItemButton;
+	}
 };

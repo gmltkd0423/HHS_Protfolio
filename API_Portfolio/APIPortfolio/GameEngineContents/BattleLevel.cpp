@@ -39,22 +39,22 @@ void BattleLevel::Loading()
 			GameEngineInput::GetInst()->CreateKey("UI_Right", VK_RIGHT);
 			GameEngineInput::GetInst()->CreateKey("UI_Up", VK_UP);
 			GameEngineInput::GetInst()->CreateKey("UI_Down", VK_DOWN);
+			GameEngineInput::GetInst()->CreateKey("UI_Esc", VK_ESCAPE);
 			GameEngineInput::GetInst()->CreateKey("UI_Action", 'Z');
 		}
 	}
 
+	ChangeMenuState(MENUSTATE::SELECTMENU);
 }
 
 void BattleLevel::Update()
 {
-	BattleStateUpdate(CurState_);
+	MenuStateUpdate();
 
 	if (true == GameEngineInput::GetInst()->IsPress("ChangeDebug"))
 	{
 		GameEngineLevel::IsDebugModeSwitch();
 	}
-
-	CheckPlayerKey();
 }
 
 void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -73,7 +73,7 @@ void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->Stop();
 	
 
-	CurState_ = BATTLELEVELSTATE::FLOWEY;
+
 
 }
 
@@ -82,41 +82,62 @@ void BattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 }
 
-void BattleLevel::BattleStateUpdate(BATTLELEVELSTATE _State)
+void BattleLevel::ChangeMenuState(MENUSTATE _State)
 {
-
-
-
-
-	switch (_State)
+	if (_State != CurMenuState_)
 	{
-	case BATTLELEVELSTATE::FLOWEY:
-		Battle_Flowey();
-		break;
-	case BATTLELEVELSTATE::NONE:
-		return;
-	}
+		switch (_State)
+		{
+		case MENUSTATE::SELECTMENU:
+			MenuSelectStart();
+			break;
+		case MENUSTATE::FIGHTMENU:
+			FightMenuStart();
+			break;
+		case MENUSTATE::ACTIONMENU:
+			ActionMenuStart();
+			break;
+		case MENUSTATE::MERCYMENU:
+			break;
+		case MENUSTATE::ITEMMENU:
+			break;
+		default:
+			break;
+		}
 
-	CurState_ = BATTLELEVELSTATE::NONE;
-	
+		CurMenuState_ = _State;
+	}
 }
 
-void BattleLevel::Battle_Flowey()
+void BattleLevel::MenuStateUpdate()
 {
-
-
-
-
+	switch (CurMenuState_)
+	{
+	case MENUSTATE::SELECTMENU:
+		MenuSelectUpdate();
+		break;
+	case MENUSTATE::FIGHTMENU:
+		FightMenuUpdate();
+		break;
+	case MENUSTATE::MERCYMENU:
+		break;
+	case MENUSTATE::ACTIONMENU:
+		ActionMenuUpdate();
+		break;
+	case MENUSTATE::ITEMMENU:
+		break;
+	default:
+		break;
+	}
 }
 
 void BattleLevel::UISetting()
 {
-
-
 }
 
-void BattleLevel::CheckPlayerKey()
+void BattleLevel::UIKeyMove()
 {
+
 	if (true == GameEngineInput::GetInst()->IsDown("UI_Left"))
 	{
 		float4 Dir = Player::MainPlayer->GetPosition();
@@ -140,10 +161,61 @@ void BattleLevel::CheckPlayerKey()
 			Player::MainPlayer->SetPosition({ 986,650 });
 		}
 	}
+}
+
+void BattleLevel::SelectButton()
+{
+	//Fight버튼을 눌럿다면
+	if (true == Button_->GetbFightButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	{
+		ChangeMenuState(MENUSTATE::FIGHTMENU);
+	}
+
+	if (true == Button_->GetbActionButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	{
+		ChangeMenuState(MENUSTATE::ACTIONMENU);
+	}
+
+	if (true == Button_->GetbMercyButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	{
+		ChangeMenuState(MENUSTATE::MERCYMENU);
+	}
+
+	if (true == Button_->GetbItemButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	{
+		ChangeMenuState(MENUSTATE::ITEMMENU);
+	}
+}
+
+void BattleLevel::MenuSelectStart()
+{
+}
 
 
 
+void BattleLevel::MenuSelectUpdate()
+{
+	UIKeyMove();
+	SelectButton();
+}
 
+void BattleLevel::FightMenuStart()
+{
+	int a = 0;
+}
+
+void BattleLevel::FightMenuUpdate()
+{
+	int a = 0;
+}
+
+void BattleLevel::ActionMenuStart()
+{
+}
+
+void BattleLevel::ActionMenuUpdate()
+{
+	int a = 0;
 }
 
 

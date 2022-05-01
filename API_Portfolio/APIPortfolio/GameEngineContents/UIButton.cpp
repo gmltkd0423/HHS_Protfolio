@@ -7,7 +7,11 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 UIButton::UIButton()	:
-	ButtonSize({165,63})
+	ButtonSize({165,63}),
+	bFightButton(false),
+	bActionButton(false),
+	bMercyButton(false),
+	bItemButton(false)
 {
 }
 
@@ -71,10 +75,12 @@ void UIButton::CheckCollision()
 	if (true == FightButtonCollision->CollisionCheck("Player"))
 	{
 		FightButton->SetIndex(1);
+		bFightButton = true;
 	}
 	else
 	{
 		FightButton->SetIndex(0);
+		bFightButton = false;
 	}
 
 
@@ -82,10 +88,12 @@ void UIButton::CheckCollision()
 	if (true == ActionButtonCollision->CollisionCheck("Player"))
 	{
 		ActionButton->SetIndex(1);
+		bActionButton = true;
 	}
 	else
 	{
 		ActionButton->SetIndex(0);
+		bActionButton = false;
 	}
 
 
@@ -93,10 +101,12 @@ void UIButton::CheckCollision()
 	if (true == MercyButtonCollision->CollisionCheck("Player"))
 	{
 		MercyButton->SetIndex(1);
+		bMercyButton = true;
 	}
 	else
 	{
 		MercyButton->SetIndex(0);
+		bMercyButton = false;
 	}
 
 
@@ -104,9 +114,11 @@ void UIButton::CheckCollision()
 	if (true == ItemButtonCollision->CollisionCheck("Player"))
 	{
 		ItemButton->SetIndex(1);
+		bItemButton = true;
 	}
 	else
 	{
 		ItemButton->SetIndex(0);
+		bItemButton = false;
 	}
 }
