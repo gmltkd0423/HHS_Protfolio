@@ -175,6 +175,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BattleLevelFont.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="ContentsEnums.h" />
     <ClInclude Include="EndingLevel.h">
       <SubType>
@@ -243,10 +245,12 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Trigger.h" />
+    <ClInclude Include="UIButton.h" />
     <ClInclude Include="Undertale.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Undyne.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BattleLevel.cpp">
@@ -257,6 +261,8 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="BattleLevelFont.cpp" />
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="EndingLevel.cpp">
       <SubType>
       </SubType>
@@ -325,10 +331,12 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Trigger.cpp" />
+    <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="Undertale.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Undyne.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

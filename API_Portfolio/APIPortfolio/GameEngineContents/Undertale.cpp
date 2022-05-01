@@ -186,6 +186,11 @@ void Undertale::GameInit()
 		{
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
+
+
+
+
+
 	}
 
 
@@ -224,7 +229,7 @@ void Undertale::GameInit()
 	CreateLevel<BattleLevel>("BattleLevel");
 	CreateLevel<EndingLevel>("EndingLevel");
 	CreateLevel<FloweyBattleLevel>("FloweyBattleLevel");
-	ChangeLevel("TitleLevel");
+	ChangeLevel("BattleLevel");
 
 }
 
