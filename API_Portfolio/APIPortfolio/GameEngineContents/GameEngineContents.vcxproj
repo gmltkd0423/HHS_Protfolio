@@ -168,6 +168,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackBar.h" />
+    <ClInclude Include="AttackEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Bar.h" />
     <ClInclude Include="BattleLevel.h">
       <SubType>
@@ -256,6 +260,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AttackBar.cpp" />
+    <ClCompile Include="AttackEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="BattleLevel.cpp">
       <SubType>

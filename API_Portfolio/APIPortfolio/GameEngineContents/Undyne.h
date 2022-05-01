@@ -23,4 +23,20 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* UndyneRenderer;
+
+	float Time_;
+	float Timer_;
+	bool IsHurt;
+	bool IsIdle;
+	bool IsShake;
+
+	float4 MoveDir_;
+	float4 Pos_;
+
+public:
+	void Hurt();
+	void Idle();
+
+private:
+	void Shake();
 };

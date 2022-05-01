@@ -147,6 +147,10 @@ void Undertale::GameInit()
 		GameEngineImage* Idle = GameEngineImageManager::GetInst()->Find("Undyne_Idle.bmp");
 		Idle->Cut({ 477,364 });
 
+		GameEngineImage* Hurt = GameEngineImageManager::GetInst()->Find("Undyne_Hurt.bmp");
+		Hurt->Cut({ 477,364 });
+
+
 	}
 
 
@@ -205,6 +209,9 @@ void Undertale::GameInit()
 
 		GameEngineImage* JudgBar = GameEngineImageManager::GetInst()->Find("Judg_Bar.bmp");
 		JudgBar->Cut({ 14,128 });
+
+		GameEngineImage* Effect = GameEngineImageManager::GetInst()->Find("Attack_Effect.bmp");
+		Effect->Cut({ 100,147 });
 
 	}
 

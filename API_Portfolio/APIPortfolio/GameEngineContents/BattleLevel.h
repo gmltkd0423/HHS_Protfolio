@@ -5,6 +5,7 @@
 #include "Box.h"
 #include "AttackBar.h"
 #include "Bar.h"
+#include "AttackEffect.h"
 
 enum class MENUSTATE
 {
@@ -51,6 +52,7 @@ private:
 	Undyne* Undyne_;
 	Box* TextBox;
 	AttackBar* AttackBar_;
+	AttackEffect* Effect_;
 	Bar* Judge_Bar;
 	Bar* BarList[3];
 

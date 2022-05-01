@@ -5,6 +5,7 @@
 #include "Undyne.h"
 #include "AttackBar.h"
 #include "SoundPlayer.h"
+#include "AttackEffect.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -31,17 +32,21 @@ void BattleLevel::Loading()
 	Back->SetPivot(Half);
 
 	Undyne_ = CreateActor<Undyne>((int)BATTLELEVELORDER::BACKGROUND);
-	Undyne_->SetPosition({ 690,155 });
+	Undyne_->SetPosition({ 720,185 });
 
 	Button_ = CreateActor<UIButton>((int)BATTLELEVELORDER::BOX);
-	Button_->SetPosition({ 250,650 });
+	Button_->SetPosition({ 250,680 });
 
 	TextBox = CreateActor<Box>((int)BATTLELEVELORDER::BOX);
-	TextBox->SetPosition({ 640,430 });
+	TextBox->SetPosition({ 640,490 });
 
 	AttackBar_ = CreateActor<AttackBar>((int)BATTLELEVELORDER::BOX);
-	AttackBar_->SetPosition({ 640,430 });
+	AttackBar_->SetPosition({ 640,490 });
 	AttackBar_->Off();
+
+	Effect_ = CreateActor< AttackEffect>((int)BATTLELEVELORDER::ACTOR);
+	Effect_->SetPosition({ 650,185 });
+	Effect_->Off();
 	//Å°»ý¼º
 	{
 		if (false == GameEngineInput::GetInst()->IsKey("UI_Left"))
@@ -82,7 +87,7 @@ void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
 	Player::MainPlayer->GetLevel()->SetCameraPos({ 0,0 });
 	Player::MainPlayer->CamPosOff();
-	Player::MainPlayer->SetPosition({ 191.0f, 650.0f });
+	Player::MainPlayer->SetPosition({ 191.0f, 680.0f });
 	Player::MainPlayer->Stop();
 
 	SoundPlayer::Bgm_ = GameEngineSound::SoundPlayControl("mus_x_undyne.ogg");
@@ -158,7 +163,7 @@ void BattleLevel::CreateBar()
 	if (0 >= Timer_)
 	{
 		Judge_Bar = CreateActor<Bar>((int)BATTLELEVELORDER::ACTOR);
-		Judge_Bar->SetPosition({ 100,430 });
+		Judge_Bar->SetPosition({ 100,490 });
 		BarList[Count_] = Judge_Bar;
 		Count_++;
 		if (Count_ == 1)
@@ -185,7 +190,7 @@ void BattleLevel::UIKeyMove()
 
 		if (191.0f >= Player::MainPlayer->GetPosition().x)
 		{
-			Player::MainPlayer->SetPosition({ 191,650 });
+			Player::MainPlayer->SetPosition({ 191,680 });
 		}
 	}
 
@@ -197,7 +202,7 @@ void BattleLevel::UIKeyMove()
 
 		if (986.0f <= Player::MainPlayer->GetPosition().x)
 		{
-			Player::MainPlayer->SetPosition({ 986,650 });
+			Player::MainPlayer->SetPosition({ 986,680 });
 		}
 	}
 }
@@ -289,12 +294,26 @@ void BattleLevel::FightMenuStart()
 {
 	Count_ = 0;
 	AttackBar_->On();
+	Bar::BarCount_ = 0;
+	Bar::KeyDownCount_ = 0;
+	Bar::Damage_ = 0;
+	Timer_ = 0.4f;
 }
 
 void BattleLevel::FightMenuUpdate()
 {
 	CreateBar();
 
+	if (Bar::KeyDownCount_ == 3)
+	{
+		Effect_->On();
+		Timer_ -= GameEngineTime::GetDeltaTime();
+		if (0 >= Timer_)
+		{
+			Effect_->Off();
+			Undyne_->Hurt();
+		}
+	}
 
 
 }

@@ -71,9 +71,6 @@
     <ClInclude Include="UIButton.h">
       <Filter>Level\BattleLevel\Actor\UI</Filter>
     </ClInclude>
-    <ClInclude Include="BattleLevelFont.h">
-      <Filter>Level\BattleLevel\Actor\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Level\BattleLevel\Actor\UI</Filter>
     </ClInclude>
@@ -85,6 +82,12 @@
     </ClInclude>
     <ClInclude Include="Bar.h">
       <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackEffect.h">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleLevelFont.h">
+      <Filter>Level\BattleLevel\Actor\Font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +158,6 @@
     <ClCompile Include="FloweyBattleLevelFont.cpp">
       <Filter>Level\FloweyBattleLevel\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="BattleLevelFont.cpp">
-      <Filter>Level\BattleLevel\Actor\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Level\BattleLevel\Actor\UI</Filter>
     </ClCompile>
@@ -172,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="Bar.cpp">
       <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackEffect.cpp">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleLevelFont.cpp">
+      <Filter>Level\BattleLevel\Actor\Font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +255,9 @@
     </Filter>
     <Filter Include="Actor\Monster\Undyne">
       <UniqueIdentifier>{bd6d3563-919a-444f-8dc0-ea2e7b819c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\BattleLevel\Actor\Font">
+      <UniqueIdentifier>{996998d4-48b7-43bc-8d81-53d9754ec465}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
