@@ -102,7 +102,7 @@ void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		//레벨 액터 재배치
 		Init();
-
+		NextLevel = false;
 		if (nullptr == Player::MainPlayer)
 		{
 			Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);

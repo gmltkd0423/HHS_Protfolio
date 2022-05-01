@@ -186,7 +186,6 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
-		Player::MainPlayer->IsHeart();
 	}
 
 	Player::MainPlayer->CollisionImage("Level2_ColMap.bmp");
@@ -195,7 +194,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetSpeed(200.0f);
 	Player::MainPlayer->CamPosOff();
 	Player::MainPlayer->Stop();
-	
+	Player::MainPlayer->IsHeart();
 	TextFont_ = CreateActor<FloweyBattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
 

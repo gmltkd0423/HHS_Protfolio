@@ -169,14 +169,21 @@ void Player::StateUpdate()
 
 void Player::IsHeart()
 {
-	Heart_->On();
-	Frisk_->Off();
+	if(false == Heart_->IsUpdate())
+	{
+		Heart_->On();
+		Frisk_->Off();
+	}
+	
 }
 
 void Player::IsFrisk()
 {
-	Heart_->Off();
-	Frisk_->On();
+	if (false == Frisk_->IsUpdate())
+	{
+		Heart_->Off();
+		Frisk_->On();
+	}
 }
 
 bool Player::IsActionKeyDown()

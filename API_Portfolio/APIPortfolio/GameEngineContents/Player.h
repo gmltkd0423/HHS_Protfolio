@@ -141,6 +141,7 @@ public:
 	}
 
 	void CollisionImage(const std::string& _Name);
+
 	GameEngineImage* GetColImage()
 	{
 		return MapColImage_;
