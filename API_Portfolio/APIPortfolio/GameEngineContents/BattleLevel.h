@@ -4,6 +4,7 @@
 #include "Undyne.h"
 #include "Box.h"
 #include "AttackBar.h"
+#include "Bar.h"
 
 enum class MENUSTATE
 {
@@ -50,6 +51,7 @@ private:
 	Undyne* Undyne_;
 	Box* TextBox;
 	AttackBar* AttackBar_;
+	Bar* Judge_Bar;
 
 	float4 FightButtonDir_;
 	float4 ActionButtonDir_;

@@ -41,6 +41,10 @@ void BattleLevel::Loading()
 	AttackBar_->SetPosition({ 640,430 });
 	AttackBar_->Off();
 
+	Judge_Bar = CreateActor<Bar>((int)BATTLELEVELORDER::ACTOR);
+	Judge_Bar->SetPosition({ 100,430 });
+	Judge_Bar->Off();
+
 	//Å°»ý¼º
 	{
 		if (false == GameEngineInput::GetInst()->IsKey("UI_Left"))
@@ -209,6 +213,7 @@ void BattleLevel::CheckEscape()
 			if (MENUSTATE::FIGHTMENU == CurMenuState_)
 			{
 				AttackBar_->Off();
+				Judge_Bar->Off();
 			}
 
 
@@ -256,6 +261,7 @@ void BattleLevel::MenuSelectUpdate()
 void BattleLevel::FightMenuStart()
 {
 	AttackBar_->On();
+	Judge_Bar->On();
 }
 
 void BattleLevel::FightMenuUpdate()

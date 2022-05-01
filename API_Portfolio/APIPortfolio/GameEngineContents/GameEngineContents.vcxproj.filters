@@ -83,6 +83,9 @@
     <ClInclude Include="AttackBar.h">
       <Filter>Level\BattleLevel\Actor\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Bar.h">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -165,6 +168,9 @@
       <Filter>Actor\Monster\Undyne</Filter>
     </ClCompile>
     <ClCompile Include="AttackBar.cpp">
+      <Filter>Level\BattleLevel\Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Bar.cpp">
       <Filter>Level\BattleLevel\Actor\UI</Filter>
     </ClCompile>
   </ItemGroup>

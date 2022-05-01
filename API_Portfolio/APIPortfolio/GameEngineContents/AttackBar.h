@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineCollision.h>
 
 
 // Ό³Έν :
@@ -22,4 +23,8 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* AttackBarRenderer;
+	GameEngineImage* ColMap;
+
+
+
 };

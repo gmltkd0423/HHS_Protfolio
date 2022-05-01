@@ -203,7 +203,8 @@ void Undertale::GameInit()
 		GameEngineImage* ItemButton = GameEngineImageManager::GetInst()->Find("ItemButton.bmp");
 		ItemButton->Cut({ 165,63 });
 
-
+		GameEngineImage* JudgBar = GameEngineImageManager::GetInst()->Find("Judg_Bar.bmp");
+		JudgBar->Cut({ 14,128 });
 
 	}
 
