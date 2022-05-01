@@ -298,13 +298,14 @@ void BattleLevel::FightMenuStart()
 	Bar::KeyDownCount_ = 0;
 	Bar::Damage_ = 0;
 	Timer_ = 0.4f;
+	HurtEnd = false;
 }
 
 void BattleLevel::FightMenuUpdate()
 {
 	CreateBar();
 
-	if (Bar::KeyDownCount_ == 3)
+	if (Bar::KeyDownCount_ == 3 && HurtEnd ==false )
 	{
 		Effect_->On();
 		Timer_ -= GameEngineTime::GetDeltaTime();
@@ -312,8 +313,10 @@ void BattleLevel::FightMenuUpdate()
 		{
 			Effect_->Off();
 			Undyne_->Hurt();
+			HurtEnd = true;
 		}
 	}
+
 
 
 }

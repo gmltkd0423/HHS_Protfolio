@@ -40,7 +40,7 @@ void Bar::Start()
 
 	if (false == GameEngineInput::GetInst()->IsKey("BarKey_Down"))
 	{
-		GameEngineInput::GetInst()->CreateKey("BarKey_Down", 'Z');
+		GameEngineInput::GetInst()->CreateKey("BarKey_Down", VK_SPACE);
 	}
 }
 
@@ -68,7 +68,7 @@ void Bar::Update()
 	CheckJudgMent();
 }
 
-bool KeyCheck_ = false;
+//bool KeyCheck_ = false;
 
 void Bar::Render()
 {

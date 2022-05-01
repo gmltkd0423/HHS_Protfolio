@@ -63,6 +63,7 @@ private:
 	float4 ItemButtonDir_;
 
 	float Timer_;
+	bool HurtEnd;
 
 
 private:

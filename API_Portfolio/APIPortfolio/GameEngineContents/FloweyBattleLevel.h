@@ -46,6 +46,7 @@ private:
 	int FloweyStateCount_;
 	float Angle;
 	bool FloweyDeath;
+	bool FloweyHurt;
 
 	float4 MoveDir_;
 	float4 MoveDir2_;
@@ -61,7 +62,7 @@ private:
 	Fire* Fire_;
 	Trigger* Trigger_;
 
-
+	GameEngineSound FloweySound;
 	GameEngineActor* WinkStar;
 	GameEngineRenderer* WinkStarRenderer;
 
@@ -71,7 +72,7 @@ private:
 	FloweyBattleLevelFont* TextFont_;
 	float4 PlayerPos_;
 
-	GameEngineSound FloweySound;
+	GameEngineSound FloweyHurtSound;
 
 	float4 BulletPos_[5];
 	FloweyBullet* Bullets_[5];

@@ -37,6 +37,16 @@ public:
 	void Hurt();
 	void Idle();
 
+	bool GetIsHurt()
+	{
+		return IsHurt;
+	}
+
+	bool GetIsIdle()
+	{
+		return IsIdle;
+	}
+
 private:
 	void Shake();
 };

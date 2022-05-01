@@ -39,20 +39,25 @@ void Undyne::Render()
 
 void Undyne::Hurt()
 {
-	UndyneRenderer->ChangeAnimation("Hurt");
+
 	IsHurt = true;
+
 }
 
 void Undyne::Idle()
 {
+
 	UndyneRenderer->ChangeAnimation("Idle");
 	IsIdle = true;
+
 }
 
 void Undyne::Shake()
 {
 	if (true == IsHurt)
 	{
+
+		UndyneRenderer->ChangeAnimation("Hurt");
 		if (false == IsShake)
 		{
 			Pos_ = GetPosition();
@@ -82,10 +87,12 @@ void Undyne::Shake()
 
 			if (0.0f >= Timer_)
 			{
-				Timer_ = 0.0f;
+				Timer_ = 1.0f;
 				Time_ = 0.0f;
 				SetPosition(Pos_);
 				IsShake = false;
+				IsHurt = false;
+				UndyneRenderer->ChangeAnimation("Idle");
 			}
 		}
 	}

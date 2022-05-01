@@ -27,7 +27,8 @@ FloweyBattleLevel::FloweyBattleLevel() :
 	Count_(0),
 	CurState_(PatternState::Talk),
 	FloweyStateCount_(0),
-	FloweyDeath(false)
+	FloweyDeath(false),
+	FloweyHurt(false)
 {
 }
 
@@ -887,8 +888,12 @@ void FloweyBattleLevel::Pattern4Update()
 	if (true == Trigger_->GetFireDeath())
 	{
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Hurt");
-		Angle += 3.0f;
 
+		if (FloweyHurt == false)
+		{
+			FloweyHurtSound.SoundPlayOneShot("floweyhitsound.mp3");
+			FloweyHurt = true;
+		}
 		MoveDir_ += float4::LEFT *  GameEngineTime::GetDeltaTime() * 100.0f;
 		MoveDir2_ = float4::UP * GameEngineTime::GetDeltaTime() * 200.0f;
 
