@@ -43,8 +43,14 @@ protected:
 
 private:
 	MENUSTATE CurMenuState_;
+	MENUSTATE PrevMenuState_;
 	UIButton* Button_;
 	Undyne* Undyne_;
+
+	float4 FightButtonDir_;
+	float4 ActionButtonDir_;
+	float4 MercyButtonDir_;
+	float4 ItemButtonDir_;
 
 
 
@@ -52,6 +58,7 @@ private:
 private:
 	void UIKeyMove();
 	void SelectButton();
+	void CheckEscape();
 
 	void UISetting();
 

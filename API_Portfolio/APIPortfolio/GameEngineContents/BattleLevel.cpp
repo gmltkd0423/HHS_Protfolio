@@ -8,7 +8,11 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
 
-BattleLevel::BattleLevel() 
+BattleLevel::BattleLevel() :
+	FightButtonDir_({}),
+	ActionButtonDir_({}),
+	MercyButtonDir_({}),
+	ItemButtonDir_({})
 {
 }
 
@@ -55,6 +59,8 @@ void BattleLevel::Update()
 	{
 		GameEngineLevel::IsDebugModeSwitch();
 	}
+
+	CheckEscape();
 }
 
 void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -71,10 +77,6 @@ void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->CamPosOff();
 	Player::MainPlayer->SetPosition({ 191.0f, 650.0f });
 	Player::MainPlayer->Stop();
-	
-
-
-
 }
 
 void BattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -168,29 +170,69 @@ void BattleLevel::SelectButton()
 	//Fight버튼을 눌럿다면
 	if (true == Button_->GetbFightButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		ChangeMenuState(MENUSTATE::FIGHTMENU);
+		CurMenuState_ = MENUSTATE::FIGHTMENU;
+		FightButtonDir_ = Player::MainPlayer->GetPosition();
+	}
+	else if (true == Button_->GetbActionButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	{
+		CurMenuState_ = MENUSTATE::ACTIONMENU;
+		ActionButtonDir_ = Player::MainPlayer->GetPosition();
+	}
+	else if (true == Button_->GetbMercyButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	{
+		CurMenuState_ = MENUSTATE::MERCYMENU;
+		MercyButtonDir_ = Player::MainPlayer->GetPosition();
+	}
+	else if (true == Button_->GetbItemButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	{
+		CurMenuState_ = MENUSTATE::ITEMMENU;
+		ItemButtonDir_ = Player::MainPlayer->GetPosition();
 	}
 
-	if (true == Button_->GetbActionButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	ChangeMenuState(CurMenuState_);
+
+}
+
+void BattleLevel::CheckEscape()
+{
+	if (MENUSTATE::ACTIONMENU == CurMenuState_	||
+		MENUSTATE::FIGHTMENU == CurMenuState_	||
+		MENUSTATE::MERCYMENU == CurMenuState_ || 
+		MENUSTATE::ITEMMENU == CurMenuState_)
 	{
-		ChangeMenuState(MENUSTATE::ACTIONMENU);
+		if (true == GameEngineInput::GetInst()->IsDown("UI_Esc"))
+		{
+			PrevMenuState_ = CurMenuState_;
+			ChangeMenuState(MENUSTATE::SELECTMENU);
+		}
 	}
 
-	if (true == Button_->GetbMercyButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
-	{
-		ChangeMenuState(MENUSTATE::MERCYMENU);
-	}
 
-	if (true == Button_->GetbItemButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
-	{
-		ChangeMenuState(MENUSTATE::ITEMMENU);
-	}
 }
 
 void BattleLevel::MenuSelectStart()
 {
-}
+	if (MENUSTATE::FIGHTMENU == PrevMenuState_)
+	{
+		Player::MainPlayer->SetPosition(FightButtonDir_);
+	}
+	else if (MENUSTATE::ACTIONMENU == PrevMenuState_)
+	{
+		Player::MainPlayer->SetPosition(ActionButtonDir_);
+	}
+	else if (MENUSTATE::MERCYMENU == PrevMenuState_)
+	{
+		Player::MainPlayer->SetPosition(MercyButtonDir_);
+	}
+	else if (MENUSTATE::ITEMMENU == PrevMenuState_)
+	{
+		Player::MainPlayer->SetPosition(ItemButtonDir_);
 
+	}
+
+
+	Player::MainPlayer->Stop();
+}
 
 
 void BattleLevel::MenuSelectUpdate()
