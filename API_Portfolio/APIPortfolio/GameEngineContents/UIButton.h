@@ -22,4 +22,20 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* FightButton;
+	GameEngineCollision* FightButtonCollision;
+
+	GameEngineRenderer* ActionButton;
+	GameEngineCollision* ActionButtonCollision;
+
+	GameEngineRenderer* MercyButton;
+	GameEngineCollision* MercyButtonCollision;
+
+	GameEngineRenderer* ItemButton;
+	GameEngineCollision* ItemButtonCollision;
+
+	float4 ButtonSize;
+
+
+private:
+	void CheckCollision();
 };

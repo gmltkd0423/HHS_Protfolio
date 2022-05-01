@@ -1,5 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include "UIButton.h"
+#include "Undyne.h"
 
 enum class BATTLELEVELSTATE
 {
@@ -34,5 +36,12 @@ private:
 	void UISetting();
 private:
 	BATTLELEVELSTATE CurState_;
+	UIButton* Button_;
+	Undyne* Undyne_;
+
+
+
+private:
+	void CheckPlayerKey();
 };
 

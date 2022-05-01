@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 
 
+
 // Ό³Έν :
 class Undyne :public GameEngineActor
 {
@@ -21,5 +22,5 @@ protected:
 	void Update() override;
 	void Render() override;
 private:
-
+	GameEngineRenderer* UndyneRenderer;
 };

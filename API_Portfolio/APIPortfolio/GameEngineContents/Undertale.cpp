@@ -188,6 +188,20 @@ void Undertale::GameInit()
 		}
 
 
+		GameEngineImage* FightButton = GameEngineImageManager::GetInst()->Find("FightButton.bmp");
+		FightButton->Cut({ 110,42 });
+
+		GameEngineImage* FightButton2 = GameEngineImageManager::GetInst()->Find("FightButton2.bmp");
+		FightButton2->Cut({ 165,63 });
+
+		GameEngineImage* MercyButton = GameEngineImageManager::GetInst()->Find("MercyButton.bmp");
+		MercyButton->Cut({ 165,63 });
+
+		GameEngineImage* ActionButton = GameEngineImageManager::GetInst()->Find("ActionButton.bmp");
+		ActionButton->Cut({ 165,63 });
+
+		GameEngineImage* ItemButton = GameEngineImageManager::GetInst()->Find("ItemButton.bmp");
+		ItemButton->Cut({ 165,63 });
 
 
 
