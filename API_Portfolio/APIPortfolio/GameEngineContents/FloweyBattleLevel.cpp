@@ -146,7 +146,7 @@ void FloweyBattleLevel::Loading()
 	{
 		//플레이어 hp바
 		HpBar_ = CreateActor<HpBar>((int)BATTLELEVELORDER::ACTOR);
-		HpBar_->SetPosition({ 500, 620 });
+		HpBar_->SetPosition({ 590, 600 });
 
 	}
 
@@ -373,7 +373,7 @@ void FloweyBattleLevel::Pattern1Start()
 void FloweyBattleLevel::Pattern1Update()
 {
 	////플레이어가 맞았는지 검사
-	if (12 == Player::MainPlayer->GetHp())
+	if (1 == Player::MainPlayer->GetHp())
 	{
 		for (int i = 0; i < 5; ++i)
 		{

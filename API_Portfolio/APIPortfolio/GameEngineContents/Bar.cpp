@@ -96,7 +96,6 @@ void Bar::CheckJudgMent()
 				Damage_ += Randomint;
 				IsKeyDown = true;
 				MoveDir_ = float4::ZERO;
-				return;
 
 			}
 			else if (RGB(255, 0, 0) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
