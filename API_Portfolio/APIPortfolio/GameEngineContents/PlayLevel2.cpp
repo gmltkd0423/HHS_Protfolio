@@ -92,7 +92,7 @@ void PlayLevel2::Init()
 
 void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	if (0 == strcmp("FloweyBattleLevel", _PrevLevel->GetNameConstPtr()))
+	if (nullptr != _PrevLevel  && 0 == strcmp("FloweyBattleLevel", _PrevLevel->GetNameConstPtr()) )
 	{
 		NextLevel = true;
 		Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1200 });

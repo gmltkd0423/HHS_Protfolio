@@ -111,7 +111,6 @@ void Player::Update()
 	Blink();
 	ChangeToHeart();
 
-	CollisionCheck();
 }
 
 
@@ -249,16 +248,6 @@ bool Player::IsKeyUp()
 	return true;
 }
 
-void Player::CheckWall(float4 _Value)
-{
-	float4 NextPos = GetPosition() + _Value;
-	int Color = MapColImage_->GetImagePixel(NextPos);
-	if (RGB(0, 0, 0) != Color)
-	{
-		SetMove(_Value);
-	}
-
-}
 
 void Player::Blink()
 {
@@ -388,7 +377,44 @@ void Player::GetDamaged()
 	}
 }
 
-void Player::CollisionCheck()
+void Player::CollisionCheck(float4 _value)
 {
-	//if(true == PlayerCollision_->NextPosCollisionCheck("BoxCol"))
+	float4 MyPos = GetPosition();
+	float4 MyRightPos =float4({ 25.0f,0.0f }) + _value;
+	float4 MyLeftPos = float4({ -25.0f,0.0f }) + _value;
+	float4 MyBotPos =  float4({ 0.0f,30.0f })+ _value;
+	float4 MyTopPos = float4({ 0.0f,-30.0f })+ _value;
+
+
+	if (false == PlayerCollision_->NextPosCollisionCheck("BoxCol", MyRightPos))
+	{
+		_value.x = 0;
+	}
+	if (false == PlayerCollision_->NextPosCollisionCheck("BoxCol", MyLeftPos))
+	{
+		_value.x = 0;
+	}
+	if (false == PlayerCollision_->NextPosCollisionCheck("BoxCol", MyBotPos))
+	{
+		_value.y = 0;
+	}
+	if (false == PlayerCollision_->NextPosCollisionCheck("BoxCol", MyTopPos))
+	{
+		_value.y = 0;
+	}
+		
+	
+	SetMove(_value);
+	
+}
+
+
+void Player::CheckWall(float4 _Value)
+{
+	float4 NextPos = GetPosition() + _Value;
+	int Color = MapColImage_->GetImagePixel(NextPos);
+	if (RGB(0, 0, 0) != Color)
+	{
+		SetMove(_Value);
+	}
 }

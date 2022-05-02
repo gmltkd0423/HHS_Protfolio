@@ -172,7 +172,7 @@ private:
 	void CheckWall(float4 _Value);
 	void Blink();
 	void GetDamaged();
-	void CollisionCheck();
+	void CollisionCheck(float4 _value);
 
 
 private:

@@ -40,33 +40,38 @@ void Player::MoveUpdate()
 	if (true == GameEngineInput::GetInst()->IsPress("MoveRight") && true == IsMove_)
 	{
 		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_;
-		Frisk_->ChangeAnimation("MoveRight");
 		DirName_ = "MoveRight";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft") && true == IsMove_)
 	{
 		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_;
-		Frisk_->ChangeAnimation("MoveLeft");
 		DirName_=  "MoveLeft";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveUp") && true == IsMove_)
 	{
 		MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * Speed_;
-		Frisk_->ChangeAnimation("MoveUp");
 		DirName_ = "MoveUp";
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveDown") && true == IsMove_)
 	{
 		MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_;
-		Frisk_->ChangeAnimation("MoveDown");
 		DirName_ = "MoveDown";
 	}
 
-	CheckWall(MoveDir_);
-
+	Frisk_->ChangeAnimation(DirName_);
+	
+	
+	if (strcmp(GetLevel()->GetNameConstPtr(), "BattleLevel") == 0 || (strcmp(GetLevel()->GetNameConstPtr(), "FloweyBattleLevel") == 0))
+	{
+		CollisionCheck(MoveDir_);
+	}
+	else
+	{
+		CheckWall(MoveDir_);
+	}
 	return;
 }
 

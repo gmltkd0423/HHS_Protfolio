@@ -50,6 +50,8 @@ void FloweyBattleLevel::Loading()
 	{
 		GameEngineActor* Box = CreateActor<BattleLevelActor>();
 		GameEngineRenderer* BoxRenderer = Box->CreateRendererToScale("TextBox_Square.bmp", { 200,200 }, (int)BATTLELEVELORDER::BOX, RenderPivot::CENTER, { 640 , 465 });
+		GameEngineCollision* BoxCol;
+		BoxCol = Box->CreateCollision("BoxCol", BoxRenderer->GetScale(), { 640 , 465 });
 	}
 
 
