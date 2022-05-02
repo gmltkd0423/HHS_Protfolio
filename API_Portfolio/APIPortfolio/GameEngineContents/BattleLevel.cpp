@@ -10,6 +10,7 @@
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 BattleLevel::BattleLevel() :
 	FightButtonDir_({}),
@@ -56,9 +57,6 @@ void BattleLevel::Loading()
 	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 	Texts->SetPosition({ 150,500 });
 
-
-	Spear_ = CreateActor<SpearArrow>((int)BATTLELEVELORDER::ACTOR);
-	Spear_->SetPosition({ 400,300 });
 	//키생성
 	{
 		if (false == GameEngineInput::GetInst()->IsKey("UI_Left"))
@@ -72,12 +70,16 @@ void BattleLevel::Loading()
 		}
 	}
 
-	ChangeMenuState(MENUSTATE::SELECTMENU);
+	ChangeMenuState(MENUSTATE::FIGHTMENU);
+
+
+	ChangeFightState(FIGHTSTATE::None);
 }
 
 void BattleLevel::Update()
 {
 	MenuStateUpdate();
+	FightStateUpdate();
 
 	if (true == GameEngineInput::GetInst()->IsPress("ChangeDebug"))
 	{
@@ -159,10 +161,118 @@ void BattleLevel::MenuStateUpdate()
 	}
 }
 
+void BattleLevel::ChangeFightState(FIGHTSTATE _State)
+{
+	if (FightState_ != _State)
+	{
+		switch (_State)
+		{
+		case FIGHTSTATE::Talk:
+			break;
+		case FIGHTSTATE::Pattern1:
+			Pattern1Start();
+			break;
+		case FIGHTSTATE::Pattern2:
+			break;
+		case FIGHTSTATE::Pattern3:
+			break;
+		case FIGHTSTATE::Pattern4:
+			break;
+		case FIGHTSTATE::None:
+			return;
+		default:
+			break;
+		}
+	}
+	FightState_ = _State;
+}
+
+void BattleLevel::FightStateUpdate()
+{
+
+	switch (FightState_)
+	{
+	case FIGHTSTATE::Talk:
+		break;
+	case FIGHTSTATE::Pattern1:
+		Patter1Update();
+		break;
+	case FIGHTSTATE::Pattern2:
+		break;
+	case FIGHTSTATE::Pattern3:
+		break;
+	case FIGHTSTATE::Pattern4:
+		break;
+	case FIGHTSTATE::None:
+		return;
+	default:
+		break;
+	}
+}
+
+void BattleLevel::Pattern1Start()
+{
+	TextBox->SetState(BoxState::Battle2);
+	SpearCount_ = 0;
+	Timer_ = 1.0f;
+}
+
+void BattleLevel::CreateSpear()
+{
+	if (SpearCount_ == 30)
+	{
+		return;
+	}
+
+
+	Timer_ -= GameEngineTime::GetDeltaTime();
+	if (0.0f <= Timer_)
+	{
+		return;
+
+	}
+
+
+
+	GameEngineRandom Ran;
+	float Posx = Ran.RandomFloat(400.0f,800.0f);
+	float Posy = Ran.RandomFloat(300.0f, 650.0f);
+	SpearArrow* Spear = CreateActor<SpearArrow>((int)BATTLELEVELORDER::ACTOR);
+	Spear->SetPosition({ Posx,Posy });
+	SpearCount_++;
+	Timer_ = 1.0f;
+}
+
+void BattleLevel::Patter1Update()
+{
+	if (true == TextBox->GetIsChange())
+	{
+		Player::MainPlayer->SetPosition(TextBox->GetPosition());
+		Player::MainPlayer->Play();
+		TextBox->SetIsChangeFalse();
+		Undyne_->GetRenderer()->ChangeAnimation("Idle");
+		Undyne_->GetRenderer()->SetAlpha(150);
+	}
+
+	if (false == TextBox->GetIsChange())
+	{
+		CreateSpear();
+	}
+}
+
+
+
+
+
 void BattleLevel::UISetting()
 {
 }
 
+
+
+
+
+//판정바
 void BattleLevel::CreateBar()
 {
 	if (3 <= Count_)
@@ -190,6 +300,7 @@ void BattleLevel::CreateBar()
 
 
 }
+
 
 void BattleLevel::UIKeyMove()
 {
@@ -374,12 +485,15 @@ void BattleLevel::FightMenuUpdate()
 	}
 
 
+	//상자 모양 변경
 	if (true == HurtEnd)
 	{
 		AttackBar_->Off();
-		TextBox->SetState(BoxState::Battle);
+		ChangeFightState(FIGHTSTATE::Pattern1);
+
 	}
 
+	//상자가 바뀌고나면
 	//
 	//if (true == IsText)
 	//{

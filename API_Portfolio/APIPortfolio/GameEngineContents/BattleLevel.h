@@ -27,6 +27,7 @@ enum class FIGHTSTATE
 	Pattern2,
 	Pattern3,
 	Pattern4,
+	None
 };
 
 // Ό³Έν :
@@ -52,6 +53,8 @@ protected:
 private:
 	MENUSTATE CurMenuState_;
 	MENUSTATE PrevMenuState_;
+
+	FIGHTSTATE FightState_;
 	UIButton* Button_;
 	Undyne* Undyne_;
 	Box* TextBox;
@@ -87,13 +90,22 @@ private:
 
 	void UISetting();
 	void CreateBar();
+	void CreateSpear();
 
 	int Count_;
+	int SpearCount_;
 
 //state
 private:
 	void ChangeMenuState(MENUSTATE _State);
 	void MenuStateUpdate();
+
+	void ChangeFightState(FIGHTSTATE _State);
+	void FightStateUpdate();
+
+	void Pattern1Start();
+	void Patter1Update();
+
 
 
 	void MenuSelectStart();

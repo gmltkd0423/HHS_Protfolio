@@ -22,5 +22,7 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* SpearRenderer;
+
+	float Angle;
 };
 

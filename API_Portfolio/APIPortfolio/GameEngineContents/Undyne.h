@@ -43,6 +43,10 @@ public:
 	void Hurt();
 	void Idle();
 
+	GameEngineRenderer* GetRenderer()
+	{
+		return UndyneRenderer;
+	}
 	bool GetIsHurt()
 	{
 		return IsHurt;

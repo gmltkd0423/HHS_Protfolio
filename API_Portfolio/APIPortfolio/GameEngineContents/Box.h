@@ -5,8 +5,12 @@
 enum class BoxState
 {
 	Text,
-	Battle
+	Battle1,
+	Battle2,
+	Battle3,
 };
+
+
 
 
 // Ό³Έν :
@@ -29,6 +33,7 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* TextBox;
+	GameEngineCollision* BoxCol;
 
 	float Timer_;
 	float Time_;
@@ -52,22 +57,42 @@ private:
 	float Speed;
 	bool IsChange;
 
+	int Pattern;
+
 private:
 	void Shake();
 
 	void TextStateStart();
 	void TextStateUpdate();
 	
-	void BattleStateStart();
-	void BattleStateUpdate();
+	void Battle1StateStart();
+	void Battle1StateUpdate();
+
+	void Battle2StateStart();
+	void Battle2StateUpdate();
+
+	void Battle3StateStart();
+	void Battle3StateUpdate();
 
 	void ChangeState(BoxState _State);
 	void StateUpdate();
+
+	
 
 public:
 	inline void SetIsShakeTrue()
 	{
 		IsShake = true;
+	}
+
+	bool GetIsChange()
+	{
+		return IsChange;
+	}
+
+	void SetIsChangeFalse()
+	{
+		IsChange = false;
 	}
 
 	inline void SetState(BoxState _State)

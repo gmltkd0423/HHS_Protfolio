@@ -111,7 +111,7 @@ void Player::Update()
 	Blink();
 	ChangeToHeart();
 
-
+	CollisionCheck();
 }
 
 
@@ -257,6 +257,7 @@ void Player::CheckWall(float4 _Value)
 	{
 		SetMove(_Value);
 	}
+
 }
 
 void Player::Blink()
@@ -385,4 +386,9 @@ void Player::GetDamaged()
 	{
 		Hp_ -= 19;
 	}
+}
+
+void Player::CollisionCheck()
+{
+	//if(true == PlayerCollision_->NextPosCollisionCheck("BoxCol"))
 }
