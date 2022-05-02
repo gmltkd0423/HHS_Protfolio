@@ -2,6 +2,13 @@
 #include <GameEngine/GameEngineActor.h>
 
 
+enum class BoxState
+{
+	Text,
+	Battle
+};
+
+
 // Ό³Έν :
 class Box :public GameEngineActor
 {
@@ -37,14 +44,34 @@ private:
 	bool IsRightDown;
 	bool IsLeftTop;
 
+	BoxState CurState_;
+	float4 MyScale;
 
+	float SizeX;
+	float SizeY;
+	float Speed;
+	bool IsChange;
 
 private:
 	void Shake();
 
+	void TextStateStart();
+	void TextStateUpdate();
+	
+	void BattleStateStart();
+	void BattleStateUpdate();
+
+	void ChangeState(BoxState _State);
+	void StateUpdate();
+
 public:
-	void SetIsShakeTrue()
+	inline void SetIsShakeTrue()
 	{
 		IsShake = true;
+	}
+
+	inline void SetState(BoxState _State)
+	{
+		ChangeState(_State);
 	}
 };

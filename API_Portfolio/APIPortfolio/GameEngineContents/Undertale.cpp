@@ -174,6 +174,9 @@ void Undertale::GameInit()
 	GameEngineImage* Fire = GameEngineImageManager::GetInst()->Find("Fire.bmp");
 	Fire->Cut({ 20,30 });
 
+	GameEngineImage* Spear = GameEngineImageManager::GetInst()->Find("spear2.bmp");
+	Spear->Cut({ 129,100 });
+
 
 	// UI
 	{

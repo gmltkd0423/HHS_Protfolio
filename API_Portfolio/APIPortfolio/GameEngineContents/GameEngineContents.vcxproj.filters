@@ -89,6 +89,9 @@
     <ClInclude Include="BattleLevelFont.h">
       <Filter>Level\BattleLevel\Actor\Font</Filter>
     </ClInclude>
+    <ClInclude Include="SpearArrow.h">
+      <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="BattleLevelFont.cpp">
       <Filter>Level\BattleLevel\Actor\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearArrow.cpp">
+      <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -19,7 +19,8 @@ BattleLevel::BattleLevel() :
 	Timer_(0),
 	BarTime_(0),
 	BarCount_(0),
-	EffectOn(false)
+	EffectOn(false),
+	IsText(false)
 {
 }
 
@@ -50,6 +51,14 @@ void BattleLevel::Loading()
 	Effect_ = CreateActor< AttackEffect>((int)BATTLELEVELORDER::ACTOR);
 	Effect_->SetPosition({ 650,185 });
 	Effect_->Off();
+
+
+	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
+	Texts->SetPosition({ 150,500 });
+
+
+	Spear_ = CreateActor<SpearArrow>((int)BATTLELEVELORDER::ACTOR);
+	Spear_->SetPosition({ 400,300 });
 	//키생성
 	{
 		if (false == GameEngineInput::GetInst()->IsKey("UI_Left"))
@@ -253,10 +262,18 @@ void BattleLevel::CheckEscape()
 	{
 		if (true == GameEngineInput::GetInst()->IsDown("UI_Esc"))
 		{
+			EffectSound_.SoundPlayOneShot("snd_select.wav");
 			if (MENUSTATE::FIGHTMENU == CurMenuState_)
 			{
 				AttackBar_->Off();
 				Judge_Bar->Off();
+				for (size_t i = 0; i < 3; i++)
+				{
+					if (nullptr != BarList[i])
+					{
+						BarList[i]->Death();
+					}
+				}
 			}
 
 
@@ -319,23 +336,15 @@ void BattleLevel::FightMenuStart()
 	HurtEnd = false;
 	BarCount_ = 0;
 	EffectOn = false;
+	IsText = false;
 }
 
 void BattleLevel::FightMenuUpdate()
 {
 	CreateBar();
-	/*for (size_t i = 0; i < 3; i++)
-	{
-		if (BarList[i] != nullptr)
-		{
-			if (1000 <= BarList[i]->GetPosition().x)
-			{
-				BarList[i]->Off();
-				Bar::KeyDownCount_++;
-			}
-		}
-	}*/
 
+
+	//이펙트가 나오고
 	if (true == EffectOn)
 	{
 		Effect_->On();
@@ -346,11 +355,12 @@ void BattleLevel::FightMenuUpdate()
 			EffectSound_.SoundPlayOneShot("snd_damage.wav");
 			Effect_->Off();
 			Undyne_->Hurt();
-			HurtEnd = true;
+			HurtEnd = true;  // 흔들리는게 다끝나고나면
 			EffectOn = false;
 		}
 	}
 
+	//바 3번입력
 	if (3 <= Count_ && 6>Count_ && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
 		BarCount_ = Count_ - 3;
@@ -363,8 +373,20 @@ void BattleLevel::FightMenuUpdate()
 		}
 	}
 
-	int a = Bar::Damage_;
 
+	if (true == HurtEnd)
+	{
+		AttackBar_->Off();
+		TextBox->SetState(BoxState::Battle);
+	}
+
+	//
+	//if (true == IsText)
+	//{
+	//	Texts->SetTextCount(0);
+	//	Texts->SetCount(TextCount_);
+
+	//}
 
 }
 

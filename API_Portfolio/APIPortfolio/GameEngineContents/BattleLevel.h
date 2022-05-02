@@ -6,6 +6,8 @@
 #include "AttackBar.h"
 #include "Bar.h"
 #include "AttackEffect.h"
+#include "BattleLevelFont.h"
+#include "SpearArrow.h"
 #include<GameEngineBase/GameEngineSound.h>
 
 enum class MENUSTATE
@@ -20,6 +22,7 @@ enum class MENUSTATE
 
 enum class FIGHTSTATE
 {
+	Talk,
 	Pattern1,
 	Pattern2,
 	Pattern3,
@@ -52,12 +55,15 @@ private:
 	UIButton* Button_;
 	Undyne* Undyne_;
 	Box* TextBox;
+	BattleLevelFont* Texts;
 	AttackBar* AttackBar_;
 	AttackEffect* Effect_;
 	Bar* Judge_Bar;
 	Bar* BarList[3];
+	SpearArrow* Spear_;
 	float BarTime_;
 	int BarCount_;
+	int TextCount_;
 	GameEngineSound EffectSound_;
 
 
@@ -69,6 +75,8 @@ private:
 	float Timer_;
 	bool HurtEnd;
 	bool EffectOn;
+	bool IsText;
+
 
 
 private:

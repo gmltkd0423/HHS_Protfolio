@@ -45,3 +45,4 @@ enum class TITLEORDER
 	TEXT,
 	FADEIMAGE
 };
+
