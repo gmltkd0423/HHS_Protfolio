@@ -22,12 +22,12 @@ enum class MENUSTATE
 
 enum class FIGHTSTATE
 {
+	None,
 	Talk,
 	Pattern1,
 	Pattern2,
 	Pattern3,
-	Pattern4,
-	None
+	Pattern4
 };
 
 // Ό³Έν :
@@ -67,6 +67,7 @@ private:
 	float BarTime_;
 	int BarCount_;
 	int TextCount_;
+	float ShakeTimer_;
 	GameEngineSound EffectSound_;
 
 
@@ -94,6 +95,7 @@ private:
 
 	int Count_;
 	int SpearCount_;
+	float PatternTime_;
 
 //state
 private:
@@ -105,6 +107,9 @@ private:
 
 	void Pattern1Start();
 	void Patter1Update();
+
+	void TalkStart();
+	void TalkUpdate();
 
 
 

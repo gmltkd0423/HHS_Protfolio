@@ -435,3 +435,16 @@ void Player::CheckWall(float4 _Value)
 		SetMove(_Value);
 	}
 }
+
+
+void Player::HeartOff()
+{
+	Heart_->Off();
+}
+
+
+void Player::HeartOn()
+{
+
+	Heart_->On();
+}

@@ -50,5 +50,8 @@ public:
 		IsShake = true;
 	}
 
-
+	GameEngineRenderer* GetRenderer()
+	{
+		return AttackBarRenderer;
+	}
 };

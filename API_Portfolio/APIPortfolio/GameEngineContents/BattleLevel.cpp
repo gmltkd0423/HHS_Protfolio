@@ -5,6 +5,7 @@
 #include "Undyne.h"
 #include "AttackBar.h"
 #include "SoundPlayer.h"
+#include "BattleLevelFont.h"
 #include "AttackEffect.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
@@ -36,6 +37,7 @@ void BattleLevel::Loading()
 	float4 Half = Back->GetImage()->GetScale().Half();
 	Back->SetPivot(Half);
 
+
 	Undyne_ = CreateActor<Undyne>((int)BATTLELEVELORDER::BACKGROUND);
 	Undyne_->SetPosition({ 720,185 });
 
@@ -45,9 +47,10 @@ void BattleLevel::Loading()
 	TextBox = CreateActor<Box>((int)BATTLELEVELORDER::BOX);
 	TextBox->SetPosition({ 640,490 });
 
+
 	AttackBar_ = CreateActor<AttackBar>((int)BATTLELEVELORDER::BOX);
 	AttackBar_->SetPosition({ 640,490 });
-	AttackBar_->Off();
+	AttackBar_->GetRenderer()->Off();
 
 	Effect_ = CreateActor< AttackEffect>((int)BATTLELEVELORDER::ACTOR);
 	Effect_->SetPosition({ 650,185 });
@@ -55,7 +58,8 @@ void BattleLevel::Loading()
 
 
 	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
-	Texts->SetPosition({ 150,500 });
+
+
 
 	//키생성
 	{
@@ -70,9 +74,7 @@ void BattleLevel::Loading()
 		}
 	}
 
-	ChangeMenuState(MENUSTATE::FIGHTMENU);
-
-
+	ChangeMenuState(MENUSTATE::SELECTMENU);
 	ChangeFightState(FIGHTSTATE::None);
 }
 
@@ -168,6 +170,7 @@ void BattleLevel::ChangeFightState(FIGHTSTATE _State)
 		switch (_State)
 		{
 		case FIGHTSTATE::Talk:
+			TalkStart();
 			break;
 		case FIGHTSTATE::Pattern1:
 			Pattern1Start();
@@ -193,6 +196,7 @@ void BattleLevel::FightStateUpdate()
 	switch (FightState_)
 	{
 	case FIGHTSTATE::Talk:
+		TalkUpdate();
 		break;
 	case FIGHTSTATE::Pattern1:
 		Patter1Update();
@@ -215,10 +219,12 @@ void BattleLevel::Pattern1Start()
 	TextBox->SetState(BoxState::Battle2);
 	SpearCount_ = 0;
 	Timer_ = 1.0f;
+	PatternTime_ = 5.0f;
 }
 
 void BattleLevel::CreateSpear()
 {
+
 	if (SpearCount_ == 30)
 	{
 		return;
@@ -233,7 +239,6 @@ void BattleLevel::CreateSpear()
 	}
 
 
-
 	GameEngineRandom Ran;
 	float Posx = Ran.RandomFloat(400.0f,800.0f);
 	float Posy = Ran.RandomFloat(300.0f, 650.0f);
@@ -242,6 +247,8 @@ void BattleLevel::CreateSpear()
 	SpearCount_++;
 	Timer_ = 1.0f;
 }
+
+
 
 void BattleLevel::Patter1Update()
 {
@@ -258,6 +265,51 @@ void BattleLevel::Patter1Update()
 	{
 		CreateSpear();
 	}
+
+	PatternTime_ -= GameEngineTime::GetDeltaTime();
+
+	if (0 >= PatternTime_)
+	{
+		ChangeFightState(FIGHTSTATE::Talk);
+	}
+}
+
+
+
+
+void BattleLevel::TalkStart()
+{
+	TextCount_ = 1;
+	Texts->IsAllTextOutFalse();
+	Player::MainPlayer->HeartOff();
+	TextBox->SetState(BoxState::Text);
+	Undyne_->GetRenderer()->SetAlpha(255);
+}
+
+
+
+
+void BattleLevel::TalkUpdate()
+{
+	if (true == TextBox->GetIsChange())
+	{
+		Texts->On();
+		Texts->SetCount(1);
+		Texts->SetTextCount(0);
+		TextBox->SetIsChangeFalse();
+	}
+
+
+	if (true == Texts->GetIsAllTextOut())
+	{
+		if (true == Player::MainPlayer->IsActionKeyDown())
+		{
+			Texts->IsAllTextOutFalse();
+			ChangeMenuState(MENUSTATE::SELECTMENU);
+			ChangeFightState(FIGHTSTATE::None);
+		}
+	}
+
 }
 
 
@@ -339,24 +391,28 @@ void BattleLevel::SelectButton()
 	//Fight버튼을 눌럿다면
 	if (true == Button_->GetbFightButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
+		PrevMenuState_ = MENUSTATE::FIGHTMENU;
 		ChangeMenuState(MENUSTATE::FIGHTMENU);
 		FightButtonDir_ = Player::MainPlayer->GetPosition();
 		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbActionButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
+		PrevMenuState_ = MENUSTATE::ACTIONMENU;
 		ChangeMenuState(MENUSTATE::ACTIONMENU);
 		ActionButtonDir_ = Player::MainPlayer->GetPosition();
 		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbMercyButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
+		PrevMenuState_ = MENUSTATE::MERCYMENU;
 		ChangeMenuState(MENUSTATE::MERCYMENU);
 		MercyButtonDir_ = Player::MainPlayer->GetPosition();
 		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbItemButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
+		PrevMenuState_ = MENUSTATE::ITEMMENU;
 		ChangeMenuState(MENUSTATE::ITEMMENU);
 		ItemButtonDir_ = Player::MainPlayer->GetPosition();
 		EffectSound_.SoundPlayOneShot("snd_select.wav");
@@ -425,7 +481,8 @@ void BattleLevel::MenuSelectStart()
 
 	}
 
-
+	Texts->Off();
+	Player::MainPlayer->HeartOn();
 	Player::MainPlayer->Stop();
 }
 
@@ -439,7 +496,7 @@ void BattleLevel::MenuSelectUpdate()
 void BattleLevel::FightMenuStart()
 {
 	Count_ = 0;
-	AttackBar_->On();
+	AttackBar_->GetRenderer()->On();
 	Bar::BarCount_ = 0;
 	Bar::KeyDownCount_ = 0;
 	Bar::Damage_ = 0;
@@ -448,6 +505,7 @@ void BattleLevel::FightMenuStart()
 	BarCount_ = 0;
 	EffectOn = false;
 	IsText = false;
+	ShakeTimer_ = 0.5f;
 }
 
 void BattleLevel::FightMenuUpdate()
@@ -488,19 +546,12 @@ void BattleLevel::FightMenuUpdate()
 	//상자 모양 변경
 	if (true == HurtEnd)
 	{
-		AttackBar_->Off();
+		AttackBar_->GetRenderer()->Off();
 		ChangeFightState(FIGHTSTATE::Pattern1);
-
+		HurtEnd = false;
 	}
 
-	//상자가 바뀌고나면
-	//
-	//if (true == IsText)
-	//{
-	//	Texts->SetTextCount(0);
-	//	Texts->SetCount(TextCount_);
 
-	//}
 
 }
 

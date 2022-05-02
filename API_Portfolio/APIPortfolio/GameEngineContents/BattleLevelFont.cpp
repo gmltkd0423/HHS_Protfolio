@@ -27,8 +27,6 @@ void BattleLevelFont::Update()
 
 void BattleLevelFont::Render()
 {
-
-
 	Texts();
 
 	if (Text_.size() == 0)
@@ -47,12 +45,12 @@ void BattleLevelFont::Render()
 	RealText_ = Text_.substr(0, TextCount_);
 
 
-	if (Text_.size() != RealText_.size())
-	{
-		TextSounds();
-	}
+	//if (Text_.size() != RealText_.size())
+	//{
+	//	TextSounds();
+	//}
 
-	TextFont_.Draw(RealText_, { 760.0f, 170.0f }, RGB(0, 0, 0), 35, 35);
+	TextFont_.Draw(RealText_, { 200.0f, 400.0f }, RGB(255, 255, 255), 55, 55);
 
 	//대화가 모두 출력되면
 	if (Text_.size() == RealText_.size())
@@ -64,9 +62,9 @@ void BattleLevelFont::Render()
 
 void BattleLevelFont::Texts()
 {
-	if (0 == Count_)
+	if (1 == Count_)
 	{
-		Text_ = L"하트 모양이 보이지? \n저게 네 영혼이야. \n네 존재의 정수지!";
+		Text_ = L"* 바람이 울부짖고 있다...";
 	}
 	
 	else

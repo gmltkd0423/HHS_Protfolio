@@ -515,7 +515,7 @@ void FloweyBattleLevel::Pattern1Update()
 		TextFont_->SetCount(Count_);
 		TextFont_->SetTextCount(0);
 		FloweyStateCount_++;
-
+		SoundPlayer::Bgm_.PlaySpeed(0.9f);
 		//idle상태로 안가게만들어줌
 		TextFont_->IsAllTextOutFalse();
 	}
@@ -570,6 +570,7 @@ void FloweyBattleLevel::Pattern1Update()
 		TextFont_->SetTextCount(0);
 		FloweyStateCount_++;
 		//TextFont_->IsAllTextOutFalse();
+		SoundPlayer::Bgm_.PlaySpeed(0.8f);
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Mad");
 	}
 
@@ -609,6 +610,7 @@ void FloweyBattleLevel::Pattern1Update()
 			false == Bullets_[4]->IsUpdate()
 			)
 		{
+			SoundPlayer::Bgm_.PlaySpeed(0.5f);
 			Count_++;  //21
 			Time_ = 0;
 		}
@@ -623,11 +625,11 @@ void FloweyBattleLevel::Pattern1Update()
 	{
 		Time_ += GameEngineTime::GetDeltaTime();
 
-		if (1.5f < Time_)
+		if (3.0f < Time_)
 		{
 			SoundPlayer::Bgm_.Stop();
 			FloweyTalkRenderer->ChangeAnimation("Flowey_Evil");
-			if (2.2f < Time_)
+			if (3.7f < Time_)
 			{
 				Count_++;   //22
 				Speech_Bubble->On();

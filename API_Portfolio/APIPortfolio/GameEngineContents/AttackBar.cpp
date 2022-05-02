@@ -43,7 +43,7 @@ void AttackBar::Shake()
 		{
 			float4 RanPos_ = { 3.0f,3.0f };
 
-
+			Timer_ = 1.0f;
 			Pos_ = GetPosition();
 			RightDownPos_ = GetPosition() + RanPos_;
 			LeftTopPos_ = GetPosition() - RanPos_;
@@ -95,7 +95,7 @@ void AttackBar::Shake()
 
 			if (0.0f >= Timer_)
 			{
-				Timer_ = 1.0f;
+				Timer_ = 0.0f;
 				SetPosition(Pos_);
 				IsShake = false;
 				SetPos = false;

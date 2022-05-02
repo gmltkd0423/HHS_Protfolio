@@ -56,7 +56,7 @@ void Bar::Update()
 
 	if (false == IsKeyDown)
 	{
-		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * 1000.0f;
+		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * 800.0f;
 	}
 	else
 	{

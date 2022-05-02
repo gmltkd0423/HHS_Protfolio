@@ -98,6 +98,11 @@ public:
 		return IsMove_;
 	}
 
+	void HeartOff();
+
+
+	void HeartOn();
+
 	float4 GetMoveDir()
 	{
 		return MoveDir_;
