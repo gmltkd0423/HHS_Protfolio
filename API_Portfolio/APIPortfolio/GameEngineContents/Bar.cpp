@@ -48,10 +48,15 @@ void Bar::Start()
 
 void Bar::Update()
 {
+	if (KeyDownCount_ == 3)
+	{
+		int a = 0;
+	}
+
 
 	if (false == IsKeyDown)
 	{
-		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * 500.0f;
+		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * 1000.0f;
 	}
 	else
 	{
@@ -60,6 +65,7 @@ void Bar::Update()
 		Timer_ -= GameEngineTime::GetDeltaTime();
 		
 	}
+
 
 	if (0 >= Timer_)
 	{
@@ -70,7 +76,7 @@ void Bar::Update()
 	CheckJudgMent();
 }
 
-//bool KeyCheck_ = false;
+bool KeyCheck_ = false;
 
 void Bar::Render()
 {
@@ -90,30 +96,42 @@ void Bar::CheckJudgMent()
 	//		KeyCheck_ = true;
 	//		KeyDownCount_++;
 
-			if (MyBarCount_ == KeyDownCount_ &&  RGB(255, 255, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
+			if (false == KeyCheck_ &&  RGB(255, 255, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
-				GameEngineRandom Ran;
-				int Randomint = Ran.RandomInt(0, 30);
-				Damage_ += Randomint;
-				KeyDownCount_++;
-				MoveDir_ = float4::ZERO;
+				if (MyBarCount_ == KeyDownCount_)
+				{
+					KeyCheck_ = true;
+					GameEngineRandom Ran;
+					int Randomint = Ran.RandomInt(0, 30);
+					Damage_ += Randomint;
+					KeyDownCount_++;
+					MoveDir_ = float4::ZERO;
+				}
 
 			}
-			else if (MyBarCount_ == KeyDownCount_ && RGB(255, 0, 0) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
+			else if (false == KeyCheck_ && RGB(255, 0, 0) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
-				GameEngineRandom Ran;
-				int Randomint = Ran.RandomInt(30, 60);
-				Damage_ += Randomint;
-				KeyDownCount_++;
-				MoveDir_ = float4::ZERO;
+				if (MyBarCount_ == KeyDownCount_)
+				{
+					KeyCheck_ = true;
+					GameEngineRandom Ran;
+					int Randomint = Ran.RandomInt(30, 60);
+					Damage_ += Randomint;
+					KeyDownCount_++;
+					MoveDir_ = float4::ZERO;
+				}
 			}
-			else if (MyBarCount_ == KeyDownCount_ && RGB(0, 0, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
+			else if (false == KeyCheck_ && RGB(0, 0, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
-				GameEngineRandom Ran;
-				int Randomint = Ran.RandomInt(60, 100);
-				Damage_ += Randomint;
-				KeyDownCount_++;
-				MoveDir_ = float4::ZERO;
+				if (MyBarCount_ == KeyDownCount_)
+				{
+					KeyCheck_ = true;
+					GameEngineRandom Ran;
+					int Randomint = Ran.RandomInt(60, 100);
+					Damage_ += Randomint;
+					KeyDownCount_++;
+					MoveDir_ = float4::ZERO;
+				}
 			}
 
 	//		return;

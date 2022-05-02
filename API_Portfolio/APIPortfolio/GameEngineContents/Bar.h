@@ -31,7 +31,7 @@ private:
 	void CheckJudgMent();
 	int MyBarCount_;
 	bool IsKeyDown;
-	bool KeyCheck_;
+	//bool KeyCheck_;
 
 	float Timer_;
 public:

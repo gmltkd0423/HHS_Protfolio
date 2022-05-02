@@ -30,9 +30,14 @@ private:
 	bool IsIdle;
 	bool IsShake;
 
+
+	bool IsRight;
+	bool IsLeft;
+
 	float4 MoveDir_;
 	float4 Pos_;
 	float4 RightPos_;
+	float4 LeftPos_;
 
 public:
 	void Hurt();

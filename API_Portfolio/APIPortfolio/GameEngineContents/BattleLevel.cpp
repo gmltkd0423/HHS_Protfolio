@@ -170,11 +170,11 @@ void BattleLevel::CreateBar()
 		Count_++;
 		if (Count_ == 1)
 		{
-			Timer_ = 0.2f;
+			Timer_ = 0.1f;
 		}
 		else
 		{
-			Timer_ = 0.5f;
+			Timer_ = 0.2f;
 		}
 	}
 
@@ -307,6 +307,17 @@ void BattleLevel::FightMenuStart()
 void BattleLevel::FightMenuUpdate()
 {
 	CreateBar();
+	/*for (size_t i = 0; i < 3; i++)
+	{
+		if (BarList[i] != nullptr)
+		{
+			if (1000 <= BarList[i]->GetPosition().x)
+			{
+				BarList[i]->Off();
+				Bar::KeyDownCount_++;
+			}
+		}
+	}*/
 
 	if (BarCount_ == 2 && HurtEnd ==false )
 	{
@@ -320,13 +331,14 @@ void BattleLevel::FightMenuUpdate()
 		}
 	}
 
-	if (6>Count_ && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	if (3 <= Count_ && 6>Count_ && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
 		BarCount_ = Count_ - 3;
 		BarList[BarCount_]->SetIsKeyDownTrue();
 		Count_++;
 	}
 
+	int a = Bar::Damage_;
 
 
 }
