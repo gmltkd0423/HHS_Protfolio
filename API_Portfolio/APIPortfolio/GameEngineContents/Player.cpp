@@ -411,9 +411,26 @@ void Player::CollisionCheck(float4 _value)
 
 void Player::CheckWall(float4 _Value)
 {
-	float4 NextPos = GetPosition() + _Value;
-	int Color = MapColImage_->GetImagePixel(NextPos);
-	if (RGB(0, 0, 0) != Color)
+
+
+
+
+	float4 DownPos = GetPosition() + float4({0, 40}) + _Value;
+	float4 RightPos = GetPosition() + float4({ 30,0  }) + _Value;
+	float4 LeftPos = GetPosition() + float4({ -30, 0 }) + _Value;
+	float4 UpPos = GetPosition() + float4({ 0, -40 }) + _Value;
+
+	int DownColor = MapColImage_->GetImagePixel(DownPos);
+	int RightColor = MapColImage_->GetImagePixel(RightPos);
+	int LeftColor = MapColImage_->GetImagePixel(LeftPos);
+	int UpColor = MapColImage_->GetImagePixel(UpPos);
+
+
+
+	if (RGB(0, 0, 0) != DownColor	&&
+		RGB(0, 0, 0) != RightColor &&
+		RGB(0, 0, 0) != UpColor && 
+		RGB(0, 0, 0) != LeftColor  )
 	{
 		SetMove(_Value);
 	}
