@@ -16,7 +16,9 @@ BattleLevel::BattleLevel() :
 	ActionButtonDir_({}),
 	MercyButtonDir_({}),
 	ItemButtonDir_({}),
-	Timer_(0.2f)
+	Timer_(0.2f),
+	BarTime_(0.4f),
+	BarCount_(0)
 {
 }
 
@@ -299,13 +301,14 @@ void BattleLevel::FightMenuStart()
 	Bar::Damage_ = 0;
 	Timer_ = 0.4f;
 	HurtEnd = false;
+	BarCount_ = 0;
 }
 
 void BattleLevel::FightMenuUpdate()
 {
 	CreateBar();
 
-	if (Bar::KeyDownCount_ == 3 && HurtEnd ==false )
+	if (BarCount_ == 2 && HurtEnd ==false )
 	{
 		Effect_->On();
 		Timer_ -= GameEngineTime::GetDeltaTime();
@@ -315,6 +318,13 @@ void BattleLevel::FightMenuUpdate()
 			Undyne_->Hurt();
 			HurtEnd = true;
 		}
+	}
+
+	if (6>Count_ && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
+	{
+		BarCount_ = Count_ - 3;
+		BarList[BarCount_]->SetIsKeyDownTrue();
+		Count_++;
 	}
 
 

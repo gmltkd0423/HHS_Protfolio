@@ -55,7 +55,8 @@ private:
 	AttackEffect* Effect_;
 	Bar* Judge_Bar;
 	Bar* BarList[3];
-
+	float BarTime_;
+	int BarCount_;
 
 	float4 FightButtonDir_;
 	float4 ActionButtonDir_;

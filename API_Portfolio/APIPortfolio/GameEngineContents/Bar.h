@@ -44,4 +44,10 @@ public:
 	{
 		return Damage_;
 	}
+
+
+	void SetIsKeyDownTrue()
+	{
+		IsKeyDown = true;;
+	}
 };

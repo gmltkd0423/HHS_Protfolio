@@ -40,7 +40,7 @@ void Bar::Start()
 
 	if (false == GameEngineInput::GetInst()->IsKey("BarKey_Down"))
 	{
-		GameEngineInput::GetInst()->CreateKey("BarKey_Down", VK_SPACE);
+		GameEngineInput::GetInst()->CreateKey("BarKey_Down", 'Z');
 	}
 }
 
@@ -60,10 +60,11 @@ void Bar::Update()
 		
 	}
 
-	if (0.0f >= Timer_)
+	if (0 >= Timer_)
 	{
 		Off();
 	}
+
 	SetMove(MoveDir_);
 	CheckJudgMent();
 }
@@ -81,47 +82,47 @@ void Bar::CheckJudgMent()
 	float4 Pos_ = GetPosition();
 	int Color = AttackBar_ColMap->GetImagePixel(Pos_);
 
-	if (false == KeyCheck_ && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
-	{
-		if (KeyDownCount_ == MyBarCount_)
-		{
-			KeyCheck_ = true;
-			KeyDownCount_++;
+	//if (false == KeyCheck_ && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
+	//{
+	//	if (KeyDownCount_ == MyBarCount_)
+	//	{
+	//		KeyCheck_ = true;
+	//		KeyDownCount_++;
 
-			if (RGB(255, 255, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
+			if (MyBarCount_ == KeyDownCount_ &&  RGB(255, 255, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
 				BarRenderer->ChangeAnimation("BarAni");
 				GameEngineRandom Ran;
 				int Randomint = Ran.RandomInt(0, 30);
 				Damage_ += Randomint;
-				IsKeyDown = true;
+				KeyDownCount_++;
 				MoveDir_ = float4::ZERO;
 
 			}
-			else if (RGB(255, 0, 0) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
+			else if (MyBarCount_ == KeyDownCount_ && RGB(255, 0, 0) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
 				BarRenderer->ChangeAnimation("BarAni");
 				GameEngineRandom Ran;
 				int Randomint = Ran.RandomInt(30, 60);
 				Damage_ += Randomint;
-				IsKeyDown = true;
+				KeyDownCount_++;
 				MoveDir_ = float4::ZERO;
 			}
-			else if (RGB(0, 0, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
+			else if (MyBarCount_ == KeyDownCount_ && RGB(0, 0, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
 				BarRenderer->ChangeAnimation("BarAni");
 				GameEngineRandom Ran;
 				int Randomint = Ran.RandomInt(60, 100);
 				Damage_ += Randomint;
-				IsKeyDown = true;
+				KeyDownCount_++;
 				MoveDir_ = float4::ZERO;
 			}
 
-			return;
-		}
+	//		return;
+	//	}
 
-		//b++;
-	}
-	return;
+	//	//b++;
+	//}
+	//return;
 
 }
