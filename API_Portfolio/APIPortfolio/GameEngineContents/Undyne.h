@@ -32,6 +32,7 @@ private:
 
 	float4 MoveDir_;
 	float4 Pos_;
+	float4 RightPos_;
 
 public:
 	void Hurt();

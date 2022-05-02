@@ -61,29 +61,31 @@ void Undyne::Shake()
 		if (false == IsShake)
 		{
 			Pos_ = GetPosition();
+			RightPos_.x = GetPosition().x + 100.0f;
+			MoveDir_.x = GetPosition().x + 50.0f - Pos_.x;
 		}
 
 		IsShake = true;
 		if (0.0f <= Timer_)
 		{
+			GameEngineRandom Ran;
+			float Randomfloat = Ran.RandomInt(1.0f, 4.0f);
 			Timer_ -= GameEngineTime::GetDeltaTime();
 			Time_ -= GameEngineTime::GetDeltaTime();
-			if (0.1f <= Time_)
+
+			if (GetPosition().x <= RightPos_.x)
 			{
+				
+				//MoveDir_.x = GetPosition().x + 50.0f - Pos_.x;
+				MoveDir_.Normal2D();
+				SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 1000.0f);
+			}
+			//SetPosition( {GetPosition().x + Randomfloat,GetPosition().y});
 			
-				GameEngineRandom Ran;
-				float Randomfloat = Ran.RandomInt(1.0f, 2.0f);
-				//float x  = sin(Randomfloat * 10.0f)* powf(0.5f, Randomfloat);
-				SetPosition( {GetPosition().x + Randomfloat,GetPosition().y});
-			}
-			else if (0.0f >= Time_)
-			{
-				Time_ = 0.2f;
-				GameEngineRandom Ran;
-				float Randomfloat = Ran.RandomInt(1.0f, 2.0f);
-				//float x = sin(Randomfloat * 10.0f) * powf(0.5f, Randomfloat);
-				SetPosition({ GetPosition().x - Randomfloat,GetPosition().y });
-			}
+		
+	
+			//	SetPosition({ GetPosition().x - Randomfloat,GetPosition().y });
+\
 
 			if (0.0f >= Timer_)
 			{
@@ -95,5 +97,6 @@ void Undyne::Shake()
 				UndyneRenderer->ChangeAnimation("Idle");
 			}
 		}
+		//IsHurt = false;
 	}
 }

@@ -56,6 +56,7 @@ void Bar::Update()
 	else
 	{
 		MoveDir_ = float4::ZERO;
+		BarRenderer->ChangeAnimation("BarAni");
 		Timer_ -= GameEngineTime::GetDeltaTime();
 		
 	}
@@ -91,7 +92,6 @@ void Bar::CheckJudgMent()
 
 			if (MyBarCount_ == KeyDownCount_ &&  RGB(255, 255, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
-				BarRenderer->ChangeAnimation("BarAni");
 				GameEngineRandom Ran;
 				int Randomint = Ran.RandomInt(0, 30);
 				Damage_ += Randomint;
@@ -101,7 +101,6 @@ void Bar::CheckJudgMent()
 			}
 			else if (MyBarCount_ == KeyDownCount_ && RGB(255, 0, 0) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
-				BarRenderer->ChangeAnimation("BarAni");
 				GameEngineRandom Ran;
 				int Randomint = Ran.RandomInt(30, 60);
 				Damage_ += Randomint;
@@ -110,7 +109,6 @@ void Bar::CheckJudgMent()
 			}
 			else if (MyBarCount_ == KeyDownCount_ && RGB(0, 0, 255) == Color && true == GameEngineInput::GetInst()->IsDown("BarKey_Down"))
 			{
-				BarRenderer->ChangeAnimation("BarAni");
 				GameEngineRandom Ran;
 				int Randomint = Ran.RandomInt(60, 100);
 				Damage_ += Randomint;
