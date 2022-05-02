@@ -16,9 +16,10 @@ BattleLevel::BattleLevel() :
 	ActionButtonDir_({}),
 	MercyButtonDir_({}),
 	ItemButtonDir_({}),
-	Timer_(0.2f),
-	BarTime_(0.4f),
-	BarCount_(0)
+	Timer_(0),
+	BarTime_(0),
+	BarCount_(0),
+	EffectOn(false)
 {
 }
 
@@ -186,26 +187,30 @@ void BattleLevel::UIKeyMove()
 
 	if (true == GameEngineInput::GetInst()->IsDown("UI_Left"))
 	{
-		float4 Dir = Player::MainPlayer->GetPosition();
-		Dir.x -= 265.0f;
-		Player::MainPlayer->SetPosition(Dir);
-
 		if (191.0f >= Player::MainPlayer->GetPosition().x)
 		{
 			Player::MainPlayer->SetPosition({ 191,680 });
+			return;
 		}
+		float4 Dir = Player::MainPlayer->GetPosition();
+		Dir.x -= 265.0f;
+		Player::MainPlayer->SetPosition(Dir);
+		EffectSound_.SoundPlayOneShot("snd_squeak.wav");
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("UI_Right"))
 	{
-		float4 Dir = Player::MainPlayer->GetPosition();
-		Dir.x += 265.0f;
-		Player::MainPlayer->SetPosition(Dir);
-
 		if (986.0f <= Player::MainPlayer->GetPosition().x)
 		{
 			Player::MainPlayer->SetPosition({ 986,680 });
+			return;
 		}
+
+		float4 Dir = Player::MainPlayer->GetPosition();
+		Dir.x += 265.0f;
+		Player::MainPlayer->SetPosition(Dir);
+		EffectSound_.SoundPlayOneShot("snd_squeak.wav");
+
 	}
 }
 
@@ -216,21 +221,25 @@ void BattleLevel::SelectButton()
 	{
 		ChangeMenuState(MENUSTATE::FIGHTMENU);
 		FightButtonDir_ = Player::MainPlayer->GetPosition();
+		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbActionButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
 		ChangeMenuState(MENUSTATE::ACTIONMENU);
 		ActionButtonDir_ = Player::MainPlayer->GetPosition();
+		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbMercyButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
 		ChangeMenuState(MENUSTATE::MERCYMENU);
 		MercyButtonDir_ = Player::MainPlayer->GetPosition();
+		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbItemButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
 		ChangeMenuState(MENUSTATE::ITEMMENU);
 		ItemButtonDir_ = Player::MainPlayer->GetPosition();
+		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 
 }
@@ -259,6 +268,13 @@ void BattleLevel::CheckEscape()
 	}
 
 
+}
+
+void BattleLevel::ShakeActor()
+{
+	Button_->SetIsShakeTrue();
+	TextBox->SetIsShakeTrue();
+	AttackBar_->SetIsShakeTrue();
 }
 
 void BattleLevel::MenuSelectStart()
@@ -299,9 +315,10 @@ void BattleLevel::FightMenuStart()
 	Bar::BarCount_ = 0;
 	Bar::KeyDownCount_ = 0;
 	Bar::Damage_ = 0;
-	Timer_ = 0.4f;
+	Timer_ = 0.8f;
 	HurtEnd = false;
 	BarCount_ = 0;
+	EffectOn = false;
 }
 
 void BattleLevel::FightMenuUpdate()
@@ -319,15 +336,18 @@ void BattleLevel::FightMenuUpdate()
 		}
 	}*/
 
-	if (BarCount_ == 2 && HurtEnd ==false )
+	if (true == EffectOn)
 	{
 		Effect_->On();
+		ShakeActor();
 		Timer_ -= GameEngineTime::GetDeltaTime();
 		if (0 >= Timer_)
 		{
+			EffectSound_.SoundPlayOneShot("snd_damage.wav");
 			Effect_->Off();
 			Undyne_->Hurt();
 			HurtEnd = true;
+			EffectOn = false;
 		}
 	}
 
@@ -336,6 +356,11 @@ void BattleLevel::FightMenuUpdate()
 		BarCount_ = Count_ - 3;
 		BarList[BarCount_]->SetIsKeyDownTrue();
 		Count_++;
+
+		if (BarCount_ == 2)
+		{
+			EffectOn = true;
+		}
 	}
 
 	int a = Bar::Damage_;

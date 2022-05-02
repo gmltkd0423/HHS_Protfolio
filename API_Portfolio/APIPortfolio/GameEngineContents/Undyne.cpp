@@ -64,8 +64,8 @@ void Undyne::Shake()
 		if (false == IsShake)
 		{
 			Pos_ = GetPosition();
-			RightPos_.x = GetPosition().x + 50.0f;
-			LeftPos_.x = GetPosition().x - 50.0f;
+			RightPos_.x = GetPosition().x + 30.0f;
+			LeftPos_.x = GetPosition().x - 30.0f;
 			//MoveDir_.x = GetPosition().x + 50.0f - Pos_.x;
 		}
 
@@ -85,7 +85,7 @@ void Undyne::Shake()
 				if (GetPosition().x >= RightPos_.x)
 				{
 					IsRight = true;
-					RightPos_.x -= 10.0f;
+					RightPos_.x -= 5.0f;
 					//MoveDir_.x = GetPosition().x + 50.0f - Pos_.x;
 
 					IsLeft = false;
@@ -99,7 +99,7 @@ void Undyne::Shake()
 				{
 					IsLeft = true;
 					IsRight = false;
-					LeftPos_.x += 10.0f;
+					LeftPos_.x += 5.0f;
 					Time_ = 0.0f;
 				}
 			}
@@ -117,9 +117,8 @@ void Undyne::Shake()
 				SetPosition(Pos_);
 				IsShake = false;
 				IsHurt = false;
-				UndyneRenderer->ChangeAnimation("Idle");
+				//UndyneRenderer->ChangeAnimation("Idle");
 			}
 		}
-		//IsHurt = false;
 	}
 }

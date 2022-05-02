@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
 class AttackEffect	:public GameEngineActor
@@ -21,7 +22,7 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* EffectRenderer;
-
+	GameEngineSound EffectSound_;
 
 private:
 	bool IsHurt;

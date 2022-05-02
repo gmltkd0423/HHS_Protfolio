@@ -6,6 +6,7 @@
 #include "AttackBar.h"
 #include "Bar.h"
 #include "AttackEffect.h"
+#include<GameEngineBase/GameEngineSound.h>
 
 enum class MENUSTATE
 {
@@ -57,6 +58,8 @@ private:
 	Bar* BarList[3];
 	float BarTime_;
 	int BarCount_;
+	GameEngineSound EffectSound_;
+
 
 	float4 FightButtonDir_;
 	float4 ActionButtonDir_;
@@ -65,12 +68,14 @@ private:
 
 	float Timer_;
 	bool HurtEnd;
+	bool EffectOn;
 
 
 private:
 	void UIKeyMove();
 	void SelectButton();
 	void CheckEscape();
+	void ShakeActor();
 
 	void UISetting();
 	void CreateBar();
@@ -91,5 +96,7 @@ private:
 
 	void ActionMenuStart();
 	void ActionMenuUpdate();
+
+	
 };
 

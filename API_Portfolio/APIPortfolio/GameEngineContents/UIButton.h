@@ -40,13 +40,26 @@ private:
 	bool bActionButton;
 	bool bMercyButton;
 	bool bItemButton;
+	float Timer_;
+	float Time_;
+	float4 MoveDir_;
+	float4 MoveDir2_;
+	float4 RightDownPos_;
+	float4 LeftTopPos_;
+	float4 Pos_;
+
+	bool IsShake;
+	bool SetPos;
+
+	bool IsRightDown;
+	bool IsLeftTop;
 
 
 private:
 	void CheckCollision();
+	void Shake();
 
 public:
-
 	bool GetbFightButton()
 	{
 		return bFightButton;
@@ -65,5 +78,10 @@ public:
 	bool GetbItemButton()
 	{
 		return bItemButton;
+	}
+
+	void SetIsShakeTrue()
+	{
+		IsShake = true;
 	}
 };
