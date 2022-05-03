@@ -3,6 +3,8 @@
 #include "Player.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include "SoundPlayer.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 SpearArrow::SpearArrow() :
 	Timer_(1.0f),
@@ -35,6 +37,7 @@ void SpearArrow::Update()
 	{
 		if(false == LookPlayer)
 		{
+			SpearSound.SoundPlayOneShot("snd_arrow.wav");
 			float Degree = float4::VectorXYtoDegree(GetPosition(), Player::MainPlayer->GetPosition());
 			SpearRenderer->SetRotationZ(Degree + 180.0f);
 			MoveDir_ = (Player::MainPlayer->GetPosition() - GetPosition()) * GameEngineTime::GetDeltaTime() * 1.3f;
@@ -45,6 +48,7 @@ void SpearArrow::Update()
 	}
 	else
 	{
+
 		SpearRenderer->SetRotationZ(Angle);
 	}
 }
