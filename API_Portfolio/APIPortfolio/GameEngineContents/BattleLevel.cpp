@@ -219,7 +219,7 @@ void BattleLevel::Pattern1Start()
 	TextBox->SetState(BoxState::Battle2);
 	SpearCount_ = 0;
 	Timer_ = 1.0f;
-	PatternTime_ = 5.0f;
+	PatternTime_ = 10.0f;
 }
 
 void BattleLevel::CreateSpear()
