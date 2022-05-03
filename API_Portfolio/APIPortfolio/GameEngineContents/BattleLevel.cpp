@@ -282,6 +282,7 @@ void BattleLevel::TalkStart()
 	TextCount_ = 1;
 	Texts->IsAllTextOutFalse();
 	Player::MainPlayer->HeartOff();
+	Player::MainPlayer->Stop();
 	TextBox->SetState(BoxState::Text);
 	Undyne_->GetRenderer()->SetAlpha(255);
 }

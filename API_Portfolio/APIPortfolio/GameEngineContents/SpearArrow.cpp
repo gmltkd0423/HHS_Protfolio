@@ -1,8 +1,12 @@
 #include "SpearArrow.h"
 #include "ContentsEnums.h"
+#include "Player.h"
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineTime.h>
 
-SpearArrow::SpearArrow() 
+SpearArrow::SpearArrow() :
+	Timer_(1.0f),
+	LookPlayer(false)
 {
 
 }
@@ -25,8 +29,24 @@ void SpearArrow::Start()
 void SpearArrow::Update()
 {
 	Angle += 180.0f * GameEngineTime::GetDeltaTime();
+	Timer_ -= GameEngineTime::GetDeltaTime();
 
-	SpearRenderer->SetRotationZ(Angle);
+	if (0 >= Timer_)
+	{
+		if(false == LookPlayer)
+		{
+			float Degree = float4::VectorXYtoDegree(GetPosition(), Player::MainPlayer->GetPosition());
+			SpearRenderer->SetRotationZ(Degree + 180.0f);
+			MoveDir_ = (Player::MainPlayer->GetPosition() - GetPosition()) * GameEngineTime::GetDeltaTime() * 1.3f;
+			LookPlayer = true;
+		}
+	
+		SetMove(MoveDir_);
+	}
+	else
+	{
+		SpearRenderer->SetRotationZ(Angle);
+	}
 }
 
 void SpearArrow::Render()

@@ -23,6 +23,11 @@ protected:
 private:
 	GameEngineRenderer* SpearRenderer;
 
+	float Timer_;
 	float Angle;
+
+	float4 MoveDir_;
+
+	bool LookPlayer;
 };
 
