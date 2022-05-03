@@ -24,7 +24,7 @@ void SpearArrow::Start()
 
 void SpearArrow::Update()
 {
-	Angle += 90.0f * GameEngineTime::GetDeltaTime();
+	Angle += 180.0f * GameEngineTime::GetDeltaTime();
 
 	SpearRenderer->SetRotationZ(Angle);
 }
