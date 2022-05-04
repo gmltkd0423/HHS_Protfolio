@@ -8,6 +8,8 @@
 #include "BattleLevelFont.h"
 #include "UINumber.h"
 #include "AttackEffect.h"
+#include "HpBar.h"
+#include "UINumber.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -22,6 +24,7 @@ BattleLevel::BattleLevel() :
 	Timer_(0),
 	BarTime_(0),
 	BarCount_(0),
+	TextCount_(0),
 	EffectOn(false),
 	IsText(false)
 {
@@ -33,6 +36,12 @@ BattleLevel::~BattleLevel()
 
 void BattleLevel::Loading()
 {
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+	}
+
+
 	GameEngineActor* BackGround = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::BACKGROUND);
 	GameEngineRenderer* Back = BackGround->CreateRenderer("BattleLevelBackGround.bmp",  (int)BATTLELEVELORDER::BACKGROUND);
 	float4 Half = Back->GetImage()->GetScale().Half();
@@ -57,9 +66,21 @@ void BattleLevel::Loading()
 	Effect_->SetPosition({ 650,185 });
 	Effect_->Off();
 
+	PlayerHpBar = CreateActor<HpBar>((int)BATTLELEVELORDER::ACTOR);
+	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
+	PlayerHpBar->SetActorMaxHp(Player::MainPlayer->GetMaxHp());
+	PlayerHpBar->SetPosition({ 640,650 });
 
-	UINumber* Number = CreateActor<UINumber>((int)BATTLELEVELORDER::ACTOR);
-	Number->SetPosition({ 400,200 });
+
+	UndyneHpBar = CreateActor < HpBar>((int)BATTLELEVELORDER::ACTOR);
+	UndyneHpBar->SetActorHp(Undyne_->GetHp());
+	UndyneHpBar->SetActorMaxHp(Undyne_->GetMaxHp());
+	UndyneHpBar->SetPosition({ 640,300 });
+
+
+	DamageNumber = CreateActor<UINumber>((int)BATTLELEVELORDER::ACTOR);
+	DamageNumber->SetPosition({ 400,200 });
+	DamageNumber->Off();
 
 
 	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
@@ -284,7 +305,6 @@ void BattleLevel::Patter1Update()
 
 void BattleLevel::TalkStart()
 {
-	TextCount_ = 1;
 	Texts->IsAllTextOutFalse();
 	Player::MainPlayer->HeartOff();
 	Player::MainPlayer->Stop();
@@ -297,6 +317,15 @@ void BattleLevel::TalkStart()
 
 void BattleLevel::TalkUpdate()
 {
+
+	if (TextCount_ == 1)
+	{
+		Texts->SetCount(1);
+		Texts->IsAllTextOutFalse();
+		Texts->SetTextCount(0);
+		//TextCount_++;
+	}
+
 	if (true == TextBox->GetIsChange())
 	{
 		Texts->On();
@@ -512,10 +541,21 @@ void BattleLevel::FightMenuStart()
 	EffectOn = false;
 	IsText = false;
 	ShakeTimer_ = 0.5f;
+	Texts->Off();
 }
 
 void BattleLevel::FightMenuUpdate()
 {
+	////상자 모양 변경
+	//if (true == HurtEnd)
+	//{
+	//	AttackBar_->GetRenderer()->Off();
+	//	ChangeFightState(FIGHTSTATE::Pattern1);
+	//	HurtEnd = false;
+	//	DamageNumber->Off();
+	//}
+
+	//
 	CreateBar();
 
 
@@ -530,6 +570,10 @@ void BattleLevel::FightMenuUpdate()
 			EffectSound_.SoundPlayOneShot("snd_damage.wav");
 			Effect_->Off();
 			Undyne_->Hurt();
+			Undyne_->GetDamaged(Bar::Damage_);
+			UndyneHpBar->SetActorHp(Undyne_->GetHp());
+			DamageNumber->SetValue(Bar::Damage_);
+			DamageNumber->On();
 			HurtEnd = true;  // 흔들리는게 다끝나고나면
 			EffectOn = false;
 		}
@@ -549,13 +593,6 @@ void BattleLevel::FightMenuUpdate()
 	}
 
 
-	//상자 모양 변경
-	if (true == HurtEnd)
-	{
-		AttackBar_->GetRenderer()->Off();
-		ChangeFightState(FIGHTSTATE::Pattern1);
-		HurtEnd = false;
-	}
 
 
 

@@ -20,7 +20,15 @@ protected:
 	void Update() override;
 	void Render() override;
 private:
-	GameEngineRenderer* Number1;
-	GameEngineRenderer* Number2;
+	GameEngineRenderer* Number[3];
+
+	int value_;
+
+
+public:
+	void SetValue(int _value)
+	{
+		value_ = _value;
+	}
 };
 

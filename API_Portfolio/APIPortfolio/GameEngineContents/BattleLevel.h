@@ -9,6 +9,8 @@
 #include "BattleLevelFont.h"
 #include "UINumber.h"
 #include "SpearArrow.h"
+#include "HpBar.h"
+#include "UINumber.h"
 #include<GameEngineBase/GameEngineSound.h>
 
 enum class MENUSTATE
@@ -65,6 +67,11 @@ private:
 	Bar* Judge_Bar;
 	Bar* BarList[3];
 	SpearArrow* Spear_;
+	HpBar* PlayerHpBar;
+	HpBar* UndyneHpBar;
+	UINumber* DamageNumber;
+
+
 	float BarTime_;
 	int BarCount_;
 	int TextCount_;

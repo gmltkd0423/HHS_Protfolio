@@ -1,6 +1,12 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
+enum class HpBarState
+{
+	Player,
+	Undyne
+};
+
 
 // Ό³Έν :
 class HpBar	: public GameEngineActor
@@ -23,9 +29,33 @@ protected:
 private:
 	GameEngineRenderer* HpBarRed_;
 	GameEngineRenderer* HpBarYellow_;
+	HpBarState CurState_;
 
-	int PlayerHp_;
-	int PlayerMaxHp_;
+
+	int Hp_;
+	int MaxHp_;
+
+	int ActorHp;
+	int ActorMaxHp;
+
+public:
+	inline void SetState(HpBarState _State)
+	{
+		CurState_ = _State;
+	}
+
+
+	inline void SetActorHp(int _Hp)
+	{
+		ActorHp = _Hp;
+	}
+
+
+	inline void SetActorMaxHp(int _MaxHp)
+	{
+		ActorMaxHp = _MaxHp;
+	}
+
 
 };
 

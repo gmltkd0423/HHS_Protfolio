@@ -12,7 +12,11 @@ Undyne::Undyne() :
 	Time_(0.0f),
 	Timer_(1.0f),
 	IsRight(false),
-	IsLeft(false)
+	IsLeft(false),
+	Hp(1000.0f),
+	MaxHp(1000.0f),
+	IsDamaged(false)
+
 {
 }
 
@@ -51,6 +55,14 @@ void Undyne::Idle()
 
 	UndyneRenderer->ChangeAnimation("Idle");
 	IsIdle = true;
+
+}
+
+void Undyne::GetDamaged(float _Damage)
+{
+	Hp -= _Damage;
+
+
 
 }
 

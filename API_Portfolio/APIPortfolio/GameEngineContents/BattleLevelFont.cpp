@@ -62,7 +62,11 @@ void BattleLevelFont::Render()
 
 void BattleLevelFont::Texts()
 {
-	if (1 == Count_)
+	if (0 == Count_)
+	{
+		Text_ = L"영웅이 등장했다...";
+	}
+	else if (1 == Count_)
 	{
 		Text_ = L"* 바람이 울부짖고 있다...";
 	}

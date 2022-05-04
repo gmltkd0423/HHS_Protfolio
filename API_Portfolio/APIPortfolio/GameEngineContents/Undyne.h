@@ -23,13 +23,16 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* UndyneRenderer;
+	float Hp;
+	float MaxHp;
+
 
 	float Time_;
 	float Timer_;
 	bool IsHurt;
 	bool IsIdle;
 	bool IsShake;
-
+	bool IsDamaged;
 
 	bool IsRight;
 	bool IsLeft;
@@ -42,6 +45,7 @@ private:
 public:
 	void Hurt();
 	void Idle();
+	void GetDamaged(float _Damage);
 
 	GameEngineRenderer* GetRenderer()
 	{
@@ -57,6 +61,17 @@ public:
 		return IsIdle;
 	}
 
+	float GetHp()
+	{
+		return Hp;
+	}
+
+	float GetMaxHp()
+	{
+		return MaxHp;
+	}
+
 private:
 	void Shake();
+
 };

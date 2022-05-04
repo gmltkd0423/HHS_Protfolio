@@ -38,6 +38,11 @@ FloweyBattleLevel::~FloweyBattleLevel()
 
 void FloweyBattleLevel::Loading()
 {
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
+	}
+
 	//백그라운드
 	{
 		GameEngineActor* BackGround = CreateActor<BattleLevelActor>();
@@ -149,6 +154,8 @@ void FloweyBattleLevel::Loading()
 		//플레이어 hp바
 		HpBar_ = CreateActor<HpBar>((int)BATTLELEVELORDER::ACTOR);
 		HpBar_->SetPosition({ 590, 600 });
+		HpBar_->SetActorHp(Player::MainPlayer->GetHp());
+		HpBar_->SetActorMaxHp(Player::MainPlayer->GetMaxHp());
 
 	}
 
@@ -377,6 +384,7 @@ void FloweyBattleLevel::Pattern1Update()
 	////플레이어가 맞았는지 검사
 	if (1 == Player::MainPlayer->GetHp())
 	{
+		HpBar_->SetActorHp(Player::MainPlayer->GetHp());
 		for (int i = 0; i < 5; ++i)
 		{
 			Bullets_[i]->Off();
