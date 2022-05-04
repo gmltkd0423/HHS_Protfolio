@@ -23,8 +23,8 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* UndyneRenderer;
-	float Hp;
-	float MaxHp;
+	int Hp;
+	int MaxHp;
 
 
 	float Time_;
@@ -45,7 +45,7 @@ private:
 public:
 	void Hurt();
 	void Idle();
-	void GetDamaged(float _Damage);
+	void GetDamaged(int _Damage);
 
 	GameEngineRenderer* GetRenderer()
 	{
@@ -61,12 +61,12 @@ public:
 		return IsIdle;
 	}
 
-	float GetHp()
+	int GetHp()
 	{
 		return Hp;
 	}
 
-	float GetMaxHp()
+	int GetMaxHp()
 	{
 		return MaxHp;
 	}

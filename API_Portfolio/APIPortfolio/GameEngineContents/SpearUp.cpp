@@ -4,7 +4,7 @@
 #include<GameEngineBase/GameEngineTime.h>
 
 SpearUp::SpearUp()	:
-	Value(254)
+	Value(255)
 {
 }
 
@@ -17,7 +17,7 @@ void SpearUp::Start()
 	SpearRenderer = CreateRenderer((int)BATTLELEVELORDER::UPARROW);
 	SpearRenderer->SetImage("Spear_Up.bmp");
 	SpearRenderer->SetTransColor(RGB(0, 0, 0));
-
+	SpearSound.SoundPlayOneShot("snd_arrow.wav");
 }
 
 void SpearUp::Update()

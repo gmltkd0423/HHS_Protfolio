@@ -100,4 +100,10 @@ public:
 	{
 		ChangeState(_State);
 	}
+
+
+	GameEngineRenderer* GetRenderer()
+	{
+		return TextBox;
+	}
 };

@@ -24,7 +24,7 @@ private:
 
 	int value_;
 
-
+	 
 public:
 	void SetValue(int _value)
 	{

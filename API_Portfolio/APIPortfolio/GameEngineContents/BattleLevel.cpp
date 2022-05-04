@@ -10,6 +10,7 @@
 #include "AttackEffect.h"
 #include "HpBar.h"
 #include "UINumber.h"
+#include "Arrow.h"
 #include "SpearUp.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
@@ -28,7 +29,8 @@ BattleLevel::BattleLevel() :
 	TextCount_(0),
 	EffectOn(false),
 	IsText(false),
-	NumberUIOn(false)
+	NumberUIOn(false),
+	PatternCount_(0)
 {
 }
 
@@ -48,10 +50,10 @@ void BattleLevel::Loading()
 	Back->SetPivot(Half);
 
 	//총알 가리기용 이미지
-	GameEngineActor* BackGround2 = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::TEXTBOX);
-	GameEngineRenderer* Back2 = BackGround2->CreateRenderer("BattleLevelBackGround.bmp", (int)BATTLELEVELORDER::TEXTBOX);
+	BackGround2 = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::TEXTBOX);
+	Back2 = BackGround2->CreateRenderer("BattleLevelBackGround.bmp", (int)BATTLELEVELORDER::TEXTBOX);
 	float4 Half2 = Back2->GetImage()->GetScale().Half();
-	Back2->SetPivot({ Half2.x,Half2.y + 530.0f });
+	Back2->SetPivot(Half2);
 
 
 	Undyne_ = CreateActor<Undyne>((int)BATTLELEVELORDER::TEXTBOX);
@@ -330,6 +332,9 @@ void BattleLevel::Pattern2Start()
 	SpearUpCount_ = 0;
 	Timer_ = 1.0f;
 	PatternTime_ = 10.0f;
+	float4 Half2 = Back2->GetImage()->GetScale().Half();
+	Back2->SetPivot({ Half2.x,Half2.y + 530.0f });
+	TextBox->GetRenderer()->SetTransColor(RGB(0, 0, 0));
 }
 
 void BattleLevel::CreateUpSpear()
@@ -362,6 +367,8 @@ void BattleLevel::CreateUpSpear()
 
 }
 
+
+
 void BattleLevel::Pattern2Update()
 {
 
@@ -384,6 +391,9 @@ void BattleLevel::Pattern2Update()
 
 	if (SpearUpCount_ == 10)
 	{
+		float4 Half2 = Back2->GetImage()->GetScale().Half();
+		Back2->SetPivot( Half2 );
+		TextBox->GetRenderer()->SetTransColor(RGB(255, 0, 0));
 		ChangeFightState(FIGHTSTATE::Talk);
 	}
 
@@ -393,10 +403,54 @@ void BattleLevel::Pattern2Update()
 //패턴3/////////////////////////////////////////////////////////////////////
 void BattleLevel::Pattern3Start()
 {
+	TextBox->SetState(BoxState::Battle3);
+	ArrowCount_ = 0;
+	Timer_ = 2.0f;
+	PatternTime_ = 2.0f;
 }
+void BattleLevel::CreateArrow()
+{
+	if (ArrowCount_ == 20)
+	{
+		return;
+	}
 
+	Timer_ -= GameEngineTime::GetDeltaTime();
+	if (0 <= Timer_)
+	{
+		return;
+	}
+
+	Arrow* Arrow_ = CreateActor<Arrow>((int)BATTLELEVELORDER::ACTOR);
+	ArrowCount_++;
+	Timer_ = 0.6f;
+}
 void BattleLevel::Pattern3Update()
 {
+	if (true == TextBox->GetIsChange())
+	{
+		Player::MainPlayer->SetPosition(TextBox->GetPosition());
+		TextBox->SetIsChangeFalse();
+		Undyne_->GetRenderer()->ChangeAnimation("Idle");
+		Undyne_->GetRenderer()->SetAlpha(150);
+		TextBox->SetState(BoxState::None);
+	}
+
+
+	if (false == TextBox->GetIsChange())
+	{
+		CreateArrow();
+	}
+
+	if (ArrowCount_ >= 20)
+	{
+		PatternTime_ -= GameEngineTime::GetDeltaTime();
+		if(0 >= PatternTime_)
+		{
+			ChangeFightState(FIGHTSTATE::Talk);
+		}
+	}
+
 }
 
 
@@ -712,9 +766,27 @@ void BattleLevel::FightMenuUpdate()
 
 				NumberUIOn = false;
 				AttackBar_->GetRenderer()->Off();
-				ChangeFightState(FIGHTSTATE::Pattern1);
 				DamageNumber->Off();
 				UndyneHpBar->Off();
+
+				if (PatternCount_ == 0)
+				{
+					ChangeFightState(FIGHTSTATE::Pattern1);
+					PatternCount_++;
+				}
+				else if (PatternCount_ == 1)
+				{
+					PatternCount_++;
+					ChangeFightState(FIGHTSTATE::Pattern2);
+				}
+				else if(PatternCount_==2)
+				{
+					ChangeFightState(FIGHTSTATE::Pattern3);
+				}
+				else
+				{
+					ChangeFightState(FIGHTSTATE::Pattern1);
+				}
 			}
 		}
 	}

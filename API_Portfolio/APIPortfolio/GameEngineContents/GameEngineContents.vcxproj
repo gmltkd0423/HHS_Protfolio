@@ -167,6 +167,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrow.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="AttackBar.h" />
     <ClInclude Include="AttackEffect.h">
       <SubType>
@@ -269,6 +273,10 @@
     <ClInclude Include="Undyne.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Arrow.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="AttackBar.cpp" />
     <ClCompile Include="AttackEffect.cpp">
       <SubType>

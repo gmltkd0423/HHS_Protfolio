@@ -177,6 +177,14 @@ void Undertale::GameInit()
 	GameEngineImage* Spear = GameEngineImageManager::GetInst()->Find("spear2.bmp");
 	Spear->Cut({ 129,100 });
 
+	GameEngineImage* ArrowRed = GameEngineImageManager::GetInst()->Find("Arrow_Red.bmp");
+	ArrowRed->Cut({ 25,25 });
+
+	GameEngineImage* ArrowBlue = GameEngineImageManager::GetInst()->Find("Arrow_Blue.bmp");
+	ArrowBlue->Cut({ 25,25 });
+
+	GameEngineImage* ArrowYellow = GameEngineImageManager::GetInst()->Find("Arrow_Yellow.bmp");
+	ArrowYellow->Cut({ 21,22 });
 
 	// UI
 	{

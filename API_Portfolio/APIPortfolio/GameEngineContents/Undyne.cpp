@@ -13,11 +13,12 @@ Undyne::Undyne() :
 	Timer_(1.0f),
 	IsRight(false),
 	IsLeft(false),
-	Hp(2000.0f),
-	MaxHp(2000.0f),
+	Hp(2000),
+	MaxHp(2000),
 	IsDamaged(false)
 
 {
+
 }
 
 Undyne::~Undyne()
@@ -58,7 +59,7 @@ void Undyne::Idle()
 
 }
 
-void Undyne::GetDamaged(float _Damage)
+void Undyne::GetDamaged(int _Damage)
 {
 	Hp -= _Damage;
 
@@ -85,7 +86,7 @@ void Undyne::Shake()
 		if (0.0f <= Timer_)
 		{
 			GameEngineRandom Ran;
-			float Randomfloat = Ran.RandomInt(1.0f, 4.0f);
+			float Randomfloat = Ran.RandomFloat(1.0f, 4.0f);
 			Timer_ -= GameEngineTime::GetDeltaTime();
 			Time_ += GameEngineTime::GetDeltaTime();
 

@@ -73,9 +73,15 @@ private:
 	UINumber* DamageNumber;
 
 
+	GameEngineActor* BackGround2;
+	GameEngineRenderer* Back2;
+
 	float BarTime_;
 	int BarCount_;
 	int TextCount_;
+	int ArrowCount_;
+
+	int PatternCount_;
 	float ShakeTimer_;
 	GameEngineSound EffectSound_;
 
@@ -99,9 +105,11 @@ private:
 	void ShakeActor();
 
 	void UISetting();
+
 	void CreateBar();
 	void CreateSpear();
 	void CreateUpSpear();
+	void CreateArrow();
 
 	int Count_;
 	int SpearCount_;
