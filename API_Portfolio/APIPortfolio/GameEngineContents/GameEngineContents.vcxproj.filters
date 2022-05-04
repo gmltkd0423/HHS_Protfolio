@@ -92,6 +92,9 @@
     <ClInclude Include="SpearArrow.h">
       <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClInclude>
+    <ClInclude Include="UINumber.h">
+      <Filter>Actor\UINumber</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -185,6 +188,9 @@
     <ClCompile Include="SpearArrow.cpp">
       <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="UINumber.cpp">
+      <Filter>Actor\UINumber</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -264,6 +270,9 @@
     </Filter>
     <Filter Include="Level\BattleLevel\Actor\Font">
       <UniqueIdentifier>{996998d4-48b7-43bc-8d81-53d9754ec465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UINumber">
+      <UniqueIdentifier>{602c2bb8-9e80-41c5-b59e-2205c061da83}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

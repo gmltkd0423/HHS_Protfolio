@@ -7,6 +7,7 @@
 #include "Bar.h"
 #include "AttackEffect.h"
 #include "BattleLevelFont.h"
+#include "UINumber.h"
 #include "SpearArrow.h"
 #include<GameEngineBase/GameEngineSound.h>
 

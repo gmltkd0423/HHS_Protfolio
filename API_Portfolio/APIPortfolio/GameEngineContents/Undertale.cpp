@@ -216,6 +216,9 @@ void Undertale::GameInit()
 		GameEngineImage* Effect = GameEngineImageManager::GetInst()->Find("Attack_Effect.bmp");
 		Effect->Cut({ 100,147 });
 
+		GameEngineImage* Number = GameEngineImageManager::GetInst()->Find("UI_Number.bmp");
+		Number->Cut({ 28,28 });
+
 	}
 
 
@@ -254,7 +257,7 @@ void Undertale::GameInit()
 	CreateLevel<BattleLevel>("BattleLevel");
 	CreateLevel<EndingLevel>("EndingLevel");
 	CreateLevel<FloweyBattleLevel>("FloweyBattleLevel");
-	ChangeLevel("TitleLevel");
+	ChangeLevel("BattleLevel");
 
 }
 

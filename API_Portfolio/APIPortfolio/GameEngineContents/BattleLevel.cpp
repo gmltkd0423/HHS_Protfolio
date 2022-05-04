@@ -6,6 +6,7 @@
 #include "AttackBar.h"
 #include "SoundPlayer.h"
 #include "BattleLevelFont.h"
+#include "UINumber.h"
 #include "AttackEffect.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
@@ -55,6 +56,10 @@ void BattleLevel::Loading()
 	Effect_ = CreateActor< AttackEffect>((int)BATTLELEVELORDER::ACTOR);
 	Effect_->SetPosition({ 650,185 });
 	Effect_->Off();
+
+
+	UINumber* Number = CreateActor<UINumber>((int)BATTLELEVELORDER::ACTOR);
+	Number->SetPosition({ 400,400 });
 
 
 	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);

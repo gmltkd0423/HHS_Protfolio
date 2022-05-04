@@ -256,6 +256,10 @@
     </ClInclude>
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UINumber.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Undertale.h">
       <SubType>
       </SubType>
@@ -352,6 +356,10 @@
     </ClCompile>
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UINumber.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Undertale.cpp">
       <SubType>
       </SubType>
