@@ -59,7 +59,7 @@ void BattleLevel::Loading()
 
 
 	UINumber* Number = CreateActor<UINumber>((int)BATTLELEVELORDER::ACTOR);
-	Number->SetPosition({ 400,400 });
+	Number->SetPosition({ 400,200 });
 
 
 	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
