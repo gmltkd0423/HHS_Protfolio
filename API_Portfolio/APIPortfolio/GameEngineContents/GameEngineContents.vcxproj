@@ -242,6 +242,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SpearCircle.h" />
+    <ClInclude Include="SpearUp.h" />
     <ClInclude Include="TitleFont.h">
       <SubType>
       </SubType>
@@ -342,6 +344,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="SpearUp.cpp" />
     <ClCompile Include="TitleFont.cpp">
       <SubType>
       </SubType>

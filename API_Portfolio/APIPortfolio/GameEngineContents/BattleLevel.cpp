@@ -10,6 +10,7 @@
 #include "AttackEffect.h"
 #include "HpBar.h"
 #include "UINumber.h"
+#include "SpearUp.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -26,7 +27,8 @@ BattleLevel::BattleLevel() :
 	BarCount_(0),
 	TextCount_(0),
 	EffectOn(false),
-	IsText(false)
+	IsText(false),
+	NumberUIOn(false)
 {
 }
 
@@ -36,19 +38,23 @@ BattleLevel::~BattleLevel()
 
 void BattleLevel::Loading()
 {
-	if (nullptr == Player::MainPlayer)
-	{
-		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
-	}
 
 
+
+	//백그라운드
 	GameEngineActor* BackGround = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::BACKGROUND);
 	GameEngineRenderer* Back = BackGround->CreateRenderer("BattleLevelBackGround.bmp",  (int)BATTLELEVELORDER::BACKGROUND);
 	float4 Half = Back->GetImage()->GetScale().Half();
 	Back->SetPivot(Half);
 
+	//총알 가리기용 이미지
+	GameEngineActor* BackGround2 = CreateActor<BattleLevelActor>((int)BATTLELEVELORDER::TEXTBOX);
+	GameEngineRenderer* Back2 = BackGround2->CreateRenderer("BattleLevelBackGround.bmp", (int)BATTLELEVELORDER::TEXTBOX);
+	float4 Half2 = Back2->GetImage()->GetScale().Half();
+	Back2->SetPivot({ Half2.x,Half2.y + 530.0f });
 
-	Undyne_ = CreateActor<Undyne>((int)BATTLELEVELORDER::BACKGROUND);
+
+	Undyne_ = CreateActor<Undyne>((int)BATTLELEVELORDER::TEXTBOX);
 	Undyne_->SetPosition({ 720,185 });
 
 	Button_ = CreateActor<UIButton>((int)BATTLELEVELORDER::BOX);
@@ -67,19 +73,16 @@ void BattleLevel::Loading()
 	Effect_->Off();
 
 	PlayerHpBar = CreateActor<HpBar>((int)BATTLELEVELORDER::ACTOR);
-	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
-	PlayerHpBar->SetActorMaxHp(Player::MainPlayer->GetMaxHp());
 	PlayerHpBar->SetPosition({ 640,650 });
 
 
 	UndyneHpBar = CreateActor < HpBar>((int)BATTLELEVELORDER::ACTOR);
-	UndyneHpBar->SetActorHp(Undyne_->GetHp());
-	UndyneHpBar->SetActorMaxHp(Undyne_->GetMaxHp());
-	UndyneHpBar->SetPosition({ 640,300 });
+	UndyneHpBar->SetPosition({ 600,210 });
+	UndyneHpBar->Off();
 
 
 	DamageNumber = CreateActor<UINumber>((int)BATTLELEVELORDER::ACTOR);
-	DamageNumber->SetPosition({ 400,200 });
+	DamageNumber->SetPosition({ 620,150 });
 	DamageNumber->Off();
 
 
@@ -131,6 +134,11 @@ void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->CamPosOff();
 	Player::MainPlayer->SetPosition({ 191.0f, 680.0f });
 	Player::MainPlayer->Stop();
+
+	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
+	PlayerHpBar->SetActorMaxHp(Player::MainPlayer->GetMaxHp());
+	UndyneHpBar->SetActorHp(Undyne_->GetHp());
+	UndyneHpBar->SetActorMaxHp(Undyne_->GetMaxHp());
 
 	SoundPlayer::Bgm_ = GameEngineSound::SoundPlayControl("mus_x_undyne.ogg");
 }
@@ -202,13 +210,16 @@ void BattleLevel::ChangeFightState(FIGHTSTATE _State)
 			Pattern1Start();
 			break;
 		case FIGHTSTATE::Pattern2:
+			Pattern2Start();
 			break;
 		case FIGHTSTATE::Pattern3:
+			Pattern3Start();
 			break;
 		case FIGHTSTATE::Pattern4:
+			Pattern4Start();
 			break;
 		case FIGHTSTATE::None:
-			return;
+			break;
 		default:
 			break;
 		}
@@ -225,13 +236,16 @@ void BattleLevel::FightStateUpdate()
 		TalkUpdate();
 		break;
 	case FIGHTSTATE::Pattern1:
-		Patter1Update();
+		Pattern1Update();
 		break;
 	case FIGHTSTATE::Pattern2:
+		Pattern2Update();
 		break;
 	case FIGHTSTATE::Pattern3:
+		Pattern3Update();
 		break;
 	case FIGHTSTATE::Pattern4:
+		Pattern4Update();
 		break;
 	case FIGHTSTATE::None:
 		return;
@@ -240,12 +254,17 @@ void BattleLevel::FightStateUpdate()
 	}
 }
 
+/// <summary>
+/// ///////////////////////////////////////패턴 1 /////////////////////////////////////
+/// </summary>
+
 void BattleLevel::Pattern1Start()
 {
-	TextBox->SetState(BoxState::Battle2);
+	TextBox->SetState(BoxState::Battle1);
 	SpearCount_ = 0;
 	Timer_ = 1.0f;
 	PatternTime_ = 10.0f;
+	TextBox->SetIsChangeFalse();
 }
 
 void BattleLevel::CreateSpear()
@@ -276,7 +295,7 @@ void BattleLevel::CreateSpear()
 
 
 
-void BattleLevel::Patter1Update()
+void BattleLevel::Pattern1Update()
 {
 	if (true == TextBox->GetIsChange())
 	{
@@ -285,6 +304,7 @@ void BattleLevel::Patter1Update()
 		TextBox->SetIsChangeFalse();
 		Undyne_->GetRenderer()->ChangeAnimation("Idle");
 		Undyne_->GetRenderer()->SetAlpha(150);
+		TextBox->SetState(BoxState::None);
 	}
 
 	if (false == TextBox->GetIsChange())
@@ -301,6 +321,95 @@ void BattleLevel::Patter1Update()
 }
 
 
+/// <summary>
+/// /////////////////패턴2 /////////////////////////////////////////////
+/// </summary>
+void BattleLevel::Pattern2Start()
+{
+	TextBox->SetState(BoxState::Battle2);
+	SpearUpCount_ = 0;
+	Timer_ = 1.0f;
+	PatternTime_ = 10.0f;
+}
+
+void BattleLevel::CreateUpSpear()
+{
+	if (SpearUpCount_ == 10)
+	{
+		return;
+	}
+
+	Timer_ -= GameEngineTime::GetDeltaTime();
+	if (0.0f <= Timer_)
+	{
+		return;
+
+	}
+
+	SpearUpPos[0] = { 607,600 };
+	SpearUpPos[1] = { 640,600 };
+	SpearUpPos[2] = { 673,600 };
+
+	GameEngineRandom Ran;
+	Ran.RandomInt(0, 2);
+	int RandomInt = Ran.RandomInt(0, 2);
+
+
+	SpearUp* Spear = CreateActor<SpearUp>((int)BATTLELEVELORDER::UPARROW);
+	Spear->SetPosition(SpearUpPos[RandomInt]);
+	SpearUpCount_++;
+	Timer_ = 0.7f;
+
+}
+
+void BattleLevel::Pattern2Update()
+{
+
+	if (true == TextBox->GetIsChange())
+	{
+		Player::MainPlayer->SetPosition(TextBox->GetPosition());
+		Player::MainPlayer->Play();
+		TextBox->SetIsChangeFalse();
+		Undyne_->GetRenderer()->ChangeAnimation("Idle");
+		Undyne_->GetRenderer()->SetAlpha(150);
+		TextBox->SetState(BoxState::None);
+	}
+
+
+	if (false == TextBox->GetIsChange())
+	{
+		CreateUpSpear();
+	}
+	
+
+	if (SpearUpCount_ == 10)
+	{
+		ChangeFightState(FIGHTSTATE::Talk);
+	}
+
+}
+
+
+//패턴3/////////////////////////////////////////////////////////////////////
+void BattleLevel::Pattern3Start()
+{
+}
+
+void BattleLevel::Pattern3Update()
+{
+}
+
+
+//패턴4//////////////////////////////////////////////////////////////////////////////
+void BattleLevel::Pattern4Start()
+{
+}
+
+void BattleLevel::Pattern4Update()
+{
+}
+
+
 
 
 void BattleLevel::TalkStart()
@@ -310,6 +419,7 @@ void BattleLevel::TalkStart()
 	Player::MainPlayer->Stop();
 	TextBox->SetState(BoxState::Text);
 	Undyne_->GetRenderer()->SetAlpha(255);
+	TextCount_ = 1;
 }
 
 
@@ -318,20 +428,21 @@ void BattleLevel::TalkStart()
 void BattleLevel::TalkUpdate()
 {
 
-	if (TextCount_ == 1)
-	{
-		Texts->SetCount(1);
-		Texts->IsAllTextOutFalse();
-		Texts->SetTextCount(0);
-		//TextCount_++;
-	}
+	//if (TextCount_ == 1)
+	//{
+	//	Texts->SetCount(TextCount_);
+	//	Texts->IsAllTextOutFalse();
+	//	Texts->SetTextCount(0);
+	//	TextCount_++;
+	//}
 
 	if (true == TextBox->GetIsChange())
 	{
 		Texts->On();
-		Texts->SetCount(1);
+		Texts->SetCount(TextCount_);
 		Texts->SetTextCount(0);
 		TextBox->SetIsChangeFalse();
+		TextBox->SetState(BoxState::None);
 	}
 
 
@@ -546,15 +657,6 @@ void BattleLevel::FightMenuStart()
 
 void BattleLevel::FightMenuUpdate()
 {
-	////상자 모양 변경
-	//if (true == HurtEnd)
-	//{
-	//	AttackBar_->GetRenderer()->Off();
-	//	ChangeFightState(FIGHTSTATE::Pattern1);
-	//	HurtEnd = false;
-	//	DamageNumber->Off();
-	//}
-
 	//
 	CreateBar();
 
@@ -565,17 +667,55 @@ void BattleLevel::FightMenuUpdate()
 		Effect_->On();
 		ShakeActor();
 		Timer_ -= GameEngineTime::GetDeltaTime();
+		//약간의 딜레이후 효과들
 		if (0 >= Timer_)
 		{
 			EffectSound_.SoundPlayOneShot("snd_damage.wav");
 			Effect_->Off();
 			Undyne_->Hurt();
 			Undyne_->GetDamaged(Bar::Damage_);
+			UndyneHpBar->On();
 			UndyneHpBar->SetActorHp(Undyne_->GetHp());
 			DamageNumber->SetValue(Bar::Damage_);
 			DamageNumber->On();
 			HurtEnd = true;  // 흔들리는게 다끝나고나면
 			EffectOn = false;
+		}
+	}
+
+	//상자 모양 변경
+	// 
+	//넘버UI 위아래로 이동
+	{
+		if (HurtEnd == true)
+		{
+			float4 MoveDir = float4::UP * GameEngineTime::GetDeltaTime() * 200.0f;
+			DamageNumber->SetMove(MoveDir);
+			if (120 >= DamageNumber->GetPosition().y)
+			{
+				HurtEnd = false;
+				NumberUIOn = true;
+			}
+		}
+
+		if (NumberUIOn == true)
+		{
+			float4 MoveDir = float4::DOWN * GameEngineTime::GetDeltaTime() * 200.0f;
+			DamageNumber->SetMove(MoveDir);
+			if (180 <= DamageNumber->GetPosition().y)
+			{
+				//언다인 피가 0이하로가면 
+			/*	if (0 >= Undyne_->GetHp())
+				{
+
+				}*/
+
+				NumberUIOn = false;
+				AttackBar_->GetRenderer()->Off();
+				ChangeFightState(FIGHTSTATE::Pattern1);
+				DamageNumber->Off();
+				UndyneHpBar->Off();
+			}
 		}
 	}
 

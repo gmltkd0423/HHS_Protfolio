@@ -38,10 +38,7 @@ FloweyBattleLevel::~FloweyBattleLevel()
 
 void FloweyBattleLevel::Loading()
 {
-	if (nullptr == Player::MainPlayer)
-	{
-		Player::MainPlayer = CreateActor<Player>((int)PLAYLEVELORDER::PLAYER);
-	}
+
 
 	//백그라운드
 	{
@@ -154,8 +151,6 @@ void FloweyBattleLevel::Loading()
 		//플레이어 hp바
 		HpBar_ = CreateActor<HpBar>((int)BATTLELEVELORDER::ACTOR);
 		HpBar_->SetPosition({ 590, 600 });
-		HpBar_->SetActorHp(Player::MainPlayer->GetHp());
-		HpBar_->SetActorMaxHp(Player::MainPlayer->GetMaxHp());
 
 	}
 
@@ -207,6 +202,8 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->IsHeart();
 	TextFont_ = CreateActor<FloweyBattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
+	HpBar_->SetActorHp(Player::MainPlayer->GetHp());
+	HpBar_->SetActorMaxHp(Player::MainPlayer->GetMaxHp());
 
 	ChangeState(PatternState::Talk);
 	//Player::MainPlayer->

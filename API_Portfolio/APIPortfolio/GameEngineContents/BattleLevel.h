@@ -10,6 +10,7 @@
 #include "UINumber.h"
 #include "SpearArrow.h"
 #include "HpBar.h"
+#include "SpearUp.h"
 #include "UINumber.h"
 #include<GameEngineBase/GameEngineSound.h>
 
@@ -88,7 +89,7 @@ private:
 	bool HurtEnd;
 	bool EffectOn;
 	bool IsText;
-
+	bool NumberUIOn;
 
 
 private:
@@ -100,10 +101,13 @@ private:
 	void UISetting();
 	void CreateBar();
 	void CreateSpear();
+	void CreateUpSpear();
 
 	int Count_;
 	int SpearCount_;
+	int SpearUpCount_;
 	float PatternTime_;
+	float4 SpearUpPos[3];
 
 //state
 private:
@@ -114,7 +118,16 @@ private:
 	void FightStateUpdate();
 
 	void Pattern1Start();
-	void Patter1Update();
+	void Pattern1Update();
+
+	void Pattern2Start();
+	void Pattern2Update();
+
+	void Pattern3Start();
+	void Pattern3Update();
+
+	void Pattern4Start();
+	void Pattern4Update();
 
 	void TalkStart();
 	void TalkUpdate();

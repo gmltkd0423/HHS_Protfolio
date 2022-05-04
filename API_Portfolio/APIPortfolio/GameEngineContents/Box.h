@@ -4,6 +4,7 @@
 
 enum class BoxState
 {
+	None,
 	Text,
 	Battle1,
 	Battle2,

@@ -13,8 +13,8 @@ Undyne::Undyne() :
 	Timer_(1.0f),
 	IsRight(false),
 	IsLeft(false),
-	Hp(1000.0f),
-	MaxHp(1000.0f),
+	Hp(2000.0f),
+	MaxHp(2000.0f),
 	IsDamaged(false)
 
 {
@@ -26,7 +26,7 @@ Undyne::~Undyne()
 
 void Undyne::Start()
 {
-	UndyneRenderer = CreateRenderer((int)BATTLELEVELORDER::BACKGROUND);
+	UndyneRenderer = CreateRenderer((int)BATTLELEVELORDER::TEXTBOX);
 	UndyneRenderer->CreateAnimation("Undyne_Idle.bmp", "Idle", 0, 67, 0.04f, true);
 	UndyneRenderer->CreateAnimation("Undyne_Idle.bmp", "Idle_Stop", 0, 0, 0, false);
 	UndyneRenderer->CreateAnimation("Undyne_Hurt.bmp", "Hurt", 0, 0, 0, false);

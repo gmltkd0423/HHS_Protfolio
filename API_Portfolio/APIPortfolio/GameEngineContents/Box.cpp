@@ -25,6 +25,7 @@ void Box::Start()
 	TextBox = CreateRendererToScale("TextBox.bmp", { 1000,230 }, (int)BATTLELEVELORDER::BOX);
 	BoxCol = CreateCollision("BoxCol", { SizeX,SizeY });
 	ChangeState(BoxState::Text);
+	TextBox->SetTransColor(RGB(255, 0, 0));
 }
 
 void Box::Update()
@@ -131,6 +132,11 @@ void Box::TextStateUpdate()
 				IsChange = true;
 			}
 		}
+		else if (false == IsChange && GetPosition().y >= 490.0f && false == IsShake)
+		{
+				BoxCol->SetScale(TextBox->GetScale());
+				IsChange = true;
+		}
 
 		return;
 	}
@@ -161,26 +167,23 @@ void Box::Battle2StateStart()
 	IsChange=false;
 }
 
+
+//창위로올라는패턴
 void Box::Battle2StateUpdate()
 {
-	if (TextBox->GetScale().x <= 300.0f && TextBox->GetScale().y <= 300.0f)
+	if (TextBox->GetScale().x <= 100.0f && TextBox->GetScale().y <= 100.0f)
 	{
-		if (false == IsChange && GetPosition().y >= 450.0f && false == IsShake)
+		if (false == IsChange && GetPosition().y >= 490.0f && false == IsShake)
 		{
-			MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 100.0f;
-			SetMove(MoveDir_);
 
-			if (GetPosition().y <= 450.0f)
-			{
-				BoxCol->SetScale(TextBox->GetScale());
-				IsChange = true;
-			}
+			BoxCol->SetScale(TextBox->GetScale());
+			IsChange = true;
 		}
 
 		return;
 	}
 
-	if (TextBox->GetScale().x >= 300.0f)
+	if (TextBox->GetScale().x >= 100.0f)
 	{
 		SizeX = GameEngineTime::GetDeltaTime() * 1200;
 		TextBox->SetScale({ TextBox->GetScale().x - SizeX, TextBox->GetScale().y });
@@ -241,24 +244,24 @@ void Box::Battle1StateStart()
 
 void Box::Battle1StateUpdate()
 {
-
-	if (TextBox->GetScale().x <= 150.0f && TextBox->GetScale().y <= 150.0f)
+	if (TextBox->GetScale().x <= 300.0f && TextBox->GetScale().y <= 300.0f)
 	{
-		if (false == IsChange && GetPosition().y >= 350.0f && false == IsShake)
+		if (false == IsChange && GetPosition().y >= 450.0f && false == IsShake)
 		{
-			MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 500.0f;
+			MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 100.0f;
 			SetMove(MoveDir_);
-			
-			if (GetPosition().y <= 350.0f)
+
+			if (GetPosition().y <= 450.0f)
 			{
-				BoxCol->SetScale({ 150.0f,150.0f });
+				BoxCol->SetScale(TextBox->GetScale());
 				IsChange = true;
 			}
 		}
+
 		return;
 	}
 
-	if (TextBox->GetScale().x >= 150.0f)
+	if (TextBox->GetScale().x >= 300.0f)
 	{
 		SizeX = GameEngineTime::GetDeltaTime() * 1200;
 		TextBox->SetScale({ TextBox->GetScale().x - SizeX, TextBox->GetScale().y });
@@ -270,6 +273,7 @@ void Box::Battle1StateUpdate()
 		TextBox->SetScale({ TextBox->GetScale().x , TextBox->GetScale().y - SizeY });
 
 	}
+	
 }
 
 
@@ -290,6 +294,8 @@ void Box::ChangeState(BoxState _State)
 			break;
 		case BoxState::Battle3:
 			Battle3StateStart();
+			break;
+		case BoxState::None:
 			break;
 		default:
 			break;
@@ -315,6 +321,8 @@ void Box::StateUpdate()
 	case BoxState::Battle3:
 		Battle3StateUpdate();
 		break;
+	case BoxState::None:
+		return;
 	default:
 		break;
 	}

@@ -102,7 +102,7 @@ void Bar::CheckJudgMent()
 				{
 					KeyCheck_ = true;
 					GameEngineRandom Ran;
-					int Randomint = Ran.RandomInt(0, 30);
+					int Randomint = Ran.RandomInt(50, 80);
 					Damage_ += Randomint;
 					KeyDownCount_++;
 					MoveDir_ = float4::ZERO;
@@ -115,7 +115,7 @@ void Bar::CheckJudgMent()
 				{
 					KeyCheck_ = true;
 					GameEngineRandom Ran;
-					int Randomint = Ran.RandomInt(30, 60);
+					int Randomint = Ran.RandomInt(80, 120);
 					Damage_ += Randomint;
 					KeyDownCount_++;
 					MoveDir_ = float4::ZERO;
@@ -127,7 +127,7 @@ void Bar::CheckJudgMent()
 				{
 					KeyCheck_ = true;
 					GameEngineRandom Ran;
-					int Randomint = Ran.RandomInt(60, 100);
+					int Randomint = Ran.RandomInt(120, 200);
 					Damage_ += Randomint;
 					KeyDownCount_++;
 					MoveDir_ = float4::ZERO;
