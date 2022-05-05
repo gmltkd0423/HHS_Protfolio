@@ -35,5 +35,6 @@ private:
 	int Value;
 	bool LookPlayer;
 	bool IsUp;
+	bool IsSound;
 };
 

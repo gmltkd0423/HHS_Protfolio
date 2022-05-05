@@ -7,7 +7,8 @@
 SpearUp::SpearUp()	:
 	Value(255),
 	Timer_(0.7f),
-	IsUp(false)
+	IsUp(false),
+	IsSound(false)
 {
 }
 
@@ -29,11 +30,11 @@ void SpearUp::Update()
 	{
 		if (true == IsUp)
 		{
-			SpearSound.SoundPlayOneShot("snd_arrow.wav");
 			IsUp = false;
 		}
+		SpearUpCol->Death();
 		MoveDir_ = float4::ZERO;
-		Value -= GameEngineTime::GetDeltaTime()*2;
+		Value -= GameEngineTime::GetDeltaTime()*4;
 		SpearRenderer->SetAlpha(Value);
 		SpearRenderer->SetTransColor(RGB(0, 0, 0));
 
@@ -46,10 +47,17 @@ void SpearUp::Update()
 	{
 		if (550 >= GetPosition().y)
 		{
+
 			MoveDir_ = float4::ZERO;
 			Timer_ -= GameEngineTime::GetDeltaTime();
 			if (0 >= Timer_)
 			{
+				if (IsSound == false)
+				{
+					SpearSound.SoundPlayOneShot("snd_arrow.wav");
+					IsSound = true;
+				}
+
 				MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 150.0f;
 				SetMove(MoveDir_);
 				IsUp = true;
