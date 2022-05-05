@@ -56,6 +56,11 @@ public:
 	}
 
 
+	void SetRotationZ(float _RotZ)
+	{
+		RotZ_ = _RotZ;
+	}
+
 	// Player   Bullet
 	// 방패     적의 총알을 막는다.
 	// 방패     적의 총알
@@ -84,6 +89,7 @@ public:
 	void DebugRender();
 
 private:
+	float RotZ_;
 	friend class FrameAnimation;
 	float4 Pivot_;
 	float4 Scale_;

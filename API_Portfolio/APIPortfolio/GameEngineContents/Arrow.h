@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngine/GameEngineCollision.h>
 
 
 // Ό³Έν :
@@ -28,6 +29,7 @@ private:
 	GameEngineSound SpearSound;
 	GameEngineRandom Ran;
 	GameEngineRandom Yellow;
+	GameEngineCollision* ArrowCol;
 
 
 	float4 Pos_[4];
@@ -45,5 +47,7 @@ private:
 	float4 MoveDirUp;
 	int Value;
 	bool LookPlayer;
+
+	void CheckCol();
 };
 

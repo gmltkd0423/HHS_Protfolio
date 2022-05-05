@@ -2,9 +2,12 @@
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include<GameEngineBase/GameEngineTime.h>
+#include <GameEngine/GameEngineCollision.h>
 
 SpearUp::SpearUp()	:
-	Value(255)
+	Value(255),
+	Timer_(0.7f),
+	IsUp(false)
 {
 }
 
@@ -17,15 +20,20 @@ void SpearUp::Start()
 	SpearRenderer = CreateRenderer((int)BATTLELEVELORDER::UPARROW);
 	SpearRenderer->SetImage("Spear_Up.bmp");
 	SpearRenderer->SetTransColor(RGB(0, 0, 0));
-	SpearSound.SoundPlayOneShot("snd_arrow.wav");
+	SpearUpCol = CreateCollision("Arrow", { 35,100 });
 }
 
 void SpearUp::Update()
 {
 	if (490 >= GetPosition().y)
 	{
+		if (true == IsUp)
+		{
+			SpearSound.SoundPlayOneShot("snd_arrow.wav");
+			IsUp = false;
+		}
 		MoveDir_ = float4::ZERO;
-		Value -= GameEngineTime::GetDeltaTime();
+		Value -= GameEngineTime::GetDeltaTime()*2;
 		SpearRenderer->SetAlpha(Value);
 		SpearRenderer->SetTransColor(RGB(0, 0, 0));
 
@@ -36,8 +44,22 @@ void SpearUp::Update()
 	}
 	else
 	{
-		MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 150.0f;
-		SetMove(MoveDir_);
+		if (550 >= GetPosition().y)
+		{
+			MoveDir_ = float4::ZERO;
+			Timer_ -= GameEngineTime::GetDeltaTime();
+			if (0 >= Timer_)
+			{
+				MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 150.0f;
+				SetMove(MoveDir_);
+				IsUp = true;
+			}
+		}
+		else
+		{
+			MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 150.0f;
+			SetMove(MoveDir_);
+		}
 	}
 }
 

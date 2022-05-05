@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineCollision.h>
 
 
 // Ό³Έν :
@@ -25,6 +26,7 @@ protected:
 private:
 	GameEngineRenderer* SpearRenderer;
 	GameEngineSound SpearSound;
+	GameEngineCollision* SpearUpCol;
 
 	float Timer_;
 	float Angle;
@@ -32,5 +34,6 @@ private:
 	float4 MoveDir_;
 	int Value;
 	bool LookPlayer;
+	bool IsUp;
 };
 

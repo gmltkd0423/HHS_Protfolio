@@ -309,6 +309,9 @@ void BattleLevel::Pattern1Update()
 		TextBox->SetState(BoxState::None);
 	}
 
+	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
+
+
 	if (false == TextBox->GetIsChange())
 	{
 		CreateSpear();
@@ -330,7 +333,7 @@ void BattleLevel::Pattern2Start()
 {
 	TextBox->SetState(BoxState::Battle2);
 	SpearUpCount_ = 0;
-	Timer_ = 1.0f;
+	Timer_ = 1.3f;
 	PatternTime_ = 10.0f;
 	float4 Half2 = Back2->GetImage()->GetScale().Half();
 	Back2->SetPivot({ Half2.x,Half2.y + 530.0f });
@@ -363,7 +366,7 @@ void BattleLevel::CreateUpSpear()
 	SpearUp* Spear = CreateActor<SpearUp>((int)BATTLELEVELORDER::UPARROW);
 	Spear->SetPosition(SpearUpPos[RandomInt]);
 	SpearUpCount_++;
-	Timer_ = 0.7f;
+	Timer_ = 1.3f;
 
 }
 
@@ -382,6 +385,7 @@ void BattleLevel::Pattern2Update()
 		TextBox->SetState(BoxState::None);
 	}
 
+	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
 
 	if (false == TextBox->GetIsChange())
 	{
@@ -436,6 +440,7 @@ void BattleLevel::Pattern3Update()
 		TextBox->SetState(BoxState::None);
 	}
 
+	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
 
 	if (false == TextBox->GetIsChange())
 	{

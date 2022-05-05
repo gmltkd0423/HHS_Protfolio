@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngine/GameEngineCollision.h>
 
 
 // Ό³Έν :
@@ -23,6 +24,7 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* SpearRenderer;
+	GameEngineCollision* SpearCol;
 	GameEngineSound SpearSound;
 
 	float Timer_;

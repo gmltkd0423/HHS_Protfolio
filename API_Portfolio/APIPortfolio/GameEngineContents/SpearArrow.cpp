@@ -5,6 +5,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include "SoundPlayer.h"
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngine/GameEngineCollision.h>
 
 SpearArrow::SpearArrow() :
 	Timer_(1.0f),
@@ -26,11 +27,12 @@ void SpearArrow::Start()
 	SpearRenderer->SetRotationFilter("Spear4.bmp");
 	Angle = 0.0f;
 	SpearRenderer->SetTransColor(RGB(0, 0, 0));
+	SpearCol = CreateCollision("Arrow", { 35,90 });
 }
 
 void SpearArrow::Update()
 {
-	Angle += 180.0f * GameEngineTime::GetDeltaTime();
+	Angle += 360.0f * GameEngineTime::GetDeltaTime();
 	Timer_ -= GameEngineTime::GetDeltaTime();
 
 	if (0 >= Timer_)

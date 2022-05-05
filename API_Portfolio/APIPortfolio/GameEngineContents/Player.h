@@ -60,6 +60,7 @@ private:
 	float CamRectY;
 	float BlinkTime_;
 	float BlinkTimer_;
+	bool IsHit;
 	int Hp_;
 	int MaxHp_;
 

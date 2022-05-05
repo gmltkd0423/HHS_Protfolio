@@ -104,6 +104,9 @@
     <ClInclude Include="Arrow.h">
       <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>Level\BattleLevel\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -205,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="Arrow.cpp">
       <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>Level\BattleLevel\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

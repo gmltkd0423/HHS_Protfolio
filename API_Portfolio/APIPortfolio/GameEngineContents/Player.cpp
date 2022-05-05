@@ -29,7 +29,8 @@ Player::Player() :
 	Time_(0),
 	IsChange_(false),
 	Hp_(20),
-	MaxHp_(20)
+	MaxHp_(20),
+	IsHit(false)
 
 {
 }
@@ -274,6 +275,7 @@ void Player::Blink()
 			BlinkTime_ = 0.0f;
 			Heart_->SetAlpha(255);
 			IsBlink_ = false;
+			IsHit = false;
 		}
 	}
 }
@@ -374,6 +376,16 @@ void Player::GetDamaged()
 	if (true == PlayerCollision_->CollisionResult("Bullet", ColList,CollisionType::Rect, CollisionType::Rect))
 	{
 		Hp_ -= 19;
+	}
+
+	if (true == PlayerCollision_->CollisionResult("Arrow", ColList, CollisionType::Rect, CollisionType::Rect))
+	{
+		if (false == IsHit)
+		{
+			Hp_ -= 2;
+			BlinkTimer_ = 2.0f;
+			IsHit = true;
+		}
 	}
 }
 

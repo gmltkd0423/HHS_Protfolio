@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>
+#include <GameEngine/GameEngineCollision.h>
 
 Arrow::Arrow() :
 	Angle(0),
@@ -57,10 +58,13 @@ void Arrow::Start()
 
 	ArrowRenderer->SetTransColor(RGB(121, 230, 234));
 	ArrowRenderer->SetScale({ 40,40 });
+	ArrowCol = CreateCollision("Arrow", { 40,40 });
 }
 
 void Arrow::Update()
 {
+	CheckCol();
+
 	//По
 	if (ArrowType == 0)
 	{
@@ -291,9 +295,22 @@ void Arrow::Update()
 			}
 		}
 	}
+
 }
 
 void Arrow::Render()
 {
+
+}
+
+void Arrow::CheckCol()
+{
+	std::vector<GameEngineCollision*> ColList;
+
+	if (true == ArrowCol->CollisionResult("Player", ColList, CollisionType::Rect, CollisionType::Rect)	||
+		true == ArrowCol->CollisionResult("Shield", ColList, CollisionType::Rect, CollisionType::Rect))
+	{
+		ArrowRenderer->Off();
+	}
 
 }
