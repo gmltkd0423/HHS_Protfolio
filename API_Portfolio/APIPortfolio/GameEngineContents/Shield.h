@@ -1,5 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include<GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 
 // Ό³Έν :
@@ -22,5 +24,16 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* ShieldRenderer;
+	GameEngineCollision* ShieldCol;
+	GameEngineSound Sound_;
+
+	bool IsUp;
+	bool IsDown;
+	bool IsRight;
+	bool IsLeft;
+	float Timer_;
+
+private:
+	void CheckCollision();
 };
 

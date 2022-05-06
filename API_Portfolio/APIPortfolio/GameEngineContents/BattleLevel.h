@@ -13,6 +13,7 @@
 #include "SpearUp.h"
 #include "UINumber.h"
 #include "SpearCircle.h"
+#include "Shield.h"
 #include<GameEngineBase/GameEngineSound.h>
 
 enum class MENUSTATE
@@ -72,7 +73,7 @@ private:
 	HpBar* PlayerHpBar;
 	HpBar* UndyneHpBar;
 	UINumber* DamageNumber;
-
+	Shield* Shield_;
 
 	GameEngineActor* BackGround2;
 	GameEngineRenderer* Back2;
@@ -83,6 +84,7 @@ private:
 	int TextCount_;
 	int ArrowCount_;
 	int CircleSpearCount_;
+	bool RandomPattern;
 
 	bool IsCreateSpear;
 

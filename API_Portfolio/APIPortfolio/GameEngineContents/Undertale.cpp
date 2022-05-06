@@ -186,6 +186,12 @@ void Undertale::GameInit()
 	GameEngineImage* ArrowYellow = GameEngineImageManager::GetInst()->Find("Arrow_Yellow.bmp");
 	ArrowYellow->Cut({ 21,22 });
 
+	GameEngineImage* ShieldBlue = GameEngineImageManager::GetInst()->Find("Shield_Blue.bmp");
+	ShieldBlue->Cut({ 75,75 });
+
+	GameEngineImage* ShieldRed = GameEngineImageManager::GetInst()->Find("Shield_Red.bmp");
+	ShieldRed->Cut({ 75,75 });
+
 	// UI
 	{
 		GameEngineDirectory Dir;

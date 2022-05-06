@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 
 // Ό³Έν :
@@ -47,6 +48,7 @@ private:
 	float4 MoveDir_;
 	float4 MoveDirDown;
 	float4 MoveDirUp;
+	GameEngineSound Sound_;
 	int Value;
 	bool LookPlayer;
 

@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 Arrow::Arrow() :
 	Angle(0),
@@ -60,7 +61,7 @@ void Arrow::Start()
 
 	ArrowRenderer->SetTransColor(RGB(121, 230, 234));
 	ArrowRenderer->SetScale({ 40,40 });
-	ArrowCol = CreateCollision("Arrow", { 40,40 });
+	ArrowCol = CreateCollision("Arrow", { 10,10 });
 	PlayerPos = Player::MainPlayer->GetPosition();
 }
 
@@ -298,10 +299,17 @@ void Arrow::CheckCol()
 {
 	std::vector<GameEngineCollision*> ColList;
 
-	if (true == ArrowCol->CollisionResult("Player", ColList, CollisionType::Rect, CollisionType::Rect)	||
-		true == ArrowCol->CollisionResult("Shield", ColList, CollisionType::Rect, CollisionType::Rect))
+	if (true == ArrowCol->CollisionResult("Player", ColList, CollisionType::Rect, CollisionType::Rect))
 	{
-		ArrowRenderer->Off();
+		Off();
 	}
+
+	if (true == ArrowCol->CollisionResult("Shield", ColList, CollisionType::Rect, CollisionType::Rect))
+	{
+		Sound_.SoundPlayOneShot("snd_bell.wav");
+		Death();
+	}
+
+
 
 }

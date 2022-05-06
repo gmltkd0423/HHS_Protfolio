@@ -32,7 +32,8 @@ BattleLevel::BattleLevel() :
 	IsText(false),
 	NumberUIOn(false),
 	PatternCount_(0),
-	IsCreateSpear(false)
+	IsCreateSpear(false),
+	RandomPattern(false)
 {
 }
 
@@ -88,6 +89,9 @@ void BattleLevel::Loading()
 	DamageNumber = CreateActor<UINumber>((int)BATTLELEVELORDER::ACTOR);
 	DamageNumber->SetPosition({ 620,150 });
 	DamageNumber->Off();
+
+	Shield_ = CreateActor<Shield>((int)BATTLELEVELORDER::ACTOR);
+	Shield_->Off();
 
 
 	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
@@ -330,6 +334,7 @@ void BattleLevel::Pattern1Update()
 
 	if (0 >= PatternTime_)
 	{
+		Player::MainPlayer->Off();
 		ChangeFightState(FIGHTSTATE::Talk);
 	}
 }
@@ -406,6 +411,7 @@ void BattleLevel::Pattern2Update()
 
 	if (SpearUpCount_ == 10)
 	{
+		Player::MainPlayer->Off();
 		float4 Half2 = Back2->GetImage()->GetScale().Half();
 		Back2->SetPivot( Half2 );
 		TextBox->GetRenderer()->SetTransColor(RGB(255, 0, 0));
@@ -424,6 +430,7 @@ void BattleLevel::Pattern3Start()
 	PatternTime_ = 2.0f;
 	IsCreateSpear = false;
 }
+
 void BattleLevel::CreateArrow()
 {
 	if (ArrowCount_ == 20)
@@ -452,6 +459,8 @@ void BattleLevel::Pattern3Update()
 		Undyne_->GetRenderer()->SetAlpha(150);
 		TextBox->SetState(BoxState::None);
 		IsCreateSpear = true;
+		Shield_->On();
+		Shield_->SetPosition(Player::MainPlayer->GetPosition());
 	}
 
 	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
@@ -466,6 +475,8 @@ void BattleLevel::Pattern3Update()
 		PatternTime_ -= GameEngineTime::GetDeltaTime();
 		if(0 >= PatternTime_)
 		{
+			Shield_->Off();
+			Player::MainPlayer->Off();
 			ChangeFightState(FIGHTSTATE::Talk);
 		}
 	}
@@ -536,6 +547,7 @@ void BattleLevel::Pattern4Update()
 
 	if (CircleSpearCount_ >= 10)
 	{
+		Player::MainPlayer->Off();
 		ChangeFightState(FIGHTSTATE::Talk);
 	}
 }
@@ -574,6 +586,7 @@ void BattleLevel::TalkUpdate()
 		Texts->SetTextCount(0);
 		TextBox->SetIsChangeFalse();
 		TextBox->SetState(BoxState::None);
+		Player::MainPlayer->On();
 	}
 
 
@@ -846,23 +859,58 @@ void BattleLevel::FightMenuUpdate()
 				DamageNumber->Off();
 				UndyneHpBar->Off();
 				ChangeFightState(FIGHTSTATE::Pattern3);
-			/*	if (PatternCount_ == 0)
+				/*if (RandomPattern == false)
 				{
-					ChangeFightState(FIGHTSTATE::Pattern1);
-					PatternCount_++;
+					if (PatternCount_ == 0)
+					{
+						ChangeFightState(FIGHTSTATE::Pattern1);
+						PatternCount_++;
+					}
+					else if (PatternCount_ == 1)
+					{
+						PatternCount_++;
+						ChangeFightState(FIGHTSTATE::Pattern2);
+					}
+					else if (PatternCount_ == 2)
+					{
+						PatternCount_++;
+						ChangeFightState(FIGHTSTATE::Pattern3);
+					}
+					else if (PatternCount_ == 3)
+					{
+						PatternCount_++;
+						ChangeFightState(FIGHTSTATE::Pattern4);
+					}
+					else
+					{
+						PatternCount_++;
+						RandomPattern = true;
+					}
 				}
-				else if (PatternCount_ == 1)
+
+
+				if (RandomPattern == true)
 				{
-					PatternCount_++;
-					ChangeFightState(FIGHTSTATE::Pattern2);
-				}
-				else if(PatternCount_==2)
-				{
-					ChangeFightState(FIGHTSTATE::Pattern3);
-				}
-				else
-				{
-					ChangeFightState(FIGHTSTATE::Pattern1);
+					GameEngineRandom Ran;
+					PatternCount_ = Ran.RandomInt(0, 3);
+					if (PatternCount_ == 0)
+					{
+						ChangeFightState(FIGHTSTATE::Pattern1);
+						PatternCount_++;
+					}
+					else if (PatternCount_ == 1)
+					{
+						PatternCount_++;
+						ChangeFightState(FIGHTSTATE::Pattern2);
+					}
+					else if (PatternCount_ == 2)
+					{
+						ChangeFightState(FIGHTSTATE::Pattern3);
+					}
+					else if (PatternCount_ == 3)
+					{
+						ChangeFightState(FIGHTSTATE::Pattern4);
+					}
 				}*/
 			}
 		}
