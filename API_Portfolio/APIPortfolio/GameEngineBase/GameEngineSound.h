@@ -57,6 +57,7 @@ class GameEngineSoundPlayer
 public:
 	void Stop();
 	void PlaySpeed(float _Speed);
+	void Volume(float _Value);
 
 	FMOD::Channel* getControlHandle_()
 	{

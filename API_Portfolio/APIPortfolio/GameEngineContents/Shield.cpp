@@ -25,7 +25,7 @@ void Shield::Start()
 	ShieldRenderer->SetImage("Shield_Blue.bmp");
 	ShieldRenderer->SetIndex(0);
 	ShieldRenderer->SetTransColor(RGB(0, 0, 0));
-	ShieldRenderer->SetPivot({ 0, -20.0f });
+	ShieldRenderer->SetPivot({ 0, -30.0f });
 	ShieldCol = CreateCollision("Shield",{75,25});
 }
 
@@ -36,8 +36,8 @@ void Shield::Update()
 		ShieldRenderer->SetImage("Shield_Blue.bmp");
 		ShieldRenderer->SetIndex(0);
 		ShieldRenderer->SetPivot({0, -20.0f });
-		ShieldCol->SetScale({ 75,25 });
-		ShieldCol->SetPivot({ 0,-20.0f });
+		ShieldCol->SetScale({ 20,20 });
+		ShieldCol->SetPivot({ 0,-40.0f });
 		IsUp = true;
 		IsDown = false;
 		IsLeft = false;
@@ -48,8 +48,8 @@ void Shield::Update()
 		ShieldRenderer->SetImage("Shield_Blue.bmp");
 		ShieldRenderer->SetIndex(1);
 		ShieldRenderer->SetPivot({20.0f,0 });
-		ShieldCol->SetScale({ 25,75 });
-		ShieldCol->SetPivot({ 20.0f, 0 });
+		ShieldCol->SetScale({ 20,20 });
+		ShieldCol->SetPivot({ 40.0f, 0 });
 		IsUp = false;
 		IsDown = false;
 		IsLeft = false;
@@ -60,8 +60,8 @@ void Shield::Update()
 		ShieldRenderer->SetImage("Shield_Blue.bmp");
 		ShieldRenderer->SetIndex(2);
 		ShieldRenderer->SetPivot({0, 20.0f });
-		ShieldCol->SetScale({ 75,25 });
-		ShieldCol->SetPivot({ 0, 20.0f });
+		ShieldCol->SetScale({ 20,20 });
+		ShieldCol->SetPivot({ 0, 40.0f });
 		IsUp = false;
 		IsDown = true;
 		IsLeft = false;
@@ -73,8 +73,8 @@ void Shield::Update()
 		ShieldRenderer->SetImage("Shield_Blue.bmp");
 		ShieldRenderer->SetIndex(3);
 		ShieldRenderer->SetPivot({-20.0f, 0});
-		ShieldCol->SetScale({ 25,75 });
-		ShieldCol->SetPivot({ -20.0f,0 });
+		ShieldCol->SetScale({ 20,20 });
+		ShieldCol->SetPivot({ -40.0f,0 });
 		IsUp = false;
 		IsDown = false;
 		IsLeft = true;

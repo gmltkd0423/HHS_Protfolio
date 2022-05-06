@@ -136,6 +136,14 @@ void FloweyBattleLevelFont::Texts()
 	{
 		Text_ = L"죽 어.";
 	}
+	else if (26 == Count_)
+	{
+		Text_ = L"인간...\n 아니, 네가 무엇이든간에,\n 상관 없어.";
+	}
+	else if (27 == Count_)
+	{
+		Text_ = L"이 세계를 위해...\n 나, 언다인이,\n 널 쓰러뜨릴 것이다!";
+	}
 	else if (30 == Count_)
 	{
 		Text_ =  L"멍청하긴.";

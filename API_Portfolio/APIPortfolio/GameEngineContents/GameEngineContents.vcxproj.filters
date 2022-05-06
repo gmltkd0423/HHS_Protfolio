@@ -107,6 +107,9 @@
     <ClInclude Include="SpearCircle.h">
       <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClInclude>
+    <ClInclude Include="HpText.h">
+      <Filter>Actor\UINumber</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Undertale.cpp" />
@@ -214,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="SpearCircle.cpp">
       <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="HpText.cpp">
+      <Filter>Actor\UINumber</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

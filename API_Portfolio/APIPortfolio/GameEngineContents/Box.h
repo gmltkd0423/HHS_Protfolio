@@ -58,7 +58,7 @@ private:
 	float SizeY;
 	float Speed;
 	bool IsChange;
-
+	bool IsFirst;
 	int Pattern;
 
 private:

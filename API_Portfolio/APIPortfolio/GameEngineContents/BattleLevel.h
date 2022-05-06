@@ -12,6 +12,7 @@
 #include "HpBar.h"
 #include "SpearUp.h"
 #include "UINumber.h"
+#include "HpText.h"
 #include "SpearCircle.h"
 #include "Shield.h"
 #include<GameEngineBase/GameEngineSound.h>
@@ -33,7 +34,8 @@ enum class FIGHTSTATE
 	Pattern1,
 	Pattern2,
 	Pattern3,
-	Pattern4
+	Pattern4,
+	End
 };
 
 // Ό³Έν :
@@ -74,6 +76,7 @@ private:
 	HpBar* UndyneHpBar;
 	UINumber* DamageNumber;
 	Shield* Shield_;
+	HpText* HpText_;
 
 	GameEngineActor* BackGround2;
 	GameEngineRenderer* Back2;
@@ -122,6 +125,7 @@ private:
 	int Count_;
 	int SpearCount_;
 	int SpearUpCount_;
+	bool IsEnd;
 	float PatternTime_;
 	float4 SpearUpPos[3];
 
@@ -148,6 +152,8 @@ private:
 	void TalkStart();
 	void TalkUpdate();
 
+	void EndStart();
+	void EndUpdate();
 
 
 	void MenuSelectStart();

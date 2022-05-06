@@ -70,7 +70,10 @@ void BattleLevelFont::Texts()
 	{
 		Text_ = L"* 바람이 울부짖고 있다...";
 	}
-	
+	else if (2 == Count_)
+	{
+		Text_ = L"* 영웅을 쓰러뜨렸다";
+	}
 	else
 	{
 		Text_ = L"";

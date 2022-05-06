@@ -18,8 +18,9 @@ public:
 protected:
 	void Loading() override;
 	void Update();
-
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 private:
-
+	GameEngineActor* BackGround;
+	GameEngineRenderer* Back;
 };
 

@@ -13,8 +13,8 @@ Undyne::Undyne() :
 	Timer_(1.0f),
 	IsRight(false),
 	IsLeft(false),
-	Hp(2000),
-	MaxHp(2000),
+	Hp(3000),
+	MaxHp(3000),
 	IsDamaged(false)
 
 {

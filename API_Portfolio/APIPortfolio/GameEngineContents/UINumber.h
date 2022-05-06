@@ -21,6 +21,8 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* Number[3];
+	GameEngineRenderer* Number2[2];
+	GameEngineRenderer* Number3;
 
 	int value_;
 

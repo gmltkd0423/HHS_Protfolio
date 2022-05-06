@@ -18,6 +18,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngine/GameEngine.h>
 
 BattleLevel::BattleLevel() :
 	FightButtonDir_({}),
@@ -33,7 +34,8 @@ BattleLevel::BattleLevel() :
 	NumberUIOn(false),
 	PatternCount_(0),
 	IsCreateSpear(false),
-	RandomPattern(false)
+	RandomPattern(false),
+	IsEnd(false)
 {
 }
 
@@ -78,7 +80,10 @@ void BattleLevel::Loading()
 	Effect_->Off();
 
 	PlayerHpBar = CreateActor<HpBar>((int)BATTLELEVELORDER::ACTOR);
-	PlayerHpBar->SetPosition({ 640,650 });
+	PlayerHpBar->SetPosition({ 585,625 });
+
+	HpText_= CreateActor<HpText>((int)BATTLELEVELORDER::ACTOR);
+	HpText_->SetPosition({ 565,625 });
 
 
 	UndyneHpBar = CreateActor < HpBar>((int)BATTLELEVELORDER::ACTOR);
@@ -95,7 +100,6 @@ void BattleLevel::Loading()
 
 
 	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
-
 
 
 	//키생성
@@ -125,10 +129,6 @@ void BattleLevel::Update()
 		GameEngineLevel::IsDebugModeSwitch();
 	}
 
-	if(0 >= Undyne_->GetHp())
-	{
-
-	}
 
 	CheckEscape();
 }
@@ -158,7 +158,7 @@ void BattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void BattleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-
+	Player::MainPlayer->NextLevelOn();
 }
 
 void BattleLevel::ChangeMenuState(MENUSTATE _State)
@@ -231,6 +231,9 @@ void BattleLevel::ChangeFightState(FIGHTSTATE _State)
 		case FIGHTSTATE::Pattern4:
 			Pattern4Start();
 			break;
+		case FIGHTSTATE::End:
+			EndStart();
+			break;
 		case FIGHTSTATE::None:
 			break;
 		default:
@@ -259,6 +262,9 @@ void BattleLevel::FightStateUpdate()
 		break;
 	case FIGHTSTATE::Pattern4:
 		Pattern4Update();
+		break;
+	case FIGHTSTATE::End:
+		EndUpdate();
 		break;
 	case FIGHTSTATE::None:
 		return;
@@ -587,6 +593,13 @@ void BattleLevel::TalkUpdate()
 		TextBox->SetIsChangeFalse();
 		TextBox->SetState(BoxState::None);
 		Player::MainPlayer->On();
+		
+		if (0 >= Undyne_->GetHp())
+		{
+			Texts->SetTextCount(0);
+			Texts->SetCount(2);
+			Texts->IsAllTextOutFalse();
+		}
 	}
 
 
@@ -600,6 +613,37 @@ void BattleLevel::TalkUpdate()
 		}
 	}
 
+}
+
+void BattleLevel::EndStart()
+{
+	Texts->IsAllTextOutFalse();
+	Player::MainPlayer->HeartOff();
+	Player::MainPlayer->Stop();
+	TextBox->SetState(BoxState::Text);
+	Undyne_->GetRenderer()->SetAlpha(255);
+}
+
+void BattleLevel::EndUpdate()
+{
+	if (true == TextBox->GetIsChange())
+	{
+		Texts->On();
+		Texts->SetTextCount(0);
+		Texts->SetCount(2);
+		Texts->IsAllTextOutFalse();
+		TextBox->SetState(BoxState::None);
+		TextBox->SetIsChangeFalse();
+	}
+
+	if (true == Texts->GetIsAllTextOut())
+	{
+		if (true == Player::MainPlayer->IsActionKeyDown())
+		{
+			SoundPlayer::Bgm_.Stop();
+			GameEngine::GetInst().ChangeLevel("PlayLevel2");
+		}
+	}
 }
 
 
@@ -848,18 +892,18 @@ void BattleLevel::FightMenuUpdate()
 			DamageNumber->SetMove(MoveDir);
 			if (180 <= DamageNumber->GetPosition().y)
 			{
-				//언다인 피가 0이하로가면 
-			/*	if (0 >= Undyne_->GetHp())
-				{
-
-				}*/
 
 				NumberUIOn = false;
 				AttackBar_->GetRenderer()->Off();
 				DamageNumber->Off();
 				UndyneHpBar->Off();
-				ChangeFightState(FIGHTSTATE::Pattern3);
-				/*if (RandomPattern == false)
+				if (0 >= Undyne_->GetHp())
+				{
+					ChangeFightState(FIGHTSTATE::End);
+					IsEnd = true;
+					return;
+				}
+				if (RandomPattern == false && IsEnd==false)
 				{
 					if (PatternCount_ == 0)
 					{
@@ -889,18 +933,16 @@ void BattleLevel::FightMenuUpdate()
 				}
 
 
-				if (RandomPattern == true)
+				if (RandomPattern == true && IsEnd==false)
 				{
 					GameEngineRandom Ran;
 					PatternCount_ = Ran.RandomInt(0, 3);
 					if (PatternCount_ == 0)
 					{
 						ChangeFightState(FIGHTSTATE::Pattern1);
-						PatternCount_++;
 					}
 					else if (PatternCount_ == 1)
 					{
-						PatternCount_++;
 						ChangeFightState(FIGHTSTATE::Pattern2);
 					}
 					else if (PatternCount_ == 2)
@@ -911,7 +953,7 @@ void BattleLevel::FightMenuUpdate()
 					{
 						ChangeFightState(FIGHTSTATE::Pattern4);
 					}
-				}*/
+				}
 			}
 		}
 	}

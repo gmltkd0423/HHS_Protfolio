@@ -5,6 +5,7 @@
 #include "FloweyBullet.h"
 #include "HpBar.h"
 #include "SoundPlayer.h"
+#include "UINumber.h"
 #include "FloweyBattleLevelFont.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -28,7 +29,8 @@ FloweyBattleLevel::FloweyBattleLevel() :
 	CurState_(PatternState::Talk),
 	FloweyStateCount_(0),
 	FloweyDeath(false),
-	FloweyHurt(false)
+	FloweyHurt(false),
+	UndyneTalk(false)
 {
 }
 
@@ -152,6 +154,9 @@ void FloweyBattleLevel::Loading()
 		HpBar_ = CreateActor<HpBar>((int)BATTLELEVELORDER::ACTOR);
 		HpBar_->SetPosition({ 590, 600 });
 
+
+		HpText_ = CreateActor<HpText>((int)BATTLELEVELORDER::ACTOR);
+		HpText_->SetPosition({ 560,603 });
 	}
 
 
@@ -179,9 +184,21 @@ void FloweyBattleLevel::Update()
 
 	CheckChangeLevelKey();
 
-	if (true == GameEngineInput::GetInst()->IsPress("ChangeDebug"))
+	if (true == GameEngineInput::GetInst()->IsDown("ChangeDebug"))
 	{
 		GameEngineLevel::IsDebugModeSwitch();
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("ChangeFloweyTalk"))
+	{
+		TextFont_->SetCount(10);
+		TextFont_->SetTextCount(0);
+		TextFont_->IsAllTextOutFalse();
+		Player::MainPlayer->SetHp(20);
+		HpBar_->SetActorHp(Player::MainPlayer->GetHp());
+		SoundPlayer::Bgm_.Volume(1.0f);
+		SoundPlayer::Bgm_.PlaySpeed(1.0f);
+		ChangeState(PatternState::Pattern1);
 	}
 
 }
@@ -211,6 +228,7 @@ void FloweyBattleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if (nullptr == SoundPlayer::Bgm_.getControlHandle_())
 	{
 		SoundPlayer::Bgm_ = GameEngineSound::SoundPlayControl("03_Your_Best_Friend.flac");
+		SoundPlayer::Bgm_.Volume(1.0f);
 	}
 
 }
@@ -373,7 +391,7 @@ void FloweyBattleLevel::Pattern1Start()
 	BulletPos_[2] = { 640, 90 };
 	BulletPos_[3] = { 710, 110 };
 	BulletPos_[4] = { 790, 130 };
-	
+	FloweyStateCount_ = 0;
 }
 
 void FloweyBattleLevel::Pattern1Update()
@@ -386,7 +404,8 @@ void FloweyBattleLevel::Pattern1Update()
 		{
 			Bullets_[i]->Off();
 		}
-		SoundPlayer::Bgm_.Stop();
+
+		SoundPlayer::Bgm_.Volume(0);
 		ChangeState(PatternState::Pattern3);
 		return;
 	}
@@ -632,7 +651,7 @@ void FloweyBattleLevel::Pattern1Update()
 
 		if (3.0f < Time_)
 		{
-			SoundPlayer::Bgm_.Stop();
+			SoundPlayer::Bgm_.Volume(0);
 			FloweyTalkRenderer->ChangeAnimation("Flowey_Evil");
 			if (3.7f < Time_)
 			{
@@ -892,6 +911,8 @@ void FloweyBattleLevel::Pattern4Update()
 	{
 		FloweyTalkRenderer->ChangeAnimation("Flowey_Mad_Idle");
 		Fire_->On();
+		Player::MainPlayer->SetHp(20);
+		HpBar_->SetActorHp(Player::MainPlayer->GetHp());
 	}
 	
 	if (true == Trigger_->GetFireDeath())
@@ -928,7 +949,32 @@ void FloweyBattleLevel::Pattern4Update()
 			}
 			else
 			{
-				GameEngine::GetInst().ChangeLevel("PlayLevel2");
+				UndyneTalk = true;
+			}
+		}
+
+		if (UndyneTalk == true)
+		{
+			if (25 == Count_)
+			{
+				Speech_Bubble->On();
+
+				Count_++;  // 1
+				TextFont_->SetCount(Count_);
+				TextFont_->SetTextCount(0);
+				TextFont_->IsAllTextOutFalse();
+			}
+
+			if (true == Player::MainPlayer->IsActionKeyDown() && true == TextFont_->GetIsAllTextOut())
+			{
+				Count_++;  // 1
+				if (Count_ == 28)
+				{
+					GameEngine::GetInst().ChangeLevel("BattleLevel");
+				}
+				TextFont_->SetCount(Count_);
+				TextFont_->SetTextCount(0);
+				TextFont_->IsAllTextOutFalse();
 			}
 		}
 

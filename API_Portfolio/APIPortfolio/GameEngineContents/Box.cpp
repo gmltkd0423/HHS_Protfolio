@@ -12,7 +12,8 @@ Box::Box() :
 	Speed(50.0f),
 	IsChange(false),
 	SizeX(0),
-	SizeY(0)
+	SizeY(0),
+	IsFirst(false)
 {
 }
 
@@ -121,11 +122,13 @@ void Box::TextStateUpdate()
 	if (TextBox->GetScale().x >= 1000.0f && TextBox->GetScale().y >= 230.0f)
 	{
 
-		if (TextBox->GetScale().y >= 230.0f)
+		if (TextBox->GetScale().y >= 230.0f && IsFirst==true)
 		{
 			SizeY = GameEngineTime::GetDeltaTime() * 600;
 			TextBox->SetScale({ TextBox->GetScale().x , TextBox->GetScale().y - SizeY });
 		}
+	
+
 
 		if (false == IsChange && GetPosition().y <= 490.0f && false == IsShake)
 		{
@@ -350,6 +353,7 @@ void Box::ChangeState(BoxState _State)
 			Battle4StateStart();
 			break;
 		case BoxState::None:
+			IsFirst = true;
 			break;
 		default:
 			break;

@@ -6,6 +6,8 @@
 #include "HpBar.h"
 #include "Fire.h"
 #include "Trigger.h"
+#include "HpText.h"
+#include "UINumber.h"
 #include <GameEngineBase/GameEngineSound.h>
 
 
@@ -47,6 +49,7 @@ private:
 	float Angle;
 	bool FloweyDeath;
 	bool FloweyHurt;
+	bool UndyneTalk;
 
 	float4 MoveDir_;
 	float4 MoveDir2_;
@@ -78,6 +81,9 @@ private:
 	FloweyBullet* Bullets_[5];
 	FloweyBullet* NewBullet;
 	HpBar* HpBar_;
+	HpText* HpText_;
+	UINumber* HpNumber;
+	UINumber* MaxHpNumber;
 
 	float4 Dir[5];
 	int IsDeathCheck;

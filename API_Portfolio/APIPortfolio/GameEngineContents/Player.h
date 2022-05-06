@@ -89,6 +89,11 @@ public:
 		BlinkTimer_ = _BlinkTimer;
 	}
 	
+	inline void SetHp(int _Hp)
+	{
+		Hp_ = _Hp;
+	}
+
 	void IsHeart();
 	void IsFrisk();
 

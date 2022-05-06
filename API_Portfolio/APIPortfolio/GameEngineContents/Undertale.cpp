@@ -233,6 +233,9 @@ void Undertale::GameInit()
 		GameEngineImage* Number = GameEngineImageManager::GetInst()->Find("UI_Number.bmp");
 		Number->Cut({ 28,28 });
 
+		GameEngineImage* Number2 = GameEngineImageManager::GetInst()->Find("Hp_Number.bmp");
+		Number2->Cut({ 28,28 });
+
 	}
 
 
@@ -260,6 +263,7 @@ void Undertale::GameInit()
 		GameEngineInput::GetInst()->CreateKey("ChangePlayLevel2", '2');
 		GameEngineInput::GetInst()->CreateKey("ChangeFloweyBattleLevel", '3');
 		GameEngineInput::GetInst()->CreateKey("ChangeDebug", '0');
+		GameEngineInput::GetInst()->CreateKey("ChangeFloweyTalk", '5');
 
 
 	}
@@ -271,7 +275,7 @@ void Undertale::GameInit()
 	CreateLevel<BattleLevel>("BattleLevel");
 	CreateLevel<EndingLevel>("EndingLevel");
 	CreateLevel<FloweyBattleLevel>("FloweyBattleLevel");
-	ChangeLevel("BattleLevel");
+	ChangeLevel("TitleLevel");
 
 }
 

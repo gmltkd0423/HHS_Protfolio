@@ -92,11 +92,16 @@ void PlayLevel2::Init()
 
 void PlayLevel2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	if (nullptr != _PrevLevel  && 0 == strcmp("FloweyBattleLevel", _PrevLevel->GetNameConstPtr()) )
+	if (nullptr != _PrevLevel  && 0 == strcmp("BattleLevel", _PrevLevel->GetNameConstPtr()) )
 	{
 		NextLevel = true;
+		Player::MainPlayer->On();
 		Player::MainPlayer->SetPosition({ GameEngineWindow::GetScale().Half().x,  1200 });
 		Player::MainPlayer->Play();
+		Player::MainPlayer->CamPosOn();
+		Player::MainPlayer->IsFrisk();
+		Player::MainPlayer->SetSpeed(500.0f);
+
 		if (nullptr == Back)
 		{
 			BackGround = CreateActor<PlayLevel2Actor>((int)PLAYLEVELORDER::BACKGROUND);
@@ -256,7 +261,7 @@ void PlayLevel2::MoveNextLevel()
 
 	if (RGB(255, 0, 0) == Color)
 	{
-		GameEngine::GetInst().ChangeLevel("BattleLevel");
+		GameEngine::GetInst().ChangeLevel("EndingLevel");
 	}
 }
 

@@ -29,6 +29,7 @@ protected:
 private:
 	GameEngineRenderer* HpBarRed_;
 	GameEngineRenderer* HpBarYellow_;
+	GameEngineRenderer* HpText;
 	HpBarState CurState_;
 
 

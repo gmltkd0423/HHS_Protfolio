@@ -61,7 +61,7 @@ void Arrow::Start()
 
 	ArrowRenderer->SetTransColor(RGB(121, 230, 234));
 	ArrowRenderer->SetScale({ 40,40 });
-	ArrowCol = CreateCollision("Arrow", { 10,10 });
+	ArrowCol = CreateCollision("Arrow", { 10,40 });
 	PlayerPos = Player::MainPlayer->GetPosition();
 }
 
@@ -72,6 +72,7 @@ void Arrow::Update()
 	//По
 	if (ArrowType == 0)
 	{
+		ArrowCol->SetScale({ 40,10 });
 		if (Angle >= 180)
 		{
 			IsUp = false;
@@ -181,6 +182,7 @@ void Arrow::Update()
 	}
 	else if (ArrowType == 2)
 	{
+		ArrowCol->SetScale({ 40,10 });
 		if (Angle >= 180)
 		{
 			IsUp = false;
@@ -233,7 +235,7 @@ void Arrow::Update()
 			}
 		}
 	}
-	else
+	else if(ArrowType == 3)
 	{
 		if (UpDownAngle >= 270)
 		{
