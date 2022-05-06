@@ -12,6 +12,7 @@
 #include "HpBar.h"
 #include "SpearUp.h"
 #include "UINumber.h"
+#include "SpearCircle.h"
 #include<GameEngineBase/GameEngineSound.h>
 
 enum class MENUSTATE
@@ -76,10 +77,13 @@ private:
 	GameEngineActor* BackGround2;
 	GameEngineRenderer* Back2;
 
+	float Angle;
 	float BarTime_;
 	int BarCount_;
 	int TextCount_;
 	int ArrowCount_;
+
+	bool IsCreateSpear;
 
 	int PatternCount_;
 	float ShakeTimer_;
@@ -109,6 +113,7 @@ private:
 	void CreateBar();
 	void CreateSpear();
 	void CreateUpSpear();
+	void CreateCircleSpear();
 	void CreateArrow();
 
 	int Count_;

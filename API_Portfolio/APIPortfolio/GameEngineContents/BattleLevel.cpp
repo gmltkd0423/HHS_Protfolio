@@ -11,6 +11,7 @@
 #include "HpBar.h"
 #include "UINumber.h"
 #include "Arrow.h"
+#include "SpearCircle.h"
 #include "SpearUp.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
@@ -30,7 +31,8 @@ BattleLevel::BattleLevel() :
 	EffectOn(false),
 	IsText(false),
 	NumberUIOn(false),
-	PatternCount_(0)
+	PatternCount_(0),
+	IsCreateSpear(false)
 {
 }
 
@@ -117,6 +119,11 @@ void BattleLevel::Update()
 	if (true == GameEngineInput::GetInst()->IsPress("ChangeDebug"))
 	{
 		GameEngineLevel::IsDebugModeSwitch();
+	}
+
+	if(0 >= Undyne_->GetHp())
+	{
+
 	}
 
 	CheckEscape();
@@ -267,6 +274,7 @@ void BattleLevel::Pattern1Start()
 	Timer_ = 1.0f;
 	PatternTime_ = 10.0f;
 	TextBox->SetIsChangeFalse();
+	IsCreateSpear = false;
 }
 
 void BattleLevel::CreateSpear()
@@ -307,12 +315,13 @@ void BattleLevel::Pattern1Update()
 		Undyne_->GetRenderer()->ChangeAnimation("Idle");
 		Undyne_->GetRenderer()->SetAlpha(150);
 		TextBox->SetState(BoxState::None);
+		IsCreateSpear = true;
 	}
 
 	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
 
 
-	if (false == TextBox->GetIsChange())
+	if (true == IsCreateSpear)
 	{
 		CreateSpear();
 	}
@@ -338,6 +347,7 @@ void BattleLevel::Pattern2Start()
 	float4 Half2 = Back2->GetImage()->GetScale().Half();
 	Back2->SetPivot({ Half2.x,Half2.y + 530.0f });
 	TextBox->GetRenderer()->SetTransColor(RGB(0, 0, 0));
+	IsCreateSpear = false;
 }
 
 void BattleLevel::CreateUpSpear()
@@ -383,11 +393,12 @@ void BattleLevel::Pattern2Update()
 		Undyne_->GetRenderer()->ChangeAnimation("Idle");
 		Undyne_->GetRenderer()->SetAlpha(150);
 		TextBox->SetState(BoxState::None);
+		IsCreateSpear = true;
 	}
 
 	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
 
-	if (false == TextBox->GetIsChange())
+	if (true  == IsCreateSpear)
 	{
 		CreateUpSpear();
 	}
@@ -411,6 +422,7 @@ void BattleLevel::Pattern3Start()
 	ArrowCount_ = 0;
 	Timer_ = 2.0f;
 	PatternTime_ = 2.0f;
+	IsCreateSpear = false;
 }
 void BattleLevel::CreateArrow()
 {
@@ -429,6 +441,7 @@ void BattleLevel::CreateArrow()
 	ArrowCount_++;
 	Timer_ = 0.6f;
 }
+
 void BattleLevel::Pattern3Update()
 {
 	if (true == TextBox->GetIsChange())
@@ -438,11 +451,12 @@ void BattleLevel::Pattern3Update()
 		Undyne_->GetRenderer()->ChangeAnimation("Idle");
 		Undyne_->GetRenderer()->SetAlpha(150);
 		TextBox->SetState(BoxState::None);
+		IsCreateSpear = true;
 	}
 
 	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
 
-	if (false == TextBox->GetIsChange())
+	if (true == IsCreateSpear)
 	{
 		CreateArrow();
 	}
@@ -462,10 +476,50 @@ void BattleLevel::Pattern3Update()
 //ÆÐÅÏ4//////////////////////////////////////////////////////////////////////////////
 void BattleLevel::Pattern4Start()
 {
+	TextBox->SetState(BoxState::Battle4);
+	Timer_ = 2.0f;
+	PatternTime_ = 2.0f;
+	Angle = 0.0f;
+	IsCreateSpear = false;
+}
+
+
+void BattleLevel::CreateCircleSpear()
+{
+	if (Angle >= 360.0f)
+	{
+
+		return;
+	}
+
+	Angle += 60.0f;
+
+	float4 Dir = float4::DegreeToDirectionFloat4(Angle);
+	Dir *= 180.0f;
+	SpearCircle* CircleSpear = CreateActor<SpearCircle>((int)BATTLELEVELORDER::BULLET);
+	CircleSpear->SetPosition(Player::MainPlayer->GetPosition() + Dir);
+	//Time_ = 0.03f;
 }
 
 void BattleLevel::Pattern4Update()
 {
+	if (true == TextBox->GetIsChange())
+	{
+		Player::MainPlayer->SetPosition(TextBox->GetPosition());
+		TextBox->SetIsChangeFalse();
+		Player::MainPlayer->Play();
+		Undyne_->GetRenderer()->ChangeAnimation("Idle");
+		Undyne_->GetRenderer()->SetAlpha(150);
+		TextBox->SetState(BoxState::None);
+		IsCreateSpear = true;
+	}
+
+	if (true == IsCreateSpear)
+	{
+		CreateCircleSpear();
+	}
+
+
 }
 
 
@@ -773,8 +827,8 @@ void BattleLevel::FightMenuUpdate()
 				AttackBar_->GetRenderer()->Off();
 				DamageNumber->Off();
 				UndyneHpBar->Off();
-
-				if (PatternCount_ == 0)
+				ChangeFightState(FIGHTSTATE::Pattern4);
+			/*	if (PatternCount_ == 0)
 				{
 					ChangeFightState(FIGHTSTATE::Pattern1);
 					PatternCount_++;
@@ -791,7 +845,7 @@ void BattleLevel::FightMenuUpdate()
 				else
 				{
 					ChangeFightState(FIGHTSTATE::Pattern1);
-				}
+				}*/
 			}
 		}
 	}

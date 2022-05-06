@@ -9,6 +9,7 @@ enum class BoxState
 	Battle1,
 	Battle2,
 	Battle3,
+	Battle4
 };
 
 
@@ -74,6 +75,10 @@ private:
 
 	void Battle3StateStart();
 	void Battle3StateUpdate();
+
+
+	void Battle4StateStart();
+	void Battle4StateUpdate();
 
 	void ChangeState(BoxState _State);
 	void StateUpdate();

@@ -98,14 +98,14 @@
     <ClInclude Include="SpearUp.h">
       <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClInclude>
-    <ClInclude Include="SpearCircle.h">
-      <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
-    </ClInclude>
     <ClInclude Include="Arrow.h">
       <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClInclude>
     <ClInclude Include="Shield.h">
       <Filter>Level\BattleLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearCircle.h">
+      <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="Shield.cpp">
       <Filter>Level\BattleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearCircle.cpp">
+      <Filter>Level\BattleLevel\Actor\Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

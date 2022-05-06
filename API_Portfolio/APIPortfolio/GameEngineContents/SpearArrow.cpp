@@ -42,7 +42,7 @@ void SpearArrow::Update()
 			SpearSound.SoundPlayOneShot("snd_arrow.wav");
 			float Degree = float4::VectorXYtoDegree(GetPosition(), Player::MainPlayer->GetPosition());
 			SpearRenderer->SetRotationZ(Degree + 180.0f);
-			MoveDir_ = (Player::MainPlayer->GetPosition() - GetPosition()) * GameEngineTime::GetDeltaTime() * 1.3f;
+			MoveDir_ = (Player::MainPlayer->GetPosition() - GetPosition()) * GameEngineTime::GetDeltaTime() * 1.5f;
 			LookPlayer = true;
 		}
 	

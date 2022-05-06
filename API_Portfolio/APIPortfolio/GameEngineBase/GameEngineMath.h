@@ -67,11 +67,13 @@ public:
 		return Angle;
 	}
 
+
 	//아래로 그리기
 	static float4 DegreeToDirectionFloat4(float _Degree)
 	{
 		return RadianToDirectionFloat4(_Degree * GameEngineMath::DegreeToRadian);
 	}
+
 
 	//길이 1짜리 float4 를만들어냄
 	static float4 RadianToDirectionFloat4(float _Radian)
@@ -80,16 +82,19 @@ public:
 	}
 
 
+
 	//위로그리기
 	static float4 DegreeToDirectionFloat4Up(float _Degree)
 	{
 		return RadianToDirectionFloat4Up(_Degree * GameEngineMath::DegreeToRadian);
 	}
 
+
 	static float4 RadianToDirectionFloat4Up(float _Radian)
 	{
 		return { sinf(_Radian) , cosf(_Radian), };
 	}
+
 
 	static float4 VectorRotationToDegreeZ(const float4& _Value, float _Degree)
 	{

@@ -235,8 +235,49 @@ void Box::Battle3StateUpdate()
 	}
 }
 
+void Box::Battle4StateStart()
+{
+	IsChange = false;
+	MyScale = TextBox->GetScale();
+	SizeX = 0;
+	SizeY = 0;
+}
+
+void Box::Battle4StateUpdate()
+{
+	if (TextBox->GetScale().x >= 1000.0f)
+	{
+		if (false == IsChange && GetPosition().y >= 350.0f && false == IsShake)
+		{
+			MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 400.0f;
+			SetMove(MoveDir_);
+
+			if (GetPosition().y <= 350.0f)
+			{
+				BoxCol->SetScale(TextBox->GetScale());
+				IsChange = true;
+			}
+		}
+
+	}
+
+	if (TextBox->GetScale().x <= 1000.0f)
+	{
+		SizeX = GameEngineTime::GetDeltaTime() * 1200;
+		TextBox->SetScale({ TextBox->GetScale().x + SizeX, TextBox->GetScale().y });
+	}
+	else if(TextBox->GetScale().y<=450)
+	{
+
+		SizeY = GameEngineTime::GetDeltaTime() * 600;
+		TextBox->SetScale({ TextBox->GetScale().x , TextBox->GetScale().y + SizeY });
+
+	}
+}
+
 void Box::Battle1StateStart()
 {
+	IsChange = false;
 	MyScale = TextBox->GetScale();
 	SizeX = 0;
 	SizeY = 0;
@@ -295,6 +336,9 @@ void Box::ChangeState(BoxState _State)
 		case BoxState::Battle3:
 			Battle3StateStart();
 			break;
+		case BoxState::Battle4:
+			Battle4StateStart();
+			break;
 		case BoxState::None:
 			break;
 		default:
@@ -320,6 +364,9 @@ void Box::StateUpdate()
 		break;
 	case BoxState::Battle3:
 		Battle3StateUpdate();
+		break;
+	case BoxState::Battle4:
+		Battle4StateUpdate();
 		break;
 	case BoxState::None:
 		return;
