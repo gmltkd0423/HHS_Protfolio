@@ -120,9 +120,16 @@ void Box::TextStateUpdate()
 
 	if (TextBox->GetScale().x >= 1000.0f && TextBox->GetScale().y >= 230.0f)
 	{
+
+		if (TextBox->GetScale().y >= 230.0f)
+		{
+			SizeY = GameEngineTime::GetDeltaTime() * 600;
+			TextBox->SetScale({ TextBox->GetScale().x , TextBox->GetScale().y - SizeY });
+		}
+
 		if (false == IsChange && GetPosition().y <= 490.0f && false == IsShake)
 		{
-			MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * 300.0f;
+			MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * 600.0f;
 			SetMove(MoveDir_);
 
 			if (GetPosition().y >= 490.0f)
@@ -139,6 +146,9 @@ void Box::TextStateUpdate()
 
 		return;
 	}
+
+
+
 
 	if (TextBox->GetScale().x <= 1000.0f)
 	{

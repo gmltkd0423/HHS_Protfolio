@@ -82,6 +82,7 @@ private:
 	int BarCount_;
 	int TextCount_;
 	int ArrowCount_;
+	int CircleSpearCount_;
 
 	bool IsCreateSpear;
 

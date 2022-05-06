@@ -6,6 +6,7 @@
 class SpearCircle	:public GameEngineActor
 {
 public:
+	static int SpearCount;
 	// constrcuter destructer
 	SpearCircle();
 	~SpearCircle();
@@ -24,11 +25,16 @@ private:
 	GameEngineRenderer* SpearRenderer;
 
 	bool LookPlayer;
+	bool IsSpin;
+	bool Alpha;
 	float Angle;
 	float MoveAngle;
 	float Timer_;
+	float Speed_;
+	int Value;
 
-	float4 Dir;
+	float4 MoveDir;
 	float4 PlayerPos;
+
 };
 

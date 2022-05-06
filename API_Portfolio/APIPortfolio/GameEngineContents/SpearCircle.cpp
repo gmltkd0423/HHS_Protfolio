@@ -5,10 +5,15 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>
 
+int SpearCircle::SpearCount = 0;
 
 SpearCircle::SpearCircle()	:
 	LookPlayer(false),
-	Timer_(0.0f)
+	Timer_(1.2f),
+	IsSpin(false),
+	Speed_(0),
+	Value(255),
+	Alpha(false)
 {
 }
 
@@ -19,40 +24,82 @@ SpearCircle::~SpearCircle()
 void SpearCircle::Start()
 {
 	SpearRenderer = CreateRenderer((int)BATTLELEVELORDER::ACTOR);
-	SpearRenderer->SetImage("Spear2.bmp");
-	SpearRenderer->SetIndex(0);
-	SpearRenderer->SetRotationFilter("Spear4.bmp");
+	SpearRenderer->SetImage("Spear.bmp");
+	SpearRenderer->SetRotationFilter("Spear5.bmp");
 	Angle = 0.0f;
 	SpearRenderer->SetTransColor(RGB(0, 0, 0));
-	MoveAngle = 0;
+	if (SpearCount == 0)
+	{
+		MoveAngle = 0;
+		SpearCount++;
+	}
+	else if (SpearCount == 1)
+	{
+		MoveAngle = 60;
+		SpearCount++;
+	}
+	else if (SpearCount == 2)
+	{
+		MoveAngle = 120;
+		SpearCount++;
+	}
+	else if (SpearCount == 3)
+	{
+		MoveAngle = 180;
+		SpearCount++;
+	}
+	else if (SpearCount == 4)
+	{
+		MoveAngle = 240;
+		SpearCount++;
+	}
+	else if (SpearCount == 5)
+	{
+		MoveAngle = 300;
+		SpearCount++;
+	}
+	else if (SpearCount == 6)
+	{
+		MoveAngle = 360;
+		SpearCount++;
+	}
 	float Degree = float4::VectorXYtoDegree(GetPosition(), Player::MainPlayer->GetPosition());
 	SpearRenderer->SetRotationZ(Degree + 180.0f);
 	PlayerPos = Player::MainPlayer->GetPosition();
-	Dir = PlayerPos - GetPosition();
-	Timer_ = 1.2f;
+	Speed_ = 250.0f;
 }
+
 
 void SpearCircle::Update()
 {
+
+	//플레이어 바라보게하기
 	float Degree = float4::VectorXYtoDegree(GetPosition(), PlayerPos);
 	SpearRenderer->SetRotationZ(Degree + 180.0f);
 
-	if (false == LookPlayer) 
+	MoveAngle += 360.0f * GameEngineTime::GetDeltaTime() * 0.2;
+
+
+	//원으로회전
+	if (Alpha == false)
 	{
-		Dir = PlayerPos - GetPosition();
-		LookPlayer = true;
+		float4 Dir = float4::DegreeToDirectionFloat4(MoveAngle);
+		Dir *= Speed_;
+		Speed_ -= 1.0f;
+		SetPosition(PlayerPos + Dir);
 	}
 
-	SetMove(Dir * GameEngineTime::GetDeltaTime() * 0.8f);
-
-
-	Timer_ -= GameEngineTime::GetDeltaTime();
-	if (0.0f >= Timer_)
+	if (Speed_<=0.0f)
 	{
-		Dir = float4::ZERO;
+		Alpha = true;
 	}
 
+	if (Alpha==true)
+	{
+		Death();
+	}
 }
+
 
 void SpearCircle::Render()
 {

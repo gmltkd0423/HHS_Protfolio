@@ -10,7 +10,9 @@
 Arrow::Arrow() :
 	Angle(0),
 	Angle2(180.0f),
-	IsUp(false)
+	UpDownAngle(90.0f),
+	IsUp(false),
+	IsSpin(false)
 {
 }
 
@@ -59,6 +61,7 @@ void Arrow::Start()
 	ArrowRenderer->SetTransColor(RGB(121, 230, 234));
 	ArrowRenderer->SetScale({ 40,40 });
 	ArrowCol = CreateCollision("Arrow", { 40,40 });
+	PlayerPos = Player::MainPlayer->GetPosition();
 }
 
 void Arrow::Update()
@@ -70,6 +73,7 @@ void Arrow::Update()
 	{
 		if (Angle >= 180)
 		{
+			IsUp = false;
 			MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 800.0f;
 			SetMove(MoveDir_);
 		}
@@ -89,27 +93,23 @@ void Arrow::Update()
 
 			float4 NewPos_ = Player::MainPlayer->GetPosition() - GetPosition();
 			len = NewPos_.Len2D();
-			if (300 >= len)
+			if (200 >= len && false == IsSpin)
 			{
 				IsUp = true;
-		
+				IsSpin = true;
 			}
 
 			if (true == IsUp)
 			{
-				Angle += 3.0f;
 				if (Angle <= 180.0f)
 				{
-					if (Angle >= 180.0f)
-					{
-						SetPosition({ GetPosition().x,360.0f });
-						IsUp = false;
-					}
-
-					float4 Dir = float4::DegreeToDirectionFloat4Up(Angle);
-					Dir *= 30;
-					SetMove(Dir * GameEngineTime::GetDeltaTime() * 100.0f);
+					Angle += 3.0f;
 				}
+
+				float4 Dir = float4::DegreeToDirectionFloat4(Angle);
+				Dir *= -200;
+				SetPosition(PlayerPos + Dir);
+	
 			}
 		}
 		else
@@ -126,8 +126,9 @@ void Arrow::Update()
 	}
 	else if (ArrowType == 1)                //////////////////아래에서위로
 	{
-		if (Angle >= 300)
+		if (UpDownAngle >= 270)
 		{
+			IsUp = false;
 			MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * 600.0f;
 			SetMove(MoveDir_);
 		}
@@ -147,27 +148,23 @@ void Arrow::Update()
 
 			float4 NewPos_ = Player::MainPlayer->GetPosition() - GetPosition();
 			len = NewPos_.Len2D();
-			if (100 >= len)
+			if (150 >= len && false == IsSpin)
 			{
 				IsUp = true;
-
+				IsSpin = true;
 			}
 
 			if (true == IsUp)
 			{
-				Angle += 3.0f;
-				if (Angle <= 300.0f)
+				if (UpDownAngle <= 270.0f)
 				{
-					if (Angle >= 300.0f)
-					{
-						SetPosition({ 640.0f,GetPosition().y});
-						IsUp = false;
-					}
-
-					float4 Dir = float4::DegreeToDirectionFloat4Up(Angle);
-					Dir *= 15;
-					SetMove(Dir * GameEngineTime::GetDeltaTime() * 100.0f);
+					UpDownAngle += 3.0f;
 				}
+
+				float4 Dir = float4::DegreeToDirectionFloat4(UpDownAngle);
+				Dir *= 150;
+				SetPosition(PlayerPos + Dir);
+
 			}
 		}
 		else
@@ -183,65 +180,63 @@ void Arrow::Update()
 	}
 	else if (ArrowType == 2)
 	{
-	if (Angle >= 270)
-	{
-		MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * 800.0f;
-		SetMove(MoveDir_);
-	}
-	else
-	{
-		MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 800.0f;
-		SetMove(MoveDir_);
-	}
-
-	//노란색이면
-	if (IsYellow == 0)
-	{
-		ArrowRenderer->SetImage("Arrow_Yellow.bmp");
-		ArrowRenderer->SetIndex(2);
-		ArrowRenderer->SetScale({ 40,40 });
-		ArrowRenderer->SetTransColor(RGB(124, 231, 234));
-
-		float4 NewPos_ = Player::MainPlayer->GetPosition() - GetPosition();
-		len = NewPos_.Len2D();
-		if (200 >= len)
+		if (Angle >= 180)
 		{
-			IsUp = true;
-
+			IsUp = false;
+			MoveDir_ = float4::RIGHT * GameEngineTime::GetDeltaTime() * 800.0f;
+			SetMove(MoveDir_);
+		}
+		else
+		{
+			MoveDir_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 800.0f;
+			SetMove(MoveDir_);
 		}
 
-		if (true == IsUp)
+		//노란색이면
+		if (IsYellow == 0)
 		{
-			Angle += 3.0f;
-			if (Angle <= 270.0f)
+			ArrowRenderer->SetImage("Arrow_Yellow.bmp");
+			ArrowRenderer->SetIndex(2);
+			ArrowRenderer->SetScale({ 40,40 });
+			ArrowRenderer->SetTransColor(RGB(124, 231, 234));
+
+			float4 NewPos_ = Player::MainPlayer->GetPosition() - GetPosition();
+			len = NewPos_.Len2D();
+			if (200 >= len && false == IsSpin)
 			{
-				if (Angle >= 270.0f)
+				IsUp = true;
+				IsSpin = true;
+			}
+
+			if (true == IsUp)
+			{
+				if (Angle <= 180.0f)
 				{
-					SetPosition({ GetPosition().x,360.0f });
-					IsUp = false;
+					Angle += 3.0f;
 				}
 
 				float4 Dir = float4::DegreeToDirectionFloat4(Angle);
-				Dir *= 20;
-				SetMove(Dir * GameEngineTime::GetDeltaTime() * 100.0f);
+				Dir *= 200;
+				SetPosition(PlayerPos + Dir);
+
+			}
+		}
+		else
+		{
+			float4 NewPos_ = Player::MainPlayer->GetPosition() - GetPosition();
+			len = NewPos_.Len2D();
+			if (90 >= len)
+			{
+				ArrowRenderer->SetImage("Arrow_Red.bmp");
+				ArrowRenderer->SetIndex(3);
 			}
 		}
 	}
 	else
 	{
-		float4 NewPos_ = Player::MainPlayer->GetPosition() - GetPosition();
-		len = NewPos_.Len2D();
-		if (90 >= len)
+		if (UpDownAngle >= 270)
 		{
-			ArrowRenderer->SetImage("Arrow_Red.bmp");
-			ArrowRenderer->SetIndex(3);
-		}
-	}
-	}
-	else
-	{
-		if (Angle2 <= 0)
-		{
+			IsUp = false;
 			MoveDir_ = float4::UP * GameEngineTime::GetDeltaTime() * 600.0f;
 			SetMove(MoveDir_);
 		}
@@ -261,27 +256,23 @@ void Arrow::Update()
 
 			float4 NewPos_ = Player::MainPlayer->GetPosition() - GetPosition();
 			len = NewPos_.Len2D();
-			if (100 >= len)
+			if (150 >= len && false == IsSpin)
 			{
 				IsUp = true;
-
+				IsSpin = true;
 			}
 
 			if (true == IsUp)
 			{
-				Angle2 -= 3.0f;
-				if (Angle2 >= 0)
+				if (UpDownAngle <= 270.0f)
 				{
-					if (Angle2 <= 0)
-					{
-						SetPosition({ 640.0f,GetPosition().y});
-						IsUp = false;
-					}
-
-					float4 Dir = float4::DegreeToDirectionFloat4(Angle2);
-					Dir *= 10;
-					SetMove(Dir * GameEngineTime::GetDeltaTime() * 90.0f);
+					UpDownAngle += 3.0f;
 				}
+
+				float4 Dir = float4::DegreeToDirectionFloat4(UpDownAngle);
+				Dir *= -150;
+				SetPosition(PlayerPos + Dir);
+
 			}
 		}
 		else

@@ -477,20 +477,35 @@ void BattleLevel::Pattern3Update()
 void BattleLevel::Pattern4Start()
 {
 	TextBox->SetState(BoxState::Battle4);
-	Timer_ = 2.0f;
+	Timer_ = 1.3f;
 	PatternTime_ = 2.0f;
 	Angle = 0.0f;
 	IsCreateSpear = false;
+	CircleSpearCount_ = 0;
 }
 
 
 void BattleLevel::CreateCircleSpear()
 {
-	if (Angle >= 360.0f)
-	{
 
+	if (CircleSpearCount_ == 10)
+	{
 		return;
 	}
+
+	if (Angle >= 360.0f)
+	{
+		Timer_ -= GameEngineTime::GetDeltaTime();
+		if (0 >= Timer_)
+		{
+			SpearCircle::SpearCount = 0;
+			CircleSpearCount_++;
+			Angle = 0.0f;
+			Timer_ = 1.3f;
+		}
+		return;
+	}
+	
 
 	Angle += 60.0f;
 
@@ -519,7 +534,10 @@ void BattleLevel::Pattern4Update()
 		CreateCircleSpear();
 	}
 
-
+	if (CircleSpearCount_ >= 10)
+	{
+		ChangeFightState(FIGHTSTATE::Talk);
+	}
 }
 
 
@@ -827,7 +845,7 @@ void BattleLevel::FightMenuUpdate()
 				AttackBar_->GetRenderer()->Off();
 				DamageNumber->Off();
 				UndyneHpBar->Off();
-				ChangeFightState(FIGHTSTATE::Pattern4);
+				ChangeFightState(FIGHTSTATE::Pattern3);
 			/*	if (PatternCount_ == 0)
 				{
 					ChangeFightState(FIGHTSTATE::Pattern1);

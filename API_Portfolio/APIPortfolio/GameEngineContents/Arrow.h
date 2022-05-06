@@ -31,15 +31,17 @@ private:
 	GameEngineRandom Yellow;
 	GameEngineCollision* ArrowCol;
 
-
+	float4 PlayerPos;
 	float4 Pos_[4];
 	float Timer_;
 	float Angle;
+	float UpDownAngle;
 	float Angle2;
 	int ArrowType;
 	int IsYellow;
 	bool ColorYellow;
 	float len;
+	bool IsSpin;
 
 	bool IsUp;
 	float4 MoveDir_;
