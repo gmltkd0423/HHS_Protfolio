@@ -111,6 +111,7 @@ private:
 	int MercyCount;
 	int ItemCount;
 	bool PlayerInvin;
+	float SpinAngle;
 
 private:
 	void UIKeyMove();

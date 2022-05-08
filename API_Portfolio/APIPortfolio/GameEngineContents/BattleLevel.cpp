@@ -104,6 +104,13 @@ void BattleLevel::Loading()
 
 	Texts = CreateActor<BattleLevelFont>((int)BATTLELEVELORDER::ACTOR);
 
+	FightButtonDir_ = { 191,680 };
+	ActionButtonDir_ = { 456,680 };
+	MercyButtonDir_ = { 721,680 };
+	ItemButtonDir_ = { 986,680 };
+
+
+
 
 	//키생성
 	{
@@ -534,6 +541,16 @@ void BattleLevel::CreateCircleSpear()
 	Dir *= 180.0f;
 	SpearCircle* CircleSpear = CreateActor<SpearCircle>((int)BATTLELEVELORDER::BULLET);
 	CircleSpear->SetPosition(Player::MainPlayer->GetPosition() + Dir);
+
+	if (CircleSpearCount_ % 2 == 0)
+	{
+		SpinAngle = 360.0f;
+	}
+	else
+	{
+		SpinAngle = -360.0f;
+	}
+	CircleSpear->SetSpinAngle(SpinAngle);
 	//Time_ = 0.03f;
 }
 
@@ -549,6 +566,8 @@ void BattleLevel::Pattern4Update()
 		TextBox->SetState(BoxState::None);
 		IsCreateSpear = true;
 	}
+
+	PlayerHpBar->SetActorHp(Player::MainPlayer->GetHp());
 
 	if (true == IsCreateSpear)
 	{
@@ -571,6 +590,7 @@ void BattleLevel::TalkStart()
 	Undyne_->GetRenderer()->SetAlpha(255);
 	TextCount_ = 1;
 	AttackCount = 0;
+	PrevMenuState_ = MENUSTATE::FIGHTMENU;
 }
 
 void BattleLevel::TalkUpdate()
@@ -715,28 +735,24 @@ void BattleLevel::SelectButton()
 	//Fight버튼을 눌럿다면
 	if (true == Button_->GetbFightButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		FightButtonDir_ = Player::MainPlayer->GetPosition();
 		PrevMenuState_ = MENUSTATE::FIGHTMENU;
 		ChangeMenuState(MENUSTATE::FIGHTMENU);
 		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbActionButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		ActionButtonDir_ = Player::MainPlayer->GetPosition();
 		PrevMenuState_ = MENUSTATE::ACTIONMENU;
 		ChangeMenuState(MENUSTATE::ACTIONMENU);
 		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbMercyButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		MercyButtonDir_ = Player::MainPlayer->GetPosition();
 		PrevMenuState_ = MENUSTATE::MERCYMENU;
 		ChangeMenuState(MENUSTATE::MERCYMENU);
 		EffectSound_.SoundPlayOneShot("snd_select.wav");
 	}
 	else if (true == Button_->GetbItemButton() && true == GameEngineInput::GetInst()->IsDown("UI_Action"))
 	{
-		ItemButtonDir_ = Player::MainPlayer->GetPosition();
 		PrevMenuState_ = MENUSTATE::ITEMMENU;
 		ChangeMenuState(MENUSTATE::ITEMMENU);
 		EffectSound_.SoundPlayOneShot("snd_select.wav");
@@ -898,6 +914,84 @@ void BattleLevel::FightMenuUpdate()
 
 		//
 		CreateBar();
+
+		if (nullptr != BarList[0] &&
+			nullptr != BarList[1] &&
+			nullptr != BarList[2]
+			)
+		{
+			if (1300 <= BarList[0]->GetPosition().x &&
+				1300 <= BarList[1]->GetPosition().x &&
+				1300 <= BarList[2]->GetPosition().x
+				)
+			{
+				AttackBar_->GetRenderer()->Off();
+				for (size_t i = 0; i < 3; i++)
+				{
+					BarList[i]->Death();
+				}
+
+				if (RandomPattern == false && IsEnd == false)
+				{
+					if (PatternCount_ == 0)
+					{
+						PatternCount_++;
+						ChangeFightState(FIGHTSTATE::Pattern1);
+						ChangeMenuState(MENUSTATE::NONE);
+					}
+					else if (PatternCount_ == 1)
+					{
+						PatternCount_++;
+						ChangeFightState(FIGHTSTATE::Pattern2);
+						ChangeMenuState(MENUSTATE::NONE);
+					}
+					else if (PatternCount_ == 2)
+					{
+						PatternCount_++;
+						ChangeFightState(FIGHTSTATE::Pattern3);
+						ChangeMenuState(MENUSTATE::NONE);
+					}
+					else if (PatternCount_ == 3)
+					{
+						PatternCount_++;
+						ChangeFightState(FIGHTSTATE::Pattern4);
+						ChangeMenuState(MENUSTATE::NONE);
+					}
+					else
+					{
+						PatternCount_++;
+						RandomPattern = true;
+					}
+				}
+
+
+				if (RandomPattern == true && IsEnd == false)
+				{
+					GameEngineRandom Ran;
+					PatternCount_ = Ran.RandomInt(0, 3);
+					if (PatternCount_ == 0)
+					{
+						ChangeFightState(FIGHTSTATE::Pattern1);
+						ChangeMenuState(MENUSTATE::NONE);
+					}
+					else if (PatternCount_ == 1)
+					{
+						ChangeFightState(FIGHTSTATE::Pattern2);
+						ChangeMenuState(MENUSTATE::NONE);
+					}
+					else if (PatternCount_ == 2)
+					{
+						ChangeFightState(FIGHTSTATE::Pattern3);
+						ChangeMenuState(MENUSTATE::NONE);
+					}
+					else if (PatternCount_ == 3)
+					{
+						ChangeFightState(FIGHTSTATE::Pattern4);
+						ChangeMenuState(MENUSTATE::NONE);
+					}
+				}
+			}
+		}
 
 
 		//이펙트가 나오고
@@ -1258,16 +1352,16 @@ void BattleLevel::ItemMenuUpdate()
 		return;
 	}
 
-	if (MercyCount == 1)
+	if (ItemCount == 1)
 	{
 		Texts->SetCount(9);
 		Texts->SetTextCount(0);
-		Player::MainPlayer->SetPosition(MercyButtonDir_);
-		MercyCount++;
+		Player::MainPlayer->SetPosition(ItemButtonDir_);
+		ItemCount++;
 		Player::MainPlayer->SetInvincibleTrue();
 	}
 
-	if (MercyCount == 3)
+	if (ItemCount == 3)
 	{
 		Texts->Off();
 		if (RandomPattern == false && IsEnd == false)
@@ -1338,7 +1432,7 @@ void BattleLevel::ItemMenuUpdate()
 		{
 			EffectSound_.SoundPlayOneShot("snd_select.wav");
 			Texts->IsAllTextOutFalse();
-			MercyCount++;
+			ItemCount++;
 		}
 	}
 }

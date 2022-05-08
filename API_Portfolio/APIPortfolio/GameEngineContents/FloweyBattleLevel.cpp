@@ -943,7 +943,7 @@ void FloweyBattleLevel::Pattern4Update()
 		{
 			if (690.0f <= Undyne->GetPosition().x)
 			{
-				MoveDir3_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 250.0f;
+				MoveDir3_ = float4::LEFT * GameEngineTime::GetDeltaTime() * 350.0f;
 
 				Undyne->SetMove(MoveDir3_);
 			}

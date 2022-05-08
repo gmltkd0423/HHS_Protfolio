@@ -30,12 +30,21 @@ private:
 	bool Alpha;
 	float Angle;
 	float MoveAngle;
+	float SpinAngle;
 	float Timer_;
 	float Speed_;
 	int Value;
 
 	float4 MoveDir;
 	float4 PlayerPos;
+
+
+public:
+	inline void SetSpinAngle(float Angle)
+	{
+		SpinAngle = Angle;
+	}
+
 
 };
 

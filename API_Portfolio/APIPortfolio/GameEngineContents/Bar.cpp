@@ -48,11 +48,6 @@ void Bar::Start()
 
 void Bar::Update()
 {
-	if (KeyDownCount_ == 3)
-	{
-		int a = 0;
-	}
-
 
 	if (false == IsKeyDown)
 	{
@@ -71,6 +66,8 @@ void Bar::Update()
 	{
 		Off();
 	}
+
+
 
 	SetMove(MoveDir_);
 	CheckJudgMent();

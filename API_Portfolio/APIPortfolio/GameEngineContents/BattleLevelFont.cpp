@@ -84,7 +84,7 @@ void BattleLevelFont::Texts()
 	}
 	else if (5 == Count_)
 	{
-		Text_ = L"*불사신 언다인 99ATK 99DEF\n*세상을 구하기 위해\n  의지로 되살아 난 영웅.";
+		Text_ = L"*불사신 언다인 99ATK 99DEF\n*세상을 구하기 위해\n 의지로 되살아 난 영웅.";
 	}
 	else if (6 == Count_)
 	{

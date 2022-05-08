@@ -6,7 +6,6 @@
 #include <GameEngineBase/GameEngineMath.h>
 
 int SpearCircle::SpearCount = 0;
-
 SpearCircle::SpearCircle()	:
 	LookPlayer(false),
 	Timer_(1.2f),
@@ -78,7 +77,8 @@ void SpearCircle::Update()
 	float Degree = float4::VectorXYtoDegree(GetPosition(), PlayerPos);
 	SpearRenderer->SetRotationZ(Degree + 180.0f);
 
-	MoveAngle += 360.0f * GameEngineTime::GetDeltaTime() * 0.2;
+
+	MoveAngle += SpinAngle * GameEngineTime::GetDeltaTime() * 0.2f;
 
 
 	//원으로회전
