@@ -26,6 +26,7 @@ void SpearCircle::Start()
 	SpearRenderer = CreateRenderer((int)BATTLELEVELORDER::ACTOR);
 	SpearRenderer->SetImage("Spear.bmp");
 	SpearRenderer->SetRotationFilter("Spear5.bmp");
+	SpearCol = CreateCollision("Arrow", { 35,35 });
 	Angle = 0.0f;
 	SpearRenderer->SetTransColor(RGB(0, 0, 0));
 	if (SpearCount == 0)

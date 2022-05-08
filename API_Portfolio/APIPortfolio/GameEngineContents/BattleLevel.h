@@ -24,6 +24,7 @@ enum class MENUSTATE
 	MERCYMENU,
 	ACTIONMENU,
 	ITEMMENU,
+	NONE
 };
 
 
@@ -106,7 +107,10 @@ private:
 	bool EffectOn;
 	bool IsText;
 	bool NumberUIOn;
-
+	int AttackCount;
+	int MercyCount;
+	int ItemCount;
+	bool PlayerInvin;
 
 private:
 	void UIKeyMove();
@@ -114,7 +118,6 @@ private:
 	void CheckEscape();
 	void ShakeActor();
 
-	void UISetting();
 
 	void CreateBar();
 	void CreateSpear();
@@ -127,7 +130,9 @@ private:
 	int SpearUpCount_;
 	bool IsEnd;
 	float PatternTime_;
+	int ActionCount;
 	float4 SpearUpPos[3];
+	float4 PrevPos;
 
 //state
 private:
@@ -164,6 +169,12 @@ private:
 
 	void ActionMenuStart();
 	void ActionMenuUpdate();
+
+	void MercyMenuStart();
+	void MercyMenuUpdate();
+
+	void ItemMenuStart();
+	void ItemMenuUpdate();
 
 	
 };

@@ -23,6 +23,7 @@ protected:
 	void Render() override;
 private:
 	GameEngineRenderer* SpearRenderer;
+	GameEngineCollision* SpearCol;
 
 	bool LookPlayer;
 	bool IsSpin;

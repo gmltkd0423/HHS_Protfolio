@@ -132,7 +132,7 @@ void Box::TextStateUpdate()
 
 		if (false == IsChange && GetPosition().y <= 490.0f && false == IsShake)
 		{
-			MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * 600.0f;
+			MoveDir_ = float4::DOWN * GameEngineTime::GetDeltaTime() * 300.0f;
 			SetMove(MoveDir_);
 
 			if (GetPosition().y >= 490.0f)

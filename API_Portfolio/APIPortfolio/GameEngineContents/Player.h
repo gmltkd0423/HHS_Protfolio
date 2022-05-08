@@ -63,6 +63,7 @@ private:
 	bool IsHit;
 	int Hp_;
 	int MaxHp_;
+	bool Invincible;
 
 
 private:
@@ -83,6 +84,18 @@ public:
 	{
 		IsChange_ = true;
 	}
+
+	bool GetInvincible()
+	{
+		return Invincible;
+	}
+
+	inline void SetInvincibleTrue()
+	{
+		Invincible = true;
+	}
+
+
 
 	void SetBlinkTimer(float _BlinkTimer)
 	{

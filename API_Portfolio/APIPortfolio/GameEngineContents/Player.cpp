@@ -30,7 +30,8 @@ Player::Player() :
 	IsChange_(false),
 	Hp_(20),
 	MaxHp_(20),
-	IsHit(false)
+	IsHit(false),
+	Invincible(false)
 
 {
 }
@@ -380,7 +381,7 @@ void Player::GetDamaged()
 
 	if (true == PlayerCollision_->CollisionResult("Arrow", ColList, CollisionType::Rect, CollisionType::Rect))
 	{
-		if (false == IsHit)
+		if (false == IsHit && false == Invincible)
 		{
 			Hp_ -= 2;
 			BlinkTimer_ = 2.0f;

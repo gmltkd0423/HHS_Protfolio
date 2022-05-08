@@ -74,6 +74,38 @@ void BattleLevelFont::Texts()
 	{
 		Text_ = L"* 영웅을 쓰러뜨렸다";
 	}
+	else if (3 == Count_)
+	{
+		Text_ = L"* 불사의 언다인";
+	}
+	else if (4 == Count_)
+	{
+		Text_ = L"* 살펴보기";
+	}
+	else if (5 == Count_)
+	{
+		Text_ = L"*불사신 언다인 99ATK 99DEF\n*세상을 구하기 위해\n  의지로 되살아 난 영웅.";
+	}
+	else if (6 == Count_)
+	{
+		Text_ = L"*도망가기";
+	}
+	else if (7 == Count_)
+	{
+		Text_ = L"*도망치려 했으나 실패했다.";
+	}
+	else if (8 == Count_)
+	{
+		Text_ = L"*무적포션";
+	}
+	else if (9 == Count_)
+	{
+		Text_ = L"*알수없는 힘이 솟아오른다.";
+	}
+	else if (10 == Count_)
+	{
+		Text_ = L"*없음";
+	}
 	else
 	{
 		Text_ = L"";

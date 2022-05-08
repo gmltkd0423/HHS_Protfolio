@@ -22,12 +22,11 @@ SpearArrow::~SpearArrow()
 void SpearArrow::Start()
 {
 	SpearRenderer = CreateRenderer((int)BATTLELEVELORDER::ACTOR);
-	SpearRenderer->SetImage("Spear2.bmp");
-	SpearRenderer->SetIndex(0);
-	SpearRenderer->SetRotationFilter("Spear4.bmp");
+	SpearRenderer->SetImage("Spear.bmp");
+	SpearRenderer->SetRotationFilter("Spear5.bmp");
 	Angle = 0.0f;
 	SpearRenderer->SetTransColor(RGB(0, 0, 0));
-	SpearCol = CreateCollision("Arrow", { 35,90 });
+	SpearCol = CreateCollision("Arrow", { 35,35 });
 }
 
 void SpearArrow::Update()
