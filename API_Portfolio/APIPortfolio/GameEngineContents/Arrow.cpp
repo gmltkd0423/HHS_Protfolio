@@ -24,7 +24,7 @@ Arrow::~Arrow()
 void Arrow::Start()
 {
 	ArrowType = Ran.RandomInt(0, 3);
-	IsYellow = Yellow.RandomInt(0, 7);
+	IsYellow = Yellow.RandomInt(0, 5);
 
 	//¿ÞÂÊ
 	Pos_[0] = { -50.0f,360.0f };
